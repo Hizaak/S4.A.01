@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="diagrammes_hego_lagunak" version="4">
+  <OBJECT>
+    <ID name="diagrammes_hego_lagunak" mc="Standard.Package" uid="2b5100a7-e28c-4820-a26a-64caf1db2d7a"/>
+    <PID name="Diagrammes_Hego_Lagunak" mc="Standard.Project" uid="bf6a2295-92e2-4bf2-8986-c1dce6e0718f"/>
+    <ATTRIBUTES>
+      <ATT name="IsInstantiable">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[diagrammes_hego_lagunak]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="OwnedElement">
+        <COMPID name="Etudiant" mc="Standard.Actor" uid="315dbdb3-7bda-41f5-afaa-4d9f62c3eb5d"/>
+        <COMPID name="BDE" mc="Standard.Actor" uid="d42a829c-0e57-4655-805e-f00178d11e41"/>
+        <COMPID name="Utiliser le système de parrainage" mc="Standard.UseCase" uid="b42ad5a6-b712-445d-acc0-5c6d6292ef2c"/>
+        <COMPID name="gèrer le système de parrainage" mc="Standard.UseCase" uid="477cb652-ec86-439f-9dd3-d6fd66f56a0a"/>
+      </COMP>
+      <COMP relation="Product">
+        <COMPID name="Diagramme de cas d'utilisation diagrammes_hego_lagunak" mc="Standard.UseCaseDiagram" uid="96f70709-61e9-4162-9f17-0b43b16565b9"/>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>
