@@ -1,6 +1,11 @@
 * {
     margin: 0px;
     padding: 0px;
+    
+}
+
+body {
+    background-color: #FFBD87;
 }
 
 header {
@@ -19,9 +24,21 @@ main {
 
 form {
     border-radius: 15px;
-    background-color: brown;
+    background-color: #EB6F09;
     padding: 20px;
     text-align: left;
+}
+
+input {
+    background-color: #FFA65C;
+    border: solid 1px #FE9238;
+    border-radius: 3px;
+    margin-top: 10px;
+    padding: 5px 0;
+}
+
+input::placeholder { 
+    color: #B45302;
 }
 
 #mail {
@@ -36,5 +53,20 @@ form {
 
 #mdp > a{
     text-align: right;
+}
+
+#saisieMdp {
+    width: 100%;
+}
+
+#submit {
+    border-radius: 5px;
+    margin-top: 30px;
+    padding: 10px;
+    width: 100%;
+}
+
+#pasCompte {
+    margin-top: 10px;
 }
 
