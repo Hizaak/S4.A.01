@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
-<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="Trouver un filleul" version="4">
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="Modifier un formulaire" version="4">
   <OBJECT>
-    <ID name="Trouver un filleul" mc="Standard.UseCase" uid="b42ad5a6-b712-445d-acc0-5c6d6292ef2c"/>
+    <ID name="Modifier un formulaire" mc="Standard.UseCase" uid="00e8d1ab-7fcc-4ff7-a2c7-b1d680466f7a"/>
     <PID name="diagrammes_hego_lagunak" mc="Standard.Package" uid="2b5100a7-e28c-4820-a26a-64caf1db2d7a"/>
     <ATTRIBUTES>
       <ATT name="IsElementary">false</ATT>
@@ -9,13 +9,28 @@
       <ATT name="IsLeaf">false</ATT>
       <ATT name="IsRoot">false</ATT>
       <ATT name="Visibility">Public</ATT>
-      <ATT name="Name"><![CDATA[Trouver un filleul]]></ATT>
+      <ATT name="Name"><![CDATA[Modifier un formulaire]]></ATT>
       <ATT name="status">1970354901745664</ATT>
     </ATTRIBUTES>
     <DEPENDENCIES>
+      <COMP relation="Parent">
+        <OBJECT>
+          <ID name="Generalization" mc="Standard.Generalization" uid="cf5f3dc0-acce-49ee-afc4-9cd664cb3fe0"/>
+          <ATTRIBUTES>
+            <ATT name="Discriminator"></ATT>
+            <ATT name="Name"><![CDATA[Generalization]]></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <LINK relation="SuperType">
+              <ID name="Gérer un formulaire" mc="Standard.UseCase" uid="628f9cd7-d2ef-498e-8a9f-0eaa30115921"/>
+            </LINK>
+          </DEPENDENCIES>
+        </OBJECT>
+      </COMP>
       <COMP relation="Descriptor">
         <OBJECT>
-          <ID name="" mc="Infrastructure.Note" uid="35a05a7e-9590-413e-aad8-17ee737854c5"/>
+          <ID name="" mc="Infrastructure.Note" uid="a88581cf-53e5-43ea-b166-79fe62bbed23"/>
           <ATTRIBUTES>
             <ATT name="Content"><![CDATA[...]]></ATT>
             <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
@@ -29,7 +44,7 @@
           </DEPENDENCIES>
         </OBJECT>
         <OBJECT>
-          <ID name="" mc="Infrastructure.Note" uid="5f6c3511-402a-475e-a96c-fa882899b1b9"/>
+          <ID name="" mc="Infrastructure.Note" uid="42063c3f-b02a-4701-a188-559a0c245c2d"/>
           <ATTRIBUTES>
             <ATT name="Content"><![CDATA[...]]></ATT>
             <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
@@ -43,7 +58,7 @@
           </DEPENDENCIES>
         </OBJECT>
         <OBJECT>
-          <ID name="" mc="Infrastructure.Note" uid="e89029ae-77ff-4c03-a09c-5e695484fbff"/>
+          <ID name="" mc="Infrastructure.Note" uid="38a54ad1-b6ef-4c28-95b0-83bd5e969128"/>
           <ATTRIBUTES>
             <ATT name="Content"><![CDATA[...]]></ATT>
             <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
@@ -57,7 +72,7 @@
           </DEPENDENCIES>
         </OBJECT>
         <OBJECT>
-          <ID name="" mc="Infrastructure.Note" uid="90b6abd5-3828-498c-8f60-58b50e4b420c"/>
+          <ID name="" mc="Infrastructure.Note" uid="ffe61579-64fb-4f46-86e5-e10da90d1745"/>
           <ATTRIBUTES>
             <ATT name="Content"><![CDATA[...]]></ATT>
             <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
@@ -71,7 +86,7 @@
           </DEPENDENCIES>
         </OBJECT>
         <OBJECT>
-          <ID name="" mc="Infrastructure.Note" uid="43748af2-f6ba-418d-8ce4-64c2b8f4a931"/>
+          <ID name="" mc="Infrastructure.Note" uid="e0bd4fec-0f9f-4558-b51e-510a7ea81406"/>
           <ATTRIBUTES>
             <ATT name="Content"><![CDATA[...]]></ATT>
             <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
@@ -85,7 +100,7 @@
           </DEPENDENCIES>
         </OBJECT>
         <OBJECT>
-          <ID name="" mc="Infrastructure.Note" uid="950430d2-6454-43ee-b04f-6b3cb3dbeb59"/>
+          <ID name="" mc="Infrastructure.Note" uid="64f0e3eb-4967-424c-b139-4c044d3ed270"/>
           <ATTRIBUTES>
             <ATT name="Content"><![CDATA[...]]></ATT>
             <ATT name="MimeType"><![CDATA[text/plain]]></ATT>

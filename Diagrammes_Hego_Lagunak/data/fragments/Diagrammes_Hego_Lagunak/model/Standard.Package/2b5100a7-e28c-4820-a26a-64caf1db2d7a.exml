@@ -14,13 +14,53 @@
     </ATTRIBUTES>
     <DEPENDENCIES>
       <COMP relation="OwnedElement">
-        <COMPID name="Etudiant" mc="Standard.Actor" uid="315dbdb3-7bda-41f5-afaa-4d9f62c3eb5d"/>
+        <COMPID name="2ème année" mc="Standard.Actor" uid="315dbdb3-7bda-41f5-afaa-4d9f62c3eb5d"/>
         <COMPID name="BDE" mc="Standard.Actor" uid="d42a829c-0e57-4655-805e-f00178d11e41"/>
-        <COMPID name="Utiliser le système de parrainage" mc="Standard.UseCase" uid="b42ad5a6-b712-445d-acc0-5c6d6292ef2c"/>
-        <COMPID name="gèrer le système de parrainage" mc="Standard.UseCase" uid="477cb652-ec86-439f-9dd3-d6fd66f56a0a"/>
+        <COMPID name="Trouver un filleul" mc="Standard.UseCase" uid="b42ad5a6-b712-445d-acc0-5c6d6292ef2c"/>
+        <COMPID name="Gérer le système de parrainage" mc="Standard.UseCase" uid="477cb652-ec86-439f-9dd3-d6fd66f56a0a"/>
+        <COMPID name="Se connecter" mc="Standard.UseCase" uid="e8653103-d12f-48b6-9e5f-08af29adfc3a"/>
+        <COMPID name="Gérer le système de parrainage" mc="Standard.UseCase" uid="02055ba9-31ab-414e-8be9-7e1a9c5120c8"/>
+        <COMPID name="Étudiant" mc="Standard.Actor" uid="f51c3545-6ebb-4db4-8373-591e5a122b55"/>
+        <COMPID name="1ère année" mc="Standard.Actor" uid="08a20943-f3f1-4b71-a7e9-73921662df01"/>
+        <COMPID name="2ème année" mc="Standard.Actor" uid="96d2107b-09d9-42e9-83ab-10da0144d5b8"/>
+        <COMPID name="BDE" mc="Standard.Actor" uid="adfec12e-2a8c-4ccc-a06b-9b3f682956d0"/>
+        <COMPID name="Gérer des formulaires" mc="Standard.UseCase" uid="e966b181-faa1-4429-9928-493735d873b8"/>
+        <COMPID name="Trouver un parrain" mc="Standard.UseCase" uid="12f1fed4-2dc2-4135-a3bb-d1ecbb906f1d"/>
+        <COMPID name="Trouver un filleul" mc="Standard.UseCase" uid="6de8ca49-9964-4016-a6a6-f10a46e2891d"/>
+        <COMPID name="Répondre à un formulaire" mc="Standard.UseCase" uid="49dbc09e-e65f-4d05-83e7-e4380216e8c7"/>
+        <COMPID name="Choisir une réponse à un formulaire anonymisé" mc="Standard.UseCase" uid="9c53964c-62d0-47e1-b947-528b9406ae86"/>
+        <COMPID name="BDE" mc="Standard.Actor" uid="a2ffdfda-17de-4c74-aa79-0bcb4288087e"/>
+        <COMPID name="Se connecter" mc="Standard.UseCase" uid="89fe5185-80e9-4e32-b720-688c756e27f2"/>
+        <COMPID name="Gérer des formulaires" mc="Standard.UseCase" uid="628f9cd7-d2ef-498e-8a9f-0eaa30115921"/>
+        <COMPID name="Définir les dates de début et de fin de chaque étape" mc="Standard.UseCase" uid="2f47cbf5-5572-46e0-928c-40e9a9726974"/>
+        <COMPID name="Choisir le mode d'association" mc="Standard.UseCase" uid="f2c53302-089e-4049-8c75-bd663a3e2b79"/>
+        <COMPID name="Créer des formulaires" mc="Standard.UseCase" uid="a7753011-81fa-4a13-87af-ba4f6020ca1a"/>
+        <COMPID name="Modifier des formulaires" mc="Standard.UseCase" uid="00e8d1ab-7fcc-4ff7-a2c7-b1d680466f7a"/>
+        <COMPID name="Supprimer des formulaires" mc="Standard.UseCase" uid="0004939d-06d2-45a8-b2dd-45418cb1fc50"/>
+        <COMPID name="1ère année" mc="Standard.Actor" uid="e1039129-daf3-406a-a9b6-dac3fdef2d8a"/>
+        <COMPID name="Répondre à un formulaire" mc="Standard.UseCase" uid="c287d947-c74f-4fce-aa95-93e2c791a0d5"/>
+        <COMPID name="Se connecter" mc="Standard.UseCase" uid="5885a5d4-ba4b-4af3-b1a2-2e214cd97f59"/>
+        <COMPID name="S'inscrire" mc="Standard.UseCase" uid="03dd2d38-86de-4359-9c7f-9e592c902b85"/>
+        <COMPID name="Modifier ses informations" mc="Standard.UseCase" uid="e9b11a9f-d82e-4923-860a-b56cdf0037fa"/>
+        <COMPID name="Supprimer son compte" mc="Standard.UseCase" uid="ffeb1e35-e60c-4106-a6e2-63a9a21e9e16"/>
+        <COMPID name="Trouver un parrain" mc="Standard.UseCase" uid="21878f88-2755-46d7-bafe-393de9f8bcc2"/>
+        <COMPID name="2ème année" mc="Standard.Actor" uid="2df67ca3-612b-4018-93fc-16e909f24e28"/>
+        <COMPID name="Trouver un filleul" mc="Standard.UseCase" uid="9891ceed-4990-4b1b-98bd-cbe740723796"/>
+        <COMPID name="Se connecter" mc="Standard.UseCase" uid="a06132e2-a301-4b4f-8490-4e2728b073b2"/>
+        <COMPID name="Modifier ses informations" mc="Standard.UseCase" uid="926507b0-b9a2-4ad2-9df6-00bfeb0979ec"/>
+        <COMPID name="Supprimer son compte" mc="Standard.UseCase" uid="f545f239-3fa3-4952-a403-e780c5f5eecc"/>
+        <COMPID name="Répondre à un questionnaire" mc="Standard.UseCase" uid="f03f605e-8f9f-4731-827c-da31fdfb0434"/>
+        <COMPID name="Choisir une réponse à un formulaire anonymisé" mc="Standard.UseCase" uid="5fd9ea39-58e8-4f58-b90d-8f64d7bbd835"/>
+        <COMPID name="S'inscrire" mc="Standard.UseCase" uid="7079b9a8-9295-4b0f-826e-097aca6d6f88"/>
+        <COMPID name="1ème année" mc="Standard.Actor" uid="7dac6ace-d155-40ea-b40d-ad23fecdc28b"/>
+        <COMPID name="Trouver un parrain" mc="Standard.UseCase" uid="68b38ea5-9431-4c06-81d0-baacf068121e"/>
       </COMP>
       <COMP relation="Product">
-        <COMPID name="Diagramme de cas d'utilisation diagrammes_hego_lagunak" mc="Standard.UseCaseDiagram" uid="96f70709-61e9-4162-9f17-0b43b16565b9"/>
+        <COMPID name="Diagramme simplifié des cas d'utilisation" mc="Standard.UseCaseDiagram" uid="96f70709-61e9-4162-9f17-0b43b16565b9"/>
+        <COMPID name="Diagramme des cas d'utilisation" mc="Standard.UseCaseDiagram" uid="9ec2d13d-f2b8-4de3-82eb-d40d69c4b8d7"/>
+        <COMPID name="Diagramme détaillé des cas d'utilisation du BDE" mc="Standard.UseCaseDiagram" uid="382261a4-2472-402d-b3ab-deeba9de2a71"/>
+        <COMPID name="Diagramme détaillé des cas d'utilisation des 1ère années" mc="Standard.UseCaseDiagram" uid="4e17b3fd-fd56-4788-8c1e-a7f9c6b153d8"/>
+        <COMPID name="Diagramme détaillé des cas d'utilisation des 2ème années" mc="Standard.UseCaseDiagram" uid="ae0ead61-1aa2-42ed-8096-bb5b91abcb73"/>
       </COMP>
     </DEPENDENCIES>
   </OBJECT>
