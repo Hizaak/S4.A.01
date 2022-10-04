@@ -1,0 +1,40 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+header {
+    text-align: center;
+}
+
+img {
+    width: 96px;
+}
+
+main {
+    margin: 20px auto;
+    width: 350px;
+    text-align: center;
+}
+
+form {
+    border-radius: 15px;
+    background-color: brown;
+    padding: 20px;
+    text-align: left;
+}
+
+#mail {
+    display: inline;
+}
+
+#mdp {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 20px;
+}
+
+#mdp > a{
+    text-align: right;
+}
+
