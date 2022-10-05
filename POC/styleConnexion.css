@@ -1,10 +1,14 @@
 * {
     margin: 0px;
     padding: 0px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
     
 }
 
 body {
+    display: flex;
+    flex-direction: column;
     background-color: #FFBD87;
 }
 
@@ -70,3 +74,16 @@ input::placeholder {
     margin-top: 10px;
 }
 
+
+footer{
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+}
+
+footer > ul{
+    display: flex;
+    
+    justify-content: space-between;
+    list-style: none;
+    width: 800px;
+}
