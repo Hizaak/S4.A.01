@@ -75,6 +75,12 @@ input::placeholder {
 }
 
 
+
+input {
+    text-align: center;
+}
+
+
 footer{
     position: absolute;
     bottom: 0; left: 0; right: 0;
