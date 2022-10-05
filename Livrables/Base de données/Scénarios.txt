@@ -1,0 +1,26 @@
+SELECT :
+Un étudiant veut visionner un formulaire
+Un étudiant souhaite se connecter
+Un étudiant de 2ème année veut consulter la liste des réponses des étudiants de 1ère année
+Un étudiant veut consulter le nom de son parrain / de son filleul
+Un étudiant de 1ère année souhaite consulter l'indice que lui a laissé son parrain
+Le BDE souhaite consulter la liste des réponses des étudiants pour une question
+Le BDE souhaite consulter la liste des réponses d'un étudiant à un formulaire
+Le BDE souhaite consulter la liste des filleuls d'un parrain
+
+INSERT :
+Un étudiant se créer un compte
+Un étudiant répond à un formulaire
+Le BDE crée un formulaire
+Le BDE crée une question
+
+UPDATE :
+Un étudiant modifie les informations le concernant
+Un étudiant modifie sa réponse à une question d'un formulaire
+Le BDE modifie un formulaire
+Le BDE modifie une question
+
+DELETE :
+Un étudiant souhaite supprimer son compte
+Le BDE souhaite supprimer un formulaire
+Le BDE souhaite supprimer une question dans un formulaire
