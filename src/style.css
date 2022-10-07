@@ -1,45 +1,20 @@
-.carte{
-    text-align: center;
-    margin-top: 50px;
-    margin-bottom: 50px;
-    margin-left: 35%;
-    margin-right: 35%;
-    border-radius: 20px;
-    border: 1px solid #000;
+/* 
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Roboto+Mono:ital,wght@0,100;0,300;0,400;0,600;0,700;1,300;1,500&display=swap" rel="stylesheet"> 
+
+Titre: Alfa Slab One
+
+Input: Roboto Mono
+*/
+
+:root{
+    --main-color: #000;
 }
 
-
-img{
-    
-    width: 50%;
-    height: 50%;
-    border-radius: 20px;
+*{
+    padding: 0;
+    margin: 0;
 }
 
-
-.choix{
-    display: flex;
-    justify-content: space-around;
-    padding-top: 50px;
-    padding-bottom: 50px;
-     
-}
-
-button{
-    border-radius: 20px;
-    width: 150px;
-    border: 1px solid #000;
-    background-color: #fff;
-    padding: 10px;
-    font-size: 20px;
-    font-weight: bold;
-    color: #000;
-}
-
-.oui{
-    background-color: #0f0;
-}
-
-.non{
-    background-color: #f00;
-}
