@@ -5,16 +5,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion</title>
+    <title>Création de compte</title>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="styleConnexion.css">
+    <link rel="stylesheet" href="styleCreation.css">
     <link rel="stylesheet" href="style.css">
 
     <!-- Polices -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Mono&family=Rambla:wght@700&family=Roboto:ital,wght@0,300;1,400&display=swap" rel="stylesheet">   
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Mono&family=Rambla:wght@700&family=Roboto:ital,wght@0,300;1,400&display=swap" rel="stylesheet">
 
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="sources/icon/favicon/apple-touch-icon.png">
@@ -25,7 +25,7 @@
 <body>
     <header>
         <img id="logo-hego-berria" src="sources/images/logo.png" alt="logo Hego Berria">
-        <h1>Connexion à Hego Berria</h1>
+        <h1>Création de compte</h1>
     </header>
 
     <main>
@@ -35,14 +35,14 @@
                 <input type="text" id="identifiant" placeholder="identifiant" >
                 <label id="domaine">@etud.univ-pau.fr</label>
             </section>
-            <section id="mdp">
-                <p>Mot de passe</p>
-                <a id="mdpOublie" href="mdpOublie.html">Mot de passe oublié</a>
-            </section>
+            <p id="mdp">Mot de passe</p>
             <input type="password" id="saisieMdp">
-            <button id="bouton-connexion" type="submit" name="submit">Se connecter</button>
+            <p id="confirmer-mdp">Confirmer le mot de passe</p>
+            <input type="password" id="saisieMdp">
+            <p id="Sélectionnez votre promo"></p>
+            <button id="bouton-inscription" type="submit" name="submit">S'inscrire</button>
         </form>
-        <p id="pas-de-compte">Pas de compte ? <a href="creation-compte.html">Créer un compte</a>.</p>
+        <p id="pas-de-compte">Déjà un compte ? <a href="connexion.html">Se connecter</a>.</p>
     </main>
 
     <footer>
