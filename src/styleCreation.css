@@ -1,4 +1,4 @@
-body{
+body {
     display: flex;
     flex-direction: column;
     line-height: 1.5;
@@ -6,25 +6,25 @@ body{
 }
 
 /* Header */
-header{
+header {
     text-align: center;
     line-height: 1;
 }
 
 
-#logo-hego-berria{
+#logo-hego-berria {
     width: 96px;
 }
 
 /* Main */
 main {
-    flex:1;
+    flex: 1;
     margin: 20px auto;
     width: auto;
     text-align: center;
 }
 
-form{
+form {
     display: flex;
     flex-direction: column;
     border: 1px solid var(--border-color);
@@ -35,14 +35,15 @@ form{
     max-width: 350px;
 }
 
-#mdp, #confirmer-mdp{
+#mdp,
+#confirmer-mdp {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     margin-top: 10px;
 }
 
-input{
+input {
     outline-color: invert;
     background-color: var(--background-color);
     border: solid 1px var(--border-color);
@@ -52,7 +53,7 @@ input{
     padding: 5px;
 }
 
-#bouton-inscription{
+#bouton-inscription {
     margin-top: 20px;
     padding: 5px;
     width: 100%;
@@ -74,15 +75,16 @@ input{
     background-color: var(--icon-color);
 }
 
-#pas-de-compte{
+#pas-de-compte {
     margin-top: 10px;
     font-size: 14px;
     padding: 15px;
     border: solid 1px var(--border-color);
     border-radius: 10px;
 }
+
 /* Footer */
-footer{
+footer {
     text-align: center;
     background-color: var(--background-color);
     color: var(--text-color);
@@ -90,7 +92,7 @@ footer{
     margin-bottom: 10px;
 }
 
-ul{
+ul {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -98,12 +100,12 @@ ul{
     gap: 20px
 }
 
-#nous-contacter{
+#nous-contacter {
     text-decoration: none;
     color: var(--text-color);
 }
 
-#nous-contacter:hover{
+#nous-contacter:hover {
     text-decoration: underline;
     color: var(--link-text);
 }

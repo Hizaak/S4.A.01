@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <!-- Metadonnées -->
     <meta charset="UTF-8">
@@ -14,7 +15,9 @@
     <!-- Polices -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Mono&family=Rambla:wght@700&family=Roboto:ital,wght@0,300;1,400&display=swap" rel="stylesheet">   
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Mono&family=Rambla:wght@700&family=Roboto:ital,wght@0,300;1,400&display=swap"
+        rel="stylesheet">
 
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="sources/icon/favicon/apple-touch-icon.png">
@@ -31,10 +34,12 @@
     <main>
         <form method="POST">
             <p>Adresse mail étudiante</p>
+            <!-- TODO : Ajouter un message d'erreur si l'identifiant n'existe pas -->
             <section id="mail">
-                <input type="text" id="identifiant" placeholder="identifiant" >
+                <input type="text" id="identifiant" placeholder="identifiant">
                 <label id="domaine">@etud.univ-pau.fr</label>
             </section>
+            <!-- TODO : Ajouter l'oeil permettant de dévoiler le code -->
             <section id="mdp">
                 <p>Mot de passe</p>
                 <a id="mdpOublie" href="mdpOublie.html">Mot de passe oublié</a>
@@ -51,7 +56,7 @@
             <li><a href="#">Sécurité</a></li>
             <li><a id="nous-contacter" href="#">Nous contacter</a></li>
         </ul>
-        
-    </footer>  
+    </footer>
 </body>
+
 </html>
