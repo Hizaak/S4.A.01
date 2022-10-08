@@ -28,7 +28,7 @@ form{
     display: flex;
     flex-direction: column;
     border: 1px solid var(--border-color);
-    border-radius: 4px;
+    border-radius: 10px;
     background-color: var(--light-background-color);
     padding: 20px 15px;
     text-align: left;
@@ -82,13 +82,11 @@ input{
     margin-top: 10px;
     font-size: 14px;
     padding: 15px;
-
     border: solid 1px var(--border-color);
-    border-radius: 4px;
+    border-radius: 10px;
 }
 /* Footer */
 footer{
-    align-items: flex-end;
     text-align: center;
     background-color: var(--background-color);
     color: var(--text-color);
@@ -104,6 +102,12 @@ ul{
     gap: 20px
 }
 
+#nous-contacter{
+    text-decoration: none;
+    color: var(--text-color);
+}
 
-
-  
+#nous-contacter:hover{
+    text-decoration: underline;
+    color: var(--link-text);
+}
