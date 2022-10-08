@@ -1,16 +1,25 @@
 /* 
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Roboto+Mono:ital,wght@0,100;0,300;0,400;0,600;0,700;1,300;1,500&display=swap" rel="stylesheet"> 
-
-Titre: Alfa Slab One
-
-Input: Roboto Mono
+Titre: Rambla
+Texte : Roboto
+Input: Fira Mono
 */
 
 :root{
-    --main-color: #000;
+    /* Fond */
+    --background-color: #16161b;
+        /* Pour le menu */
+    --light-background-color: #212027; 
+    --border-color: #22282e;
+
+    /* Texte */
+    --title-text-color: #EEEEEE;
+    --main-text-color: #CCCCCC;
+    --text-color: #a8a8a8;
+    --shaded-text-color: #666666;
+
+    /* Couleurs */
+    --icon-color: #ff8c3fcc;
+    --link-text: #4f94e3;
 }
 
 *{
@@ -18,3 +27,51 @@ Input: Roboto Mono
     margin: 0;
 }
 
+/* Styles par défaut */
+/* Titres */
+h1{
+    font-family: 'Rambla', sans-serif;
+    font-size: 2.5em;
+    letter-spacing: 1px;
+    color: var(--title-text-color);
+}
+
+h2{
+    font-family: 'Rambla', sans-serif;
+    font-size: 2em;
+    letter-spacing: 1px;
+    color: var(--title-text-color);
+}
+
+h3{
+    font-family: 'Rambla', sans-serif;
+    font-size: 1.5em;
+    letter-spacing: 1px;
+    color: var(--title-text-color);
+}
+
+p{
+    font-family: sans-serif;
+    font-size: 1em;
+    color: var(--main-text-color);
+}
+
+/* Style des liens */
+a{
+    font-family: sans-serif;
+    font-size: 1em;
+    color: var(--link-text);
+    text-decoration: none;
+}
+
+a:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+body{
+    background-color: var(--background-color);
+    font-family: sans-serif;
+    font-size: 1em;
+    color: var(--main-text-color);
+}

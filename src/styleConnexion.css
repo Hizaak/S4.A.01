@@ -1,93 +1,109 @@
-* {
-    margin: 0px;
-    padding: 0px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-body {
+body{
     display: flex;
     flex-direction: column;
-    background-color: #FFBD87;
+    line-height: 1.5;
+    min-height: 100vh;
 }
 
-header {
+/* Header */
+header{
     text-align: center;
+    line-height: 1;
 }
 
-img {
+
+#logo-hego-berria{
     width: 96px;
 }
 
+/* Main */
 main {
+    flex:1;
     margin: 20px auto;
-    width: 350px;
+    width: auto;
     text-align: center;
 }
 
-form {
-    border-radius: 15px;
-    background-color: #EB6F09;
-    padding: 20px;
+form{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--light-background-color);
+    padding: 20px 15px;
     text-align: left;
+    max-width: 350px;
 }
 
-input {
-    background-color: #FFA65C;
-    border: solid 1px #FE9238;
-    border-radius: 3px;
-    margin-top: 10px;
-    padding: 5px 0;
-}
-
-input::placeholder { 
-    color: #B45302;
-}
-
-#mail {
-    display: inline;
-}
-
-#mdp {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+#mdp{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     margin-top: 20px;
 }
 
-#mdp > a{
-    text-align: right;
+#mdpOublie:hover{
+    text-decoration: none;
 }
 
-#saisieMdp {
+input{
+    outline-color: invert;
+    background-color: var(--background-color);
+    border: solid 1px var(--border-color);
+    color: var(--text-color);
+    border-radius: 4px;
+    margin-top: 3px;
+    padding: 5px;
+}
+
+#bouton-connexion{
+    margin-top: 20px;
+    padding: 5px;
     width: 100%;
+    font-size: 20px;
+    letter-spacing: 1px;
+    background-color: var(--icon-color);
+    cursor: pointer;
+    border-radius: 3px;
+    box-shadow: 0 0 10px var(--icon-color);
+    transition: 0.2s;
+    color: var(--icon-color);
+    background-color: var(--background-color);
+    border: 1px solid var(--icon-color);
 }
 
-#submit {
-    border-radius: 5px;
-    margin-top: 30px;
-    padding: 10px;
-    width: 100%;
+#bouton-connexion:hover {
+    color: white;
+    box-shadow: 0 0 14px var(--icon-color);
+    background-color: var(--icon-color);
 }
 
-#pasCompte {
+#pas-de-compte{
     margin-top: 10px;
+    font-size: 14px;
+    padding: 15px;
+
+    border: solid 1px var(--border-color);
+    border-radius: 4px;
 }
-
-
-
-input {
-    text-align: center;
-}
-
-
+/* Footer */
 footer{
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
+    align-items: flex-end;
+    text-align: center;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-size: 14px;
+    margin-bottom: 10px;
 }
 
-footer > ul{
+ul{
     display: flex;
-    
-    justify-content: space-between;
-    list-style: none;
-    width: 800px;
+    flex-direction: row;
+    justify-content: center;
+    list-style-type: none;
+    gap: 20px
 }
+
+
+
+  

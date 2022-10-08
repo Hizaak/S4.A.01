@@ -1,16 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Metadonnées -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styleConnexion.css">
-    <link rel="icon" type="image/png" href="/sources/images/logo.png" />
     <title>Connexion</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="styleConnexion.css">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Polices -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Mono&family=Rambla:wght@700&family=Roboto:ital,wght@0,300;1,400&display=swap" rel="stylesheet">   
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="sources/icon/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="sources/icon/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="sources/icon/favicon/favicon-16x16.png">
 </head>
+
 <body>
     <header>
-        <img src="sources/images/logo.png" alt="logo Hego Berria">
+        <img id="logo-hego-berria" src="sources/images/logo.png" alt="logo Hego Berria">
         <h1>Connexion à Hego Berria</h1>
     </header>
 
@@ -18,25 +32,23 @@
         <form method="POST">
             <p>Adresse mail étudiante</p>
             <section id="mail">
-                <input type="text" id="identifiant" name="" placeholder="nom.prenom" >
+                <input type="text" id="identifiant" placeholder="identifiant" >
                 <label id="domaine">@etud.univ-pau.fr</label>
             </section>
             <section id="mdp">
-                <label>Mot de passe</label>
-                <a id="mdpOublie" href="#">Mot de passe oublié</a>
+                <p>Mot de passe</p>
+                <a id="mdpOublie" href="mdpOublie.html">Mot de passe oublié</a>
             </section>
-            <input type="password" id="saisieMdp" name="">
-            <br>
-            <input id="submit" type="submit" name="submit" value="Se connecter">
+            <input type="password" id="saisieMdp">
+            <button id="bouton-connexion" type="submit" name="submit">Se connecter</button>
         </form>
-        <p id="pasCompte">Pas de compte ? <a href="#">Créer un compte</a>.</p>
+        <p id="pas-de-compte">Pas de compte ? <a href="#">Créer un compte</a>.</p>
     </main>
 
     <footer>
         <ul>
-            <li> <a href="#">Conditions d'utilisation</a></li>
-            <li><a href="#">Confidentialité</a></li>
-            <li><a href="#">Utilisation des cookies</a></li>
+            <li><a href="#">Conditions d'utilisation</a></li>
+            <li><a href="#">Politique</a></li>
             <li><a href="#">Sécurité</a></li>
             <li><a href="#">Contacter Hego Berria</a></li>
         </ul>
