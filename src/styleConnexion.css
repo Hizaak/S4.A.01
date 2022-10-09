@@ -46,6 +46,21 @@ form {
     text-decoration: none;
 }
 
+#saisieMdp1{
+    width: 95%;
+}
+
+#password-eye{
+    cursor: pointer;
+    position: absolute;
+    margin-top: -25px;
+    margin-left: 250px;
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
+}
+
 input {
     outline-color: invert;
     background-color: var(--background-color);

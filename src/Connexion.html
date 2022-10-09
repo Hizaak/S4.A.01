@@ -15,14 +15,18 @@
     <!-- Polices -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Fira+Mono&family=Rambla:wght@700&family=Roboto:ital,wght@0,300;1,400&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Mono&family=Rambla:wght@700&family=Roboto:ital,wght@0,300;1,400&display=swap" rel="stylesheet">
 
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="sources/icon/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="sources/icon/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="sources/icon/favicon/favicon-16x16.png">
+
+    <!-- Fontawesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+
+    <!-- Eye password -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 </head>
 
 <body>
@@ -39,12 +43,16 @@
                 <input type="text" id="identifiant" placeholder="identifiant">
                 <label id="domaine">@etud.univ-pau.fr</label>
             </section>
-            <!-- TODO : Ajouter l'oeil permettant de dévoiler le code -->
             <section id="mdp">
                 <p>Mot de passe</p>
                 <a id="mdpOublie" href="mdpOublie.html">Mot de passe oublié</a>
             </section>
-            <input type="password" id="saisieMdp">
+            <section id="section-MDP">
+                <input type="password" name="password" autocomplete="current-password" required="" id="saisieMdp1">
+                <!-- FIXME : Le changement d'icone ne fonctionne pas -->
+                <i id="password-eye1"><span id="password-eye-icon1" class="material-symbols-outlined">visibility_off</span></i>
+                <script src="password-eye.js"></script>
+            </section>
             <button id="bouton-connexion" type="submit" name="submit">Se connecter</button>
         </form>
         <p id="pas-de-compte">Pas de compte ? <a href="creation-compte.html">Créer un compte</a>.</p>
