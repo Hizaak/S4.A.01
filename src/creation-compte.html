@@ -4,13 +4,12 @@
 <head>
     <!-- Metadonnées -->
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Création de compte</title>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="styleCreation.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styleCreation.css">
 
     <!-- Polices -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,57 +19,50 @@
         rel="stylesheet">
 
     <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="sources/icon/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="sources/icon/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="sources/icon/favicon/favicon-16x16.png">
-
-    <!-- Eye password -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="apple-touch-icon" sizes="180x180" href="sources/icons/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="sources/icons/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="sources/icons/favicon/favicon-16x16.png">
 </head>
 
 <body>
     <header>
-        <img id="logo-hego-berria" src="sources/images/logo.png" alt="logo Hego Berria">
+        <img id="logoHegoBerria" src="sources/images/logo.png" alt="Le logo de Hego Berria">
         <h1>Création de compte</h1>
     </header>
 
     <main>
         <form method="POST">
-            <p>Adresse mail étudiante</p>
-            <!-- TODO : Ajouter un message d'erreur si l'identifiant n'existe pas -->
+            <p>Identifiant</p>
             <section id="mail">
-                <input type="text" id="identifiant" placeholder="identifiant">
+                <input type="text" id="identifiant" required>
                 <label id="domaine">@etud.univ-pau.fr</label>
             </section>
-            <!-- FIXME : icone eye
-            TODO : Ajouter le Password Checker
-            TODO : Ajouter la barre de sécurité du mot de passe -->
-            <p id="mdp">Mot de passe</p>
-            <section id="section-MDP">
-                <input type="password" name="password" autocomplete="current-password" required="" id="saisieMdp1">
-                <!-- FIXME : Le changement d'icone ne fonctionne pas -->
-                <i id="password-eye1"><span id="password-eye-icon1" class="material-symbols-outlined">visibility_off</span></i>
-                <script src="password-eye.js"></script>
+            <p id="texteMDP">Mot de passe</p>
+            <section>
+                <!-- TODO : mettre une limite de visibilité dans la saisie pour ne pas couvrir l'oeil -->
+                <input id="motDePasse" type="password" name="password" autocomplete="current-password" required>
+                <img id="oeilMDP" src="sources/icons/visibility_on.svg" alt="Icone d'oeil" onclick="showPassword('motDePasse')">
             </section>
-            <p id="confirmer-mdp">Confirmer le mot de passe</p>
-            <section id="section-MDP">
-                <input type="password" name="password" autocomplete="current-password" required="" id="saisieMdp2">
-                <!-- FIXME : Le changement d'icone ne fonctionne pas -->
-                <i id="password-eye2"><span id="password-eye-icon2" class="material-symbols-outlined">visibility_off</span></i>
-                <script src="password-eye.js"></script>
+            <p id="texteConfirmation">Confirmer le mot de passe</p>
+            <section>
+                <!-- TODO : mettre une limite de visibilité dans la saisie pour ne pas couvrir l'oeil -->
+                <input id="confirmation" type="password" name="password" autocomplete="current-password" required>
+                <img id="oeilConfirmation" src="sources/icons/visibility_on.svg" alt="Icone d'oeil" onclick="showPassword('confirmation')">
             </section>
-            <button id="bouton-inscription" type="submit" name="submit">S'inscrire</button>
+            <button id="boutonInscription" type="submit" name="submit">S'inscrire</button>
         </form>
-        <p id="pas-de-compte">Déjà un compte ? <a href="connexion.html">Se connecter</a>.</p>
+        <p id="pasDeCompte">Déjà un compte ? <a href="connexion.html">Se connecter</a>.</p>
     </main>
 
     <footer>
         <ul>
             <li><a href="#">Politique</a></li>
             <li><a href="#">Sécurité</a></li>
-            <li><a id="nous-contacter" href="#">Nous contacter</a></li>
+            <li><a id="nousContacter" href="#">Nous contacter</a></li>
         </ul>
     </footer>
+    
+    <script type="text/javascript" src="password-eye.js"></script>
 </body>
 
 </html>

@@ -4,7 +4,6 @@
 <head>
     <!-- Metadonnées -->
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion</title>
 
@@ -15,56 +14,54 @@
     <!-- Polices -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Mono&family=Rambla:wght@700&family=Roboto:ital,wght@0,300;1,400&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Mono&family=Rambla:wght@700&family=Roboto:ital,wght@0,300;1,400&display=swap"
+        rel="stylesheet">
 
     <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="sources/icon/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="sources/icon/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="sources/icon/favicon/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="sources/icons/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="sources/icons/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="sources/icons/favicon/favicon-16x16.png">
 
-    <!-- Fontawesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
-
-    <!-- Eye password -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <script type="text/javascript" src="/password-eye.js"></script>
 </head>
 
 <body>
     <header>
-        <img id="logo-hego-berria" src="sources/images/logo.png" alt="logo Hego Berria">
+        <img id="logoHegoBerria" src="sources/images/logo.png" alt="Le logo de Hego Berria">
         <h1>Connexion à Hego Berria</h1>
     </header>
 
     <main>
         <form method="POST">
-            <p>Adresse mail étudiante</p>
-            <!-- TODO : Ajouter un message d'erreur si l'identifiant n'existe pas -->
+            <p>Identifiant</p>
             <section id="mail">
-                <input type="text" id="identifiant" placeholder="identifiant">
+                <input type="text" id="identifiant" required>
                 <label id="domaine">@etud.univ-pau.fr</label>
             </section>
-            <section id="mdp">
+            <section id="sectionMDP">
                 <p>Mot de passe</p>
-                <a id="mdpOublie" href="mdpOublie.html">Mot de passe oublié</a>
+                <a id="MDPOublie" href="mdpOublie.html">Mot de passe oublié</a>
             </section>
-            <section id="section-MDP">
-                <input type="password" name="password" autocomplete="current-password" required="" id="saisieMdp1">
-                <!-- FIXME : Le changement d'icone ne fonctionne pas -->
-                <i id="password-eye1"><span id="password-eye-icon1" class="material-symbols-outlined">visibility_off</span></i>
-                <script src="password-eye.js"></script>
+            <section>
+                <!-- TODO : mettre une limite de visibilité dans la saisie pour ne pas couvrir l'oeil -->
+                <input id="motDePasse" type="password" name="password" autocomplete="current-password" required>
+                <img id="oeilMDP" src="sources/icons/visibility_on.svg" alt="Icone d'oeil" onclick="showPassword('motDePasse')">
             </section>
-            <button id="bouton-connexion" type="submit" name="submit">Se connecter</button>
+            <button id="boutonConnexion" type="submit" name="submit">Se connecter</button>
         </form>
-        <p id="pas-de-compte">Pas de compte ? <a href="creation-compte.html">Créer un compte</a>.</p>
+        <p id="pasDeCompte">Pas de compte ? <a href="creation-compte.html">Créer un compte</a>.</p>
     </main>
 
     <footer>
         <ul>
             <li><a href="#">Politique</a></li>
             <li><a href="#">Sécurité</a></li>
-            <li><a id="nous-contacter" href="#">Nous contacter</a></li>
+            <li><a id="nousContacter" href="#">Nous contacter</a></li>
         </ul>
     </footer>
+    
+    <script type="text/javascript" src="password-eye.js"></script>
 </body>
 
 </html>

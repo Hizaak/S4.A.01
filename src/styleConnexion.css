@@ -12,7 +12,7 @@ header {
 }
 
 
-#logo-hego-berria {
+#logoHegoBerria {
     width: 96px;
 }
 
@@ -35,30 +35,32 @@ form {
     max-width: 350px;
 }
 
-#mdp {
+#sectionMDP {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     margin-top: 20px;
 }
 
-#mdpOublie:hover {
+#MDPOublie:hover {
     text-decoration: none;
 }
 
-#saisieMdp1{
+#motDePasse {
     width: 95%;
 }
 
-#password-eye{
+#oeilMDP {
     cursor: pointer;
     position: absolute;
-    margin-top: -25px;
-    margin-left: 250px;
-    -webkit-user-select: none; /* Safari */        
-    -moz-user-select: none; /* Firefox */
-    -ms-user-select: none; /* IE10+/Edge */
-    user-select: none; /* Standard */
+    height: 17px;
+    margin-top: 9px;
+    margin-left: -30px;
+
+    -webkit-user-select: none;    /* Safari */
+    -moz-user-select: none;    /* Firefox */
+    -ms-user-select: none;    /* IE10+/Edge */
+    user-select: none;    /* Standard */
 }
 
 input {
@@ -71,7 +73,7 @@ input {
     padding: 5px;
 }
 
-#bouton-connexion {
+#boutonConnexion {
     margin-top: 20px;
     padding: 5px;
     width: 100%;
@@ -93,7 +95,7 @@ input {
     background-color: var(--icon-color);
 }
 
-#pas-de-compte {
+#pasDeCompte {
     margin-top: 10px;
     font-size: 14px;
     padding: 15px;
@@ -118,12 +120,12 @@ ul {
     gap: 20px
 }
 
-#nous-contacter {
+#nousContacter {
     text-decoration: none;
     color: var(--text-color);
 }
 
-#nous-contacter:hover {
+#nousContacter:hover {
     text-decoration: underline;
     color: var(--link-text);
 }
