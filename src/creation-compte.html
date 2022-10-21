@@ -26,7 +26,7 @@
 
 <body>
     <header>
-        <img id="logoHegoBerria" src="sources/images/logo.png" alt="Le logo de Hego Berria">
+        <img id="logoHegoBerria" src="sources/icons/logo_hego_berria.svg" alt="Le logo de Hego Berria">
         <h1>Création de compte</h1>
     </header>
 
@@ -40,14 +40,14 @@
             <p id="texteMDP">Mot de passe</p>
             <section>
                 <!-- TODO : mettre une limite de visibilité dans la saisie pour ne pas couvrir l'oeil -->
-                <input id="motDePasse" type="password" name="password" autocomplete="current-password" required>
-                <img id="oeilMDP" src="sources/icons/visibility_on.svg" alt="Icone d'oeil" onclick="showPassword('motDePasse')">
+                <input id="MDP" type="password" name="password" autocomplete="current-password" required>
+                <img id="oeil-MDP" src="sources/icons/visibility_on.svg" alt="Icone d'oeil" onclick="showPassword('MDP')">
             </section>
             <p id="texteConfirmation">Confirmer le mot de passe</p>
             <section>
                 <!-- TODO : mettre une limite de visibilité dans la saisie pour ne pas couvrir l'oeil -->
                 <input id="confirmation" type="password" name="password" autocomplete="current-password" required>
-                <img id="oeilConfirmation" src="sources/icons/visibility_on.svg" alt="Icone d'oeil" onclick="showPassword('confirmation')">
+                <img id="oeil-confirmation" src="sources/icons/visibility_on.svg" alt="Icone d'oeil" onclick="showPassword('confirmation')">
             </section>
             <button id="boutonInscription" type="submit" name="submit">S'inscrire</button>
         </form>

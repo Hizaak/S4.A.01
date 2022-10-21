@@ -11,9 +11,16 @@ header {
     line-height: 1;
 }
 
-#logoHegoBerria {
-    width: 96px;
+h1{
+    margin: 10px;
 }
+
+#logoHegoBerria {
+    margin-top: 40px;
+    margin-bottom: 15px;
+    width: 100px;
+}
+
 
 /* Main */
 main {
@@ -43,16 +50,17 @@ form {
     width: 100%;
 }
 
-#motDePasse, #confirmation{
+#MDP, #confirmation{
     width: 95%;
 }
 
-#oeilMDP, #oeilConfirmation {
+#oeil-MDP, #oeil-confirmation {
     cursor: pointer;
     position: absolute;
-    height: 17px;
-    margin-top: 9px;
+    height: 20px;
+    margin-top: 7px;
     margin-left: -30px;
+    filter: invert(75%);
 
     -webkit-user-select: none;    /* Safari */
     -moz-user-select: none;    /* Firefox */
