@@ -11,8 +11,7 @@ header {
     line-height: 1;
 }
 
-
-#logo-hego-berria {
+#logoHegoBerria {
     width: 96px;
 }
 
@@ -35,8 +34,8 @@ form {
     max-width: 350px;
 }
 
-#mdp,
-#confirmer-mdp {
+#texteMDP,
+#texteConfirmation {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -44,19 +43,21 @@ form {
     width: 100%;
 }
 
-#saisieMdp1, #saisieMdp2{
+#motDePasse, #confirmation{
     width: 95%;
 }
 
-#password-eye1, #password-eye2{
+#oeilMDP, #oeilConfirmation {
     cursor: pointer;
     position: absolute;
-    margin-top: -25px;
-    margin-left: 250px;
-    -webkit-user-select: none; /* Safari */        
-    -moz-user-select: none; /* Firefox */
-    -ms-user-select: none; /* IE10+/Edge */
-    user-select: none; /* Standard */
+    height: 17px;
+    margin-top: 9px;
+    margin-left: -30px;
+
+    -webkit-user-select: none;    /* Safari */
+    -moz-user-select: none;    /* Firefox */
+    -ms-user-select: none;    /* IE10+/Edge */
+    user-select: none;    /* Standard */
 }
 
 input {
@@ -69,7 +70,7 @@ input {
     padding: 5px;
 }
 
-#bouton-inscription {
+#boutonInscription {
     margin-top: 20px;
     padding: 5px;
     width: 100%;
@@ -85,13 +86,13 @@ input {
     border: 1px solid var(--icon-color);
 }
 
-#bouton-inscription:hover {
+#boutonInscription:hover {
     color: white;
     box-shadow: 0 0 14px var(--icon-color);
     background-color: var(--icon-color);
 }
 
-#pas-de-compte {
+#pasDeCompte {
     margin-top: 10px;
     font-size: 14px;
     padding: 15px;
@@ -116,12 +117,12 @@ ul {
     gap: 20px
 }
 
-#nous-contacter {
+#nousContacter {
     text-decoration: none;
     color: var(--text-color);
 }
 
-#nous-contacter:hover {
+#nousContacter:hover {
     text-decoration: underline;
     color: var(--link-text);
 }
