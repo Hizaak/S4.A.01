@@ -97,7 +97,7 @@ input {
     border: 1px solid var(--icon-color);
 }
 
-#bouton-connexion:hover {
+#boutonConnexion:hover {
     color: white;
     box-shadow: 0 0 14px var(--icon-color);
     background-color: var(--icon-color);
