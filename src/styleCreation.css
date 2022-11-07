@@ -87,7 +87,6 @@ input {
     background-color: var(--icon-color);
     cursor: pointer;
     border-radius: 3px;
-    box-shadow: 0 0 10px var(--icon-color);
     transition: 0.2s;
     color: var(--icon-color);
     background-color: var(--background-color);
@@ -96,7 +95,7 @@ input {
 
 #boutonInscription:hover {
     color: white;
-    box-shadow: 0 0 14px var(--icon-color);
+    box-shadow: 0 0 10px var(--icon-color);
     background-color: var(--icon-color);
 }
 
