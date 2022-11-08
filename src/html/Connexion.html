@@ -8,8 +8,8 @@
     <title>Connexion</title>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="styleConnexion.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style/styleConnexion.css">
+    <link rel="stylesheet" href="../style/style.css">
 
     <!-- Polices -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,12 +26,13 @@
 
 <body>
     <header>
-        <img id="logoHegoBerria" src="sources/icons/logo_hego_berria.svg" alt="Le logo de Hego Berria">
-        <h1>Connexion à Hego Berria</h1>
+        <img id="logoHegoBerria" src="../sources/icons/logo_hego_berria.svg" alt="Le logo de Hego Berria">
+        <h1>Hego Berria</h1>
     </header>
 
     <main>
         <form method="POST">
+            <h1 id="connexionTitle">Connexion</h1>
             <p>Identifiant</p>
             <section id="mail">
                 <input type="text" id="identifiant" required>
@@ -44,7 +45,7 @@
             <section>
                 <!-- TODO : mettre une limite de visibilité dans la saisie pour ne pas couvrir l'oeil -->
                 <input id="MDP" type="password" name="password" autocomplete="current-password" required>
-                <img id="oeil-MDP" src="sources/icons/visibility_on.svg" alt="Icone d'oeil" onclick="showPassword('MDP')">
+                <img id="oeil-MDP" src="../sources/icons/visibility_on.svg" alt="Icone d'oeil" onclick="showPassword('MDP')">
             </section>
             <button id="boutonConnexion" type="submit" name="submit">Se connecter</button>
         </form>
