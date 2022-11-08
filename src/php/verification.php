@@ -47,16 +47,16 @@ echo "</form>";
 
 
 //on verifie que le code est correct
-
+echo $_SESSION['code'];
 if (isset($_POST['code'])){
     if ($_POST['code'] == $_SESSION['code']){
         //on actualise le mot de passe de l'utilisateur dans la table utilisateur
-        $req = $database->prepare('UPDATE Utilisateur SET password = ? WHERE login = ?');
+        $req = $database->prepare('UPDATE Utilisateur SET password = ?, estValide = 1 WHERE login = ?' );
         $req->execute(array($_SESSION['password'], $_SESSION['mail']));
 
 
         //on redirige vers la page de connexion
-        header('Location: ../html/connexion.html');
+        header('Location: connexion.php');
     }
     else{
         echo "Le code de vérification est incorrect";
