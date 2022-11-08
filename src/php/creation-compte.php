@@ -69,11 +69,12 @@ if (isset($_POST['mail']) && isset($_POST['password']) && isset($_POST['conf-pas
 <body>
     <header>
         <img id="logoHegoBerria" src="../sources/icons/logo_hego_berria.svg" alt="Le logo de Hego Berria">
-        <h1>Création de compte</h1>
+        <h1>Hego Berria</h1>
     </header>
 
     <main>
         <form method="POST">
+            <h1 id="creationTitle">Créer un compte</h1>
             <p>Identifiant</p>
             <section id="mail">
                 <input name="mail" type="text" id="identifiant"  required>
