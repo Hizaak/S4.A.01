@@ -46,8 +46,6 @@ echo "<input type='submit' value='Valider'>";
 echo "</form>";
 
 
-
-
 //on verifie que le code est correct
 
 if (isset($_POST['code'])){
@@ -64,29 +62,4 @@ if (isset($_POST['code'])){
         echo "Le code de vérification est incorrect";
     }
 }
-
-
-
-
-
-
-//on hash le mot de passe
-
-// $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-//on ajoute l'utilisateur dans la base de données
-                // $req = $database->prepare('UPDATE Utilisateur SET password = ? WHERE login = ?');
-
-                // $req->execute(array($password,$_POST['mail']));
-                // echo 'Votre compte a bien été créé';
-
 ?>
-
-<html>
-
-    </main>
-
-    <footer></footer>
-
-</body>
-
-</html>
