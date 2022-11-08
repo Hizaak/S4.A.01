@@ -37,9 +37,7 @@ main {
     text-align: center;
 }
 
-p {
-    padding: 10px;
-}
+
 
 form {
     display: flex;
@@ -49,7 +47,7 @@ form {
     background-color: var(--light-background-color);
     padding: 20px 15px;
     text-align: left;
-    max-width: 350px;
+    max-width: 380px;
 }
 
 input {
@@ -59,7 +57,7 @@ input {
     color: var(--text-color);
     border-radius: 4px;
     margin-top: 3px;
-    padding: 10px;
+    padding: 5px;
 }
 
 

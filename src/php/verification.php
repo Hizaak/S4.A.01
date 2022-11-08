@@ -31,20 +31,22 @@
     </header>
 
     <main>
-        <p>Un code de vérification a été envoyé</p><br>
-        <p>Veuillez entrer le code de vérification ci-dessous :</p><br>
+
+        <form action='verification.php' method='post'>
+            <p>Un code de vérification a été envoyé</p>
+            <p>Veuillez entrer le code de vérification ci-dessous :</p>
+            <input type='text' name='code' placeholder='Code de vérification'>
+            <input type='submit' value='Valider'>
+        </form>
+        
+    </main>
 
 </html>
 
 <?php
+/*
 include('db.php');
 session_start();
-
-echo "<form action='verification.php' method='post'>";
-echo "<input type='text' name='code' placeholder='Code de vérification'>";
-echo "<input type='submit' value='Valider'>";
-echo "</form>";
-
 
 //on verifie que le code est correct
 echo $_SESSION['code'];
@@ -62,4 +64,5 @@ if (isset($_POST['code'])){
         echo "Le code de vérification est incorrect";
     }
 }
+*/
 ?>
