@@ -33,10 +33,10 @@
     <main>
 
         <form action='verification.php' method='post'>
-            <p>Un code de vérification a été envoyé</p>
+            <p id="msgCodeEnvoi">Un <b>code de vérification</b> vous a été envoyé.</p>
             <p>Veuillez entrer le code de vérification ci-dessous :</p>
-            <input type='text' name='code' placeholder='Code de vérification'>
-            <input type='submit' value='Valider'>
+            <input type='text' name='code' placeholder='000000' id='inputValidation'>
+            <input type='submit' value='Valider' id='boutonValidation'>
         </form>
         
     </main>
