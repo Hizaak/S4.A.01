@@ -7,36 +7,25 @@ if (isset($_POST['mail']) && isset($_POST['password']) && isset($_POST['conf-pas
     // On verifie que les champs ne sont pas vides
     if (!empty($_POST['mail']) && !empty($_POST['password']) && !empty($_POST['conf-password'])){
         //on verifie que les mots de passe sont identiques
-        if ($_POST['password'] == $_POST['conf-password']){
-            //on verifie que le mail n'est pas déjà utilisé
-            $req = $database->prepare('SELECT * FROM Utilisateur WHERE login = ?');
-            $req->execute(array($_POST['mail']));
-            $resultat = $req->fetch();
+        //on verifie que le mail n'est pas déjà utilisé
+        $req = $database->prepare('SELECT * FROM Utilisateur WHERE login = ?');
+        $req->execute(array($_POST['mail']));
+        $resultat = $req->fetch();
 
-            if ($resultat){
-               
-                //INSERER LE MESSAGE DE CONFIRMATION ICI
-
-
-
-
-                //on hash le mot de passe
-
-                // $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-                // //on ajoute l'utilisateur dans la base de données
-                // $req = $database->prepare('UPDATE Utilisateur SET password = ? WHERE login = ?');
-
-                // $req->execute(array($password,$_POST['mail']));
-                // echo 'Votre compte a bien été créé';
+        if ($resultat){
+            //On stock les données de l'utilisateur dans la session pour les réutiliser sur la page de vérifications
+            $_SESSION['mail'] = $_POST['mail'];
+            $_SESSION['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
+            //On redirige vers la page de vérification
+            $code = rand(100000, 999999);
+            //on stock le code dans la session
+            $_SESSION['code'] = $code;
+            header('Location: verification.php');
             }
-            else{
-                echo 'cet email n\'est pas disponible';
-            }
-        }
         else{
-            echo 'Les mots de passe ne sont pas identiques';
+            echo "cet email n\'est pas disponible";
+            }
         }
-    }
     else{
         echo 'Veuillez remplir tous les champs';
     }}
@@ -93,17 +82,7 @@ if (isset($_POST['mail']) && isset($_POST['password']) && isset($_POST['conf-pas
                 <input id="confirmation" type="password" name="conf-password" autocomplete="current-password" required>
                 <img id="oeil-confirmation" src="../sources/icons/visibility_on.svg" alt="Icone d'oeil" onclick="showPassword('confirmation')">
             </section>
-            <section id="confirmation-mail">
-                <?php
-                    if (isset($resultat) && $resultat){
-                        echo '<p>Un code vous à était envoyé par mail</p>';
-                        echo '<input type="text" name="secret" id="code" required>';
-                        echo '<p id="texteConfirmation">Si vous n\'avez pas reçu de mail, cliquez <a href="creation-compte.php">ici</a></p>';
-                        
-                    }
-                ?>
-            </section>
-            <button id="boutonInscription" type="submit" name="submit">S\'inscrire</button>
+            <button id="boutonInscription" type="submit" name="submit">S'inscrire</button>
             
         </form>
         <p id="pasDeCompte">Déjà un compte ? <a href="../html/connexion.html">Se connecter</a>.</p>
