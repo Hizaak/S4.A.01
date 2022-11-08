@@ -64,6 +64,7 @@ if (isset($_POST['mail']) && isset($_POST['password']) && isset($_POST['conf-pas
     <link rel="apple-touch-icon" sizes="180x180" href="../sources/icons/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="../sources/icons/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../sources/icons/favicon/favicon-16x16.png">
+
 </head>
 
 <body>
@@ -73,7 +74,7 @@ if (isset($_POST['mail']) && isset($_POST['password']) && isset($_POST['conf-pas
     </header>
 
     <main>
-        <form method="POST">
+        <form method="POST" class="form-anticlear">
             <p>Identifiant</p>
             <section id="mail">
                 <input name="mail" type="text" id="identifiant"  required>
@@ -101,7 +102,7 @@ if (isset($_POST['mail']) && isset($_POST['password']) && isset($_POST['conf-pas
                     }
                 ?>
             </section>
-            <button id="boutonInscription" type="submit" name="submit">S'inscrire</button>
+            <button id="boutonInscription" type="submit" name="submit">S\'inscrire</button>
             
         </form>
         <p id="pasDeCompte">Déjà un compte ? <a href="../html/connexion.html">Se connecter</a>.</p>
