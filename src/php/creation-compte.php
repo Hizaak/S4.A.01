@@ -1,52 +1,3 @@
-
-<?php
-include('db.php');
-session_start();
-// Si le formulaire a été envoyé
-if (isset($_POST['mail']) && isset($_POST['password']) && isset($_POST['conf-password'])) {
-    // On verifie que les champs ne sont pas vides
-    if (!empty($_POST['mail']) && !empty($_POST['password']) && !empty($_POST['conf-password'])){
-        //on verifie que les mots de passe sont identiques
-        //on verifie que le mail n'est pas déjà utilisé
-        $req = $database->prepare('SELECT * FROM Utilisateur WHERE login = ?');
-        $req->execute(array($_POST['mail']));
-        $resultat = $req->fetch();
-
-
-        if ($resultat){
-            if ($resultat['estValide']==1){
-                echo "Ce compte est déjà existant, si vous ne vous souvenez plus de votre mot de passe, cliquez <a href='mot-de-passe-oublie.php'>ici</a>";
-            }
-            else{
-                //On stock les données de l'utilisateur dans la session pour les réutiliser sur la page de vérifications
-                $_SESSION['mail'] = $_POST['mail'];
-                $_SESSION['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
-                //On redirige vers la page de vérification
-                $code = rand(100000, 999999);
-                //on stock le code dans la session
-                $_SESSION['code'] = $code;
-                //on envoie le code par mail
-                $to = $_SESSION['mail'];
-                $subject = "Code de vérification";
-                $message = "Voici votre code de vérification : " . $code;
-                mail($to.'@etud.univ-pau.fr', $subject, $message, $headers);
-                echo "le code est : " . $_SESSION['code'];
-                header('Location: verification.php');
-            }
-        }
-        else{
-            echo "cet email n\'est pas disponible";
-            }
-        }
-    else{
-        echo 'Veuillez remplir tous les champs';
-    }}
-
-
-?>
-
-
-
 <html lang="fr">
 
 <head>
@@ -86,6 +37,7 @@ if (isset($_POST['mail']) && isset($_POST['password']) && isset($_POST['conf-pas
             <section id="mail">
                 <input name="mail" type="text" id="identifiant"  required>
                 <label id="domaine">@iutbayonne.univ-pau.fr</label>
+                <p id="error"></p>
             </section>
             <p id="texteMDP">Mot de passe</p>
             <section>
@@ -100,6 +52,7 @@ if (isset($_POST['mail']) && isset($_POST['password']) && isset($_POST['conf-pas
                 <img id="oeil-confirmation" src="../sources/icons/visibility_on.svg" alt="Icone d'oeil" onclick="showPassword('confirmation')">
             </section>
             <button id="boutonInscription" type="submit" name="submit">S'inscrire</button>
+    
             
         </form>
         <p id="pasDeCompte">Déjà un compte ? <a href="connexion.php">Se connecter</a>.</p>
@@ -117,3 +70,55 @@ if (isset($_POST['mail']) && isset($_POST['password']) && isset($_POST['conf-pas
 </body>
 
 </html>
+
+
+<?php
+include('db.php');
+include('outils.php');
+session_start();
+// Si le formulaire a été envoyé
+if (isset($_POST['mail']) && isset($_POST['password']) && isset($_POST['conf-password'])) {
+    // On verifie que les champs ne sont pas vides
+    if (!empty($_POST['mail']) && !empty($_POST['password']) && !empty($_POST['conf-password'])){
+        //on verifie que les mots de passe sont identiques
+        //on verifie que le mail n'est pas déjà utilisé
+        $req = $database->prepare('SELECT * FROM Utilisateur WHERE login = ?');
+        $req->execute(array($_POST['mail']));
+        $resultat = $req->fetch();
+
+
+        if ($resultat){
+            if ($resultat['estValide']==1){
+                error("Le compte existe déjà");
+                }
+            else{
+                //On stock les données de l'utilisateur dans la session pour les réutiliser sur la page de vérifications
+                $_SESSION['mail'] = $_POST['mail'];
+                $_SESSION['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
+                //On redirige vers la page de vérification
+                $code = rand(100000, 999999);
+                //on stock le code dans la session
+                $_SESSION['code'] = $code;
+                //on envoie le code par mail
+                $to = $_SESSION['mail'];
+                $subject = "Code de vérification";
+                $message = "Voici votre code de vérification : " . $code;
+                mail($to.'@etud.univ-pau.fr', $subject, $message, $headers);
+                echo "le code est : " . $_SESSION['code'];
+                header('Location: verification.php');
+                
+            }
+        }
+        else{
+            error("Ce compte n'existe pas");
+            }
+    }
+    else{
+        error("Tout les champs ne sont pas remplis");
+        }
+            
+    }
+
+
+?>
+

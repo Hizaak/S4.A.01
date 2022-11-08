@@ -75,3 +75,10 @@ body {
     font-size: 1em;
     color: var(--main-text-color);
 }
+
+#error {
+    font-family: sans-serif;
+    font-size: 0.8em;
+    color: rgb(255, 65, 65);
+    font-style: italic;
+}
