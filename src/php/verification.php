@@ -1,10 +1,6 @@
 <?php
 include('db.php');
 session_start();
-// Si le formulaire a été envoyé
-//INSERER LE MESSAGE DE CONFIRMATION ICI
-//on genere un code de verification
-
 
 echo "Un code de vérification a été envoyé<br>";
 echo "Veuillez entrer le code de vérification ci-dessous : ";
@@ -13,12 +9,7 @@ echo "<input type='text' name='code' placeholder='Code de vérification'>";
 echo "<input type='submit' value='Valider'>";
 echo "</form>";
 
-//on envoie le code par mail
-// $to = $_SESSION['mail'];
-// $subject = "Code de vérification";
-// $message = "Voici votre code de vérification : " . $code;
-// mail($to.'@etud.univ-pau.fr', $subject, $message, $headers);
-echo "le code est : " . $_SESSION['code'];
+
 
 
 //on verifie que le code est correct

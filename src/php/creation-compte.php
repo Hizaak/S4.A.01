@@ -20,6 +20,12 @@ if (isset($_POST['mail']) && isset($_POST['password']) && isset($_POST['conf-pas
             $code = rand(100000, 999999);
             //on stock le code dans la session
             $_SESSION['code'] = $code;
+            //on envoie le code par mail
+            $to = $_SESSION['mail'];
+            $subject = "Code de vérification";
+            $message = "Voici votre code de vérification : " . $code;
+            mail($to.'@etud.univ-pau.fr', $subject, $message, $headers);
+            echo "le code est : " . $_SESSION['code'];
             header('Location: verification.php');
             }
         else{
