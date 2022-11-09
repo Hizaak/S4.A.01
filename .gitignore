@@ -39,3 +39,6 @@
 *.out
 *.app
 main
+
+# Fichiers d'authentification
+db.php
