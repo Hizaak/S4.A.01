@@ -47,13 +47,7 @@
 
 <?php
 
-<<<<<<< Updated upstream
 include('outils.php');
-=======
-include('db.php');
-session_start();
->>>>>>> Stashed changes
-
 //on verifie que le code est correct
 if (isset($_POST['code'])){
     if ($_POST['code'] == $_SESSION['code']){
