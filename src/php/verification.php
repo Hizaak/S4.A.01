@@ -45,7 +45,11 @@
 
 <?php
 
+<<<<<<< Updated upstream
 include('outils.php');
+=======
+include('db.php');
+>>>>>>> Stashed changes
 session_start();
 
 //on verifie que le code est correct
