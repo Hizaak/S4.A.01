@@ -46,19 +46,9 @@
 
 <?php
 
-<<<<<<< Updated upstream
 include('outils.php');
-<<<<<<< HEAD
-
-=======
-=======
-include('db.php');
->>>>>>> Stashed changes
-session_start();
->>>>>>> 82ac6f48ed1b14983555262c5c0bce4ecdc5e161
 
 //on verifie que le code est correct
-echo $_SESSION['code'];
 if (isset($_POST['code'])){
     if ($_POST['code'] == $_SESSION['code']){
         //on actualise le mot de passe de l'utilisateur dans la table utilisateur
