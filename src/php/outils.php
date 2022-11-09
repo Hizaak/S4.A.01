@@ -25,5 +25,13 @@ function envoyerCodeMail($mail){
 
 }
 
+function verifUtilisateur($user){
+    //retourne les informations de l'utilisateur
+    global $database;
+    $req = $database->prepare('SELECT * FROM Utilisateur WHERE login = ?');
+    $req->execute(array($user));
+    return $req->fetch();
+}
+
 
 ?>

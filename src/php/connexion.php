@@ -50,7 +50,7 @@
             </section>
             <button id="boutonConnexion" type="submit" name="submit">Se connecter</button>
         </form>
-        <p id="pasDeCompte">Pas de compte ? <a href="creation-compte.php">Créer un compte</a>.</p>
+        <p id="pasDeCompte">Pas de compte ? <a href="creationCompte.php">Créer un compte</a>.</p>
     </main>
 
     <footer>
@@ -68,7 +68,9 @@
 
 <?php
 include('outils.php');
-
+if (isset($_SESSION['mail'])) {
+    echo ('<script>document.getElementById("identifiant").value ="'.$_SESSION['mail'].'"</script>');
+}
 if (isset($_POST['mail']) && isset($_POST['password'])) {
     //on verifie que le mail est bien dans la base de données
     $req = $database->prepare('SELECT * FROM Utilisateur WHERE login = ?');

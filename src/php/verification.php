@@ -39,6 +39,7 @@
             <p id='error'></p>
             <input type='submit' value='Valider' id='boutonValidation'>
         </form>
+        <p id="success"></p>
         
     </main>
 
@@ -55,10 +56,9 @@ if (isset($_POST['code'])){
         $req = $database->prepare('UPDATE Utilisateur SET password = ?, estValide = 1 WHERE login = ?' );
         //TODO : faire verifier par le prof
         $req->execute(array($_SESSION['password'], $_SESSION['mail']));
-
-
+        print "<script type='text/javascript'>document.getElementById('success').innerHTML ='Opération réussis avec succès<br>Vous allez être redirigé vers la page de connexion'</script>";
         //on redirige vers la page de connexion
-        header('Location: connexion.php');
+        header('Refresh: 3,URL=connexion.php');
     }
     else{
         error("Le code de vérification est incorrect");
