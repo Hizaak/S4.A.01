@@ -1,41 +1,3 @@
-<?php
-include('db.php');
-session_start();
-
-if (isset($_POST['mail']) && isset($_POST['password'])) {
-    //on verifie que le mail est bien dans la base de données
-    $req = $database->prepare('SELECT * FROM Utilisateur WHERE login = ?');
-    $req->execute(array($_POST['mail']));
-    $resultat = $req->fetch();
-
-    if (!$resultat) {
-        echo "Le mail n'est pas dans la base de données";
-    } else {
-        //on verifie que le mot de passe est correct
-        // On hash le mot de passe
-        if (password_verify($_POST['password'], $resultat['password'])) {
-            //on verifie que l'utilisateur a bien validé son compte
-            if ($resultat['estValide'] == 1) {
-                //on stocke le mail dans une variable de session
-                $_SESSION['mail'] = $_POST['mail'];
-
-                //on redirige vers la page de verification
-                echo "ca marche";
-            } else {
-                echo "Vous n'avez pas validé votre compte";
-                echo "<a href='creation-compte.php'>Valider votre compte</a>";
-            }
-        } else {
-            echo "Le mot de passe est incorrect";
-        }
-    }
-}
-
-
-
-?>
-
-
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -102,3 +64,40 @@ if (isset($_POST['mail']) && isset($_POST['password'])) {
 </body>
 
 </html>
+
+<?php
+include('outils.php');
+session_start();
+
+if (isset($_POST['mail']) && isset($_POST['password'])) {
+    //on verifie que le mail est bien dans la base de données
+    $req = $database->prepare('SELECT * FROM Utilisateur WHERE login = ?');
+    $req->execute(array($_POST['mail']));
+    $resultat = $req->fetch();
+
+    if (!$resultat) {
+        echo "Le mail n'est pas dans la base de données";
+    } else {
+        //on verifie que le mot de passe est correct
+        // On hash le mot de passe
+        if (password_verify($_POST['password'], $resultat['password'])) {
+            //on verifie que l'utilisateur a bien validé son compte
+            if ($resultat['estValide'] == 1) {
+                //on stocke le mail dans une variable de session
+                $_SESSION['mail'] = $_POST['mail'];
+
+                //on redirige vers la page de verification
+                echo "ca marche";
+            } else {
+                echo "Vous n'avez pas validé votre compte";
+                echo "<a href='creation-compte.php'>Valider votre compte</a>";
+            }
+        } else {
+            echo "Le mot de passe est incorrect";
+        }
+    }
+}
+
+
+
+?>

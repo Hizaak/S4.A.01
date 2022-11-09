@@ -1,5 +1,6 @@
 <?php
     //connexion à la base
+    global $database;
     $db_servername = "placali.fr";
     $db_username = "hegolagunak";
     $db_password = "398cve0AmLNLUFXY";

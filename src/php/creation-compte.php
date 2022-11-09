@@ -73,7 +73,6 @@
 
 
 <?php
-include('db.php');
 include('outils.php');
 session_start();
 // Si le formulaire a été envoyé
@@ -95,16 +94,7 @@ if (isset($_POST['mail']) && isset($_POST['password']) && isset($_POST['conf-pas
                 //On stock les données de l'utilisateur dans la session pour les réutiliser sur la page de vérifications
                 $_SESSION['mail'] = $_POST['mail'];
                 $_SESSION['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
-                //On redirige vers la page de vérification
-                $code = rand(100000, 999999);
-                //on stock le code dans la session
-                $_SESSION['code'] = $code;
-                //on envoie le code par mail
-                $to = $_SESSION['mail'];
-                $subject = "Code de vérification";
-                $message = "Voici votre code de vérification : " . $code;
-                mail($to.'@etud.univ-pau.fr', $subject, $message, $headers);
-                echo "le code est : " . $_SESSION['code'];
+                $_SESSION['code'] = envoyerCodeMail($_POST['mail']);
                 header('Location: verification.php');
                 
             }

@@ -44,8 +44,8 @@
 </html>
 
 <?php
-/*
-include('db.php');
+
+include('outils.php');
 session_start();
 
 //on verifie que le code est correct
@@ -64,5 +64,5 @@ if (isset($_POST['code'])){
         echo "Le code de vérification est incorrect";
     }
 }
-*/
+
 ?>
