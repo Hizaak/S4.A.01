@@ -74,7 +74,6 @@
 
 <?php
 include('outils.php');
-session_start();
 // Si le formulaire a été envoyé
 if (isset($_POST['mail']) && isset($_POST['password']) && isset($_POST['conf-password'])) {
     // On verifie que les champs ne sont pas vides

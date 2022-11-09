@@ -40,12 +40,13 @@
             </section>
             <section id="sectionMDP">
                 <p>Mot de passe</p>
-                <a id="MDPOublie" href="mdpOublie.html">Mot de passe oublié</a>
+                <a id="MDPOublie" href="motDePasseOublie.php">Mot de passe oublié</a>
             </section>
             <section>
                 <!-- TODO : mettre une limite de visibilité dans la saisie pour ne pas couvrir l'oeil -->
                 <input id="MDP" type="password" name="password" autocomplete="current-password" required>
                 <img id="oeil-MDP" src="../sources/icons/visibility_on.svg" alt="Icone d'oeil" onclick="showPassword('MDP')">
+                <p id="error"></p>
             </section>
             <button id="boutonConnexion" type="submit" name="submit">Se connecter</button>
         </form>
@@ -67,7 +68,6 @@
 
 <?php
 include('outils.php');
-session_start();
 
 if (isset($_POST['mail']) && isset($_POST['password'])) {
     //on verifie que le mail est bien dans la base de données
@@ -76,7 +76,7 @@ if (isset($_POST['mail']) && isset($_POST['password'])) {
     $resultat = $req->fetch();
 
     if (!$resultat) {
-        echo "Le mail n'est pas dans la base de données";
+        error("Identifiant ou mot de passe incorrect");
     } else {
         //on verifie que le mot de passe est correct
         // On hash le mot de passe
@@ -87,13 +87,12 @@ if (isset($_POST['mail']) && isset($_POST['password'])) {
                 $_SESSION['mail'] = $_POST['mail'];
 
                 //on redirige vers la page de verification
-                echo "ca marche";
+                header('Location: accueil.php');
             } else {
-                echo "Vous n'avez pas validé votre compte";
-                echo "<a href='creation-compte.php'>Valider votre compte</a>";
+                error("Vous n'avez pas validé votre compte<br><a href='creationCompte.php'>Valider votre compte</a>");
             }
         } else {
-            echo "Le mot de passe est incorrect";
+            error("Identifiant ou mot de passe incorrect");
         }
     }
 }

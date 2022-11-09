@@ -36,6 +36,7 @@
             <p id="msgCodeEnvoi">Un <b>code de vérification</b> vous a été envoyé.</p>
             <p>Veuillez entrer le code de vérification ci-dessous :</p>
             <input type='text' name='code' placeholder='000000' id='inputValidation'>
+            <p id='error'></p>
             <input type='submit' value='Valider' id='boutonValidation'>
         </form>
         
@@ -46,7 +47,7 @@
 <?php
 
 include('outils.php');
-session_start();
+
 
 //on verifie que le code est correct
 echo $_SESSION['code'];
@@ -54,6 +55,7 @@ if (isset($_POST['code'])){
     if ($_POST['code'] == $_SESSION['code']){
         //on actualise le mot de passe de l'utilisateur dans la table utilisateur
         $req = $database->prepare('UPDATE Utilisateur SET password = ?, estValide = 1 WHERE login = ?' );
+        //TODO : faire verifier par le prof
         $req->execute(array($_SESSION['password'], $_SESSION['mail']));
 
 
@@ -61,7 +63,7 @@ if (isset($_POST['code'])){
         header('Location: connexion.php');
     }
     else{
-        echo "Le code de vérification est incorrect";
+        error("Le code de vérification est incorrect");
     }
 }
 

@@ -1,6 +1,8 @@
 <?php
-include('db.php');
-session_start();
+include('baseDeDonnees.php');
+if(!isset($_SESSION)){
+    session_start();
+}
 
 //Insert un code d'erreur dans la page HTML dans la div d'id "erreur"
 function error($message) {
@@ -17,7 +19,7 @@ function envoyerCodeMail($mail){
     $subject = "Code de vérification";
     $message = "Voici votre code de vérification : " . $code;
     echo $code;
-    //mail($mail.'@etud.univ-pau.fr', $subject, $message);
+    mail($mail.'@iutbayonne.univ-pau.fr', $subject, $message);
     return $code;
 
 
