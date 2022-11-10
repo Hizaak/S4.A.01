@@ -2,122 +2,37 @@
 <html lang="fr">
 
 <head>
-    <title>Hego Berria | Accueil</title>
-    <meta charset="utf-8" />
+    <!--Metadonnées-->
+    <title id="mainTitle">Hego Lagunak | Accueil</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" media="(min-width: 900px) and (max-aspect-ratio: 7/10)" href="../style/styleIndexPhone.css">
-    <link rel="stylesheet" media="(max-width: 900px)" href="../style/styleIndexSscreen.css">
-    <link rel="stylesheet" media="(min-width: 901px) and (max-width: 960px) and (min-aspect-ratio: 7/10)" href="../style/styleIndexSscreen.css">
-    <link rel="stylesheet" media="(min-width: 961px) and (min-aspect-ratio: 7/10)" href="../style/styleIndexLscreen.css">
-
+    <!--CSS-->
+    <link rel="stylesheet" href="../style/style.css">
+    <link rel="stylesheet" href="../style/styleIndex.css">
+    
+    <!--Polices-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,500;0,900;1,400&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Mono&family=Rambla:wght@700&family=Roboto:ital,wght@0,300;1,400&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
     <header>
-
-        <div id="horizontal-menu">
-            <div id="logo-left-part">
-                <a href="./annonces.html" id="h-button-slider-annonces" class="button-slider">Annonces</a>
-                <a href="./index.html" id="h-button-slider-accueil" class="button-slider">Accueil</a>
-            </div>
-            <img id="logo-image-hor" src="../sources/logo/b&wINV.png" alt="logo du BDE">
-            <div id="logo-right-part">
-                <a href="./contacter.html" id="h-button-slider-contacter" class="button-slider">Nous contacter</a>
-                <a href="./iut.html" id="h-button-slider-iut" class="button-slider">Snacks</a>
-            </div>
-        </div>
-
-        <div id="vertical-menu">
-
-
-            <a class="icon" onclick="verticalMenuClick()">
-                <i id="icon-menu" class="fa fa-bars"></i>
-            </a>
-            <div id="vertical-menu-bar">
-                <a href="./index.html" id="v-button-slider-accueil" class="button-slider">Accueil</a>
-                <a href="./annonces.html" id="v-button-slider-annonces" class="button-slider">Annonces</a>
-                <a href="./iut.html" id="v-button-slider-iut" class="button-slider">Snacks</a>
-                <a href="./contacter.html" id="v-button-slider-contacter" class="button-slider">Nous contacter</a>
-                <div id="vertical-menu-exitSp" onclick="verticalMenuClick()">
-
-                </div>
-            </div>
-
-        </div>
-
+        <img id="logoHegoBerria" src="../sources/icons/logo_hego_berria.svg" alt="Le logo de Hego Berria">
+        <h1>Hego Berria</h1>
     </header>
 
-    <div id="page-content">
-
-        <div id="index-sup-part">
-
-            <div id="index-div-cen-sup">
-                <img id="index-image-principale" src="../sources/logo/color.png" alt="logo du BDE">
-                <h1>Hego Lagunak</h1>
-                <h3>Questionnaire officiel pour le parainage paraints-filleuls</h3>
-                <button id="boutonCommencer">Commencer le Questionnaire</button>
-                
-                
-    
-            </div>
-
-            <canvas id="background-anim" width="300" height="100" onclick="canvasClick(event)">
-                Désolé, votre navigateur ne prend pas en charge &lt;canvas&gt;.
-              </canvas>
-            
-        </div>
-
-        <footer id="footer">
-            <div id="int-link-l">
-                <ul>
-                    <li class="footer-link">
-                        <a class="footer-link-text" href="./index.html">Accueil</a>
-                    </li>
-                    <li class="footer-link">
-                        <a class="footer-link-text" href="./annonces.html">Annonces</a>
-                    </li>
-                </ul>
-            </div>
-
-            <div id="int-link-r">
-                <ul>
-                    <li class="footer-link">
-                        <a class="footer-link-text" href="./iut.html">Snacks</a>
-                    </li>
-                    <li class="footer-link">
-                        <a class="footer-link-text" href="./contacter.html">Nous contacter</a>
-                    </li>
-                </ul>
-            </div>
-
-            <div id="ext-link">
-                <a class="icon" href="https://www.instagram.com/hegoberria/" target="_blank">
-                    <img alt="logo d'instagram" id="icon-instagram" class="icon-image"
-                        src="../sources/logo/lien/logo-instagram-blanc.png">
-                </a>
-                <a class="icon" href="https://discord.gg/umtErBrRb4" target="_blank">
-                    <img alt="logo de discord" id="icon-gmail" class="icon-image" src="../sources/logo/lien/discord.png">
-                </a>
-                <a class="icon" href="https://www.iutbayonne.univ-pau.fr/" target="_blank">
-                    <img alt="logo de l'iut de bayonne" id="icon-discord" class="icon-image" src="../sources/logo/lien/iut.png">
-                </a>
-            </div>
-        </footer>
-
-    </div>
-
-    <script src="script.js"></script>
-    
+    <main>
+        <form>
+        <p id="mainSubTitle">Bienvenue sur la page Hego Lagunak ! Ici, vous pouvez répondre au questionnaire de parainage.</p>
+        <button href="#" id="boutonCommencer">Commencer le questionnaire</button>
+        <a>Retour sur le site officiel</a>
+        </form>
+    </main>
 </body>
-
 </html>

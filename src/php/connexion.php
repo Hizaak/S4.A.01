@@ -82,6 +82,7 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
         error("Identifiant ou mot de passe incorrect");
     } else {
         //on verifie que le mot de passe est correct
+        // On hash le mot de passe
         if (password_verify($_POST['password'], $resultat['password'])) {
             //on verifie que l'utilisateur a bien validé son compte
             if ($resultat['estValide'] == 1) {
