@@ -9,6 +9,11 @@ if (isset($_SESSION['message'])){
 }
 
 
+interdireVisiteur();
+
+
+
+
 //Insert un code d'erreur dans la page HTML dans la div d'id "erreur"
 function error($message) {
     echo '<script type="text/javascript">document.getElementById("error").innerHTML ="'. $message . '" ;</script>';      
@@ -41,9 +46,9 @@ function verifUtilisateur($user){
 
 
 
-function estConnecter($user){
+function estConnecter(){
     //retourne true si l'utilisateur est connecté
-    if (isset($_SESSION['login']) && $_SESSION['login'] == $user){
+    if (isset($_SESSION['login'])){
         return true;
     }
     else{
@@ -52,9 +57,9 @@ function estConnecter($user){
 }
 
 
-function estAdmin($user){
+function estAdmin(){
     //retourne true si l'utilisateur est admin
-    if (estConnecter($user) && $_SESSION['role'] == 'admin'){
+    if (estConnecter() && $_SESSION['role'] == 'admin'){
         return true;
     }
     else{
@@ -67,6 +72,7 @@ function estAdmin($user){
 
 
 function notifier($message,$rgb="#333"){
+    //affiche un message dans la page
     $injection= '<section id=injection><script type="text/javascript" src="../script/outils.js"></script>
           <link rel="stylesheet" href="../style/notification.css">
           <div id="notif">'."$message".'</div>
@@ -74,6 +80,14 @@ function notifier($message,$rgb="#333"){
     echo $injection;
 }
 
+function interdireVisiteur(){
+    //Interdit cette page au visiteurs
+    if (basename($_SERVER['PHP_SELF']) == basename(__FILE__)) {
+        //on redirige vers la page d'accueil
+        echo "oui";
+        header('Location:accueil.php');
+    }
+}
 
 
 ?>

@@ -68,7 +68,6 @@
 
 <?php
 include('outils.php');
-var_dump($_SESSION);
 if (isset($_SESSION['login'])) {
     echo ('<script>document.getElementById("identifiant").value ="'.$_SESSION['login'].'"</script>');
 }

@@ -7,7 +7,7 @@
 
 <?php
 include('outils.php');
-if (!estAdmin($_SESSION['login'])){
+if (!estAdmin()){
     header('Location:connexion.php');
 }
 

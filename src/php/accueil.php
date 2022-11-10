@@ -1,6 +1,8 @@
 <?php
 include 'outils.php';
-var_dump($_SESSION)
+if (!estConnecter()){
+    header('Location: connexion.php');
+}
 ?>
 
 <html lang="fr">

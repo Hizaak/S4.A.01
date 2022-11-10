@@ -64,6 +64,7 @@ include('outils.php');
 
 if(!isset($_SESSION['contexte'])){
     error("Erreur : contexte non défini");
+    header("Refresh: 1; url=connexion.php");
 }
 
 
