@@ -86,7 +86,7 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
             //on verifie que l'utilisateur a bien validé son compte
             if ($resultat['estValide'] == 1) {
                 //on stocke le mail dans une variable de session
-                $_SESSION['login'] = $_POST['login'];
+                $_SESSION['login'] = strtolower(($_POST['login']));
                 $_SESSION['role'] = $resultat['role'];
                 $_SESSION['message'] = ["Bienvenue ".$_SESSION['login'],"#006700"];
                 //on redirige vers la page de verification
