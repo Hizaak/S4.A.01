@@ -47,17 +47,57 @@
 
 <?php
 
+/* Cette page permet de vérifier l'adresse mail de l'utilisateur en lui envoyant un code de vérification par mail
+ * puis en vérifiant que le code entré par l'utilisateur est le même que celui envoyé par mail 
+ * 
+ * Nouveau  : il faut ajouter un contexte à la page pour savoir ce que l'ont doit faire après la vérification
+ * Le contexte est dans le $_SESSION['contexte']
+ * */
+
+
+
 include('outils.php');
+
+
+
 //on verifie que le code est correct
+
+if(!isset($_SESSION['contexte'])){
+    error("Erreur : contexte non défini");
+}
+
+
 if (isset($_POST['code'])){
     if ($_POST['code'] == $_SESSION['code']){
-        //on actualise le mot de passe de l'utilisateur dans la table utilisateur
-        $req = $database->prepare('UPDATE Utilisateur SET password = ?, estValide = 1 WHERE login = ?' );
-        //TODO : faire verifier par le prof
-        $req->execute(array($_SESSION['password'], $_SESSION['login']));
-        print "<script type='text/javascript'>document.getElementById('success').innerHTML ='Opération réussis avec succès<br>Vous allez être redirigé vers la page de connexion'</script>";
-        //on redirige vers la page de connexion
-        header('Refresh: 3,URL=connexion.php');
+        $contexte = $_SESSION['contexte'];
+
+        switch ($_SESSION['contexte']){
+            case 'creationCompte':
+                 //on actualise le mot de passe de l'utilisateur dans la table utilisateur
+                $req = $database->prepare('UPDATE Utilisateur SET password = ?, estValide = 1 WHERE login = ?' );
+                $req->execute(array($_SESSION['password'], $_SESSION['login']));
+                $_SESSION['message'] = ["Votre compte a bien été créé !","#006700"];
+                //on redirige vers la page de connexion
+                header('Location:connexion.php');
+                break;
+            case 'MDPoublie':
+                //on actualise le mot de passe de l'utilisateur dans la table utilisateur
+                $req = $database->prepare('UPDATE Utilisateur SET password = ? WHERE login = ?' );
+                $req->execute(array($_SESSION['password'], $_SESSION['login']));
+                //on redirige vers la page de connexion
+                $_SESSION['message'] = ["Votre mot de passe à bien était modifié!","#006700"];
+                header('Location: connexion.php');
+                break;
+            default:
+                error("Erreur : contexte non reconnu");
+                break;
+        }
+        //on supprime les variables de session inutiles 
+        unset($_SESSION['contexte']);
+        unset($_SESSION['code']);
+        unset($_SESSION['password']);
+
+
     }
     else{
         error("Le code de vérification est incorrect");

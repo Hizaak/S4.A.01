@@ -35,7 +35,7 @@
             <h2 id="creationTitle">Créer un compte</h1>
             <p>Identifiant</p>
             <section id="mail">
-                <input name="mail" type="text" id="identifiant"  required>
+                <input name="login" type="text" id="identifiant"  required>
                 <label id="domaine">@iutbayonne.univ-pau.fr</label>
                 <p id="error"></p>
             </section>
@@ -76,22 +76,23 @@
 <?php
 include('outils.php');
 // Si le formulaire a été envoyé
-if (isset($_POST['mail']) && isset($_POST['password']) && isset($_POST['conf-password'])) {
+if (isset($_POST['login']) && isset($_POST['password']) && isset($_POST['conf-password'])) {
     // On verifie que les champs ne sont pas vides
-    if (!empty($_POST['mail']) && !empty($_POST['password']) && !empty($_POST['conf-password'])){
+    if (!empty($_POST['login']) && !empty($_POST['password']) && !empty($_POST['conf-password'])){
         //on verifie que les mots de passe sont identiques
-        //on verifie que le mail n'est pas déjà utilisé
+        //on verifie que le login n'est pas déjà utilisé
         //On verifie que l'utilisateur existe
-        $resultat=verifUtilisateur($_POST['mail']);
+        $resultat=verifUtilisateur($_POST['login']);
         if ($resultat){
             if ($resultat['estValide']==1){
                 error("Le compte existe déjà");
                 }
             else{
                 //On stock les données de l'utilisateur dans la session pour les réutiliser sur la page de vérifications
-                $_SESSION['mail'] = $_POST['mail'];
+                $_SESSION['login'] = $_POST['login'];
                 $_SESSION['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
-                $_SESSION['code'] = envoyerCodeMail($_POST['mail']);
+                $_SESSION['code'] = envoyerCodeMail($_POST['login']);
+                $_SESSION['contexte'] = "creationCompte";
                 header('Location: verification.php');
                 
             }

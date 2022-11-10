@@ -3,6 +3,11 @@ include('baseDeDonnees.php');
 if(!isset($_SESSION)){
     session_start();
 }
+if (isset($_SESSION['message'])){
+    notifier($_SESSION['message'][0], $_SESSION['message'][1]);
+    unset($_SESSION['message']);
+}
+
 
 //Insert un code d'erreur dans la page HTML dans la div d'id "erreur"
 function error($message) {

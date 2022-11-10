@@ -1,4 +1,8 @@
-<!DOCTYPE html>
+<?php
+include 'outils.php';
+var_dump($_SESSION)
+?>
+
 <html lang="fr">
 
 <head>

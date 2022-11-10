@@ -83,18 +83,28 @@ if (isset($_POST['submit']) && isset($_POST['login']) && isset($_POST['password'
     $login = $_POST['login'];
     $password = $_POST['password'];
     $confPassword = $_POST['conf-password'];
-    if (verifUtilisateur($login)){
+    $resultats=verifUtilisateur($login);
+    if ($resultats){
+        if ($resultats['estValide'] == 0) {
+            error("Votre compte n\'est pas encore initialisée<br>cliquez <a href='creationCompte.php'>ici</a>");
+            exit();
+        }
 
         if ($password == $confPassword) {
             $password = password_hash($password, PASSWORD_DEFAULT);
             $_SESSION['login'] = $login;
             $_SESSION['password'] = $password;
             $_SESSION['code']=envoyerCodeMail($login);
+            $_SESSION['contexte']="MDPoublie";
             header('Location: verification.php');
         }
         else {
             error("Les mots de passe ne correspondent pas");
-        }}
+        }
+        
+    }
+
+
     else {
         error('Identifiant incorrect');
     }}

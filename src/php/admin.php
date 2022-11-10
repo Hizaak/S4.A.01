@@ -12,7 +12,7 @@ if (!estAdmin($_SESSION['login'])){
 }
 
 else{
-    notifier("loremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremlorem","#FF0000");
+    notifier("Vous êtes connecté en tant qu'administrateur", "#FF0000");
 }
 
 ?>

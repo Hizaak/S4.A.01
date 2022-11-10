@@ -68,6 +68,7 @@
 
 <?php
 include('outils.php');
+var_dump($_SESSION);
 if (isset($_SESSION['login'])) {
     echo ('<script>document.getElementById("identifiant").value ="'.$_SESSION['login'].'"</script>');
 }
@@ -87,10 +88,11 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
                 //on stocke le mail dans une variable de session
                 $_SESSION['login'] = $_POST['login'];
                 $_SESSION['role'] = $resultat['role'];
-
+                $_SESSION['message'] = ["Bienvenue ".$_SESSION['login'],"#006700"];
                 //on redirige vers la page de verification
                 if ($resultat['role'] == 'admin'){
                     header('Location:admin.php');
+
                     
                 }
                 else{

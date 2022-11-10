@@ -26,7 +26,7 @@ function showPassword(id) {
     // On supprime la notification après 3 secondes
     setTimeout(function(){ 
       notif.className = notif.className.replace("show", ""); 
-      //document.getElementById("injection").remove();
+      document.getElementById("injection").remove();
   }, 3000);
   
     } 
