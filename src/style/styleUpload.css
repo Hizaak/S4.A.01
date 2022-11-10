@@ -1,0 +1,52 @@
+input[type=file]::file-selector-button {
+    height: 100%;
+    width: 100%;
+    border: none;
+    background: none;
+    color: orange;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    cursor: pointer;
+  }
+  
+
+  
+input[type=file]{
+    width: 100%;
+    color : transparent;
+
+}
+
+h2{
+    font-size: 25px;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    text-align: center;
+} 
+
+.btn-file {
+    border: 1px solid #ccc;
+    display: inline-block;
+    cursor: pointer;
+    text-align: center;
+    width: 25em;
+    height: 25em;
+    font-size: 18px;
+
+
+}
+
+form {
+    text-align: center;
+}
+
+table, th, td {
+    border: 1px solid;
+    text-align: center;
+    margin: 0 auto;
+  }
+
+table{
+    width: 75%;
+    margin: 20px auto;
+
+}
