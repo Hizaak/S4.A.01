@@ -1,0 +1,74 @@
+
+body{
+    display:flex;
+    flex-direction: column;
+    line-height: 1.5;
+    min-height: 100vh;
+}
+
+/*Header*/
+header{
+    text-align: center;
+    line-height: 1;
+}
+
+#logoHegoBerria {
+    margin-top: 40px;
+    margin-bottom: 25px;
+    width: 100px;
+    pointer-events: none;
+}
+
+main {
+    flex: 1;
+    margin: 20px auto;
+    width: auto;
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    background-color: var(--light-background-color);
+    padding: 20px 15px;
+    text-align: center;
+    align-items: center;
+    max-width: 500px;
+    margin-inline: 10px;
+}
+
+#mainSubTitle{
+    font-size: 20px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#boutonCommencer {
+
+    margin-top: 20px;
+    margin-bottom : 20px;
+    padding: 5px;
+    width: 100%;
+    max-width:400px;
+    height: 50px;
+    font-size: 20px;
+    letter-spacing: 1px;
+    background-color: var(--icon-color);
+    cursor: pointer;
+    border-radius: 3px;
+    transition: 0.2s;
+    color: var(--icon-color);
+    background-color: var(--background-color);
+    border: 1.5px solid var(--icon-color);
+}
+
+#boutonCommencer:hover {
+    color: white;
+    box-shadow: 0 0 10px var(--icon-color);
+    background-color: var(--icon-color);
+}
+
+a{
+    font-size: 14px;
+}
