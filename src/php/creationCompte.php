@@ -67,7 +67,7 @@
         </ul>
     </footer>
     
-    <script type="text/javascript" src="devoilerMDP.js"></script>
+    <script type="text/javascript" src="../script/outils.js"></script>
 </body>
 
 </html>

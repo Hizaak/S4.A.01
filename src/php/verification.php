@@ -54,7 +54,7 @@ if (isset($_POST['code'])){
         //on actualise le mot de passe de l'utilisateur dans la table utilisateur
         $req = $database->prepare('UPDATE Utilisateur SET password = ?, estValide = 1 WHERE login = ?' );
         //TODO : faire verifier par le prof
-        $req->execute(array($_SESSION['password'], $_SESSION['mail']));
+        $req->execute(array($_SESSION['password'], $_SESSION['login']));
         print "<script type='text/javascript'>document.getElementById('success').innerHTML ='Opération réussis avec succès<br>Vous allez être redirigé vers la page de connexion'</script>";
         //on redirige vers la page de connexion
         header('Refresh: 3,URL=connexion.php');
