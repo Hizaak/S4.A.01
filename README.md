@@ -2,7 +2,7 @@
 
 Membres du groupe :
 
--- Alexandre Maurice (Hizaak)
--- Titouan Brierre (TauntiiO)
--- Nicolas Dargazanli (noenic)
--- Leho Errecarret (lehoadb)
+- Alexandre Maurice (Hizaak)
+- Titouan Brierre (TauntiiO)
+- Nicolas Dargazanli (noenic)
+- Leho Errecarret (lehoadb)
