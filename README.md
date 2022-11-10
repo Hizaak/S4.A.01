@@ -1,8 +1,8 @@
 # S3.A.01
 
-Membre du groupe :
+Membres du groupe :
 
-Alexandre Maurice (Hizaak)<br>
-Titouan Brierre (TauntiiO) <br>
-Nicolas Dargazanli (noenic) <br>
-Leho Errecarret (lehoadb)
+-- Alexandre Maurice (Hizaak)
+-- Titouan Brierre (TauntiiO)
+-- Nicolas Dargazanli (noenic)
+-- Leho Errecarret (lehoadb)
