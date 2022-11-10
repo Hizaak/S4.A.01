@@ -19,9 +19,9 @@
         rel="stylesheet">
 
     <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="sources/icons/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="sources/icons/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="sources/icons/favicon/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../sources/icons/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../sources/icons/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../sources/icons/favicon/favicon-16x16.png">
 </head>
 
 <body>
@@ -35,7 +35,7 @@
             <h2 id="connexionTitle">Connexion</h1>
             <p>Identifiant</p>
             <section id="mail">
-                <input name='mail' type="text" id="identifiant" required>
+                <input name='login' type="text" id="identifiant" required>
                 <label id="domaine">@iutbayonne.univ-pau.fr</label>
             </section>
             <section id="sectionMDP">
@@ -61,35 +61,43 @@
         </ul>
     </footer>
     
-    <script type="text/javascript" src="../script/devoilerMDP.js"></script>
+    <script type="text/javascript" src="../script/outils.js"></script>
 </body>
 
 </html>
 
 <?php
 include('outils.php');
-if (isset($_SESSION['mail'])) {
-    echo ('<script>document.getElementById("identifiant").value ="'.$_SESSION['mail'].'"</script>');
+if (isset($_SESSION['login'])) {
+    echo ('<script>document.getElementById("identifiant").value ="'.$_SESSION['login'].'"</script>');
 }
-if (isset($_POST['mail']) && isset($_POST['password'])) {
+if (isset($_POST['login']) && isset($_POST['password'])) {
     //on verifie que le mail est bien dans la base de données
     $req = $database->prepare('SELECT * FROM Utilisateur WHERE login = ?');
-    $req->execute(array($_POST['mail']));
+    $req->execute(array($_POST['login']));
     $resultat = $req->fetch();
 
     if (!$resultat) {
         error("Identifiant ou mot de passe incorrect");
     } else {
-        // On verifie que le mot de passe est correct
+        //on verifie que le mot de passe est correct
         // On hash le mot de passe
         if (password_verify($_POST['password'], $resultat['password'])) {
             //on verifie que l'utilisateur a bien validé son compte
             if ($resultat['estValide'] == 1) {
                 //on stocke le mail dans une variable de session
-                $_SESSION['mail'] = $_POST['mail'];
+                $_SESSION['login'] = $_POST['login'];
+                $_SESSION['role'] = $resultat['role'];
 
                 //on redirige vers la page de verification
-                header('Location: accueil.php');
+                if ($resultat['role'] == 'admin'){
+                    header('Location:admin.php');
+                    
+                }
+                else{
+                    header('Location:accueil.php');
+                }
+                
             } else {
                 error("Vous n'avez pas validé votre compte<br><a href='creationCompte.php'>Valider votre compte</a>");
             }

@@ -14,12 +14,12 @@ function error($message) {
 
 /*Cette fonction génère un code aléatoire et l'envoie par mail à l'utilisateur dont l'adresse mail est passée en paramètre
 *puis renvoie le code généré pour pouvoir le comparer avec celui entré par l'utilisateur*/
-function envoyerCodeMail($mail){
+function envoyerCodeMail($login){
     $code = rand(100000, 999999);
     $subject = "Code de vérification";
     $message = "Voici votre code de vérification : " . $code;
     echo $code;
-    mail($mail.'@iutbayonne.univ-pau.fr', $subject, $message);
+    mail($login.'@iutbayonne.univ-pau.fr', $subject, $message);
     return $code;
 
 
@@ -32,6 +32,43 @@ function verifUtilisateur($user){
     $req->execute(array($user));
     return $req->fetch();
 }
+
+
+
+
+function estConnecter($user){
+    //retourne true si l'utilisateur est connecté
+    if (isset($_SESSION['login']) && $_SESSION['login'] == $user){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+
+function estAdmin($user){
+    //retourne true si l'utilisateur est admin
+    if (estConnecter($user) && $_SESSION['role'] == 'admin'){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+
+
+
+
+function notifier($message,$rgb="#333"){
+    $injection= '<section id=injection><script type="text/javascript" src="../script/outils.js"></script>
+          <link rel="stylesheet" href="../style/notification.css">
+          <div id="notif">'."$message".'</div>
+          <script>notification("'.$rgb.'")</script></section>';
+    echo $injection;
+}
+
 
 
 ?>

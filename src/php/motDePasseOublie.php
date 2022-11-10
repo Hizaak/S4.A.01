@@ -35,7 +35,7 @@
             <h2 id="creationTitle">Modifier son mot de passe</h1>
             <p>Identifiant</p>
             <section id="mail">
-                <input name="mail" type="text" id="identifiant"  required>
+                <input name="login" type="text" id="identifiant"  required>
                 <label id="domaine">@iutbayonne.univ-pau.fr</label>
                 <p id="error"></p>
             </section>
@@ -66,7 +66,7 @@
         </ul>
     </footer>
     
-    <script type="text/javascript" src="devoilerMDP.js"></script>
+    <script type="text/javascript" src="../script/outils.js"></script>
 </body>
 
 </html>
@@ -75,21 +75,21 @@
 
 <?php
 include('outils.php');
-if (isset($_SESSION['mail'])) {
-    echo ('<script>document.getElementById("identifiant").value ="'.$_SESSION['mail'].'"</script>');
+if (isset($_SESSION['login'])) {
+    echo ('<script>document.getElementById("identifiant").value ="'.$_SESSION['login'].'"</script>');
 }
 
-if (isset($_POST['submit']) && isset($_POST['mail']) && isset($_POST['password']) && isset($_POST['conf-password'])) {
-    $mail = $_POST['mail'];
+if (isset($_POST['submit']) && isset($_POST['login']) && isset($_POST['password']) && isset($_POST['conf-password'])) {
+    $login = $_POST['login'];
     $password = $_POST['password'];
     $confPassword = $_POST['conf-password'];
-    if (verifUtilisateur($mail)){
+    if (verifUtilisateur($login)){
 
         if ($password == $confPassword) {
             $password = password_hash($password, PASSWORD_DEFAULT);
-            $_SESSION['mail'] = $mail;
+            $_SESSION['login'] = $login;
             $_SESSION['password'] = $password;
-            $_SESSION['code']=envoyerCodeMail($mail);
+            $_SESSION['code']=envoyerCodeMail($login);
             header('Location: verification.php');
         }
         else {

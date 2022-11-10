@@ -1,0 +1,49 @@
+
+/* La notification est positioné en bas et au milieu de l'écran */
+#notif {
+    visibility: hidden; /* On la chache par default */
+    font-family: 'Rambla', sans-serif; /* On change la police */
+    min-width: 250px; /* On lui donne une largeur minimale */
+    margin-left: -125px; /* On la centre horizontalement */
+    background-color: #333; /* On lui donne un fond noir */
+    color: white; /* On lui donne du texte blanc */
+    text-align: center; /* On centre le texte */
+    border-radius: 15px; /* On lui donne des coins arrondis */
+    padding: 16px; /* On lui donne un peu de padding */
+    position: fixed; /* On la positionne en bas et au milieu de l'écran */
+    z-index: 1; /* On l'affiche au dessus de tout */
+    left: 50%; /* On la centre horizontalement */
+    bottom: 30px;  /* On la positionne en bas de 30px */
+}
+  
+
+/* On affiche la notification quand on clique sur un bouton (class ajouté avec JavaScript) */
+#notif.show {
+    visibility: visible; /* On l'affiche */
+    /* Ajouter une animation : On met 0,5 seconde pour faire apparaître et disparaître la notification.
+    Cependant, on met un ralenti de fondu de 2,5 secondes*/
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;}
+  
+    /* On ajoute une animation pour faire apparaître la notification */
+  @-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+  }
+  
+  @keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+  }
+  
+  @-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+  }
+  
+  @keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+  } 
+
+
