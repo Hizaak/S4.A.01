@@ -4,48 +4,40 @@ import json
 
 with open('RepTest.json') as reponses:
     data = json.load(reponses)          
+
+def associer(data):
     
-#séparation des dictionnaires de réponse
+    #séparation des dictionnaires de réponse
 
-data1 = data['1annee']  
-data2 = data['2annee']  
+    data1 = data['1annee']  
+    data2 = data['2annee']  
 
-#indexage des étudiants pour l'utilisation de la matrice
+    #indexage des étudiants pour l'utilisation de la matrice
 
-lst1 = []
-lst2 = []   
+    lst1 = []
+    lst2 = []   
 
-for i in data1:
-    lst1.append(i)
-    
-for i in data2:
-    lst2.append(i)
-    
-#initialisation de la matrice des scores d'association
-
-asso=[]
-for i in range(len(data1.keys())):
-    asso.append([])
-    for j in range(len(data2.keys())):
-        asso[i].append(0)
+    for i in data1:
+        lst1.append(i)
         
-#je pense que c'est clair
+    for i in data2:
+        lst2.append(i)
         
-def supprNoFilleuls(data2, lstASuppr):
-    for i in lstASuppr:
-        data2.pop(i)
-    return data2
+    #initialisation de la matrice des scores d'association
 
-#idem
-
-def calculScore(data1, data2, asso): 
-    
+    matAsso=[]
+    for i in range(len(data1.keys())):
+        matAsso.append([])
+        for j in range(len(data2.keys())):
+            matAsso[i].append(0)
+            
     #suppression des deuxièmes années ne voulant pas de filleul
     lstASuppr = []
     for i in data2:
         if data2[i][-1]=="0":
             lstASuppr.append(i)
-    data2 = supprNoFilleuls(data2, lstASuppr)
+    for i in lstASuppr:
+        data2.pop(i)
     
     #parcours des premières années
     for i in data1:    
@@ -62,33 +54,51 @@ def calculScore(data1, data2, asso):
                             #si un jeu en commun a été trouvé
                             if data1[i][k][indiceListe1]==data2[j][k][indiceListe2]: 
                                 #incrémenter leur score d'association
-                                asso[lst1.index(i)][lst2.index(j)] += 1  
+                                matAsso[lst1.index(i)][lst2.index(j)] += 1  
                 #si la réponse est similaire
                 if data1[i][k]==data2[j][k]:  
                     #incrémenter leur score d'association
-                    asso[lst1.index(i)][lst2.index(j)] += 1
+                    matAsso[lst1.index(i)][lst2.index(j)] += 1
                     
     #Remplissage de la matrice avec les deuxièmes années voulant plusieurs filleuls
     nbADupliquer=len(lstASuppr)
     #liste des index des secondes années à dupliquer
     lstADupliquer = []
-    while len(lstADupliquer) < nbADupliquer:
-        for i in data2:
-            if data2[i][-1]=="pls":
-                lstADupliquer.append(lst2.index(i))
-    #Si la liste de deuxièmes années à dupliquer est plus grande que le nombre de filleuls restant
-    if len(lstADupliquer) > nbADupliquer:
-        while len(lstADupliquer) > nbADupliquer:
-            lstADupliquer.pop(-1)
-    asso = DupliquerPlsFilleuls(data2, asso, nbADupliquer, lstADupliquer)
-    return asso
-
-def DupliquerPlsFilleuls(data2, asso, nbADupliquer, lstADupliquer):
+    i=0
+    nom=""
+    while True:
+        nom=lst2[i]
+        if data2[nom][-1]=="pls":
+            lstADupliquer.append(i)
+            if len(lstADupliquer) >= nbADupliquer:
+                break
+        i+=1
+    #duplication
     for i in lstADupliquer:
         #colonne dans laquelle il faut dupliquer le seconde année
-        posDuplication=len(asso)-nbADupliquer
-        for j in range(len(asso)):
-            asso[j][posDuplication] = asso[j][i]
+        posDuplication=len(matAsso)-nbADupliquer
+        for j in range(len(matAsso)):
+            matAsso[j][posDuplication] = matAsso[j][i]
+        lst2[posDuplication]=lst2[i]
         lstADupliquer.pop(0)
-    return asso
-            
+
+    #association
+    dicAsso={}
+    i=0
+    taille=len(matAsso)
+    for pAnnee in lst1:
+        asso=[0,0,0]        # 0 : le score, 1 : la ligne, 2 : la colonne
+        for j in range(taille):
+            if matAsso[i][j] > asso[0]:
+                asso=[matAsso[i][j], i, j]
+        dicAsso[pAnnee]=lst2[asso[2]]
+        for x in range(taille):
+            matAsso[asso[1]][x]=-1
+            matAsso[x][asso[2]]=-1
+        i+=1
+        
+    print(dicAsso)
+    
+    return dicAsso
+
+associer(data)
