@@ -2,7 +2,7 @@ import json
 
 #ouverture du json contenant les réponses
 
-with open('RepTest.json') as reponses:
+with open('reponses.json') as reponses:
     data = json.load(reponses)          
 
 def associer(data):
