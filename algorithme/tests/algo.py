@@ -7,7 +7,7 @@ with open('RepTest.json') as reponses:
 
 def associer(data):
     
-    #séparation des dictionnaires de réponse
+    #séparation des dictionnaires de réponse, parti pris qui n'est probablement pas à prendre après réflexion
 
     data1 = data['1annee']  
     data2 = data['2annee']  
@@ -84,8 +84,11 @@ def associer(data):
 
     #association
     dicAsso={}
-    i=0
     taille=len(matAsso)
+    
+    metHongroise(lst1, lst2, matAsso, taille)
+    
+    i=0
     for pAnnee in lst1:
         asso=[0,0,0]        # 0 : le score, 1 : la ligne, 2 : la colonne
         for j in range(taille):
@@ -100,5 +103,30 @@ def associer(data):
     print(dicAsso)
     
     return dicAsso
+
+def metHongroise(lst1, lst2, matAsso, taille):
+    for i in range(taille):
+        mini=matAsso[0][0]
+        for j in range(taille):
+            if mini>matAsso[i][j]:
+                mini=matAsso[j][i]
+        for j in range(taille):
+            matAsso[i][j]-=mini
+    #Selection des 0
+    dicZSelec = {}
+    for i in range(taille):
+        for j in range(taille):
+            if matAsso[i][j]==0:
+                estSelec=False
+                ligne=0
+                position=j
+                while estSelec==False and ligne<=taille:
+                    if ligne<len(dicZSelec) and j==dicZSelec[ligne]:
+                        estSelec=True
+                    ligne+=1
+                if estSelec==False:
+                    dicZSelec[i]=position
+    print(dicZSelec)
+            
 
 associer(data)
