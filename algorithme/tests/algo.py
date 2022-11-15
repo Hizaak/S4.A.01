@@ -89,6 +89,8 @@ def associer(data):
     metHongroise(lst1, lst2, matAsso, taille)
     
     i=0
+    for lala in matAsso:
+        print(lala)
     for pAnnee in lst1:
         asso=[0,0,0]        # 0 : le score, 1 : la ligne, 2 : la colonne
         for j in range(taille):
@@ -99,7 +101,9 @@ def associer(data):
             matAsso[asso[1]][x]=-1
             matAsso[x][asso[2]]=-1
         i+=1
-        
+    
+    # Afficher matrice Asso
+    
     print(dicAsso)
     
     return dicAsso
@@ -130,3 +134,14 @@ def metHongroise(lst1, lst2, matAsso, taille):
             
 
 associer(data)
+
+from random import randint
+matrice=[]
+for i in range (5):
+    matrice.append([])
+    for j in range(5):
+        matrice[i].append(randint(0,10))
+        
+for i in matrice:
+    print(i)
+    

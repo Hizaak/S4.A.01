@@ -2,37 +2,37 @@
     "1annee" : {
         "Matteo" :
         [
-            "oui",
-            "cuisine",
-            "moto",
+            ["oui"],
+            ["cuisine"],
+            ["moto"],
             ["mc", "gta", "valo"]
         ],
         "Lou" :
         [
-            "oui",
-            "cuisine",
-            "voiture",
+            ["oui"],
+            ["cuisine"],
+            ["voiture"],
             ["gta", "mc"]
         ],
         "Maximilien" :
         [
-            "non",
-            "jv",
-            "bus",
+            ["non"],
+            ["jv"],
+            ["bus"],
             ["mc"]
         ],
         "Adrien" :
         [
-            "non",
-            "jv",
-            "bus",
+            ["non"],
+            ["jv"],
+            ["bus"],
             ["mc", "lol", "valo"]
         ],
         "Lucas" :
         [
-            "oui",
-            "jv",
-            "pied",
+            ["oui"],
+            ["jv"],
+            ["pied"],
             ["gta"]
         ]
     },
@@ -40,41 +40,41 @@
     "2annee" : {
         "Pierre" :
         [
-            "oui",
-            "jv",
-            "voiture",
+            ["oui"],
+            ["jv"],
+            ["voiture"],
             ["gta"],
             "1"
         ],
         "Nicolas" :
         [
-            "non",
-            "jv",
-            "pied",
+            ["non"],
+            ["jv"],
+            ["pied"],
             ["mc"],
             "1"
         ],
         "Titouan" :
         [
-            "oui",
-            "cuisine",
-            "bus",
+            ["oui"],
+            ["cuisine"],
+            ["bus"],
             ["lol", "valo"],
             "1"
         ],
         "Alexandre" :
         [
-            "oui",
-            "jv",
-            "bus",
+            ["oui"],
+            ["jv"],
+            ["bus"],
             ["lol", "valo"],
             "pls"
         ],
         "Thomas" :
         [
-            "non",
-            "cuisine",
-            "voiture",
+            ["non"],
+            ["cuisine"],
+            ["voiture"],
             ["mc"],
             "0"
         ]
