@@ -1,6 +1,6 @@
 import json
 
-def dupliquerEtudiants(matriceScore, liste1Annees, liste2Annees):
+def dupliquerEtudiants(matriceScore, reponses1eAnnees, reponses2eAnnees):
     ''' Déterminer les étudiants à dupliquer (si nécessaire)
     Description de la méthode :
         - Si le nombre d'étudiants de 1ère année est supérieur au nombre d'étudiants de 2ème année, il faut dupliquer les étudiants de 2ème année
@@ -8,29 +8,39 @@ def dupliquerEtudiants(matriceScore, liste1Annees, liste2Annees):
     Qui dupliquer ?
         - Dupliquer les étudiants qui ont la moyenne de leur score associé la plus haute
     '''
-    
-    if len(liste1Annees) > len(liste2Annees):
+
+    if len(reponses1eAnnees) > len(reponses2eAnnees):
+        # Déterminer la liste des étudiants à dupliquer (ceux qui ont mis "pls")
+        listeEtudiantsADupliquer = []
+        for i in reponses2eAnnees:
+            if reponses2eAnnees[i][-1]=="pls":
+                listeEtudiantsADupliquer.append(i)
+
+        print(listeEtudiantsADupliquer)
+
         # Dupliquer les étudiants de 2ème année
         listeMoyenneScore = []
         # Calculer la moyenne des colonnes de la matrice des scores
-        for i in range(len(matriceScore[0])):
+        for i in range(len(listeEtudiantsADupliquer)):
             somme = 0
             for j in range(len(matriceScore)):
                 somme += matriceScore[j][i]
             listeMoyenneScore.append([somme / len(matriceScore), 0])
-            
-        while(len(liste2Annees) < len(liste1Annees)):
-            # Déterminer le nombre de filleuls minimum
-            # TODO : dupliquer réellement les filleuls
+
+        # [[427.6666666666667, 0], [405.3333333333333, 0], [469.3333333333333, 0], [436.0, 0]]
+        differenceEffectif = len(reponses1eAnnees)-len(reponses2eAnnees)
+        for i in range (differenceEffectif):
             pass
+            # TODO : dupliquer réellement les filleuls
     else:
         # Dupliquer les étudiants de 1ère année
         for i in range(len (matriceScore)):
             listeMoyenneScore.append([sum(matriceScore[i]) / len(matriceScore[i]), 0])
+
             # TODO : dupliquer réellement les parrains
             
 
-    return matriceScore, liste1Annees, liste2Annees
+    return matriceScore, reponses1eAnnees, reponses2eAnnees
 
 def calculerDistanceReponse(reponse1eAnnee, reponse2eAnnee):
     
@@ -55,8 +65,8 @@ def creerMatriceScore(reponses1eAnnees, reponses2eAnnees):
     Plus la valeur est basse, plus les étudiants sont jugés comme "compatibles" (contrainte de l'algorithme hongrois)
     '''
     
-    liste1Annees = list(reponses1eAnnees.keys())
-    liste2Annees = list(reponses2eAnnees.keys())
+    liste1eAnnees = list(reponses1eAnnees.keys())
+    liste2eAnnees = list(reponses2eAnnees.keys())
     
     # Initialisation de la matrice des scores d'association
     scoreMaximal = len(list(reponses1eAnnees.keys())[0]) # Le scoreMaximal <==> NB_QUESTIONS
@@ -65,8 +75,8 @@ def creerMatriceScore(reponses1eAnnees, reponses2eAnnees):
     # Calculer le score d'association entre chaque étudiant de 1ère année et chaque étudiant de 2ème année
     for i in range(len(reponses1eAnnees)): # Parcours des étudiants de 1ère année
         for j in range(len(reponses2eAnnees)): # Parcours des étudiants de 2ème année
-            for k in range(len(reponses1eAnnees[liste1Annees[i]])):
-                matriceScore[i][j] -= calculerDistanceReponse(reponses1eAnnees[liste1Annees[i]][k], reponses2eAnnees[liste2Annees[j]][k])
+            for k in range(len(reponses1eAnnees[liste1eAnnees[i]])):
+                matriceScore[i][j] -= calculerDistanceReponse(reponses1eAnnees[liste1eAnnees[i]][k], reponses2eAnnees[liste2eAnnees[j]][k])
     
     # On arrondit les scores au centième puis on multiplie par 100 pour n'avoir que des entiers positifs
     for i in range(len(matriceScore)):
@@ -74,10 +84,7 @@ def creerMatriceScore(reponses1eAnnees, reponses2eAnnees):
             matriceScore[i][j] = int(100 * round(matriceScore[i][j], 3))
     
 
-    for i in matriceScore:
-        print(i)
-
-    matriceScore, liste1Annees, liste2Annees = dupliquerEtudiants(matriceScore, liste1Annees, liste2Annees)
+    matriceScore, liste1eAnnees, liste2eAnnees = dupliquerEtudiants(matriceScore, reponses1eAnnees, reponses2eAnnees)
     
     
     
