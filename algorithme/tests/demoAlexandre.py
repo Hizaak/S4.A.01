@@ -1,37 +1,77 @@
 import json
 
-def dupliquerEtudiants(matriceScore, reponses1eAnnees, reponses2eAnnees):
+def dupliquerEtudiants(matriceScore, reponses1eAnnees, reponses2eAnnees, liste1eAnnees, liste2eAnnees):
     ''' Déterminer les étudiants à dupliquer (si nécessaire)
     Description de la méthode :
         - Si le nombre d'étudiants de 1ère année est supérieur au nombre d'étudiants de 2ème année, il faut dupliquer les étudiants de 2ème année
         - Sinon (très rare), il faut dupliquer les étudiants de 1ère année
     Qui dupliquer ?
-        - Dupliquer les étudiants qui ont la moyenne de leur score associé la plus haute
+        - Dupliquer les étudiants qui ont la moyenne de leur score associé la plus basse
     '''
 
+    # S'IL y a étudiants de 1ère année que d'étudiants de 2ème année, IL FAUT dupliquer les étudiants de 2ème année
     if len(reponses1eAnnees) > len(reponses2eAnnees):
         # Déterminer la liste des étudiants à dupliquer (ceux qui ont mis "pls")
-        listeEtudiantsADupliquer = []
-        for i in reponses2eAnnees:
-            if reponses2eAnnees[i][-1]=="pls":
-                listeEtudiantsADupliquer.append(i)
+        
+        dictionnaireEtudiantsADupliquer = {}
+        for i in range(len(reponses2eAnnees)):
+            if reponses2eAnnees[list(reponses2eAnnees.keys())[i]][-1] == 'pls':
+                # Calcul de la moyenne des scores associés à cet étudiant
+                sommeScore = 0
+                listeValeursADupliquer = []
+                for j in range(len(matriceScore)):
+                    sommeScore += matriceScore[j][i]
+                    listeValeursADupliquer.append(matriceScore[j][i])
+                    
+                dictionnaireEtudiantsADupliquer[list(reponses2eAnnees.keys())[i]] = [sommeScore / len(matriceScore), listeValeursADupliquer, 0]
+                
 
-        print(listeEtudiantsADupliquer)
-
-        # Dupliquer les étudiants de 2ème année
-        listeMoyenneScore = []
-        # Calculer la moyenne des colonnes de la matrice des scores
-        for i in range(len(listeEtudiantsADupliquer)):
-            somme = 0
+        
+        for i in range (len(reponses1eAnnees)-len(reponses2eAnnees)):
+            # Dupliquer l'étudiant avec le moins de filleuls déjà associés et la moyenne de score associé la plus basse
+            valeurMin = 100000000
+            for j in dictionnaireEtudiantsADupliquer:
+                if dictionnaireEtudiantsADupliquer[j][-1] < valeurMin:
+                    valeurMin = dictionnaireEtudiantsADupliquer[j][-1]
+            print(dictionnaireEtudiantsADupliquer)
+            print(valeurMin)
+            moyenneScoreMin = dictionnaireEtudiantsADupliquer[list(dictionnaireEtudiantsADupliquer.keys())[0]][0]
+            etudiantADupliquer = list(dictionnaireEtudiantsADupliquer.keys())[0]
+            
+            for j in dictionnaireEtudiantsADupliquer:
+                if dictionnaireEtudiantsADupliquer[j][-1] == valeurMin and dictionnaireEtudiantsADupliquer[j][0] < moyenneScoreMin:
+                    moyenneScoreMin = dictionnaireEtudiantsADupliquer[j][0]
+                    dictionnaireEtudiantsADupliquer[j][-1] += 1
+                    etudiantADupliquer = j
+            
+            # Dupliquer l'étudiant
             for j in range(len(matriceScore)):
-                somme += matriceScore[j][i]
-            listeMoyenneScore.append([somme / len(matriceScore), 0])
-
-        # [[427.6666666666667, 0], [405.3333333333333, 0], [469.3333333333333, 0], [436.0, 0]]
-        differenceEffectif = len(reponses1eAnnees)-len(reponses2eAnnees)
-        for i in range (differenceEffectif):
-            pass
+                matriceScore[j].append(dictionnaireEtudiantsADupliquer[etudiantADupliquer][1][j])
+                dictionnaireEtudiantsADupliquer[etudiantADupliquer][-1] += 1
+                
+            for lala in matriceScore:
+                print(lala)
+            print()
+            
+            
+            
+            
             # TODO : dupliquer réellement les filleuls
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+    # SINON, IL FAUT dupliquer les étudiants de 1ère année
     else:
         # Dupliquer les étudiants de 1ère année
         for i in range(len (matriceScore)):
@@ -82,9 +122,12 @@ def creerMatriceScore(reponses1eAnnees, reponses2eAnnees):
     for i in range(len(matriceScore)):
         for j in range(len(matriceScore[i])):
             matriceScore[i][j] = int(100 * round(matriceScore[i][j], 3))
-    
 
-    matriceScore, liste1eAnnees, liste2eAnnees = dupliquerEtudiants(matriceScore, reponses1eAnnees, reponses2eAnnees)
+    # AFFICHAGE PROPRE MATRICE
+    # for i in matriceScore:
+    #     print(i)
+
+    matriceScore, liste1eAnnees, liste2eAnnees = dupliquerEtudiants(matriceScore, reponses1eAnnees, reponses2eAnnees, liste1eAnnees, liste2eAnnees)
     
     
     
