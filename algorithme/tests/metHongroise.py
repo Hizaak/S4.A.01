@@ -1,10 +1,10 @@
-matScores = [[466, 566, 383, 483, 383, 483, 383],
-             [350, 550, 400, 500, 400, 500, 400],
-             [500, 300, 500, 400, 500, 400, 500],
-             [500, 366, 433, 333, 433, 333, 433],
-             [300, 400, 500, 400, 500, 400, 500],
-             [450, 250, 600, 500, 600, 500, 600],
-             [500, 350, 475, 375, 475, 375, 475]]
+matScores = [[266, 366, 183, 283, 366, 283, 366], 
+             [150, 350, 200, 300, 350, 300, 350], 
+             [300, 100, 300, 200, 100, 200, 100], 
+             [300, 166, 233, 133, 166, 133, 166], 
+             [100, 200, 300, 200, 200, 200, 200], 
+             [250, 50, 400, 300, 50, 300, 50], 
+             [300, 150, 275, 175, 150, 175, 150]]
 
 valMax = 400
 
@@ -87,7 +87,6 @@ def metHongroise(matScores, valMax):
                         # On sélectionne le 0
                         if aUnSelecC == False:
                             matMarque[i][j]=0
-                            nbSelec+=1
                             newZeroSelec = True
                             break
                     j+=1
@@ -103,7 +102,13 @@ def metHongroise(matScores, valMax):
                         matMarque[k][l]=None
         
         # Condition de Sortie
-        if nbSelec==taille:
+        # On compte le nombre de 0 sélectionnés
+        nbSelec = 0
+        for i in range(taille):
+            for j in range(taille):
+                if matMarque[i][j] == 0:
+                    nbSelec+=1
+        if nbSelec>=taille:
             break
         
         # On couvre les colonnes dont un 0 est sélectionné
@@ -141,16 +146,63 @@ def metHongroise(matScores, valMax):
                         nbMaxPasSelec = True
                         break 
                 j+=1
-                if nbMaxPasSelec:
-                    break
+            if nbMaxPasSelec:
+                break
             i+=1
             
         # On sélectionne le nombre maximal de 0
         if nbMaxPasSelec:
-            pass
+            z = []
+            z.append([i,j])
+            i=1
+            while True:
+                
+                finSuite=False
+                # On ajoute à la suite z le 0 sélectionné dans la colonne de z[i-1]
+                j=0
+                while True:
+                    if matMarque[j][z[i-1][1]]==0:
+                        z.append([j,z[i-1][1]])
+                        break
+                    j+=1
+                    if j==taille:
+                        finSuite=True
+                        break
+                
+                # On ajoute à la suite z le 0 marqué d'un prime dans la ligne de z[i-1]
+                j=0
+                while True:
+                    if matMarque[z[i][0]][j]==1:
+                        z.append([z[i][0],j])
+                        break
+                    j+=1
+                    if j==taille:
+                        finSuite=True
+                        break
+                    
+                # On a trouvé la suite
+                if finSuite:
+                    break
+                
+                i+=1
+                
+            # On retire les primes et on sélectionne les 0
+            for i in range(len(z)):
+                if i%2==0:
+                    matMarque[z[i][0]][z[i][1]]=0
+                else:
+                    matMarque[z[i][0]][z[i][1]]=None
+            
+            # On découvre les lignes et colonnes et retire les primes
+            tabCacheL = initTabCache(taille)
+            tabCacheC = initTabCache(taille)
+            for k in range(taille):
+                for l in range(taille):
+                    if matMarque[k][l]==1:
+                        matMarque[k][l]=None
         
         # Opérations avec l'élément libre le plus petit
-        if nbMaxPasSelec == False:
+        else:
             
             # On trouve l'élément libre le plus petit
             valMin=valMax
@@ -171,12 +223,8 @@ def metHongroise(matScores, valMax):
                     for j in range(taille):
                         matScores[j][i]-=valMin          
         
-        #pour le test
-        nbSelec=taille
-        if nbSelec==taille:
-            break
-        
     # Affichage
+    print(nbSelec)
     print(tabCacheC)
     print(tabCacheL)
     afficherMatrice(matScores)
