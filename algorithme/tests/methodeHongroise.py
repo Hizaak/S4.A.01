@@ -1,17 +1,3 @@
-matScores = [[266, 366, 183, 283, 366, 283, 366], 
-             [150, 350, 200, 300, 350, 300, 350], 
-             [300, 100, 300, 200, 100, 200, 100], 
-             [300, 166, 233, 133, 166, 133, 166], 
-             [100, 200, 300, 200, 200, 200, 200], 
-             [250, 50, 400, 300, 50, 300, 50], 
-             [300, 150, 275, 175, 150, 175, 150]]
-
-valMax = 400
-
-def afficherMatrice(matrice):
-    for i in matrice:
-        print(i)
-        
 def initMatMarque(taille):
     matMarque = []
     for i in range(taille):
@@ -26,8 +12,8 @@ def initTabCache(taille):
         tabCache.append(0)
     return tabCache
 
-def metHongroise(matScores, valMax):
-    
+def appliquerMethodeHongroise(matScores, valMax):
+
     taille = len(matScores)
     nbSelec = 0
     matMarque = initMatMarque(taille)       # 0 si sélectionné, 1 si marqué d'un prime, sinon None   
@@ -224,11 +210,4 @@ def metHongroise(matScores, valMax):
                         matScores[j][i]-=valMin          
         
     # Affichage
-    print(nbSelec)
-    print(tabCacheC)
-    print(tabCacheL)
-    afficherMatrice(matScores)
-    afficherMatrice(matMarque)
-    return matScores
-
-metHongroise(matScores, valMax)
+    return matMarque

@@ -1,5 +1,5 @@
 import json
-import numpy as np
+from methodeHongroise import appliquerMethodeHongroise
 
 
 def dupliquerEtudiants(matriceScore, reponses1eAnnees, reponses2eAnnees, liste1eAnnees, liste2eAnnees):
@@ -45,7 +45,7 @@ def dupliquerEtudiants(matriceScore, reponses1eAnnees, reponses2eAnnees, liste1e
             for j in range(len(matriceScore)):
                 matriceScore[j].append(dictionnaireEtudiantsADupliquer[etudiantADupliquer][1][j])
             dictionnaireEtudiantsADupliquer[etudiantADupliquer][-1] += 1
-
+            liste2eAnnees.append(etudiantADupliquer)
 
     # SINON, IL FAUT dupliquer les étudiants de 1ère année
     else:
@@ -55,11 +55,9 @@ def dupliquerEtudiants(matriceScore, reponses1eAnnees, reponses2eAnnees, liste1e
     # Affichage du processus de duplication
     print("\nStructure du dictionnaire d'etudiants a dupliquer :")
     print(dictionnaireEtudiantsADupliquer)
-    print("\nMatrice apres la duplication des etudiants :")
-    for i in matriceScore:
-        print(i)
 
-    return matriceScore, reponses1eAnnees, reponses2eAnnees
+
+    return matriceScore, liste1eAnnees, liste2eAnnees
 
 
 def calculerDistanceReponse(reponse1eAnnee, reponse2eAnnee):
@@ -79,21 +77,13 @@ def calculerDistanceReponse(reponse1eAnnee, reponse2eAnnee):
     return distance
 
 
-def creerMatriceScore(reponses1eAnnees, reponses2eAnnees):
+def creerMatriceScore(reponses1eAnnees, reponses2eAnnees, liste1eAnnees, liste2eAnnees):
     '''
     Crée et calcule la matrice de score d'association entre les réponses des étudiants de 1ère et 2ème année
     Les lignes correspondent aux réponses des étudiants de 1ère année
     Les colonnes correspondent aux réponses des étudiants de 2ème année
     Plus la valeur est basse, plus les étudiants sont jugés comme "compatibles" (contrainte de l'algorithme hongrois)
     '''
-    liste1eAnnees = list(reponses1eAnnees.keys())
-    liste2eAnnees = list(reponses2eAnnees.keys())
-
-    # Affichage des étudiants conservés
-    # print("Etudiants de 1e annee (lignes) :")
-    # print(liste1eAnnees)
-    # print("Etudiants de 2e annee (colonnes) :")
-    # print(liste2eAnnees)
 
     # Initialisation de la matrice des scores d'association
     # Le scoreMaximal <==> NB_QUESTIONS
@@ -108,9 +98,9 @@ def creerMatriceScore(reponses1eAnnees, reponses2eAnnees):
                 matriceScore[i][j] -= calculerDistanceReponse(
                     reponses1eAnnees[liste1eAnnees[i]][k], reponses2eAnnees[liste2eAnnees[j]][k])
 
-    # print("\nMatrice avant la rastérisation des données :")
-    # for i in matriceScore:
-    #     print(i)
+    print("\nMatrice avant la rasterisation des donnees :")
+    for i in matriceScore:
+        print(i)
 
     # On arrondit les scores au centième puis on multiplie par 100 pour n'avoir que des entiers positifs
     for i in range(len(matriceScore)):
@@ -123,18 +113,45 @@ def creerMatriceScore(reponses1eAnnees, reponses2eAnnees):
 
     matriceScore, liste1eAnnees, liste2eAnnees = dupliquerEtudiants(matriceScore, reponses1eAnnees, reponses2eAnnees, liste1eAnnees, liste2eAnnees)
 
-    return matriceScore
+    print("\nMatrice apres la duplication des etudiants :")
+    for i in matriceScore:
+        print(i)
+        
+    return matriceScore, liste1eAnnees, liste2eAnnees, scoreMaximal
 
 
-def appliquerMethodeHongroise(matriceScore):
-    pass
 
+def determinerParrainFilleul(matriceAssociation, liste1eAnnees, liste2eAnnees):
+    
+    TAILLE = len(matriceAssociation)
+    tableauAssociation= []
+    for i in range(TAILLE):
+        for j in range(TAILLE):
+            if matriceAssociation[i][j] == 0:
+                tableauAssociation.append([liste1eAnnees[i],liste2eAnnees[j]])
+                # print(liste1eAnnees)
+                # print(liste2eAnnees)
+                
+    return tableauAssociation
 
 def associerParrainFilleul(reponses1eAnnees, reponses2eAnnees):
-    matriceScore = creerMatriceScore(reponses1eAnnees, reponses2eAnnees)
-    tableauAssociation = appliquerMethodeHongroise(matriceScore)
-
-    pass
+    liste1eAnnees = list(reponses1eAnnees.keys())
+    liste2eAnnees = list(reponses2eAnnees.keys())
+    
+    # Affichage des étudiants conservés
+    print("Etudiants de 1e annee (lignes) :")
+    print(liste1eAnnees)
+    print("Etudiants de 2e annee (colonnes) :")
+    print(liste2eAnnees)
+        
+    matriceScore, liste1eAnnees, liste2eAnnees, scoreMaximal = creerMatriceScore(reponses1eAnnees, reponses2eAnnees, liste1eAnnees, liste2eAnnees)
+    matriceAssociation = appliquerMethodeHongroise(matriceScore, scoreMaximal)
+    print("\nMatrice d'association finale :")
+    for i in matriceAssociation:
+        print(i)
+    associationParrainFilleul = determinerParrainFilleul(matriceAssociation, liste1eAnnees, liste2eAnnees)
+    
+    return associationParrainFilleul
 
 
 def main():
@@ -151,8 +168,14 @@ def main():
         if reponses2eAnnees_temp[i][-1] != '0':
             reponses2eAnnees[i] = reponses2eAnnees_temp[i]
 
-    associerParrainFilleul(reponses1eAnnees, reponses2eAnnees)
+    associationParrainFilleul = associerParrainFilleul(reponses1eAnnees, reponses2eAnnees)
+    
+    # Affichage des parrains et des filleuls
+    print()
+    for i in associationParrainFilleul:
+        print(i[1] + " parraine " + i[0] + " !")
 
+    
 
 if __name__ == "__main__":
     main()
