@@ -12,12 +12,14 @@ def dupliquerEtudiants(matriceScore, reponses1eAnnees, reponses2eAnnees, liste1e
         - Supprimer les étudiants de 1e année qui ont la moyenne de leur score associé la plus haute
     '''
     dictionnaireEtudiantsADupliquer = {}
+    
     # S'IL y a étudiants de 1ère année que d'étudiants de 2ème année, IL FAUT dupliquer les étudiants de 2ème année
     if len(reponses1eAnnees) > len(reponses2eAnnees):
         
         # Déterminer la liste des étudiants à dupliquer (ceux qui ont mis "pls")
         for i in range(len(reponses2eAnnees)):
             if reponses2eAnnees[list(reponses2eAnnees.keys())[i]][-1] == 'pls':
+                
                 # Calcul de la moyenne des scores associés à cet étudiant
                 sommeScore = 0
                 listeValeursADupliquer = []
@@ -38,6 +40,7 @@ def dupliquerEtudiants(matriceScore, reponses1eAnnees, reponses2eAnnees, liste1e
             
             # On détermine l'étudiant à dupliquer à l'instant T
             for j in dictionnaireEtudiantsADupliquer:
+                
                 if dictionnaireEtudiantsADupliquer[j][-1] < niveauPriorite : 
                     niveauPriorite = dictionnaireEtudiantsADupliquer[j][-1]
                     scoreMinimum = dictionnaireEtudiantsADupliquer[j][0]
@@ -127,16 +130,17 @@ def creerMatriceScore(reponses1eAnnees, reponses2eAnnees, liste1eAnnees, liste2e
         
     return matriceScore, liste1eAnnees, liste2eAnnees, scoreMaximal
 
-
-
 def determinerParrainFilleul(matriceAssociation, liste1eAnnees, liste2eAnnees):
     
     TAILLE = len(matriceAssociation)
     tableauAssociation= []
     for i in range(TAILLE):
-        for j in range(TAILLE):
+        j=0
+        while j < TAILLE:
             if matriceAssociation[i][j] == 0:
                 tableauAssociation.append([liste1eAnnees[i],liste2eAnnees[j]])
+                break
+            j+=1
                 # print(liste1eAnnees)
                 # print(liste2eAnnees)
                 
@@ -160,7 +164,6 @@ def associerParrainFilleul(reponses1eAnnees, reponses2eAnnees):
     associationParrainFilleul = determinerParrainFilleul(matriceAssociation, liste1eAnnees, liste2eAnnees)
     
     return associationParrainFilleul
-
 
 def main():
     # Ouverture du json contenant les réponses

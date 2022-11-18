@@ -15,10 +15,10 @@ def initTabCache(taille):
 def appliquerMethodeHongroise(matScores, valMax):
 
     taille = len(matScores)
-    nbSelec = 0                             # le nombre de 0 selectionnés
+    nbSelec = 0                                         # le nombre de 0 selectionnés
     matriceMarquage = initMatriceMarquage(taille)       # 0 si sélectionné, 1 si marqué d'un prime, sinon None   
-    tabCacheL = initTabCache(taille)        # 0 si découvert, 1 si caché
-    tabCacheC = initTabCache(taille)        # Idem
+    tabCacheL = initTabCache(taille)                    # 0 si découvert, 1 si caché
+    tabCacheC = initTabCache(taille)                    # Idem
         
     # Soustraire la valeur minimale à chaque ligne
     for i in range(taille):
@@ -86,13 +86,14 @@ def appliquerMethodeHongroise(matScores, valMax):
                     if matriceMarquage[k][l]==1:
                         matriceMarquage[k][l]=None
         
-        # Condition de Sortie
         # On compte le nombre de 0 sélectionnés
         nbSelec = 0
         for i in range(taille):
             for j in range(taille):
                 if matriceMarquage[i][j] == 0:
                     nbSelec+=1
+        
+        # Condition de Sortie
         if nbSelec>=taille:
             break
         
@@ -139,10 +140,10 @@ def appliquerMethodeHongroise(matScores, valMax):
         if nbMaxPasSelec:
             z = []
             z.append([i,j])
-            i=1
+            i=1 
+            finSuite=False
             while True:
                 
-                finSuite=False
                 # On ajoute à la suite z le 0 sélectionné dans la colonne de z[i-1]
                 j=0
                 while True:
@@ -205,6 +206,4 @@ def appliquerMethodeHongroise(matScores, valMax):
                     if tabCacheC[i]==False:
                             matScores[j][i]-=valMin          
                         
-        
-    # Affichage
     return matriceMarquage
