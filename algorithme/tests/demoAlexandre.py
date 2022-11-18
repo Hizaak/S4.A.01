@@ -1,14 +1,15 @@
 import json
 from methodeHongroise import appliquerMethodeHongroise
 
-
 def dupliquerEtudiants(matriceScore, reponses1eAnnees, reponses2eAnnees, liste1eAnnees, liste2eAnnees):
-    ''' Déterminer les étudiants à dupliquer (si nécessaire)
+    ''' Déterminer les étudiants à dupliquer
     Description de la méthode :
         - Si le nombre d'étudiants de 1ère année est supérieur au nombre d'étudiants de 2ème année, il faut dupliquer les étudiants de 2ème année
-        - Sinon (très rare), il faut dupliquer les étudiants de 1ère année
+        - Sinon (très rare), il faut supprimer des étudiants de 2e année
     Qui dupliquer ?
-        - Dupliquer les étudiants qui ont la moyenne de leur score associé la plus basse
+        - Dupliquer les étudiants de 2e année qui ont la moyenne de leur score associé la plus basse
+    Qui supprimer ?
+        - Supprimer les étudiants de 1e année qui ont la moyenne de leur score associé la plus haute
     '''
     dictionnaireEtudiantsADupliquer = {}
     # S'IL y a étudiants de 1ère année que d'étudiants de 2ème année, IL FAUT dupliquer les étudiants de 2ème année
@@ -28,15 +29,20 @@ def dupliquerEtudiants(matriceScore, reponses1eAnnees, reponses2eAnnees, liste1e
 
         for i in range(len(reponses1eAnnees)-len(reponses2eAnnees)):
             
-            # Trouver l'étudiant avec le moins de filleuls déjà associés et la moyenne de score associé la plus basse
+            # score le plus bas (en prenant en compte le nombre de fois où il a été dupliqué)
             scoreMinimum = dictionnaireEtudiantsADupliquer[list(dictionnaireEtudiantsADupliquer.keys())[0]][0]
+            # Identifiant de l'étudiant à dupliquer
             etudiantADupliquer = list(dictionnaireEtudiantsADupliquer.keys())[0]
+            # Trouver l'étudiant avec le moins de filleuls déjà associés
             niveauPriorite = dictionnaireEtudiantsADupliquer[list(dictionnaireEtudiantsADupliquer.keys())[0]][-1]
+            
+            # On détermine l'étudiant à dupliquer à l'instant T
             for j in dictionnaireEtudiantsADupliquer:
                 if dictionnaireEtudiantsADupliquer[j][-1] < niveauPriorite : 
                     niveauPriorite = dictionnaireEtudiantsADupliquer[j][-1]
                     scoreMinimum = dictionnaireEtudiantsADupliquer[j][0]
                     etudiantADupliquer = j
+                    
                 if niveauPriorite == dictionnaireEtudiantsADupliquer[j][-1] and dictionnaireEtudiantsADupliquer[j][0] < scoreMinimum :
                     scoreMinimum = dictionnaireEtudiantsADupliquer[j][0]
                     etudiantADupliquer = j
@@ -51,29 +57,31 @@ def dupliquerEtudiants(matriceScore, reponses1eAnnees, reponses2eAnnees, liste1e
     else:
         pass
 
-
     # Affichage du processus de duplication
     print("\nStructure du dictionnaire d'etudiants a dupliquer :")
     print(dictionnaireEtudiantsADupliquer)
-
 
     return matriceScore, liste1eAnnees, liste2eAnnees
 
 
 def calculerDistanceReponse(reponse1eAnnee, reponse2eAnnee):
 
+    # Distance entre les réponses du 2e année vers le 1e année
     nb2eAnneeVers1eAnnee = 0
     for i in reponse2eAnnee:
         if i in reponse1eAnnee:
             nb2eAnneeVers1eAnnee += 1
 
+    # Distance entre les réponses du 1e année vers le 2e année
     nb1eAnneeVers2eAnnee = 0
     for i in reponse1eAnnee:
         if i in reponse2eAnnee:
             nb1eAnneeVers2eAnnee += 1
 
+    #  Ratio entre les distances
     distance = (nb1eAnneeVers2eAnnee / len(reponse1eAnnee)) * \
         (nb2eAnneeVers1eAnnee / len(reponse2eAnnee))
+        
     return distance
 
 
@@ -174,8 +182,6 @@ def main():
     print()
     for i in associationParrainFilleul:
         print(i[1] + " parraine " + i[0] + " !")
-
-    
-
+        
 if __name__ == "__main__":
     main()

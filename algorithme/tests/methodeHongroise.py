@@ -1,22 +1,22 @@
-def initMatMarque(taille):
-    matMarque = []
+def initMatriceMarquage(taille):
+    matriceMarquage = []
     for i in range(taille):
-        matMarque.append([])
+        matriceMarquage.append([])
         for j in range(taille):
-            matMarque[i].append(None)
-    return matMarque
+            matriceMarquage[i].append(None)
+    return matriceMarquage
 
 def initTabCache(taille):
     tabCache=[]
     for i in range(taille):
-        tabCache.append(0)
+        tabCache.append(False)
     return tabCache
 
 def appliquerMethodeHongroise(matScores, valMax):
 
     taille = len(matScores)
-    nbSelec = 0
-    matMarque = initMatMarque(taille)       # 0 si sélectionné, 1 si marqué d'un prime, sinon None   
+    nbSelec = 0                             # le nombre de 0 selectionnés
+    matriceMarquage = initMatriceMarquage(taille)       # 0 si sélectionné, 1 si marqué d'un prime, sinon None   
     tabCacheL = initTabCache(taille)        # 0 si découvert, 1 si caché
     tabCacheC = initTabCache(taille)        # Idem
         
@@ -44,13 +44,13 @@ def appliquerMethodeHongroise(matScores, valMax):
         # Sélection des 0
         i=0
         newZeroSelec = False
-        while i < taille:
+        for i in range(taille):
             
             # On vérifie s'il y a déjà un 0 sélectionné dans la ligne
             j=0
             aUnSelecL = False
             while j < taille:
-                if matMarque[i][j] == 0:
+                if matriceMarquage[i][j] == 0:
                     aUnSelecL = True
                     break
                 j+=1
@@ -65,18 +65,17 @@ def appliquerMethodeHongroise(matScores, valMax):
                         k=0
                         aUnSelecC = False
                         while k < taille:
-                            if matMarque[k][j] == 0:
+                            if matriceMarquage[k][j] == 0:
                                 aUnSelecC = True
                                 break
                             k+=1
                             
                         # On sélectionne le 0
                         if aUnSelecC == False:
-                            matMarque[i][j]=0
+                            matriceMarquage[i][j]=0
                             newZeroSelec = True
                             break
                     j+=1
-            i+=1
             
         # On découvre les lignes et colonnes et retire les primes
         if newZeroSelec:
@@ -84,15 +83,15 @@ def appliquerMethodeHongroise(matScores, valMax):
             tabCacheC = initTabCache(taille)
             for k in range(taille):
                 for l in range(taille):
-                    if matMarque[k][l]==1:
-                        matMarque[k][l]=None
+                    if matriceMarquage[k][l]==1:
+                        matriceMarquage[k][l]=None
         
         # Condition de Sortie
         # On compte le nombre de 0 sélectionnés
         nbSelec = 0
         for i in range(taille):
             for j in range(taille):
-                if matMarque[i][j] == 0:
+                if matriceMarquage[i][j] == 0:
                     nbSelec+=1
         if nbSelec>=taille:
             break
@@ -100,8 +99,8 @@ def appliquerMethodeHongroise(matScores, valMax):
         # On couvre les colonnes dont un 0 est sélectionné
         for i in range(taille):
             for j in range(taille):
-                if matMarque[i][j] == 0:
-                    tabCacheC[j] = 1
+                if matriceMarquage[i][j] == 0:
+                    tabCacheC[j] = True
                      
         # Marquage des primes
         nbMaxPasSelec = False
@@ -109,22 +108,22 @@ def appliquerMethodeHongroise(matScores, valMax):
         while i < taille:
             j=0
             while j < taille:
-                if matScores[i][j]==0 and matMarque[i][j]!=0 and tabCacheC[j]==0 and tabCacheL[i]==0:
-                    matMarque[i][j]=1
+                if matScores[i][j]==0 and matriceMarquage[i][j]!=0 and tabCacheC[j]==False and tabCacheL[i]==False:
+                    matriceMarquage[i][j]=1
                     
                     # Vérifier s'il y a un 0 sélectionné dans la ligne
                     k=0
                     aUnSelecL = False
                     while k < taille:
-                        if matMarque[i][k]==0:
+                        if matriceMarquage[i][k]==0:
                             aUnSelecL = True
                             break
                         k+=1
                         
                     # Cacher la ligne et découvrir la colonne du 0 sélectionné
                     if aUnSelecL:
-                        tabCacheL[i]=1
-                        tabCacheC[k]=0
+                        tabCacheL[i]=True
+                        tabCacheC[k]=False
                         break
                     
                     # On a pas sélectionné le nombre maximum de 0
@@ -147,7 +146,7 @@ def appliquerMethodeHongroise(matScores, valMax):
                 # On ajoute à la suite z le 0 sélectionné dans la colonne de z[i-1]
                 j=0
                 while True:
-                    if matMarque[j][z[i-1][1]]==0:
+                    if matriceMarquage[j][z[i-1][1]]==0:
                         z.append([j,z[i-1][1]])
                         break
                     j+=1
@@ -158,7 +157,7 @@ def appliquerMethodeHongroise(matScores, valMax):
                 # On ajoute à la suite z le 0 marqué d'un prime dans la ligne de z[i-1]
                 j=0
                 while True:
-                    if matMarque[z[i][0]][j]==1:
+                    if matriceMarquage[z[i][0]][j]==1:
                         z.append([z[i][0],j])
                         break
                     j+=1
@@ -175,17 +174,17 @@ def appliquerMethodeHongroise(matScores, valMax):
             # On retire les primes et on sélectionne les 0
             for i in range(len(z)):
                 if i%2==0:
-                    matMarque[z[i][0]][z[i][1]]=0
+                    matriceMarquage[z[i][0]][z[i][1]]=0
                 else:
-                    matMarque[z[i][0]][z[i][1]]=None
+                    matriceMarquage[z[i][0]][z[i][1]]=None
             
             # On découvre les lignes et colonnes et retire les primes
             tabCacheL = initTabCache(taille)
             tabCacheC = initTabCache(taille)
             for k in range(taille):
                 for l in range(taille):
-                    if matMarque[k][l]==1:
-                        matMarque[k][l]=None
+                    if matriceMarquage[k][l]==1:
+                        matriceMarquage[k][l]=None
         
         # Opérations avec l'élément libre le plus petit
         else:
@@ -194,20 +193,18 @@ def appliquerMethodeHongroise(matScores, valMax):
             valMin=valMax
             for i in range(taille):
                 for j in range(taille):
-                    if tabCacheL[i]==0 and tabCacheC[j]==0 and matScores[i][j]<valMin:
+                    if tabCacheL[i]==False and tabCacheC[j]==False and matScores[i][j]<valMin:
                         valMin = matScores[i][j]
                         
-            # On ajoute la valeur minimale découverte à toutes les lignes couvertes
             for i in range(taille):
-                if tabCacheL[i]==1:
-                    for j in range(taille):
+                for j in range(taille):
+                    # On ajoute la valeur minimale découverte à toutes les lignes couvertes
+                    if tabCacheL[i]:
                         matScores[i][j]+=valMin
+                    # On soustrait la valeur minimale découverte à toutes les colonnes découvertes
+                    if tabCacheC[i]==False:
+                            matScores[j][i]-=valMin          
                         
-            # On soustrait la valeur minimale découverte à toutes les colonnes découvertes
-            for i in range(taille):
-                if tabCacheC[i]==0:
-                    for j in range(taille):
-                        matScores[j][i]-=valMin          
         
     # Affichage
-    return matMarque
+    return matriceMarquage
