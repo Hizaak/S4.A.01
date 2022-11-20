@@ -98,7 +98,6 @@ function interdireVisiteur(){
     //Interdit cette page au visiteurs
     if (basename($_SERVER['PHP_SELF']) == basename(__FILE__)) {
         //on redirige vers la page d'accueil
-        echo "oui";
         header('Location:accueil.php');
     }
 }
