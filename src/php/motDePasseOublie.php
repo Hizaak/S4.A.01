@@ -80,6 +80,7 @@ if (isset($_SESSION['login'])) {
 }
 
 if (isset($_POST['submit']) && isset($_POST['login']) && isset($_POST['password']) && isset($_POST['conf-password'])) {
+
     $login = $_POST['login'];
     $password = $_POST['password'];
     $confPassword = $_POST['conf-password'];

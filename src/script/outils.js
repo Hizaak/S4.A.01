@@ -20,7 +20,6 @@ function showPassword(id) {
     
     // On affiche la notification
     notif.style.backgroundColor="\#"+couleurBG.substring(1);
-    console.log(couleurBG,notif.style.backgroundColor);
     notif.className = "show";
     
     // On supprime la notification après 3 secondes

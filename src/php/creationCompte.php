@@ -89,7 +89,7 @@ if (isset($_POST['login']) && isset($_POST['password']) && isset($_POST['conf-pa
                 }
             else{
                 //On stock les données de l'utilisateur dans la session pour les réutiliser sur la page de vérifications
-                $_SESSION['login'] = $_POST['login'];
+                $_SESSION['login'] = strtolower(($_POST['login']));
                 $_SESSION['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
                 $_SESSION['code'] = envoyerCodeMail($_POST['login']);
                 $_SESSION['contexte'] = "creationCompte";
