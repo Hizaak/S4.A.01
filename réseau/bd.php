@@ -1,18 +1,4 @@
 <?php 
-// On se connecte à la base de données
-
-//Si on peut ping lakartxela.fr alors
-// try{
-//     fsockopen("lakartxela.iutbayonne.univ-pau.fr", 80, $errno, $errstr, 30) ;
-
-
-// }
-// catch (Exception $e){
-    //     $host="localhost";
-    // }
-    
-
-//$host="lakartxela.iutbayonne.univ-pau.fr";
 $host="localhost";
 $user="ndargazan001_bd";
 $password="ndargazan001_bd";

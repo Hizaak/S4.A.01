@@ -7,8 +7,10 @@
     <title>Fiasco</title>
 </head>
 <body>
-    <h1>Le premier site de partage de Playlist sans partage de playlist</h1>
-    <a href="playlist.php">Voir les playlist</a>
+    <h1>Le premier site de partage de Playlists sans partage de playlists</h1>
+    <a href="playlist.php">Voir toutes les playlists</a>
+    <a href="rechercherArtiste.php">Rechercher des titres d'un artiste</a>
+    <a href="rechercherPlaylist.php">Rechercher une playlists</a>
 
     
 </body>

@@ -3,31 +3,38 @@
 session_start();
 include 'bd.php';
 //on recupere les dvd de la base de données
-$reponse = $bdd->prepare('SELECT * FROM dvd');
+$reponse = $bdd->prepare('SELECT playlist.nom AS playlist, titre.nom, titre.artiste, titre.genre, titre.note FROM playlist, titre, appartient WHERE playlist.id = appartient.idPlaylist AND titre.id = appartient.idTitre; ');
 $reponse->execute();
 ?>
 
 <html>
     <head>
         <title>Fiasco</title>
-        <link rel="stylesheet" href="./stylearticle.css">
     </head>
     <body>
         <a href="index.php">Retour</a>
-        <section class="grille-dvd">
-            <?php
-            while($dvd = $reponse->fetch()){
-                echo '<article class="dvd">';
-                echo '<p id="id" style="display:none">'.$dvd['id'].'</p>';
+        <?php
 
-                //On verifie si l'image existe
-                echo '<img src="../assets/compress/'.$dvd['img'].'" alt="img'.$dvd['titre'].'">';
-                echo '<h2>'.$dvd['titre'].'</h2>';
-                echo '<p>Réalisateur : '.$dvd['realisation'].'</p>';
-                echo '<p>Genre : '.$dvd['genre'].'</p>';
-                echo '<p> Prix : '.$dvd['prix'].'€</p>';
-                echo '</article>';
-            }
+                echo '<h1>Les Playlists de l\'utilisateur '.$user.'</h1>';
+                echo '<section class="grille-titre">';
+                //On affiche les titres de la playlist selectionnée
+                $playlist = array();
+                while ($element = $reponse->fetch()){
+                    //On crée un tableau avec les titres de même nom de playlist
+                    $playlist[$element['playlist']][] = $element;
+                }
+
+                //On affiche les titres de la playlist selectionnée
+                foreach ($playlist as $key => $value) {
+                    echo '<article class="titre">';
+                    echo '<h2>'.$key.'</h2>';
+                    echo '<ul>';
+                    foreach ($value as $key2 => $value2) {
+                        echo '<li>'.$value2['nom'].' - '.$value2['artiste'].' - '.$value2['genre'].' - '.$value2['note'].'/5</li>';     
+                    }
+                    echo '</ul>';
+                    echo '</article>';
+                }
             ?>            
 
 </section>
