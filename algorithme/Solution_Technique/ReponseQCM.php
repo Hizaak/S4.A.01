@@ -1,6 +1,8 @@
 
 <?php
 
+require "Reponse.php";
+
 class ReponseQCM extends Reponse{
         
         //Attributs
