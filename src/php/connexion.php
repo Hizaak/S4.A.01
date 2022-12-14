@@ -82,9 +82,14 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
     } else {
         //on verifie que le mot de passe est correct
         // On hash le mot de passe
-        if (password_verify($_POST['password'], $resultat['password'])) {
+        if (!$resultat['password']) {
+            error("Vous n'avez pas validé votre compte<br><a href='creationCompte.php'>Valider votre compte</a>");
+            exit();
+        }
+
+        if ($resultat['password']!=' ' && password_verify($_POST['password'], $resultat['password'])) {
             //on verifie que l'utilisateur a bien validé son compte
-            if ($resultat['estValide'] == 1) {
+            if ($resultat['valide'] == "oui") {
                 //on stocke le mail dans une variable de session
                 $_SESSION['login'] = strtolower(($_POST['login']));
                 $_SESSION['role'] = $resultat['role'];
@@ -99,9 +104,7 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
                     header('Location:accueil.php');
                 }
                 
-            } else {
-                error("Vous n'avez pas validé votre compte<br><a href='creationCompte.php'>Valider votre compte</a>");
-            }
+            } 
         } else {
             error("Identifiant ou mot de passe incorrect");
         }

@@ -1,10 +1,11 @@
 <?php 
 //On creer l'object Question
-class Question{
+abstract class Question{
     //On creer les attributs
     private $id;
     private $name;
     private $image;
+    private $type;
 
     //On creer le constructeur
     /**
@@ -64,18 +65,14 @@ class Question{
         $this->id="carte".$id."$";;
     }
 
-    public function get_upperhtml(){
-        $id=$this->id;
-        $html='<section class="container" id="'.$id.'container">
-        <section class="carte" id='.$id.'>
-            <h2>'.$this->name.'</h2>
-            <img src="'.$this->image.'" alt="icone">';
-        return $html; }
+    /**
+     * Get the value of type
+     */
 
-    public function get_lowerhtml(){
-            $html='</section></section>';
-            return $html;
-        }
+
+
+
+    
     
 
 }
@@ -84,11 +81,11 @@ class Question{
 
 //On creer L'objet Question_QCM qui herite de Question
 class Question_QCM extends Question{
-    //On creer les attributs
+//-----------------attributs--------------------------------
     private $listReponse; //Liste des reponses avec leurs couleurs associées [reponse,couleur] 
     private $nbReponseMax; //Nombre de reponse max pour la question
 
-    //On creer le constructeur
+//----------------constructeur------------------------------
     /**
     * Question_QCM constructor.
     * @param string $name 
@@ -100,11 +97,12 @@ class Question_QCM extends Question{
         parent::__construct($id,$name,$image);
         $this->listReponse=$listReponse;
         $this->nbReponseMax=$nbReponseMax;
+        $this->type="QCM";
 
     }
 
 
-    //On creer les getters et setters
+//---------------getters et setters--------------------------
 
 
     /**
@@ -132,130 +130,13 @@ class Question_QCM extends Question{
     /**
      * Set the value of nbReponseMax
      */
-
     function set_nbReponseMax($nbReponseMax){
         $this->nbReponseMax=$nbReponseMax;
     }
 
-    /**
-     * Genere la section html de toute les réponses de la questions en fonction de la liste des réponses
-     * et du nombre de réponses max
-     */
-
-    function get_html_reponses(){
-        //On recupere le type de question 
-        //On fait une condition sur une ligne
-        $buttontype=($this->get_nbReponseMax()>=2)?"checkbox":"button";       //Si le nombre de reponse max est superieur a 2 alors on met un checkbox sinon on met un button
-        $typeQuestion=(count($this->get_listReponse())<2)?"Binaire":"QCM"; 
-        $html='<section class="'.$typeQuestion.' reponses" id="'.$this->get_id().'reponses">';
-
-        if ($buttontype=="button"){
-            
-            for ($i=0;$i<count($this->get_listReponse());$i++){
-                $html.='<input id="'.$this->get_id().'rep'.$i.'"
-                                class="BoutonReponse'.$typeQuestion.'" 
-                                type="'.$buttontype.'" 
-                                name="'.$this->get_id().'rep'.$i.'" 
-                                value="'.$this->get_listReponse()[$i][0].'" 
-                                style="background-color:'.$this->get_listReponse()[$i][1].'">
-                        </input>';
-            }
-        }
-        else if ($buttontype=="checkbox"){
-            for ($i=0;$i<count($this->get_listReponse());$i++){
-                $html.= 
-                '<section class=checkboxRep>
-                        <input id="'.$this->get_id().'rep'.$i.'" 
-                               class="BoutonReponse'.$typeQuestion.'" 
-                               type="'.$buttontype.'" 
-                               name="'.$this->get_id().'rep'.$i.'"
-                               value="true">
-                        </input>      
-                        <label for="'.$this->get_id().'rep'.$i.'">'.$this->get_listReponse()[$i][0].'</label>
-                </section>';
-            }
-        }
-        return $html;
-    }
-
-    /**
-     * Genere la section html de la partie configuration de la question en fonction de la liste des réponses et du type de question
-     */
-    function get_html_propriete(){
-        $buttontype=($this->get_nbReponseMax()>=2)?"checkbox":"button";
-        $html='
-        <section class="propriete" id="'.$this->get_id().'propriete">
-         <form action="questionUpload.php" method="POST" enctype="multipart/form-data" target="postkeeper">
-            <section>
-                <label for="intituleCarte">Intitulé de la carte</label>
-                <input  type="text" name="'.$this->get_id().'editName" class="editName" id="'.$this->get_id().'editName" value="'.$this->get_name().'" oninput="maj('.$this->get_id().'propriete,'.$this->get_id().')">
-                <label for="type" style="display:none">'.$buttontype.'</label>
-            </section>
-            <section>
-                <label for="iconeCarte">Icone de la carte</label>
-                <input  type="file" accept="image/*" name="'.$this->get_id().'editIcon" class="editIcon" id="'.$this->get_id().'editIcon" onchange=loadimg('.$this->get_id().'editIcon,'.$this->get_id().')>
-            </section>';
-    
-
-        if ($buttontype=="button"){
-            $html.='<section class="reponses">';
-            for ($i=0;$i<count($this->get_listReponse());$i++){
-                $html.='
-                <section class="btnsettings">
-                    <label for="'.$this->get_id().'editRep'.$i.'">Réponse '.($i+1).'</label>
-                    <input  type="text" name="'.$this->get_id().'editRep'.$i.'" class="editbtn" id="'.$this->get_id().'editRep'.$i.'" value="'.$this->get_listReponse()[$i][0].'" oninput="maj('.$this->get_id().'propriete,'.$this->get_id().')" >
-                    <input  type="color" name="'.$this->get_id().'editColor'.$i.'" class="editbtn" id="'.$this->get_id().'editColor'.$i.'" value="'.$this->get_listReponse()[$i][1].'" oninput="maj('.$this->get_id().'propriete,'.$this->get_id().')">
-                </section>';
-            }
-            $html.='</section>';
-        }
-        else if ($buttontype=="checkbox"){
-            $html.='
-            <section>
-                <label for="nbReponseMax">Nombre de réponses max</label>
-                <input  type="number" name="'.$this->get_id().'editNbRepMax" class="editNbRepMax" id="'.$this->get_id().'editNbRepMax" value="'.$this->get_nbReponseMax().'"  min="1" oninput="maj('.$this->get_id().'propriete,'.$this->get_id().')">
-            </section>
-            <section class="reponses">';
-            for ($i=0;$i<count($this->get_listReponse());$i++){
-                $html.='<section class=btnsettings>
-                            <label for="'.$this->get_id().'editRep'.$i.'">Réponse '.($i+1).'</label>
-                            <input  type="text" name="'.$this->get_id().'editRep'.$i.'" class="editRep" id="'.$this->get_id().'editRep'.$i.'" value="'.$this->get_listReponse()[$i][0].'" oninput="maj('.$this->get_id().'propriete,'.$this->get_id().')">
-                        </section>';
-            }
-            $html.='</section>';
-        }
-        $html.='
-            <section class="addsuppbtn">
-                <button type="button" name="'.$this->get_id().'supp" class="suppRep" id="'.$this->get_id().'edit" onClick=suppRep('.$this->get_id().'propriete'.','.$this->get_id().')>Enlever</button>
-                <button type="button" name="'.$this->get_id().'add" class="addRep" id="'.$this->get_id().'edit" onClick=addRep('.$this->get_id().'propriete'.','.$this->get_id().') >Ajouter</button>
-            </section>';
-        $html.='<input type="submit" name="'.$this->get_id().'editSubmit" class="editSubmit" id="'.$this->get_id().'editSubmit" value="Valider">
-            </form>';
-        
-
-        return $html;
-
-
-    }
-
-
-
-
-
-
-    public function afficher($parametre=false){
-        $html=parent::get_upperhtml();
-        $html.=$this->get_html_reponses();
-        $html.='</section></section>';
-        if ($parametre==true) {
-            $html.=$this->get_html_propriete();
-        }
-        $html.='</section></section>';
-        return $html;
-
-    }
-
-    
+    public function get_type(){
+        return $this->type;
+    }    
 }
 
 
@@ -274,6 +155,7 @@ class Question_Libre extends Question{
     public function __construct($id,$name,$image,$nbCaractereMax){
         parent::__construct($id,$name,$image);
         $this->nbCaractereMax=$nbCaractereMax;
+        $this->type="LIBRE";
     }
     //On creer les getters et setters
 
@@ -291,15 +173,9 @@ class Question_Libre extends Question{
         $this->nbCaractereMax=$nbCaractereMax;
     }
 
-
-    function afficherQuestion(){
-        //a faire
-
-        
+    public function get_type(){
+        return $this->type;
     }
-
-
-
 }
 
 ?>

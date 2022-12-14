@@ -16,7 +16,7 @@
 </html>
 
 <?php
-include "Question.php";
+include "genereHTMLQuestion.php";
 include "baseDeDonnees.php";
 include "outils.php";
 
@@ -108,7 +108,14 @@ echo '<form id=addQuestion method="post">
 
 echo '<script type="text/javascript" src="../script/carte.js"></script>';
 
-var_dump($_POST)
+$carte = new Question_QCM(1,"Intitulé de la question","..\\sources\\images\\imgplaceholder.jpg",array(array("Réponse 1","#00FF00"),array("Réponse 2","#FF0000"),array("Réponse 3","#FF0000")),1);
+$repcarte=new ReprQuestionQCM($carte);
+echo $repcarte->get_html(true);
+
+
+$cartelibre=new Question_Libre(2,"Intitulé de la question","..\\sources\\images\\imgplaceholder.jpg",255);
+$repcartelibre=new ReprQuestionLibre($cartelibre);
+echo $repcartelibre->get_html(true);
 ?>
 
 
