@@ -5,13 +5,13 @@ class Etudiant {
 
     //Attributs
     private $id;
-    private $nom;
+    private $login;
     private $niveau;
 
     //Constructeur
-    public function __construct($id, $nom, $niveau) {
+    public function __construct($id, $login, $niveau) {
         $this->id = $id;
-        $this->nom = $nom;
+        $this->login = $login;
         $this->niveau = $niveau;
     }
 
@@ -20,8 +20,8 @@ class Etudiant {
         return $this->id;
     }
 
-    public function getNom() {
-        return $this->nom;
+    public function getLogin() {
+        return $this->login;
     }
 
     public function getNiveau() {
@@ -32,8 +32,8 @@ class Etudiant {
         $this->id = $id;
     }
 
-    public function setNom($nom) {
-        $this->nom = $nom;
+    public function setLogin($login) {
+        $this->login = $login;
     }
 
     public function setNiveau($niveau) {
