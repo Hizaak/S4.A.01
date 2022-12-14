@@ -1,6 +1,8 @@
 
 <?php
 
+require "Associer.php";
+
 //Récuperer les étudiants dans la base de données
 
 //Récuperer les réponses dans la base de données
