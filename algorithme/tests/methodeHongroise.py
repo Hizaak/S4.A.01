@@ -54,6 +54,7 @@ def appliquerMethodeHongroise(matScores, valMax):
                     aUnSelecL = True
                     break
                 j+=1
+                
             if aUnSelecL == False:
                 
                 # On tente de sélectionner un 0 dans la ligne
@@ -144,7 +145,7 @@ def appliquerMethodeHongroise(matScores, valMax):
             finSuite=False
             while True:
                 
-                # On ajoute à la suite z le 0 sélectionné dans la colonne de z[i-1]
+                # On ajoute à la suite z le 0 sélectionné dans la colonne de z[i-1] (soit z[i-1][1])
                 j=0
                 while True:
                     if matriceMarquage[j][z[i-1][1]]==0:
@@ -155,7 +156,7 @@ def appliquerMethodeHongroise(matScores, valMax):
                         finSuite=True
                         break
                 
-                # On ajoute à la suite z le 0 marqué d'un prime dans la ligne de z[i-1]
+                # On ajoute à la suite z le 0 marqué d'un prime dans la ligne de z[i-1] (soit z[i-1][0])
                 j=0
                 while True:
                     if matriceMarquage[z[i][0]][j]==1:
