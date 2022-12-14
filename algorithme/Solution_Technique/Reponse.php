@@ -1,15 +1,17 @@
 
 <?php
 
-class Reponse {
+abstract class Reponse {
 
     //Attributs
     private $id;
+    private $idQuestion;
     private $idEtudiant;
-    
+
     //Constructeur
-    public function Reponse($id, $idEtudiant) {
+    public function __construct($id, $idQuestion, $idEtudiant) {
         $this->id = $id;
+        $this->idQuestion = $idQuestion;
         $this->idEtudiant = $idEtudiant;
     }
 
@@ -20,6 +22,14 @@ class Reponse {
 
     public function setId($id) {
         $this->id = $id;
+    }
+
+    public function getIdQuestion() {
+        return $this->idQuestion;
+    }
+
+    public function setIdQuestion($idQuestion) {
+        $this->idQuestion = $idQuestion;
     }
 
     public function getIdEtudiant() {
