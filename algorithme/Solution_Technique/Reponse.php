@@ -1,43 +1,43 @@
 
 <?php
 
-class Reponse {
+abstract class Reponse {
 
     //Attributs
     private $id;
+    private $idQuestion;
     private $idEtudiant;
-    private $objetReponse;
 
     //Constructeur
-    public function __construct($id, $idEtudiant, $objetReponse) {
+    public function __construct($id, $idQuestion, $idEtudiant) {
         $this->id = $id;
+        $this->idQuestion = $idQuestion;
         $this->idEtudiant = $idEtudiant;
-        $this->objetReponse = $objetReponse;
     }
 
-    //Encpsulation
+    //Encapsulation
     public function getId() {
         return $this->id;
-    }
-
-    public function getIdEtudiant() {
-        return $this->idEtudiant;
-    }
-
-    public function getObjetReponse() {
-        return $this->objetReponse;
     }
 
     public function setId($id) {
         $this->id = $id;
     }
 
-    public function setIdEtudiant($idEtudiant) {
-        $this->idEtudiant = $idEtudiant;
+    public function getIdQuestion() {
+        return $this->idQuestion;
     }
 
-    public function setObjetReponse($objetReponse) {
-        $this->objetReponse = $objetReponse;
+    public function setIdQuestion($idQuestion) {
+        $this->idQuestion = $idQuestion;
+    }
+
+    public function getIdEtudiant() {
+        return $this->idEtudiant;
+    }
+
+    public function setIdEtudiant($idEtudiant) {
+        $this->idEtudiant = $idEtudiant;
     }
 
 }
