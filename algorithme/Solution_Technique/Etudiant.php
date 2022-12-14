@@ -1,39 +1,20 @@
 
 <?php
 
-class Etudiant {
+class Etudiant extends Utilisateur {
 
     //Attributs
-    private $id;
-    private $login;
     private $niveau;
 
     //Constructeur
-    public function __construct($id, $login, $niveau) {
-        $this->id = $id;
-        $this->login = $login;
+    public function __construct($login, $niveau) {
+        parent::__construct($login);
         $this->niveau = $niveau;
     }
 
-    //Encpsulation
-    public function getId() {
-        return $this->id;
-    }
-
-    public function getLogin() {
-        return $this->login;
-    }
-
+    //Encapsulation
     public function getNiveau() {
         return $this->niveau;
-    }
-
-    public function setId($id) {
-        $this->id = $id;
-    }
-
-    public function setLogin($login) {
-        $this->login = $login;
     }
 
     public function setNiveau($niveau) {
