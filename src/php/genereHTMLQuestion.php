@@ -122,7 +122,6 @@ class ReprQuestionQCM extends ReprQuestion{
         $buttontype=($this->question->get_nbReponseMax()>=2)?"checkbox":"button";
         $html='
         <section class="propriete" id="'.$this->question->get_id().'propriete">
-         <form action="questionUpload.php" method="POST" enctype="multipart/form-data" target="postkeeper">
             <section>
                 <label for="intituleCarte">Intitulé de la carte</label>
                 <input  type="text" name="'.$this->question->get_id().'editName" class="editName" id="'.$this->question->get_id().'editName" value="'.$this->question->get_name().'" oninput="maj('.$this->question->get_id().'propriete,'.$this->question->get_id().')">
@@ -166,8 +165,7 @@ class ReprQuestionQCM extends ReprQuestion{
                 <button type="button" name="'.$this->question->get_id().'supp" class="suppRep" id="'.$this->question->get_id().'edit" onClick=suppRep('.$this->question->get_id().'propriete'.','.$this->question->get_id().')>Enlever</button>
                 <button type="button" name="'.$this->question->get_id().'add" class="addRep" id="'.$this->question->get_id().'edit" onClick=addRep('.$this->question->get_id().'propriete'.','.$this->question->get_id().') >Ajouter</button>
             </section>';
-        $html.='<input type="submit" name="'.$this->question->get_id().'editSubmit" class="editSubmit" id="'.$this->question->get_id().'editSubmit" value="Valider">
-            </form>';
+        $html.='<input type="submit" name="'.$this->question->get_id().'editSubmit" class="editSubmit" id="'.$this->question->get_id().'editSubmit" value="Valider">';
         
 
         return $html;
@@ -178,8 +176,8 @@ class ReprQuestionQCM extends ReprQuestion{
 class ReprQuestionLIBRE extends ReprQuestion{
     function get_html_reponses(){
         $html='
-            <section class="questionReponse">
-                <input type="text" name="'.$this->question->get_id().'rep" class="reponseLibre" id="'.$this->question->get_id().'rep" placeholder="Vous avez '.$this->question->get_nbCaractereMax().'caractères pour faire votre vie">
+            <section class="reponselibre">
+                <textarea name="'.$this->question->get_id().'rep" class="inputReponseLibre" id="'.$this->question->get_id().'rep" placeholder="Vous pouvez écrire jusqu\'à '.$this->question->get_nbCaractereMax().' caractères" maxlength="'.$this->question->get_nbCaractereMax().'"></textarea>
             </section>
         <section class="suivant">
             <input type="button" name="'.$this->question->get_id().'next" class="next" id="'.$this->question->get_id().'next" value="Suivant" onClick=next('.$this->question->get_id().')>';
@@ -191,10 +189,10 @@ class ReprQuestionLIBRE extends ReprQuestion{
     function get_html_propriete(){
         $html='
         <section class="propriete" id="'.$this->question->get_id().'propriete">
-         <form action="questionUpload.php" method="POST" enctype="multipart/form-data" target="postkeeper">
             <section>
                 <label for="intituleCarte">Intitulé de la carte</label>
                 <input  type="text" name="'.$this->question->get_id().'editName" class="editName" id="'.$this->question->get_id().'editName" value="'.$this->question->get_name().'" oninput="maj('.$this->question->get_id().'propriete,'.$this->question->get_id().')">
+                <label for="type" style="display:none">libre</label>
             </section>
             <section>
                 <label for="iconeCarte">Icone de la carte</label>
@@ -202,10 +200,9 @@ class ReprQuestionLIBRE extends ReprQuestion{
             </section>
             <section>
                 <label for="nbCaractereMax">Nombre de caractère max</label>
-                <input  type="number" name="'.$this->question->get_id().'editNbCaractereMax" class="editNbCaractereMax" id="'.$this->question->get_id().'editNbCaractereMax" value="'.$this->question->get_nbCaractereMax().'"  min="1" max="300" oninput="maj('.$this->question->get_id().'propriete,'.$this->question->get_id().')">
+                <input  type="number" name="'.$this->question->get_id().'editNbCaractereMax" class="editNbCaractereMax" id="'.$this->question->get_id().'editNbCaractereMax" value="'.$this->question->get_nbCaractereMax().'"  min="1" max="500" oninput="maj('.$this->question->get_id().'propriete,'.$this->question->get_id().')">
             </section>
             <input type="submit" name="'.$this->question->get_id().'editSubmit" class="editSubmit" id="'.$this->question->get_id().'editSubmit" value="Valider">
-            </form>
         </section>';
         return $html;
     }

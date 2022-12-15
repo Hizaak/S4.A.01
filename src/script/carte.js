@@ -1,30 +1,3 @@
-  
-    
-    document.getElementById('addQuestion').addEventListener('submit', function(_event){
-        //Le bouton ajouter 
-        _event.preventDefault();
-        sendall(this);
-        this.submit();
-    });
-
-    document.getElementById('formsendall').addEventListener('submit', function(_event){
-        _event.preventDefault();
-        sendall(this);
-        this.submit();
-        });
-    
-    function sendall(form){
-        var inputs = document.getElementsByTagName("input")
-        for(var i = 0; i < inputs.length; i++){
-            if(['text','color','number','file'].includes(inputs[i].type)){
-                inputs[i].setAttribute("form",form.id);
-            }
-        }
-    }
-
-
-
-
     //On fait une fonction qui attend un évènement de changemet de valeur d'un des inputs
     function maj(prop,carte){
         typereponse=prop.querySelectorAll('label')[1].textContent;
@@ -49,7 +22,7 @@
                 }
             }
         }
-        else if (typereponse=="checkbox"){
+        if (typereponse=="checkbox"){
             var inputs = prop.querySelectorAll(".editRep");
             var boutons = carte.querySelectorAll("label");
             for (let i = 0; i < inputs.length; i++) {
@@ -57,16 +30,26 @@
             }
             prop.querySelector(".editNbRepMax").max = inputs.length;
         }
+        if (typereponse=="libre"){
+            var input = prop.querySelectorAll(".editNbCaractereMax");
+            //Si la valeur n'est pas entre 1 et 500 on la met à 500
+            if (input[0].value>500){
+                input[0].value=500;
+            }
+            //Si ca commence par - on le met a 1
+            if (input[0].value<=-1 || input[0].value=='0'){
+                input[0].value=1;
+            }
+
+
+            carte.querySelector("textarea").setAttribute("maxlength",input[0].value);
+            carte.querySelector("textarea").setAttribute("placeholder","Vous pouvez écrire jusqu'à "+input[0].value+" caractères");
+        }
 
     }
     function loadimg(input,carte){
         //Action lors du changement de l'image
         var file = input.files[0];
-        //Si une image était déjà sélectionnée on la supprime du localstorage
-        // if (localStorage.getItem(input.id)){ 
-        //     localStorage.removeItem(input.id);
-        // }
-        //Ensuite on ajoute l'image sélectionnée dans le localstorage et on l'affiche
         if (file){
             var url = URL.createObjectURL(file);
             carte.querySelector("img").src = url;
@@ -81,7 +64,6 @@
         element=prop.querySelector(".reponses");
         section=document.createElement("section");
         section.className="btnsettings";
-        console.log(typereponse);
         if (typereponse=="button"){
             //On créer les nouveaux inputs avec les commandes JS car le HTML ne permet pas de créer des inputs dynamiquement (On sais pas pourquoi)
                 label=document.createElement("label");

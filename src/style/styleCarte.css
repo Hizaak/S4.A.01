@@ -42,7 +42,7 @@ img{
     
     width: 200px;
     height: 200px;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
     border-radius: 10px;
 
 }
@@ -74,4 +74,23 @@ input[type="button"]{
 form {
     width: 100%;
     height: 100%;
+}
+
+.reponselibre{
+    height: 200px;
+}
+
+.inputReponseLibre{
+    resize: none;
+    width: 80%;
+    height: 90%;
+    border-radius: 10px;
+    border: 1px solid gray;
+    padding: -10px;
+
+}
+
+.inputReponseLibre:focus{
+    outline: none;
+    border: 1px solid #000;
 }

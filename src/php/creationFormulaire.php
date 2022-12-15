@@ -8,10 +8,6 @@
     <title>Création de Formulaire</title>
 </head>
 <body>
-<iframe src="questionUpload.php" name="postkeeper" style="display:inline;"></iframe>
-<form  id='formsendall' method="post">
-    <input type="submit" value="Go">
-</form>
 </body>
 </html>
 
