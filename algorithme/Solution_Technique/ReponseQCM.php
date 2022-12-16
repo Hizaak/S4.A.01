@@ -9,8 +9,8 @@ class ReponseQCM extends Reponse{
         private $reponseQCM;
         
         //Constructeur
-        public function __construct($id, $idQuestion, $idEtudiant, $objetReponse, $reponseQCM) {
-            parent::__construct($id, $idQuestion, $idEtudiant, $objetReponse);
+        public function __construct($idQuestion, $idEtudiant, $reponseQCM) {
+            parent::__construct($idQuestion, $idEtudiant);
             $this->reponseQCM = $reponseQCM;
         }
         
