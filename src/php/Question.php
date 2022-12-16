@@ -1,4 +1,5 @@
 <?php 
+
 //On creer l'object Question
 abstract class Question{
     //On creer les attributs
@@ -6,6 +7,7 @@ abstract class Question{
     private $name;
     private $image;
     private $type;
+    private $visibilite='all';
 
     //On creer le constructeur
     /**
@@ -14,10 +16,31 @@ abstract class Question{
      * @param $image
      */
 
-    public function __construct($id,$name,$image){
-        $this->id="carte".$id."$";;
+    public function __construct($id,$name,$image,$visibilite){
+        $this->id=$id;
         $this->name=$name;
         $this->image=$image;
+        $this->visibilite=$visibilite;
+    }
+
+
+    static public function db_get_all($database){
+        $req=$database->prepare("SELECT ID,TYPEQUESTION FROM Question");
+        $req->execute();
+        $listQuestions=array();
+        while($resultat=$req->fetch()){
+            $id=$resultat['ID'];
+            $type=$resultat['TYPEQUESTION'];
+            if($type=="QCM"){
+                $carte=Question_QCM::db_get($database,$id);
+                $listQuestions[]=$carte;
+            }
+            if($type=="LIBRE"){
+                $carte=Question_Libre::db_get($database,$id);
+                $listQuestions[]=$carte;
+            }
+        }
+        return $listQuestions;
     }
 
 
@@ -52,12 +75,18 @@ abstract class Question{
     }
 
     /**
-     * Get the value of id
+     * Get the value of id for html
+     */
+    public function get_id_html(){
+        return "carte".$this->id."$";;
+    }
+
+    /**
+     * Get the value of id in the database
      */
     public function get_id(){
         return $this->id;
     }
-
     /**
      * Set the value of id
      */
@@ -66,8 +95,18 @@ abstract class Question{
     }
 
     /**
-     * Get the value of type
+     * Get the value of visibilite
      */
+    public function get_visibilite(){
+        return $this->visibilite;
+    }
+
+    /**
+     * Set the value of visibilite
+     */
+    public function set_visibilite($visibilite){
+        $this->visibilite=$visibilite;
+    }
 
 
 
@@ -82,7 +121,7 @@ abstract class Question{
 //On creer L'objet Question_QCM qui herite de Question
 class Question_QCM extends Question{
 //-----------------attributs--------------------------------
-    private $listReponse; //Liste des reponses avec leurs couleurs associées [reponse,couleur] 
+    private $listPropositions; //Liste des reponses avec leurs couleurs associées [reponse,couleur] 
     private $nbReponseMax; //Nombre de reponse max pour la question
 
 //----------------constructeur------------------------------
@@ -90,34 +129,52 @@ class Question_QCM extends Question{
     * Question_QCM constructor.
     * @param string $name 
     * @param string $image
-    * @param array $listReponse
+    * @param array $listPropositions
     * @param int $nbReponseMax
     */
-    public function __construct($id,$name,$image,$listReponse,$nbReponseMax){
-        parent::__construct($id,$name,$image);
-        $this->listReponse=$listReponse;
-        $this->nbReponseMax=$nbReponseMax;
+    public function __construct($id,$name,$image,$visibilite,$listPropositions,$nbReponseMax){
+        parent::__construct($id,$name,$image,$visibilite);
+        $this->listPropositions=$listPropositions;
+        $this->set_nbReponseMax($nbReponseMax);
         $this->type="QCM";
 
     }
 
+    static public function db_get($database,$id){
+        $req=$database->prepare("SELECT * FROM Question WHERE ID=:id");
+        $req->execute(array("id"=>$id));
+        $resultat=$req->fetch();
+        if($resultat){
+            $req=$database->prepare("SELECT * FROM Proposition WHERE ID_QUESTION=:id_question");
+            $req->execute(array("id_question"=>$id));
+            $resultat2=$req->fetchAll();
+            $listPropositions=array();
+            foreach($resultat2 as $proposition){
+                $listPropositions[]=array($proposition['TEXTE'],$proposition['COULEUR']);
+            }
+            return new Question_QCM($id,$resultat['INTITULE'],$resultat['IMAGE'],$resultat['VISIBILITE'],$listPropositions,$resultat['NBREPONSE']);
+        }
+        else{
+            return null;
+        }
+    }
 
 //---------------getters et setters--------------------------
 
 
     /**
-     * Get the value of listReponse
+     * Get the value of listPropositions
      */
-    function get_listReponse(){
-        return $this->listReponse;
+    function get_listPropositions(){
+        return $this->listPropositions;
 
     }
 
     /**
-     * Set the value of listReponse
+     * Set the value of listPropositions
      */
-    function set_listReponse($listReponse){
-        $this->listReponse=$listReponse;
+    function set_listPropositions($listPropositions){
+        $this->listPropositions=$listPropositions;
     }
 
     /**
@@ -131,12 +188,45 @@ class Question_QCM extends Question{
      * Set the value of nbReponseMax
      */
     function set_nbReponseMax($nbReponseMax){
+        if($nbReponseMax<1){
+            $nbReponseMax=1;
+        }
         $this->nbReponseMax=$nbReponseMax;
     }
 
     public function get_type(){
         return $this->type;
-    }    
+    }  
+    
+
+
+    public function db_save($database){
+        //On regarde si une carte du meme id existe deja dans la base de donnee
+        $req=$database->prepare("SELECT * FROM Question WHERE id=:id");
+        $req->execute(array("id"=>$this->get_id()));
+        $resultat=$req->fetch();
+        if(!$resultat){
+            //Si elle n'existe pas on la cree
+            $req=$database->prepare("INSERT INTO Question (id,intitule,id_formulaire,image,visibilite,typequestion,nbreponse)
+                                    VALUES (:id,:intitule,:id_formulaire,:image,:visibilite,:typequestion,:nbreponse)");}
+        else{
+            //Si elle existe on la modifie
+            $req=$database->prepare("UPDATE Question SET intitule=:intitule,id_formulaire=:id_formulaire,image=:image,visibilite=:visibilite,typequestion=:typequestion,nbreponse=:nbreponse WHERE id=:id");
+        }
+        $req->execute(array(
+            "id"=>$this->get_id(),
+            "intitule"=>$this->get_name(),
+            "id_formulaire"=>1,
+            "image"=>$this->get_image(),
+            "visibilite"=>1,
+            "typequestion"=>$this->get_type(),
+            "nbreponse"=>$this->get_nbReponseMax()));
+
+        
+    }
+
+
+
 }
 
 
@@ -152,11 +242,24 @@ class Question_Libre extends Question{
     * @param filepath $image
     * @param int $nbCaractereMax
     */
-    public function __construct($id,$name,$image,$nbCaractereMax){
-        parent::__construct($id,$name,$image);
-        $this->nbCaractereMax=$nbCaractereMax;
+    public function __construct($id,$name,$image,$visibilite,$nbCaractereMax){
+        parent::__construct($id,$name,$image,$visibilite);
+        $this->set_nbCaractereMax($nbCaractereMax);
         $this->type="LIBRE";
     }
+
+    static public function db_get($database,$id){
+        $req=$database->prepare("SELECT * FROM Question WHERE ID=:id");
+        $req->execute(array("id"=>$id));
+        $resultat=$req->fetch();
+        if($resultat){
+            return new Question_Libre($id,$resultat['INTITULE'],$resultat['IMAGE'],$resultat['VISIBILITE'],$resultat['NBCARACTEREMAX']);
+        }
+        else{
+            return null;
+        }
+    }
+
     //On creer les getters et setters
 
     /**
@@ -170,12 +273,45 @@ class Question_Libre extends Question{
      * Set the value of nbCaractereMax
      */
     function set_nbCaractereMax($nbCaractereMax){
+        if ($nbCaractereMax<0){
+            $nbCaractereMax=1;
+        }
+        if ($nbCaractereMax>500){
+            $nbCaractereMax=500;
+        }
+
         $this->nbCaractereMax=$nbCaractereMax;
     }
 
     public function get_type(){
         return $this->type;
     }
+
+    public function db_save($database){
+        //On regarde si une carte du meme id existe deja dans la base de donnee
+        $req=$database->prepare("SELECT * FROM Question WHERE id=:id");
+        $req->execute(array("id"=>$this->get_id()));
+        $resultat=$req->fetch();
+        if(!$resultat){
+            //Si elle n'existe pas on la cree
+            $req=$database->prepare("INSERT INTO Question (id,intitule,id_formulaire,image,visibilite,typequestion,nbCaractereMax)
+                                    VALUES (:id,:intitule,:id_formulaire,:image,:visibilite,:typequestion,:nbCaractereMax)");}
+
+        else{
+            //Si elle existe on la modifie
+            $req=$database->prepare("UPDATE Question SET intitule=:intitule,id_formulaire=:id_formulaire,image=:image,visibilite=:visibilite,typequestion=:typequestion,nbCaractereMax=:nbCaractereMax WHERE id=:id");
+        }
+        $req->execute(array(
+            "id"=>$this->get_id(),
+            "intitule"=>$this->get_name(),
+            "id_formulaire"=>1,
+            "image"=>$this->get_image(),
+            "visibilite"=>1,
+            "typequestion"=>$this->get_type(),
+            "nbCaractereMax"=>$this->get_nbCaractereMax()));
+    }
+
+
 }
 
 ?>

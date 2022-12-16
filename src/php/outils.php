@@ -1,5 +1,5 @@
 <?php
-include('baseDeDonnees.php');
+include_once('baseDeDonnees.php');
 if(!isset($_SESSION)){
     session_start();
 }
