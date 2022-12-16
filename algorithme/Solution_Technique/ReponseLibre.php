@@ -9,8 +9,8 @@ class ReponseLibre extends Reponse {
         private $reponseLibre;
     
         //Constructeur
-        public function __construct($id, $idQuestion, $idEtudiant, $objetReponse, $reponseLibre) {
-            parent::__construct($id, $idQuestion, $idEtudiant, $objetReponse);
+        public function __construct($idQuestion, $idEtudiant, $reponseLibre) {
+            parent::__construct($idQuestion, $idEtudiant);
             $this->reponseLibre = $reponseLibre;
         }
     

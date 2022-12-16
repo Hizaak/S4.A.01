@@ -2,17 +2,20 @@
 <?php
 
 require "Outils.php";
+require "Main.php";
 
 //CALCULER LA MATRICE DE SCORE 
 
-//On compte le nombre de première année
-$nbFilleuls = nbPremiereAnnee();
+//On crée la liste des étudiants
+$etudiants = array();
 
-//On compte le nombre de deuxième année
-$nbParrains = nbDeuxiemeAnnee();
+//On sépare les étudiants en deux listes : les parrains et les filleuls
+
+//On compte le nombre de Filleuls
+
+//On compte le nombre de Parrains
 
 //On compte le nombre de questions référencées dans les réponses
-$nbQuestions = nbQuestions();
 
 $scoreMax = $nbQuestions*100;
 
