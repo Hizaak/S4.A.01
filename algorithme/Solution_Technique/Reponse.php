@@ -4,26 +4,16 @@
 abstract class Reponse {
 
     //Attributs
-    private $id;
     private $idQuestion;
-    private $idEtudiant;
+    private $loginEtudiant;
 
     //Constructeur
-    public function __construct($id, $idQuestion, $idEtudiant) {
-        $this->id = $id;
+    public function __construct($idQuestion, $loginEtudiant) {
         $this->idQuestion = $idQuestion;
-        $this->idEtudiant = $idEtudiant;
+        $this->loginEtudiant = $loginEtudiant;
     }
 
     //Encapsulation
-    public function getId() {
-        return $this->id;
-    }
-
-    public function setId($id) {
-        $this->id = $id;
-    }
-
     public function getIdQuestion() {
         return $this->idQuestion;
     }
@@ -32,12 +22,12 @@ abstract class Reponse {
         $this->idQuestion = $idQuestion;
     }
 
-    public function getIdEtudiant() {
-        return $this->idEtudiant;
+    public function getloginEtudiant() {
+        return $this->loginEtudiant;
     }
 
-    public function setIdEtudiant($idEtudiant) {
-        $this->idEtudiant = $idEtudiant;
+    public function setloginEtudiant($loginEtudiant) {
+        $this->loginEtudiant = $loginEtudiant;
     }
 
 }

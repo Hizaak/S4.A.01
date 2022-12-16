@@ -82,20 +82,20 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
     } else {
         //on verifie que le mot de passe est correct
         // On hash le mot de passe
-        if (!$resultat['password']) {
+        if (!$resultat['PASSWORD']) {
             error("Vous n'avez pas validé votre compte<br><a href='creationCompte.php'>Valider votre compte</a>");
             exit();
         }
 
-        if ($resultat['password']!=' ' && password_verify($_POST['password'], $resultat['password'])) {
+        if ($resultat['PASSWORD']!=' ' && password_verify($_POST['password'], $resultat['PASSWORD'])) {
             //on verifie que l'utilisateur a bien validé son compte
-            if ($resultat['valide'] == "oui") {
+            if ($resultat['VALIDE'] == "oui") {
                 //on stocke le mail dans une variable de session
                 $_SESSION['login'] = strtolower(($_POST['login']));
                 $_SESSION['role'] = $resultat['role'];
                 $_SESSION['message'] = ["Bienvenue ".$_SESSION['login'],"#006700"];
                 //on redirige vers la page de verification
-                if ($resultat['role'] == 'admin'){
+                if ($resultat['ROLE'] == 'admin'){
                     header('Location:admin.php');
 
                     

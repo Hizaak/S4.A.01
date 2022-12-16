@@ -12,30 +12,9 @@
 </html>
 
 <?php
-include "genereHTMLQuestion.php";
-include "baseDeDonnees.php";
-include "outils.php";
-
-
-// echo $Question1->afficher(true);
-$req = $database->prepare("SELECT * FROM Question");
-$req->execute();
-$resultat=$req->fetchAll();
-while ($resultat){
-    $carte=unserialize($resultat[0]["ObjetQuestion"]);
-    $carte->set_id($resultat[0]["id"]);
-    echo $carte->afficher(true);
-    array_shift($resultat);
-}
-
-if (isset($_SESSION['Questions'])){
-    //On recupere toutes les question dans l'array
-    foreach ($_SESSION['Questions'] as $question){
-        //On affiche la question
-        echo $question->afficher(true);
-    }
-
-}
+include_once "genereHTMLQuestion.php";
+include_once "baseDeDonnees.php";
+include_once "outils.php";
 
 if(!empty($_POST) && !isset($_SESSION['Questions'])){
     print_r($_POST);
@@ -68,53 +47,15 @@ if(!empty($_POST) && !isset($_SESSION['Questions'])){
 }
 
 
-
-
-
-
-
-//On affiche un bouton qui va générer une question
-
-
-//Si le bouton ajouterQuestion est appuyé on crée une nouvelle question
-if (isset($_POST["ajouterQuestion"])){
-    
-    //On récupère l'id de la dernière question
-    $req = $database->prepare("SELECT id FROM Question ORDER BY id DESC LIMIT 1");
-    $req->execute();
-    $resultat=$req->fetchAll();
-    $id=$resultat[0]["id"];
-    $id++;
-    //On crée une nouvelle question
-    $carte=new Question_QCM($id,"Intitulé de la question","..\\sources\\images\\imgplaceholder.jpg",array(array("Réponse 1","#00FF00"),array("Réponse 2","#FF0000"),array("Réponse 3","#0000FF")),2);
-    echo $carte->afficher(true);
-    //On l'ajoute a la session
-    $_SESSION['Questions'][]=$carte;
-
-
-    
+//On recupere toutes les questions de la base de donnee
+$ListeQuestion=Question::db_get_all($database);
+//On affiche les questions
+foreach ($ListeQuestion as $question) {
+    echo ReprQuestion::get_instance($question)->get_html(true);
 }
 
 
 
 
-echo '<form id=addQuestion method="post">
-        <input form="addQuestion" type="submit" name="ajouterQuestion" value="Ajouter une question">
-    </form>';
 
 echo '<script type="text/javascript" src="../script/carte.js"></script>';
-
-$carte = new Question_QCM(1,"Intitulé de la question","..\\sources\\images\\imgplaceholder.jpg",array(array("Réponse 1","#00FF00"),array("Réponse 2","#FF0000"),array("Réponse 3","#FF0000")),1);
-$repcarte=new ReprQuestionQCM($carte);
-echo $repcarte->get_html(true);
-
-
-$cartelibre=new Question_Libre(2,"Intitulé de la question","..\\sources\\images\\imgplaceholder.jpg",255);
-$repcartelibre=new ReprQuestionLibre($cartelibre);
-echo $repcartelibre->get_html(true);
-?>
-
-
-
-
-
