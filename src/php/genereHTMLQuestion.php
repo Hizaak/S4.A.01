@@ -40,7 +40,7 @@ abstract class ReprQuestion{
         $html='<section class="container" id="'.$this->question->get_id_html().'container">
             <section class="carte" id='.$this->question->get_id_html().'>
                 <h2>'.$this->question->get_name().'</h2>
-                <img src="'.$this->question->get_image().'" alt="icone">';
+                <img  id="'.$this->question->get_id_html().'Image" src="'.$this->question->get_image().'" alt="icone">';
 
         $html.=$this->get_html_reponses();
         $html.='</section></section>';
@@ -141,18 +141,22 @@ class ReprQuestionQCM extends ReprQuestion{
             </section>
             <section>
                 <label for="iconeCarte">Icone de la carte</label>
-                <input  type="file" accept="image/*" name="'.$this->question->get_id_html().'editIcon" class="editIcon" id="'.$this->question->get_id_html().'editIcon" onchange=loadimg('.$this->question->get_id_html().'editIcon,'.$this->question->get_id_html().')>
+                <input  type="file" accept="image/*" name="'.$this->question->get_id_html().'editIcon" class="editIcon" id="'.$this->question->get_id_html().'editIcon" onchange=loadimg('.$this->question->get_id_html().'editIcon)>
             </section>';
     
 
         if ($buttontype=="button"){
-            $html.='<section class="reponses">';
+            $html.='<section style="display:none">
+                        <label for="nbReponseMax">Nombre de réponses max</label>
+                        <input  type="number" name="'.$this->question->get_id_html().'editNbRepMax" class="editNbRepMax" id="'.$this->question->get_id_html().'editNbRepMax" value="'.$this->question->get_nbReponseMax().'"  min="1" oninput="maj('.$this->question->get_id_html().'propriete,'.$this->question->get_id_html().')">
+                    </section> 
+            <section class="reponses">';
             for ($i=0;$i<count($this->question->get_listPropositions());$i++){
                 $html.='
                 <section class="btnsettings">
                     <label for="'.$this->question->get_id_html().'editRep'.$i.'">Réponse '.($i+1).'</label>
                     <input  type="text" name="'.$this->question->get_id_html().'editRep'.$i.'" class="editbtn" id="'.$this->question->get_id_html().'editRep'.$i.'" value="'.$this->question->get_listPropositions()[$i][0].'" oninput="maj('.$this->question->get_id_html().'propriete,'.$this->question->get_id_html().')" >
-                    <input  type="color" name="'.$this->question->get_id_html().'editColor'.$i.'" class="editbtn" id="'.$this->question->get_id_html().'editColor'.$i.'" value="'.$this->question->get_listPropositions()[$i][1].'" oninput="maj('.$this->question->get_id_html().'propriete,'.$this->question->get_id_html().')">
+                    <input  type="color" name="'.$this->question->get_id_html().'editColor'.$i.'" class="editRep" id="'.$this->question->get_id_html().'editColor'.$i.'" value="'.$this->question->get_listPropositions()[$i][1].'" oninput="maj('.$this->question->get_id_html().'propriete,'.$this->question->get_id_html().')">
                 </section>';
             }
             $html.='</section>';
@@ -177,7 +181,7 @@ class ReprQuestionQCM extends ReprQuestion{
                 <button type="button" name="'.$this->question->get_id_html().'supp" class="suppRep" id="'.$this->question->get_id_html().'edit" onClick=suppRep('.$this->question->get_id_html().'propriete'.','.$this->question->get_id_html().')>Enlever</button>
                 <button type="button" name="'.$this->question->get_id_html().'add" class="addRep" id="'.$this->question->get_id_html().'edit" onClick=addRep('.$this->question->get_id_html().'propriete'.','.$this->question->get_id_html().') >Ajouter</button>
             </section>';
-        $html.='<input type="submit" name="'.$this->question->get_id_html().'editSubmit" class="editSubmit" id="'.$this->question->get_id_html().'editSubmit" value="Valider">';
+        $html.='<input type="submit" name="'.$this->question->get_id_html().'editSubmit" class="ValideeditSubmit" id="'.$this->question->get_id_html().'editSubmit" value="Valider">';
         
 
         return $html;
@@ -212,9 +216,9 @@ class ReprQuestionLIBRE extends ReprQuestion{
             </section>
             <section>
                 <label for="nbCaractereMax">Nombre de caractère max</label>
-                <input  type="number" name="'.$this->question->get_id_html().'editNbCaractereMax" class="editNbCaractereMax" id="'.$this->question->get_id_html().'editNbCaractereMax" value="'.$this->question->get_nbCaractereMax().'"  min="1" max="500" oninput="maj('.$this->question->get_id_html().'propriete,'.$this->question->get_id_html().')">
+                <input  type="number" name="'.$this->question->get_id_html().'editNbCaractereMax" class="editbtn editNbCaractereMax" id="'.$this->question->get_id_html().'editNbCaractereMax" value="'.$this->question->get_nbCaractereMax().'"  min="1" max="500" oninput="maj('.$this->question->get_id_html().'propriete,'.$this->question->get_id_html().')">
             </section>
-            <input type="submit" name="'.$this->question->get_id_html().'editSubmit" class="editSubmit" id="'.$this->question->get_id_html().'editSubmit" value="Valider">
+            <input type="submit" name="'.$this->question->get_id_html().'editSubmit" class="ValideeditSubmit" id="'.$this->question->get_id_html().'editSubmit" value="Valider">
         </section>';
         return $html;
     }

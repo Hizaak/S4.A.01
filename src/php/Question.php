@@ -78,7 +78,7 @@ abstract class Question{
      * Get the value of id for html
      */
     public function get_id_html(){
-        return "carte".$this->id."$";;
+        return "carte".$this->id."sep";;
     }
 
     /**

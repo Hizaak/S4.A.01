@@ -1,3 +1,73 @@
+//on ecoute un clique sur tout les boutons de classe ValideeditSubmit et on log l'element
+
+
+
+
+var boutons = document.querySelectorAll(".ValideeditSubmit");
+for (let i = 0; i < boutons.length; i++) {  
+    boutons[i].addEventListener("click", function(){
+        //On recupere tout les inputs de la partie propriété
+        idcarte=this.parentNode.parentNode.querySelector(".carte").id;
+        ititule=this.parentNode.querySelector(".editName").value;
+
+        //On recupere le type de la question
+        if (this.parentNode.parentNode.querySelector(".carte").querySelector("section").className.includes("QCM")){type="QCM";}
+        else{type="LIBRE";}
+
+        //On note limit la contraite de la question (nombre de reponse pour un QCM ou nombre de caractere pour une question libre)
+        if(type=="QCM"){
+            limit=this.parentNode.querySelector(".editNbRepMax").value;
+        }
+        else{
+            limit=this.parentNode.querySelector(".editNbCaractereMax").value;
+        }
+
+        //on recupère le base64 de l'image
+        image = this.parentNode.parentNode.querySelector(".carte").querySelector("img").src;
+        if (image.includes("/sources/images/imgplaceholder.jpg")){
+            image=null;
+        }
+
+        //On creer un dictionnaire
+        
+        proposition={};
+        //On parcours les reponses d'un QCM
+        if (type=="QCM"){
+            sectionReponse=this.parentNode.querySelectorAll(".btnsettings");
+            sectionReponse.forEach(reponse =>{
+                attributs={};
+                text=reponse.querySelector("input[type=text]");
+                color=reponse.querySelector("input[type=color]"); //null si pas de couleur
+                attributs['text']=text.value;
+                
+                //condition sur une ligne, si color est null alors on met null sinon on met la valeur de color
+                attributs['color']=color==null?null:color.value;
+
+                //on ajoute l'array au dictionnaire avec comme clé l'id de la reponse en enlevant l'id de la carte et le mot edit
+                proposition[text.id.replace(idcarte+"edit","")]=attributs;
+            });
+        }
+        
+        //On envois le json au serveur par avec ajax
+        $.ajax({
+            url:"questionUpload.php",
+            type:"POST",
+            data:{id:idcarte,type,ititule:ititule,image:image,proposition:proposition,limit:limit},
+            success:function(data){
+                console.log(data);
+                //Ne pas oublier l'input de visibilité 
+            }
+
+        });
+
+    });
+
+}
+        
+    
+    
+    
+    
     //On fait une fonction qui attend un évènement de changemet de valeur d'un des inputs
     function maj(prop,carte){
         typereponse=prop.querySelectorAll('label')[1].textContent;
@@ -47,14 +117,33 @@
         }
 
     }
-    function loadimg(input,carte){
-        //Action lors du changement de l'image
+    function loadimg(input){
+        //On recupère la carte de la propriété
+        var img = input.parentNode.parentNode.parentNode.querySelector(".carte").querySelector("img");
+
         var file = input.files[0];
-        if (file){
-            var url = URL.createObjectURL(file);
-            carte.querySelector("img").src = url;
+        var reader = new FileReader();
+        reader.onloadend = function(){
+            //si c'est une image on l'affiche
+            if (file.type.match('image.*')){
+                img.src = reader.result;
+            }
+            //sinon on affiche une alerte
+            else{
+                input.value="";
+                alert("Ce n'est pas une image");
+
+            }
+
         }
+        if(file){
+            reader.readAsDataURL(file);
+        }
+        else{
+            img.src ="";
+        };
     }
+
 
 
 
@@ -175,4 +264,3 @@
         maj(prop,carte);
 
     }
-
