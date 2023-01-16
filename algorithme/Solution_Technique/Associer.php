@@ -6,9 +6,6 @@ require "Main.php";
 
 //CALCULER LA MATRICE DE SCORE 
 
-//On crée la liste des étudiants
-$etudiants = array();
-
 //On sépare les étudiants en deux listes : les parrains et les filleuls
 
 //On compte le nombre de Filleuls
