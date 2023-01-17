@@ -1,17 +1,17 @@
 
 <?php
 
-require "Utilisateur.php";
+require_once "Utilisateur.php";
 
 class Etudiant extends Utilisateur {
 
     //Attributs
 
     private $niveau;
-    private $listeReponses = array();
+    private $listeReponses;
 
     //Constructeur
-    
+
     public function __construct($login, $niveau) {
         parent::__construct($login);
         $this->niveau = $niveau;

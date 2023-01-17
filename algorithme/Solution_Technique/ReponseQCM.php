@@ -1,7 +1,7 @@
 
 <?php
 
-require "Reponse.php";
+require_once "Reponse.php";
 
 class ReponseQCM extends Reponse{
         
