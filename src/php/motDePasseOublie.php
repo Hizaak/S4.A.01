@@ -86,7 +86,7 @@ if (isset($_POST['submit']) && isset($_POST['login']) && isset($_POST['password'
     $confPassword = $_POST['conf-password'];
     $resultats=verifUtilisateur($login);
     if ($resultats){
-        if ($resultats['valide'] != "oui") {
+        if ($resultats['VALIDE'] != "oui") {
             error("Votre compte n\'est pas encore initialisée<br>cliquez <a href='creationCompte.php'>ici</a>");
             exit();
         }

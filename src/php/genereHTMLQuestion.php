@@ -125,7 +125,11 @@ class ReprQuestionQCM extends ReprQuestion{
                         </input>      
                         <label for="'.$this->question->get_id_html().'rep'.$i.'">'.$this->question->get_listPropositions()[$i][0].'</label>
                 </section>';
+                
             }
+            $html.='</section>
+            <section class="suivant">
+                <input type="button" name="'.$this->question->get_id_html().'next" class="next" id="'.$this->question->get_id_html().'next" value="Suivant" onClick=next('.$this->question->get_id_html().')>';
         }
         return $html;
     }
@@ -142,41 +146,39 @@ class ReprQuestionQCM extends ReprQuestion{
             <section>
                 <label for="iconeCarte">Icone de la carte</label>
                 <input  type="file" accept="image/*" name="'.$this->question->get_id_html().'editIcon" class="editIcon" id="'.$this->question->get_id_html().'editIcon" onchange=loadimg('.$this->question->get_id_html().'editIcon)>
-            </section>';
-    
-
-        if ($buttontype=="button"){
-            $html.='<section style="display:none">
-                        <label for="nbReponseMax">Nombre de réponses max</label>
-                        <input  type="number" name="'.$this->question->get_id_html().'editNbRepMax" class="editNbRepMax" id="'.$this->question->get_id_html().'editNbRepMax" value="'.$this->question->get_nbReponseMax().'"  min="1" oninput="maj('.$this->question->get_id_html().'propriete,'.$this->question->get_id_html().')">
-                    </section> 
-            <section class="reponses">';
-            for ($i=0;$i<count($this->question->get_listPropositions());$i++){
-                $html.='
-                <section class="btnsettings">
-                    <label for="'.$this->question->get_id_html().'editRep'.$i.'">Réponse '.($i+1).'</label>
-                    <input  type="text" name="'.$this->question->get_id_html().'editRep'.$i.'" class="editbtn" id="'.$this->question->get_id_html().'editRep'.$i.'" value="'.$this->question->get_listPropositions()[$i][0].'" oninput="maj('.$this->question->get_id_html().'propriete,'.$this->question->get_id_html().')" >
-                    <input  type="color" name="'.$this->question->get_id_html().'editColor'.$i.'" class="editRep" id="'.$this->question->get_id_html().'editColor'.$i.'" value="'.$this->question->get_listPropositions()[$i][1].'" oninput="maj('.$this->question->get_id_html().'propriete,'.$this->question->get_id_html().')">
-                </section>';
-            }
-            $html.='</section>';
-        }
-        else if ($buttontype=="checkbox"){
-            $html.='
+            </section>
+            <section>
+            <label for="visibilite">Visibilité de la carte</label>
+                <select name="'.$this->question->get_id_html().'editVisibilite" class="editVisibilite" id="'.$this->question->get_id_html().'editVisibilite" onchange="maj('.$this->question->get_id_html().'propriete,'.$this->question->get_id_html().')">
+                    <option value="filleul" '.(($this->question->get_visibilite()=="1")?"selected":"").'>filleul</option>
+                    <option value="parrain" '.(($this->question->get_visibilite()=="2")?"selected":"").'>parrain</option>
+                    <option value="tous" '.(($this->question->get_visibilite()=="all")?"selected":"").'>tous</option>
+                </select>
+            </section>
             <section>
                 <label for="nbReponseMax">Nombre de réponses max</label>
-                <input  type="number" name="'.$this->question->get_id_html().'editNbRepMax" class="editNbRepMax" id="'.$this->question->get_id_html().'editNbRepMax" value="'.$this->question->get_nbReponseMax().'"  min="1" oninput="maj('.$this->question->get_id_html().'propriete,'.$this->question->get_id_html().')">
+                <input  type="number" name="'.$this->question->get_id_html().'editNbRepMax" class="editNbRepMax" id="'.$this->question->get_id_html().'editNbRepMax" value="'.$this->question->get_nbReponseMax().'"  min="1" max="'.($this->question->get_nbReponseMax()+1).'" oninput="maj('.$this->question->get_id_html().'propriete,'.$this->question->get_id_html().')">
             </section>
-            <section class="reponses">';
-            for ($i=0;$i<count($this->question->get_listPropositions());$i++){
-                $html.='<section class=btnsettings>
-                            <label for="'.$this->question->get_id_html().'editRep'.$i.'">Réponse '.($i+1).'</label>
-                            <input  type="text" name="'.$this->question->get_id_html().'editRep'.$i.'" class="editRep" id="'.$this->question->get_id_html().'editRep'.$i.'" value="'.$this->question->get_listPropositions()[$i][0].'" oninput="maj('.$this->question->get_id_html().'propriete,'.$this->question->get_id_html().')">
-                        </section>';
-            }
-            $html.='</section>';
-        }
+        ';
+
+    
+
         $html.='
+        <section class="reponses">';
+        for ($i=0;$i<count($this->question->get_listPropositions());$i++){
+            $html.='
+            <section class="btnsettings">
+                <label for="'.$this->question->get_id_html().'editRep'.$i.'">Réponse '.($i+1).'</label>
+                <input  type="text" name="'.$this->question->get_id_html().'editRep'.$i.'" class="editbtn" id="'.$this->question->get_id_html().'editRep'.$i.'" value="'.$this->question->get_listPropositions()[$i][0].'" oninput="maj('.$this->question->get_id_html().'propriete,'.$this->question->get_id_html().')" >
+                <input type="color" name="'.$this->question->get_id_html().'editColor'.$i.'" class="editbtn editRep" id="'.$this->question->get_id_html().'editColor'.$i.'" value="'.$this->question->get_listPropositions()[$i][1].'" oninput="maj('.$this->question->get_id_html().'propriete,'.$this->question->get_id_html().')"
+                ';
+                if ($buttontype=="checkbox"){
+                    $html.='style=display:none';
+                }
+                $html.='>
+            </section>';
+        }
+        $html.='</section>
             <section class="addsuppbtn">
                 <button type="button" name="'.$this->question->get_id_html().'supp" class="suppRep" id="'.$this->question->get_id_html().'edit" onClick=suppRep('.$this->question->get_id_html().'propriete'.','.$this->question->get_id_html().')>Enlever</button>
                 <button type="button" name="'.$this->question->get_id_html().'add" class="addRep" id="'.$this->question->get_id_html().'edit" onClick=addRep('.$this->question->get_id_html().'propriete'.','.$this->question->get_id_html().') >Ajouter</button>
@@ -213,6 +215,14 @@ class ReprQuestionLIBRE extends ReprQuestion{
             <section>
                 <label for="iconeCarte">Icone de la carte</label>
                 <input  type="file" accept="image/*" name="'.$this->question->get_id_html().'editIcon" class="editIcon" id="'.$this->question->get_id_html().'editIcon" onchange=loadimg('.$this->question->get_id_html().'editIcon,'.$this->question->get_id_html().')>
+            </section>
+            <section>
+            <label for="visibilite">Visibilité de la carte</label>
+                <select name="'.$this->question->get_id_html().'editVisibilite" class="editVisibilite" id="'.$this->question->get_id_html().'editVisibilite" onchange="maj('.$this->question->get_id_html().'propriete,'.$this->question->get_id_html().')">
+                    <option value="filleul" '.(($this->question->get_visibilite()=="1")?"selected":"").'>filleul</option>
+                    <option value="parrain" '.(($this->question->get_visibilite()=="2")?"selected":"").'>parrain</option>
+                    <option value="tous" '.(($this->question->get_visibilite()=="all")?"selected":"").'>tous</option>
+                </select>
             </section>
             <section>
                 <label for="nbCaractereMax">Nombre de caractère max</label>
