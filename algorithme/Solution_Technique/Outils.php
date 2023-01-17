@@ -1,15 +1,20 @@
 
 <?php
 
-require "Associer.php";
-require "ReponseQCM.php";
-require "ReponseLibre.php";
-require "Etudiant.php";
-require "Main.php";
+require_once "Associer.php";
+require_once "ReponseQCM.php";
+require_once "ReponseLibre.php";
+require_once "Etudiant.php";
+require_once "Main.php";
 
-$listEtud = array();
-$listPremAn = array();
-$listSecAn = array();
+function initArray(){
+    global $listEtud;
+    global $listPremAn;
+    global $listSecAn;
+    $listEtud = array();
+    $listPremAn = array();
+    $listSecAn = array();
+}
 
 function nbPremiereAnnee(){
     global $listEtud;
@@ -48,9 +53,8 @@ function listerSecAn(){
 function nbQuestions(){
     global $listEtud;
     $nbQuestions = 0;
-    foreach ($listEtud as $etudiant) {
-        $nbQuestions += count($etudiant->getListeReponses());
-    }
+    $lstRep = $listEtud[0]->getListeReponses();
+    $nbQuestions = count($lstRep);
     return $nbQuestions;
 }
 

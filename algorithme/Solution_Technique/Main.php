@@ -1,19 +1,37 @@
 
 <?php
 
-require "Associer.php";
+require_once "Associer.php";
 
 //Récuperer les étudiants dans la base de données
-$etudTest1 = new Etudiant("etest1", 1); //etud de 1annee
-$etudTest2 = new Etudiant("etest2", 2); //etud de 2annee
+$listEtud[] = new Etudiant("Bastien", 1); //etud de 1annee
+$listEtud[] = new Etudiant("Remi", 2); //etud de 2annee
+
 
 //Récuperer les réponses dans la base de données
-$repTest1a = new ReponseQCM(1, "etest1", 1, ["oui"]); //rep1 de etest1
-$repTest1b = new ReponseQCM(2, "etest1", 1, ["oui"]); //rep2 de etest1
 
-$repTest2a = new ReponseQCM(1, "etest2", 1, ["oui"]); //rep1 de etest2
-$repTest2b = new ReponseQCM(2, "etest2", 1, ["non"]); //rep2 de etest2
-$repTest3b = new ReponseQCM(3, "etest2", 1, ["oui"]); //rep3 de etest2
+
+//Le premier étudiant a répondu à 2 questions
+$listEtud[0]->ajouterReponse(["oui"]); //rep1 de etest1
+$listEtud[0]->ajouterReponse(["oui"]); //rep2 de etest1
+
+
+//Le deuxième étudiant a répondu à 3 questions
+$listEtud[1]->ajouterReponse(["oui"]); //rep1 de etest2
+$listEtud[1]->ajouterReponse(["non"]); //rep2 de etest2
+$listEtud[1]->ajouterReponse(["oui"]); //rep3 de etest2
+
+//afficher le nombre de questions
+echo "Nombre de questions : ".nbQuestions()."<br>";
+
+//Afficher les réponses des étudiants
+for ($i = 0; $i < count($listEtud); $i++) {
+    echo "Etudiant ".$listEtud[$i]->getLogin()." : ";
+    for ($j = 0; $j < count($listEtud[$i]->getListeReponses()); $j++) {
+        print_r($listEtud[$i]->getListeReponses()[$j][0]." ");
+    }
+    echo "<br>";
+}
 
 //Supprimer les parrains qui ne veulent pas de filleul
 

@@ -1,18 +1,23 @@
 
 <?php
 
-require "Outils.php";
-require "Main.php";
+require_once "Outils.php";
+require_once "Main.php";
 
 //CALCULER LA MATRICE DE SCORE 
 
 //On sépare les étudiants en deux listes : les parrains et les filleuls
+$listFilleuls = listerPremAn();
+$listParrains = listerSecAn();
 
 //On compte le nombre de Filleuls
+$nbFilleuls = count($listPremAn);
 
 //On compte le nombre de Parrains
+$nbParrains = count($listSecAn);
 
 //On compte le nombre de questions référencées dans les réponses
+$nbQuestions = nbQuestions();
 
 $scoreMax = $nbQuestions*100;
 
