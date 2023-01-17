@@ -2,7 +2,9 @@
 
 Membres du groupe :
 
-- Alexandre Maurice (Hizaak)
-- Titouan Brierre (TauntiiO)
-- Nicolas Dargazanli (noenic)
-- Leho Errecarret (lehoadb)
+| Nom et prénom | Pseudo / URL Github | N° de TP |
+|---------------|:-------------------:|---------:|
+| Alexandre Maurice | [Hizaak](https://github.com/Hizaak/) | 1 |
+| Titouan Brierre | [TauntiiO](https://github.com/TauntiiO/) | 1 |
+| Nicolas Dargazanli | [noenic](https://github.com/noenic/) | 1 |
+| Leho Errezarret | [Lehoabd](https://github.com/Lehoabd/) | 2 |
