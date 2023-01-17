@@ -1,195 +1,40 @@
 {
     "1annee" : {
-        "Matteo" :
+        "Bastien" :
         [
-            ["Visionnaire", "Ambitieux", "Solitaire"],
-            ["Moto","Vélo"],
-            ["Mc","CoD","For Honor","Mario"],
-            ["13", "37"],
-            ["Vodka","Whisky"],
-            ["Crunchyroll"]
+            ["oui"],
+            ["non"]
         ],
-        "Lou" :
+        "Alexandre" :
         [
-            ["Marrant", "Ouvert", "Fumeur"],
-            ["Plage", "Taekwondo"],
-            ["Mc", "Zelda", "CoD"],
-            ["64"],
-            ["Manzanna"],
-            ["Netflix"]
+            ["oui"],
+            ["oui"]
         ],
-        "Maximilien" :
+        "Romain" :
         [
-            ["Charismatique", "Sympathique"],
-            ["Programmation"],
-            ["Mc","Satisfactory"],
-            ["64"],
-            ["Vodka"],
-            ["Netflix"]
-        ],
-        "Adrien" :
-        [
-            ["Timide", "Geek"],
-            ["Gaming"],
-            ["Valo","SSB","Mc","LoL", "Elden Ring"],
-            ["64"],
-            ["Aucun"],
-            ["Crunchyroll"]
-        ],
-        "Lucas" :
-        [
-            ["Geek"],
-            ["Gaming"],
-            ["R6","BO2","AC2","Battlefield"],
-            ["64"],
-            ["Rhum"],
-            ["Netflix"]
-        ],
-        "Fanny" :
-        [
-            ["Dynamique", "Creatif", "Curieux", "Discret"],
-            ["Art","Plage","Photo"],
-            ["GTA","Mc","Mario"],
-            ["31", "64"],
-            ["Rhum"],
-            ["Netflix"]
-        ],
-        "Lucie":
-        [
-            ["Petit", "Timide", "Gentil", "Sportif"],
-            ["Basket", "Series", "Musique", "Gaming"],
-            ["Destiny", "PUBG"],
-            ["33"],
-            ["Aucun"],
-            ["Netflix"]
-        ],
-        "Valentin" :
-        [
-            ["Timide", "Marrant", "Fumeur"],
-            ["Musique", "Basket", "Gaming", "Soirées"],
-            ["LoL", "Valo", "Mc", "RL"],
-            ["31"],
-            ["Bière"],
-            ["Crunchyroll"]
-        ],
-        "Neo" :
-        [
-            ["Marrant", "Cringe"],
-            ["Skate", "Soirées"],
-            ["Destiny", "SSB"],
-            ["40"],
-            ["Vodka"],
-            ["Netflix"]
-        ],
-        "Solene" :
-        [
-            ["Sociable", "Dynamique", "Marrant"],
-            ["Danse", "Dessin", "Gaming", "Lecture"],
-            ["Mc", "LoL", "Zelda", "Paladins"],
-            ["64"],
-            ["Aucun"],
-            ["Crunchyroll"]
-        ],
-        "Jokin" :
-        [
-            ["Geek", "Rouspétant"],
-            ["Programmation", "Gaming"],
-            ["Mc", "Apex", "Ow"],
-            ["64"],
-            ["Vodka Black"],
-            ["Netflix"]
+            ["oui"],
+            ["oui"]
         ]
     },
     
     "2annee" : {
-        "Pierre" :
+        "Remi" :
         [
-            ["Intelligent", "Blond", "Charismatique", "Geek"],
-            ["Programmation", "Gaming", "Soirées"],
-            ["SoT", "Mc", "Battlefield"],
-            ["64"],
-            ["Whisky"],
-            ["Netflix"],
+            ["oui"],
+            ["non"],
+            "0"
+        ],
+        "Julien" :
+        [
+            ["non"],
+            ["non"],
             "1"
         ],
         "Nicolas" :
         [
-            ["Geek", "Intelligent"],
-            ["Programmation", "Gaming", "Voitures"],
-            ["Mc"],
-            ["33"],
-            ["Aucun"],
-            ["Crunchyroll"],
-            "pls"
-        ],
-        "Titouan" :
-        [
-            ["Geek", "Marrant", "Intelligent"],
-            ["Gaming", "Manger", "Soirées"],
-            ["LoL", "Satisfactory"],
-            ["64", "91"],
-            ["Get"],
-            ["Netflix"],
+            ["oui"],
+            ["non"],
             "1"
-        ],
-        "Alexandre" :
-        [
-            ["Rouspétant", "Geek", "Intelligent"],
-            ["Gaming", "Photo", "Lecture", "Chbeir"],
-            ["LoL", "Minecraft", "Ow"],
-            ["40"],
-            ["Get"],
-            ["Crunchyroll"],
-            "pls"
-        ],
-        "Thomas" :
-        [
-            ["Musclé", "Sympathique"],
-            ["Musculation", "Lecture"],
-            ["Mc", "DB"],
-            ["64"],
-            ["Aucun"],
-            "pls"
-        ],
-        "Romain" :
-        [
-            ["Beau", "Sympathique", "Marrant", "Fumeur"],
-            ["Soirées", "Programmation", "Soirées"],
-            ["RL","Forza", "Mc"],
-            ["64"],
-            ["Rhum"],
-            ["Netflix"],
-            "pls"
-        ],
-        "Leho" :
-        [
-            ["Geek", "Marrant", "Charismatique"],
-            ["Gaming", "Programmation"],
-            ["Ow"],
-            ["64"],
-            ["Aucun"],
-            ["Crunchyroll"],
-            "pls"
-        ],
-        "Dorian" :
-        [
-            ["Sympathique", "Marrant", "Intelligent"],
-            ["Basket", "Gaming", "Musique"],
-            ["Apex", "FIFA", "AC2"],
-            ["91"],
-            ["Vodka"],
-            ["Netflix"],
-            "0"
-        ],
-        "Guilhem" :
-        [
-            ["Timide", "Charismatique", "Intelligent","Sportif"],
-            ["Dessin", "Musculation"],
-            ["Mc", "Elden Ring", "AC2"],
-            ["64"],
-            ["Manzanna"],
-            ["Crunchyroll"],
-            "pls"
         ]
     }
 }
