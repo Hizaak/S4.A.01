@@ -11,8 +11,4 @@ if (!estAdmin()){
     header('Location:connexion.php');
 }
 
-else{
-    notifier("Vous êtes connecté en tant qu'administrateur", "#FF0000");
-}
-
 ?>

@@ -73,16 +73,22 @@ for (let i = 0; i < boutons.length; i++) {
         typereponse=prop.querySelectorAll('label')[1].textContent;
         carte.querySelector("h2").innerText = prop.querySelector(".editName").value;
         if (typereponse=="button"){
-            //On recupère les input de la partie propriété
-            var inputs = prop.querySelectorAll(".editbtn");
+            if(prop.querySelector(".editNbRepMax").value>1){
+                //On transforme les boutons en checkbox si il y a plus d'une réponse possible
+                buttonToCheckBox(prop,carte);
+                return;
+            }
+
+            //On recupère les inputs de la partie propriété des classes editbtn et editRep
+            var inputs = prop.querySelectorAll(".editbtn"); 
             //On récupère les boutons de la carte
             var boutons = carte.querySelectorAll("input[type=button]");
             //on parcours le tableau input
             for (let i = 0; i < inputs.length; i++) {
-                //Il y a 2 changement pour un bouton donc on divise par 2 pour avoir le bon bouton
-                //si l'input est de type text
+                //Il y a 2 changements pour un bouton donc on divise par 2 pour avoir le bon bouton
                 //on arrondi à l'entier inférieur
                 
+                //si l'input est de type text
                 if(inputs[i].type == "text"){
                     boutons[Math.floor(i/2)].value = inputs[i].value;
                 }
@@ -93,7 +99,12 @@ for (let i = 0; i < boutons.length; i++) {
             }
         }
         if (typereponse=="checkbox"){
-            var inputs = prop.querySelectorAll(".editRep");
+            if(prop.querySelector(".editNbRepMax").value==1){
+                //On transforme les checkbox en boutons si il n'y a qu'une réponse possible
+                checkBoxToButton(prop,carte);
+                return;
+            }
+            var inputs = prop.querySelector(".reponses").querySelectorAll("input[type=text]");
             var boutons = carte.querySelectorAll("label");
             for (let i = 0; i < inputs.length; i++) {
                 boutons[i].innerText = inputs[i].value;
@@ -149,12 +160,12 @@ for (let i = 0; i < boutons.length; i++) {
 
     function addRep(prop,carte){
         typereponse=prop.querySelectorAll('label')[1].textContent;
-        var nbBoutons = carte.querySelectorAll("input").length;
         element=prop.querySelector(".reponses");
+        var nbBoutons = element.childElementCount;
         section=document.createElement("section");
         section.className="btnsettings";
         if (typereponse=="button"){
-            //On créer les nouveaux inputs avec les commandes JS car le HTML ne permet pas de créer des inputs dynamiquement (On sais pas pourquoi)
+            //Création des propriétés du bouton
                 label=document.createElement("label");
                 label.setAttribute("for",carte.id+"editRep"+(nbBoutons));
                 label.innerText="Réponse "+(nbBoutons+1);
@@ -178,48 +189,56 @@ for (let i = 0; i < boutons.length; i++) {
                 color.setAttribute("oninput","maj("+prop.id+","+carte.id+")");
             section.appendChild(color); 
             element.appendChild(section);         
-            //On recupere l'élement input text qu'on vient de créer
-            //On ajoute un bouton à la carte
 
-            //On recupère le premier bouton de la carte pour récuperer sa classe (dans le cas ou on change le nom un jour)
-            var boutonTemoin = carte.querySelector("input");
 
-            //Là par contre ca marche marche tres bien en l'ajoutant par HTML
+            //Création du bouton dans la carte
                 section=carte.querySelector(".reponses");
                     bouton=document.createElement("input");
                     bouton.setAttribute("type","button");
-                    bouton.setAttribute("class",boutonTemoin.className);
+                    bouton.setAttribute("id",carte.id+"editRep"+(nbBoutons));
+                    bouton.setAttribute("class","buttonRep");
                     bouton.setAttribute("value",text.value);
                     bouton.setAttribute("style","background-color:"+document.getElementById(carte.id+"editColor"+(nbBoutons)).value);
                 section.appendChild(bouton);    
         } 
         else if(typereponse=="checkbox"){
-                label=document.createElement("label");
-                label.setAttribute("for",carte.id+"editRep"+(nbBoutons));
-                label.innerText="Réponse "+(nbBoutons+1);
-            section.appendChild(label);
-            section.appendChild(document.createTextNode( '\u00A0' ) );
-                text=document.createElement("input");
-                text.setAttribute("type","text");
-                text.setAttribute("name",carte.id+"editRep"+(nbBoutons));
-                text.setAttribute("class","editRep");
-                text.setAttribute("id",carte.id+"editRep"+(nbBoutons));
-                text.setAttribute("value","Texte");
-                text.setAttribute("oninput","maj("+prop.id+","+carte.id+")");
-            section.appendChild(text);
-            element.appendChild(section);
+            //Création des propriétés de la checkbox
+            label=document.createElement("label");
+            label.setAttribute("for",carte.id+"editRep"+(nbBoutons));
+            label.innerText="Réponse "+(nbBoutons+1);
+        section.appendChild(label);
+        section.appendChild(document.createTextNode( '\u00A0' ) );
+            text=document.createElement("input");
+            text.setAttribute("type","text");
+            text.setAttribute("name",carte.id+"editRep"+(nbBoutons));
+            text.setAttribute("class","editbtn");
+            text.setAttribute("id",carte.id+"editRep"+(nbBoutons));
+            text.setAttribute("value","Texte");
+            text.setAttribute("oninput","maj("+prop.id+","+carte.id+")");
+        section.appendChild(text);
+        section.appendChild(document.createTextNode( '\u00A0' ) );
+            color=document.createElement("input");
+            color.setAttribute("type","color");
+            color.setAttribute("name",carte.id+"editColor"+(nbBoutons));
+            color.setAttribute("class","editbtn");
+            color.setAttribute("id",carte.id+"editColor"+(nbBoutons));
+            color.setAttribute("value","#f08026");
+            color.setAttribute("oninput","maj("+prop.id+","+carte.id+")");
+            color.setAttribute("style","display:none")
+        section.appendChild(color); 
+        element.appendChild(section);
 
             //On recupere l'élement input text qu'on vient de créer
             var input = document.getElementById(carte.id+"editRep"+(nbBoutons));
     
             //On ajoute une case à cocher à la carte
-            var cacTemoin = carte.querySelector("input");
             zonereponse=carte.querySelector(".reponses");
                 secBoxLabel=document.createElement("section");
                 secBoxLabel.setAttribute("class","checkboxRep");
                     cac=document.createElement("input");
                     cac.setAttribute("type","checkbox");
-                    cac.setAttribute("class",cacTemoin.className);
+                    cac.setAttribute("id",carte.id+"editRep"+(nbBoutons));
+                    cac.setAttribute("class","BoutonReponseQCM");
                     cac.setAttribute("value","true");
                 secBoxLabel.appendChild(cac);
                 secBoxLabel.appendChild(document.createTextNode( '\u00A0' ) );
@@ -230,37 +249,106 @@ for (let i = 0; i < boutons.length; i++) {
                 secBoxLabel.appendChild(label);
             zonereponse.appendChild(secBoxLabel);
         }
-     maj(prop,carte);
+        prop.querySelector(".editNbRepMax").setAttribute("max",nbBoutons+1);//On fait plus 1 car on a recupéré le nombre de boutons avant d'en ajouter un
 }
-
-
 
 
 
 
     function suppRep(prop,carte){
         typereponse=prop.querySelectorAll('label')[1].textContent;
-
-        if (typereponse=="button"){
-            var inputs = carte.querySelectorAll("input[type=button]").length;
-            if (inputs>2){
+        var inputs = carte.querySelector(".reponses").childElementCount;
+        if (inputs<=2){
+            alert("Il faut au moins 2 réponses");
+        }
+        else{
+            if (typereponse=="button"){
                 prop.querySelectorAll(".btnsettings")[inputs-1].remove();
                 carte.querySelectorAll("input[type=button]")[inputs-1].remove();
             }
-            else{
-                alert("Il faut au moins 2 réponses");
-            }
-        }
-        else if (typereponse=="checkbox"){
-            var inputs = carte.querySelectorAll("input[type=checkbox]").length;
-            if (inputs>2){
+            else if (typereponse=="checkbox"){
                 prop.querySelectorAll(".btnsettings")[inputs-1].remove();
                 carte.querySelectorAll(".checkboxRep")[inputs-1].remove();
-            }
-            else{
-                alert("Il faut au moins 2 réponses");
+
+                //On met à jour le nombre de réponses max si le nombre de réponses max est supérieur
+                //au nombre de réponses genre si on a 3 réponses avec 3 réponses max et qu'on en supprime une on met le nombre de réponses max à 2
+                if (prop.querySelector(".editNbRepMax").value>inputs-1){
+                    prop.querySelector(".editNbRepMax").value=inputs-1;
+                }
             }
         }
-        maj(prop,carte);
+        nbBoutons=prop.querySelector(".reponses").childElementCount;
+        prop.querySelector(".editNbRepMax").setAttribute("max",nbBoutons); //On ajoute pas 1 car on a recupéré le nombre de boutons apres sa suppression
 
+            
     }
+
+
+
+function buttonToCheckBox(prop,carte){
+    //On display none les inputs color
+    var inputs = prop.querySelectorAll("input[type=color]");
+    for (var i = 0; i < inputs.length; i++) {
+        inputs[i].style.display="none";
+    }
+    var section=carte.querySelector(".reponses");
+    var boutons = section.querySelectorAll("input[type=button]");
+    for (var i = 0; i < boutons.length; i++) {
+        //On recupère le text du bouton pour le mettre dans le label
+        //on crée une nouvelle section de réponses avec un checkbox et un label
+        var secBox=document.createElement("section");
+        secBox.setAttribute("class","checkboxRep");
+        cac=document.createElement("input");
+        cac.setAttribute("type","checkbox");
+        cac.setAttribute("class","BoutonReponseQCM");
+        secBox.appendChild(cac);
+        secBox.appendChild(document.createTextNode( '\u00A0' ) );
+
+        label=document.createElement("label");
+        label.setAttribute("for",carte.id+"editRep"+i);
+        label.innerText=boutons[i].value;
+        secBox.appendChild(label);
+        section.appendChild(secBox);
+
+        prop.querySelectorAll('label')[1].textContent="checkbox";
+        //On supprime le bouton
+        boutons[i].remove();
+    }
+    //On ajoute un bouton suivant
+    var bouton=document.createElement("input");
+    bouton.setAttribute("type","button");
+    bouton.setAttribute("class","next");
+    bouton.setAttribute("value","Suivant");
+    bouton.setAttribute("onclick","next("+carte.id+")");
+    bouton.setAttribute("name",carte.id+"next");
+    carte.appendChild(bouton);
+    
+    
+}
+
+
+function checkBoxToButton(prop,carte){
+    //On display none les inputs color
+    var inputs = prop.querySelectorAll("input[type=color]");
+    for (var i = 0; i < inputs.length; i++) {
+        inputs[i].style.display="inline-block";
+    }
+    var section=carte.querySelector(".reponses");
+    var cac = section.querySelectorAll("input[type=checkbox]");
+    for (var i = 0; i < cac.length; i++) {
+        //On recupère le text du bouton pour le mettre dans le label
+        //on crée une nouvelle section de réponses avec un checkbox et un label
+        var bouton=document.createElement("input");
+        bouton.setAttribute("type","button");
+        bouton.setAttribute("class","buttonRep");
+        bouton.setAttribute("value",cac[i].nextSibling.nextSibling.textContent);
+        bouton.setAttribute("style","background-color:"+document.getElementById(carte.id+"editColor"+i).value);
+        section.appendChild(bouton);
+
+        prop.querySelectorAll('label')[1].textContent="button";
+        //On supprime le bouton
+        cac[i].parentNode.remove();
+    }
+    //On supprime le bouton suivant
+    carte.querySelector(".next").remove(); 
+}
