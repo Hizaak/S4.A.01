@@ -7,55 +7,42 @@ require_once "ReponseLibre.php";
 require_once "Etudiant.php";
 require_once "Main.php";
 
-function initArray(){
-    global $listEtud;
-    global $listPremAn;
-    global $listSecAn;
-    $listEtud = array();
-    $listPremAn = array();
-    $listSecAn = array();
-}
-
-function nbPremiereAnnee(){
-    global $listEtud;
-    $nbPremiereAnnee = 0;
-    foreach ($listEtud as $etudiant) {
-        if ($etudiant->getNiveau() == "1") {
-            $nbPremiereAnnee++;
+function separerEtud(&$listEtud,&$listPremAn,&$listSecAn){
+    for ($i = 0; $i < count($listEtud); $i++) {
+        if ($listEtud[$i]->getNiveau() == 1) {
+            $listPremAn[] = $listEtud[$i];
+        } else {
+            $listSecAn[] = $listEtud[$i];
         }
     }
-    return $nbPremiereAnnee;
+
 }
 
-function nbDeuxiemeAnnee(){
-    global $listEtud;
-    $nbDeuxiemeAnnee = 0;
-    foreach ($listEtud as $etudiant) {
-        if ($etudiant->getNiveau() == "2") {
-            $nbDeuxiemeAnnee++;
+function calculerDistanceReponses($repPremAn,$repSecAn){
+    $nbRepPremAn=count($repPremAn);
+    //on creer un nouvel array avec  tout les elements sauf le dernier des deuxieme annee
+    $nbRepSecAn=count($repSecAn); 
+    $DEUXversUN = 0;
+    for($i = 0; $i < $nbRepSecAn; $i++){
+        // Si la réponse de l'étudiant de 2ème année est dans la liste des réponses de l'étudiant de 1ère année
+        if(in_array($repSecAn[$i], $repPremAn)){
+            //on echo le debug
+            //print_r("La réponse ".$repSecAn[$i][0]." de l'étudiant de 2ème année est dans la liste des réponses de l'étudiant de 1ère année<br>");
+            $DEUXversUN += 1;
         }
     }
-    return $nbDeuxiemeAnnee;
-}
-
-function listerPremAn(){
-    for ($i = 0; $i < nbPremiereAnnee(); $i++) {
-        $listPremAn[] = new Etudiant("login", "1");
+    
+    $UNversDEUX = 0;
+    for($i = 0; $i < $nbRepPremAn; $i++){
+        // Si la réponse de l'étudiant de 1ère année est dans la liste des réponses de l'étudiant de 2ème année
+        if(in_array($repPremAn[$i], $repSecAn)){
+            //on echo le debug
+            //print_r("La réponse ".$repPremAn[$i][0]." de l'étudiant de 1ère année est dans la liste des réponses de l'étudiant de 2ème année<br>");
+            $UNversDEUX += 1;
+        }
     }
-}
+    return (($UNversDEUX/$nbRepPremAn)*($DEUXversUN/$nbRepSecAn));
 
-function listerSecAn(){
-    for ($i = 0; $i < nbDeuxiemeAnnee(); $i++) {
-        $listSecAn[] = new Etudiant("login", "2");
-    }
-}
-
-function nbQuestions(){
-    global $listEtud;
-    $nbQuestions = 0;
-    $lstRep = $listEtud[0]->getListeReponses();
-    $nbQuestions = count($lstRep);
-    return $nbQuestions;
 }
 
 ?>
