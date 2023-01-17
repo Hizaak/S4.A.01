@@ -163,7 +163,32 @@ for ($i = 0; $i < $nbFilleuls; $i++) {
     }
 }
 
-//On associe les filleuls aux parrains}
+//on affiche une matrice de résultat de la méthode hongroise en affichant null si c'est null
+$matMarque = appliquerMethodeHongroise($matriceScore, $max);
+echo "<br>Matrice marque : <br><br>";
+echo "<table>";
+echo "<tr>";
+echo "<td></td>";
+for ($i = 0; $i < $nbParrains; $i++) {
+    echo "<td>".$listSecAn[$i]->getLogin()."</td>";
+}
+echo "</tr>";
+for ($i = 0; $i < $nbFilleuls; $i++) {
+    echo "<tr>";
+    echo "<td>".$listPremAn[$i]->getLogin()."</td>";
+    for ($j = 0; $j < $nbParrains; $j++) {
+        if($matMarque[$i][$j]==2){
+            echo "<td>null</td>";
+        }else{
+            echo "<td>".$matMarque[$i][$j]."</td>";
+        }
+        
+    }
+    echo "</tr>";
+}
+echo "</table>";
+
+//On associe les filleuls aux parrains
 
 
 //Enregistrer les associations dans la base de données

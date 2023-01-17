@@ -4,7 +4,7 @@ function initMatriceMarquage($taille) {
     for ($i = 0; $i < $taille; $i++) {
         $matriceMarquage[$i] = array();
         for ($j = 0; $j < $taille; $j++) {
-            $matriceMarquage[$i][$j] = null;
+            $matriceMarquage[$i][$j] = 2;
         }
     }
     return $matriceMarquage;
@@ -98,7 +98,7 @@ function appliquerMethodeHongroise($matScores, $valMax) {
             for ($k = 0; $k < $taille; $k++) {
                 for ($l = 0; $l < $taille; $l++) {
                     if ($matriceMarquage[$k][$l] == 1) {
-                        $matriceMarquage[$k][$l] = null;
+                        $matriceMarquage[$k][$l] = 2;
                     }
                 }
             }
@@ -163,27 +163,17 @@ function appliquerMethodeHongroise($matScores, $valMax) {
                         $matScores[$i][$j] -= $valMin;
                     }
                 }
-                }
             }
-            for ($i = 0; $i < $taille; $i++) {
-                for ($j = 0; $j < $taille; $j++) {
-                    if (!$tabCacheL[$i] && !$tabCacheC[$j] && $matScores[$i][$j] == 0 && $matriceMarquage[$i][$j] == null) {
-                        $matriceMarquage[$i][$j] = 1;
-                    }
+        }
+        for ($i = 0; $i < $taille; $i++) {
+            for ($j = 0; $j < $taille; $j++) {
+                if (!$tabCacheL[$i] && !$tabCacheC[$j] && $matScores[$i][$j] == 0 && $matriceMarquage[$i][$j] == 2) {
+                    $matriceMarquage[$i][$j] = 1;
                 }
             }
         }
-        return $matriceMarquage;
-    }        
-    
-
-
-
-
-
-
-
-
-
+    }
+    return $matriceMarquage;
+}        
 
 ?>
