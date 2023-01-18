@@ -22,6 +22,12 @@ class ReponseLibre extends Reponse {
         public function setReponseLibre($reponseLibre) {
             $this->reponseLibre = $reponseLibre;
         }
+
+        //Méthodes
+
+        public function afficherReponse() {
+            echo $this->reponseLibre;
+        }
 }
 
 ?>

@@ -22,6 +22,15 @@ class ReponseQCM extends Reponse{
         public function setReponseQCM($reponseQCM) {
             $this->reponseQCM = $reponseQCM;
         }
+
+        //Méthodes
+
+        public function afficherReponse() {
+            for ($i = 0; $i < count($this->reponseQCM); $i++) {
+                echo $this->reponseQCM[$i];
+                echo " ";
+            }
+        }
 }
 
 ?>

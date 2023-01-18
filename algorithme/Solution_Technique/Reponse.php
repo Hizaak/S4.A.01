@@ -30,6 +30,10 @@ abstract class Reponse {
         $this->loginEtudiant = $loginEtudiant;
     }
 
+    //Méthodes
+
+    public abstract function afficherReponse();
+
 }
 
 ?>

@@ -1,7 +1,6 @@
 
 <?php
 
-require_once "Associer.php";
 require_once "ReponseQCM.php";
 require_once "ReponseLibre.php";
 require_once "Etudiant.php";
@@ -26,22 +25,31 @@ function calculerDistanceReponses($repPremAn,$repSecAn){
     for($i = 0; $i < $nbRepSecAn; $i++){
         // Si la réponse de l'étudiant de 2ème année est dans la liste des réponses de l'étudiant de 1ère année
         if(in_array($repSecAn[$i], $repPremAn)){
-            //on echo le debug
-            //print_r("La réponse ".$repSecAn[$i][0]." de l'étudiant de 2ème année est dans la liste des réponses de l'étudiant de 1ère année<br>");
+            // //on echo le debug
+            // print_r("La réponse ".$repSecAn[$i]." de l'étudiant de 2ème année est dans la liste des réponses de l'étudiant de 1ère année<br>");
             $DEUXversUN += 1;
         }
+        // else{
+        //     print_r("La réponse ".$repSecAn[$i]." de l'étudiant de 2ème année n'est pas dans la liste des réponses de l'étudiant de 1ère année<br>");
+        // }
     }
     
     $UNversDEUX = 0;
     for($i = 0; $i < $nbRepPremAn; $i++){
         // Si la réponse de l'étudiant de 1ère année est dans la liste des réponses de l'étudiant de 2ème année
         if(in_array($repPremAn[$i], $repSecAn)){
-            //on echo le debug
-            //print_r("La réponse ".$repPremAn[$i][0]." de l'étudiant de 1ère année est dans la liste des réponses de l'étudiant de 2ème année<br>");
+            // //on echo le debug
+            // print_r("La réponse ".$repPremAn[$i]." de l'étudiant de 1ère année est dans la liste des réponses de l'étudiant de 2ème année<br>");
             $UNversDEUX += 1;
         }
+        // else{
+        //     print_r("La réponse ".$repPremAn[$i]." de l'étudiant de 1ère année n'est pas dans la liste des réponses de l'étudiant de 2ème année<br>");
+        // }
     }
-    return (($UNversDEUX/$nbRepPremAn)*($DEUXversUN/$nbRepSecAn));
+
+    $distance = (($UNversDEUX/$nbRepPremAn)*($DEUXversUN/$nbRepSecAn));
+    // echo $distance."<br>";
+    return $distance;
 
 }
 
