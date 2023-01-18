@@ -59,7 +59,7 @@ $listEtud[5]->ajouterReponse(new ReponseQCM(4, "Nicolas", ["oui"])); //rep4 de N
 for ($i = 0; $i < count($listEtud); $i++) {
     echo "Etudiant : ".$listEtud[$i]->getLogin()."<br>";
     for ($j = 0; $j < count($listEtud[$i]->getListeReponses()); $j++) {
-        echo "Reponse : ".$listEtud[$i]->getListeReponses()[$j]->getReponseQCM()[0]."<br>";
+        echo $listEtud[$i]->getListeReponses()[$j]->afficherReponse()."<br>";
     }
     echo "<br>";
 }
