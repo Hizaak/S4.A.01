@@ -23,7 +23,7 @@ $listEtud[] = new Etudiant("Nicolas", 2); //etud de 2annee
 //TO DO
 
 //BASTIEN a répondu à 3 questions
-$listEtud[0]->ajouterReponse(new ReponseQCM(1, "Bastien", ["oui"])); //rep1 de Bastien
+$listEtud[0]->ajouterReponse(new ReponseQCM(1, "Bastien", ["oui", "non"])); //rep1 de Bastien
 $listEtud[0]->ajouterReponse(new ReponseQCM(2, "Bastien", ["non"])); //rep2 de Bastien
 $listEtud[0]->ajouterReponse(new ReponseQCM(3, "Bastien", ["oui"])); //rep3 de Bastien
 
@@ -36,7 +36,7 @@ $listEtud[1]->ajouterReponse(new ReponseQCM(4, "Remi", ["oui"])); //rep3 de Remi
 //ALEXANDRE a répondu à 3 questions
 $listEtud[2]->ajouterReponse(new ReponseQCM(1, "Alexandre", ["oui"])); //rep1 de Alexandre
 $listEtud[2]->ajouterReponse(new ReponseQCM(2, "Alexandre", ["oui"])); //rep2 de Alexandre
-$listEtud[2]->ajouterReponse(new ReponseQCM(3, "Alexandre", ["non"])); //rep2 de Alexandre
+$listEtud[2]->ajouterReponse(new ReponseQCM(3, "Alexandre", ["non", "oui"])); //rep2 de Alexandre
 
 //JULIEN a répondu à 4 questions
 $listEtud[3]->ajouterReponse(new ReponseQCM(1, "Julien", ["non"])); //rep1 de Julien
@@ -99,9 +99,7 @@ for ($i = 0; $i < $nbFilleuls; $i++) {
 for ($i = 0; $i < $nbFilleuls; $i++) {
     for ($j = 0; $j < $nbParrains; $j++) {
         for ($k = 0; $k < $nbQuestionsPrem; $k++) {
-            if ($listPremAn[$i]->getListeReponses()[$k]->getReponseQCM() == $listSecAn[$j]->getListeReponses()[$k]->getReponseQCM()) {
-                $matriceScore[$i][$j] -=calculerDistanceReponses($listPremAn[$i]->getListeReponses()[$k]->getReponseQCM(),$listSecAn[$j]->getListeReponses()[$k]->getReponseQCM());
-            }
+            $matriceScore[$i][$j] -=calculerDistanceReponses($listPremAn[$i]->getListeReponses()[$k]->getReponseQCM(),$listSecAn[$j]->getListeReponses()[$k]->getReponseQCM());
         }
     }
 }
