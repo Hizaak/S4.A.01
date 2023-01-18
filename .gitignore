@@ -43,3 +43,5 @@ main
 # Fichiers d'authentification
 baseDeDonnees.php
 *.pyc
+
+.idea
