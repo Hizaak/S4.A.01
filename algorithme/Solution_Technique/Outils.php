@@ -1,7 +1,6 @@
 
 <?php
 
-require_once "Associer.php";
 require_once "ReponseQCM.php";
 require_once "ReponseLibre.php";
 require_once "Etudiant.php";

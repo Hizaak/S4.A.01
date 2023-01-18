@@ -1,8 +1,9 @@
 
 <?php
 
-require_once "Associer.php";
 require_once "hongroise.php";
+require_once "Affichage.php";
+require_once "Outils.php";
 
 //Récuperer les étudiants dans la base de données
 
@@ -56,15 +57,7 @@ $listEtud[5]->ajouterReponse(new ReponseQCM(4, "Nicolas", ["oui"])); //rep4 de N
 
 
 //Afficher les réponses des étudiants
-for ($i = 0; $i < count($listEtud); $i++) {
-    echo "Etudiant : ".$listEtud[$i]->getLogin()."<br>";
-    for ($j = 0; $j < count($listEtud[$i]->getListeReponses()); $j++) {
-        echo $listEtud[$i]->getListeReponses()[$j]->afficherReponse()."<br>";
-    }
-    echo "<br>";
-}
-
-echo "<br>";
+afficherReponses($listEtud);
 
 //On sépare les étudiants en deux listes : les premières années et les deuxièmes années
 
@@ -72,23 +65,13 @@ $listPremAn=array();
 $listSecAn=array();
 separerEtud($listEtud,$listPremAn,$listSecAn);
 //On affiche les deux listes pour vérifier (seulement leurs login)
-for ($i = 0; $i < count($listPremAn); $i++) {
-    echo "Premiere annee : ".$listPremAn[$i]->getLogin()."<br>";
-}
-echo "<br>";
-
-for ($i = 0; $i < count($listSecAn); $i++) {
-    echo "Deuxieme annee : ".$listSecAn[$i]->getLogin()."<br>";
-}
-
-
-echo "<br>";
+afficherEtudiants($listPremAn, $listSecAn);
 
 //Supprimer les parrains qui ne veulent pas de filleul
 //On part du principe que la dernière question des deuxieme annee est la question sur le fait de vouloir un filleul ou non
 foreach($listSecAn as $etud){
     if($etud->getListeReponses()[count($etud->getListeReponses())-1]->getReponseQCM()==["non"]){
-        echo $etud->getLogin()." ne veut pas de filleul<br>";
+        afficherNoFilleul($etud);
         //On pop l'etudiant $etud de la liste $listSecAn
         $key = array_search($etud, $listSecAn);
         array_splice($listSecAn, $key, 1);
@@ -100,7 +83,7 @@ foreach($listSecAn as $etud){
 //On initialise la matrice de score
 $nbParrains = count($listSecAn);
 $nbFilleuls = count($listPremAn);
-echo "nbParrains : ".$nbParrains."<br>";
+afficherNbParrains($nbParrains);
 $matriceScore = array();
 $nbQuestionsPrem=count($listPremAn[0]->getListeReponses());
 $scoreMax = $nbQuestionsPrem;
@@ -130,24 +113,7 @@ for ($i = 0; $i < $nbFilleuls; $i++) {
     }
 }
 
-echo "<br>Matrice de score : <br><br>";
-//On affiche la matrice score de facon lissible avec en ligne les filleuls et en colonne les parrains en affichant les collone et lignes
-echo "<table>";
-echo "<tr>";
-echo "<td></td>";
-for ($i = 0; $i < $nbParrains; $i++) {
-    echo "<td>".$listSecAn[$i]->getLogin()."</td>";
-}
-echo "</tr>";
-for ($i = 0; $i < $nbFilleuls; $i++) {
-    echo "<tr>";
-    echo "<td>".$listPremAn[$i]->getLogin()."</td>";
-    for ($j = 0; $j < $nbParrains; $j++) {
-        echo "<td>".$matriceScore[$i][$j]."</td>";
-    }
-    echo "</tr>";
-}
-echo "</table>";
+afficherMatScore($matriceScore, $listPremAn, $listSecAn, $nbFilleuls, $nbParrains);
 
 //On associe les filleuls aux parrains
 //On recupere la valeur maximale de la matrice de score
@@ -162,28 +128,7 @@ for ($i = 0; $i < $nbFilleuls; $i++) {
 
 //on affiche une matrice de résultat de la méthode hongroise en affichant null si c'est null
 $matMarque = appliquerMethodeHongroise($matriceScore, $max);
-echo "<br>Matrice marque : <br><br>";
-echo "<table>";
-echo "<tr>";
-echo "<td></td>";
-for ($i = 0; $i < $nbParrains; $i++) {
-    echo "<td>".$listSecAn[$i]->getLogin()."</td>";
-}
-echo "</tr>";
-for ($i = 0; $i < $nbFilleuls; $i++) {
-    echo "<tr>";
-    echo "<td>".$listPremAn[$i]->getLogin()."</td>";
-    for ($j = 0; $j < $nbParrains; $j++) {
-        if($matMarque[$i][$j]==2){
-            echo "<td>null</td>";
-        }else{
-            echo "<td>".$matMarque[$i][$j]."</td>";
-        }
-        
-    }
-    echo "</tr>";
-}
-echo "</table>";
+afficherMatMarque($matMarque, $listPremAn, $listSecAn, $nbFilleuls, $nbParrains);
 
 //On associe les filleuls aux parrains
 
