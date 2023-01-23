@@ -5,7 +5,7 @@ require_once "Utilisateur.php";
  * @brief Classe Etudiant héritant de la classe Utilisateur
  * @author TauntiiO
  * @version 1.2
- * date : 2023-01-14
+ * date 2023-01-14
  */
 class Etudiant extends Utilisateur {
     
