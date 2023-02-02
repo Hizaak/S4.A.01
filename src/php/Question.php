@@ -25,7 +25,7 @@ abstract class Question{
 
 
     static public function db_get_all($database){
-        $req=$database->prepare("SELECT ID,TYPEQUESTION FROM Question");
+        $req=$database->prepare("SELECT ID,TYPEQUESTION FROM question");
         $req->execute();
         $listQuestions=array();
         while($resultat=$req->fetch()){
@@ -141,11 +141,11 @@ class Question_QCM extends Question{
     }
 
     static public function db_get($database,$id){
-        $req=$database->prepare("SELECT * FROM Question WHERE ID=:id");
+        $req=$database->prepare("SELECT * FROM question WHERE ID=:id");
         $req->execute(array("id"=>$id));
         $resultat=$req->fetch();
         if($resultat){
-            $req=$database->prepare("SELECT * FROM Proposition WHERE ID_QUESTION=:id_question");
+            $req=$database->prepare("SELECT * FROM proposition WHERE ID_QUESTION=:id_question");
             $req->execute(array("id_question"=>$id));
             $resultat2=$req->fetchAll();
             $listPropositions=array();
@@ -202,16 +202,16 @@ class Question_QCM extends Question{
 
     public function db_save($database){
         //On regarde si une carte du meme id existe deja dans la base de donnee
-        $req=$database->prepare("SELECT * FROM Question WHERE id=:id");
+        $req=$database->prepare("SELECT * FROM question WHERE id=:id");
         $req->execute(array("id"=>$this->get_id()));
         $resultat=$req->fetch();
         if(!$resultat){
             //Si elle n'existe pas on la cree
-            $req=$database->prepare("INSERT INTO Question (id,intitule,id_formulaire,image,visibilite,typequestion,nbreponse)
+            $req=$database->prepare("INSERT INTO question (id,intitule,id_formulaire,image,visibilite,typequestion,nbreponse)
                                     VALUES (:id,:intitule,:id_formulaire,:image,:visibilite,:typequestion,:nbreponse)");}
         else{
             //Si elle existe on la modifie
-            $req=$database->prepare("UPDATE Question SET intitule=:intitule,id_formulaire=:id_formulaire,image=:image,visibilite=:visibilite,typequestion=:typequestion,nbreponse=:nbreponse WHERE id=:id");
+            $req=$database->prepare("UPDATE question SET intitule=:intitule,id_formulaire=:id_formulaire,image=:image,visibilite=:visibilite,typequestion=:typequestion,nbreponse=:nbreponse WHERE id=:id");
         }
         $req->execute(array(
             "id"=>$this->get_id(),
@@ -249,7 +249,7 @@ class Question_Libre extends Question{
     }
 
     static public function db_get($database,$id){
-        $req=$database->prepare("SELECT * FROM Question WHERE ID=:id");
+        $req=$database->prepare("SELECT * FROM question WHERE ID=:id");
         $req->execute(array("id"=>$id));
         $resultat=$req->fetch();
         if($resultat){
@@ -289,17 +289,17 @@ class Question_Libre extends Question{
 
     public function db_save($database){
         //On regarde si une carte du meme id existe deja dans la base de donnee
-        $req=$database->prepare("SELECT * FROM Question WHERE id=:id");
+        $req=$database->prepare("SELECT * FROM question WHERE id=:id");
         $req->execute(array("id"=>$this->get_id()));
         $resultat=$req->fetch();
         if(!$resultat){
             //Si elle n'existe pas on la cree
-            $req=$database->prepare("INSERT INTO Question (id,intitule,id_formulaire,image,visibilite,typequestion,nbCaractereMax)
+            $req=$database->prepare("INSERT INTO question (id,intitule,id_formulaire,image,visibilite,typequestion,nbCaractereMax)
                                     VALUES (:id,:intitule,:id_formulaire,:image,:visibilite,:typequestion,:nbCaractereMax)");}
 
         else{
             //Si elle existe on la modifie
-            $req=$database->prepare("UPDATE Question SET intitule=:intitule,id_formulaire=:id_formulaire,image=:image,visibilite=:visibilite,typequestion=:typequestion,nbCaractereMax=:nbCaractereMax WHERE id=:id");
+            $req=$database->prepare("UPDATE question SET intitule=:intitule,id_formulaire=:id_formulaire,image=:image,visibilite=:visibilite,typequestion=:typequestion,nbCaractereMax=:nbCaractereMax WHERE id=:id");
         }
         $req->execute(array(
             "id"=>$this->get_id(),

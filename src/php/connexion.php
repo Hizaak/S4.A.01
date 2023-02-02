@@ -73,7 +73,7 @@ if (isset($_SESSION['login'])) {
 }
 if (isset($_POST['login']) && isset($_POST['password'])) {
     //on verifie que le mail est bien dans la base de données
-    $req = $database->prepare('SELECT * FROM Utilisateur WHERE login = ?');
+    $req = $database->prepare('SELECT * FROM utilisateur WHERE login = ?');
     $req->execute(array($_POST['login']));
     $resultat = $req->fetch();
 
