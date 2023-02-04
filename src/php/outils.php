@@ -52,7 +52,7 @@ function envoyerUnMail($login, $sujet, $message){
 function verifUtilisateur($user){
     //retourne les informations de l'utilisateur
     global $database;
-    $req = $database->prepare('SELECT * FROM Utilisateur WHERE login = ?');
+    $req = $database->prepare('SELECT * FROM utilisateur WHERE login = ?');
     $req->execute(array($user));
     return $req->fetch();
 }
