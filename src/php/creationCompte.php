@@ -98,7 +98,7 @@ if (isset($_POST['login']) && isset($_POST['password']) && isset($_POST['conf-pa
             }
         }
         else{
-            error("Ce compte n'existe pas");
+            error("Cette adresse mail n'existe pas");
             }
     }
     else{
