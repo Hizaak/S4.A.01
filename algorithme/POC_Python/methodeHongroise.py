@@ -21,7 +21,7 @@ def appliquerMethodeHongroise(matScores, valMax):
     tabCacheC = initTabCache(taille)                    # Idem
         
     # Soustraire la valeur minimale à chaque ligne
-    for i in range(taille):
+    for i in range(taille): 
         valMin = matScores[i][0]
         for j in range(taille):
             if matScores[i][j] < valMin:
@@ -205,6 +205,6 @@ def appliquerMethodeHongroise(matScores, valMax):
                         matScores[i][j]+=valMin
                     # On soustrait la valeur minimale découverte à toutes les colonnes découvertes
                     if tabCacheC[i]==False:
-                            matScores[j][i]-=valMin          
+                        matScores[j][i]-=valMin          
                         
     return matriceMarquage
