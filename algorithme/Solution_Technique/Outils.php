@@ -5,7 +5,22 @@ require_once "ReponseQCM.php";
 require_once "ReponseLibre.php";
 require_once "Etudiant.php";
 require_once "Main.php";
+/**
+ * @param type $listEtud
+ * @param type $listPremAn
+ * @param type $listSecAn
+ * @brief Ficher contenant les fonctions de calculs
+ */
 
+
+/**
+* @brief Fonction qui separe les étudiants en deux listes : 1ère année et 2ème année
+*  - Passage par référence de la liste d'étudiants, de la liste des étudiants de 1ère année et de la liste des étudiants de 2ème année
+*  - Le resultat est stocké dans les tableau $listPremAn et $listSecAn
+* @param type $listEtud
+* @param type $repPremAn
+* @param type $repSecAn
+*/
 function separerEtud(&$listEtud,&$listPremAn,&$listSecAn){
     for ($i = 0; $i < count($listEtud); $i++) {
         if ($listEtud[$i]->getNiveau() == 1) {
@@ -16,6 +31,14 @@ function separerEtud(&$listEtud,&$listPremAn,&$listSecAn){
     }
 
 }
+/**
+ * @brief Fonction qui calcule la distance entre les réponses des étudiants de 1ère année et de 2ème année
+ * - Passage de la liste des étudiants de 1ère année et de la liste des étudiants de 2ème année
+ * @param type $repPremAn
+ * @param type $repSecAn
+ * @return nt $distance 
+ * @bug on arrive pas à faire un passage par référence des deux tableaux
+ */
 
 function calculerDistanceReponses($repPremAn,$repSecAn){
     $nbRepPremAn=count($repPremAn);
@@ -25,30 +48,20 @@ function calculerDistanceReponses($repPremAn,$repSecAn){
     for($i = 0; $i < $nbRepSecAn; $i++){
         // Si la réponse de l'étudiant de 2ème année est dans la liste des réponses de l'étudiant de 1ère année
         if(in_array($repSecAn[$i], $repPremAn)){
-            // //on echo le debug
-            // print_r("La réponse ".$repSecAn[$i]." de l'étudiant de 2ème année est dans la liste des réponses de l'étudiant de 1ère année<br>");
             $DEUXversUN += 1;
         }
-        // else{
-        //     print_r("La réponse ".$repSecAn[$i]." de l'étudiant de 2ème année n'est pas dans la liste des réponses de l'étudiant de 1ère année<br>");
-        // }
     }
     
     $UNversDEUX = 0;
     for($i = 0; $i < $nbRepPremAn; $i++){
         // Si la réponse de l'étudiant de 1ère année est dans la liste des réponses de l'étudiant de 2ème année
         if(in_array($repPremAn[$i], $repSecAn)){
-            // //on echo le debug
-            // print_r("La réponse ".$repPremAn[$i]." de l'étudiant de 1ère année est dans la liste des réponses de l'étudiant de 2ème année<br>");
             $UNversDEUX += 1;
         }
-        // else{
-        //     print_r("La réponse ".$repPremAn[$i]." de l'étudiant de 1ère année n'est pas dans la liste des réponses de l'étudiant de 2ème année<br>");
-        // }
+
     }
 
     $distance = (($UNversDEUX/$nbRepPremAn)*($DEUXversUN/$nbRepSecAn));
-    // echo $distance."<br>";
     return $distance;
 
 }
