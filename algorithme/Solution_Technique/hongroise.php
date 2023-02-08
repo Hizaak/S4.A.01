@@ -23,6 +23,8 @@ function initTabCache($taille) {
 
 function appliquerMethodeHongroise($matScores, $valMax) {
 
+    $matScores = [[466,566,383,483,383,483,383],[350,550,400,500,400,500,400],[500,300,500,400,500,400,500],[500,366,433,333,433,333,433],[300,400,500,400,500,400,500],[450,250,600,500,600,500,600],[500,350,475,375,475,375,475]];
+    $valMax = 600;
     $taille = count($matScores);
     $nbSelec = 0;
     $matriceMarquage = initMatriceMarquage($taille);
@@ -66,6 +68,8 @@ function appliquerMethodeHongroise($matScores, $valMax) {
 
     // Tant que tous les étudiants ne sont pas sélectionnés
     while (true) {
+
+        echo "iteration<br><br>";
 
         // Marquer les zéros
         $newZeroSelec = false;
@@ -148,100 +152,166 @@ function appliquerMethodeHongroise($matScores, $valMax) {
                 }
             }
         }
+
+        //afficher les lignes et colonnes cachées
+        echo "Lignes cachées : ";
+        for ($i = 0; $i < $taille; $i++) {
+            if ($tabCacheL[$i] == true) {
+                echo "1";
+            }
+            else {
+                echo "0";
+            }
+        }
+        echo "<br>";
+        echo "Colonnes cachées : ";
+        for ($i = 0; $i < $taille; $i++) {
+            if ($tabCacheC[$i] == true) {
+                echo "1";
+            }
+            else {
+                echo "0";
+            }
+        }
+        echo "<br><br>";
     
         //marquege des primes
-        $nbMaxPasSelec = False;
-        $i = 0;
-        while ($i < $taille) {
-            $j = 0;
-            while ($j < $taille) {
-                if ($matScores[$i][$j]==0 and $matriceMarquage[$i][$j]!=0 and $tabCacheL[$i]==false and $tabCacheC[$j]==false) {
-                    $matriceMarquage[$i][$j] = 1;
+        $nbMaxPasSelec = false;
+        do {
+            $rotation = false;
+            $i = 0;
+            while ($i < $taille) {
+                $j = 0;
+                while ($j < $taille) {
+                    if ($matScores[$i][$j]==0 and $matriceMarquage[$i][$j]!=0 and $tabCacheL[$i]==false and $tabCacheC[$j]==false) {
+                        $matriceMarquage[$i][$j] = 1;
 
-                    //vérifier s'il y a un zéro sélectionné sur la ligne
-                    $k = 0;
-                    $aUnSelecL = false;
-                    while ($k < $taille) {
-                        if ($matriceMarquage[$i][$k] == 0) {
-                            $aUnSelecL = true;
+                        //vérifier s'il y a un zéro sélectionné sur la ligne
+                        $k = 0;
+                        $aUnSelecL = false;
+                        while ($k < $taille) {
+                            if ($matriceMarquage[$i][$k] == 0) {
+                                $aUnSelecL = true;
+                                break;
+                            }
+                            $k++;
+                        }
+
+                        // cacher la ligne et découvre la colonne du zéro sélectionné
+                        if ($aUnSelecL == true) {
+                            $tabCacheL[$i] = true;
+                            $tabCacheC[$k] = false;
+                            $rotation = true;
                             break;
                         }
-                        $k++;
-                    }
 
-                    // cacher la ligne et découvre la colonne du zéro sélectionné
-                    if ($aUnSelecL == true) {
-                        $tabCacheL[$i] = true;
-                        $tabCacheC[$k] = false;
-                        break;
+                        //on a pas sélectionné le nombre max de zéros
+                        else {
+                            $nbMaxPasSelec = true;
+                            break;
+                        }
                     }
-
-                    //on a pas sélectionné le nombre max de zéros
-                    else {
-                        $nbMaxPasSelec = True;
-                        break;
-                    }
+                    $j++;
                 }
-                $j++;
+                if ($nbMaxPasSelec == true) {
+                    break;
+                }
+                $i++;
             }
-            if ($nbMaxPasSelec == True) {
+            if ($nbMaxPasSelec == true) {
                 break;
             }
-            $i++;
+        } while ($rotation == true);
+
+        //afficher les lignes et colonnes cachées
+        echo "Lignes cachées : ";
+        for ($p = 0; $p < $taille; $p++) {
+            if ($tabCacheL[$p] == true) {
+                echo "1";
+            }
+            else {
+                echo "0";
+            }
         }
+        echo "<br>";
+        echo "Colonnes cachées : ";
+        for ($o = 0; $o < $taille; $o++) {
+            if ($tabCacheC[$o] == true) {
+                echo "1";
+            }
+            else {
+                echo "0";
+            }
+        }
+        echo "<br><br>";
         
-        echo "iteration<br><br>";
         afficherMat($matScores);
         echo "<br><br>";
         afficherMat($matriceMarquage);
         echo "<br><br>";
+        if ($nbMaxPasSelec == true) {
+            echo "On a pas sélectionné le nombre max de zéros";
+        }
+        else {
+            echo "On a sélectionné le nombre max de zéros";
+        }
 
         // On sélectionne le nombre max de zéros
-        if ($nbMaxPasSelec == True) {
+        if ($nbMaxPasSelec == true) {
             $z = [];
             $z[] = [$i, $j];
             $i=1;
             $finSuite = false;
-            while (true) {
+            while ($i<=$taille+1) {
                 
-                // On ajoute à la suite z le zéro sélectionné de la colonne de z[i-1] (soit z[i-1][1])) 
                 $j=0;
-                while (true){
-                    if ($matriceMarquage[$j][$z[$i-1][1]]==0) {
-                        $z[] = [$j, $z[$i-1][1]];
-                        break;
+                while ($j<=$taille) {
+
+                    //afficher la suite z
+                    echo "Suite z : ";
+                    for ($o = 0; $o < count($z); $o++) {
+                        echo "(".$z[$o][0].",".$z[$o][1].")";
+                    }
+                    echo "<br><br>";
+
+                    if ($i%2==0) {
+                        if ($matriceMarquage[$z[$i-1][0]][$j]==1) {
+                            $z[] = [$z[$i-1][0], $j];
+                            break;
+                        }
+                    }
+                    else {
+                        if ($matriceMarquage[$j][$z[$i-1][1]]==0) {
+                            $z[] = [$j, $z[$i-1][1]];
+                            break;
+                        }
+                        else if ($j>= $taille and $matriceMarquage[$j][$z[$i-1][1]]!=0) {
+                            $finSuite = true;
+                            break;
+                        }
                     }
                     $j++;
-                    if ($j==$taille) {
-                        $finSuite = true;
-                        break;
-                    }
                 }
-
-                // On ajoute à la suite z le 0 marqué d'un prime dans la ligne de z[i-1] (soit z[i-1][0])
-                $j=0;
-                while (true){
-                    if ($matriceMarquage[$z[$i][0]][$j]==1) {
-                        $z[] = [$z[$i][0], $j];
-                        break;
-                    }
-                    $j++;
-                    if ($j==$taille) {
-                        $finSuite = true;
-                        break;
-                    }
-                }
-
                 // On a trouvé la suite
                 if ($finSuite) {
                     break;
                 }
-
                 $i++;
             }
 
+            //afficher la suite z
+            echo "Suite z : ";
+            for ($o = 0; $o < count($z); $o++) {
+                echo "(".$z[$o][0].",".$z[$o][1].")";
+            }
+            echo "<br><br>";
+
             //on démarque les primes et sélectionne les zéros
             for ($i = 0; $i < count($z); $i++) {
+                
+                echo "<br><br>";
+                afficherMat($matriceMarquage);
+                
                 if ($i%2==0) {
                     $matriceMarquage[$z[$i][0]][$z[$i][1]] = 0;
                 }
@@ -292,6 +362,15 @@ function appliquerMethodeHongroise($matScores, $valMax) {
         }
     }
 
+    // On affiche la matrice marquage sans utiliser affciehrMat
+    echo "<br><br>";
+    for ($i = 0; $i < $taille; $i++) {
+        for ($j = 0; $j < $taille; $j++) {
+            echo $matriceMarquage[$i][$j]." ";
+        }
+        echo "<br>";
+    }
+    
     return $matriceMarquage;
 }        
 
