@@ -23,8 +23,6 @@ function initTabCache($taille) {
 
 function appliquerMethodeHongroise($matScores, $valMax) {
 
-    $matScores = [[466,566,383,483,383,483,383],[350,550,400,500,400,500,400],[500,300,500,400,500,400,500],[500,366,433,333,433,333,433],[300,400,500,400,500,400,500],[450,250,600,500,600,500,600],[500,350,475,375,475,375,475]];
-    $valMax = 600;
     $taille = count($matScores);
     $nbSelec = 0;
     $matriceMarquage = initMatriceMarquage($taille);
@@ -175,12 +173,17 @@ function appliquerMethodeHongroise($matScores, $valMax) {
         }
         echo "<br><br>";
     
-        //marquege des primes
+        //marquage des primes
         $nbMaxPasSelec = false;
         do {
+            
             $rotation = false;
+
+            // parcourir la matrice
             $i = 0;
             while ($i < $taille) {
+
+                // parcourir une ligne
                 $j = 0;
                 while ($j < $taille) {
                     if ($matScores[$i][$j]==0 and $matriceMarquage[$i][$j]!=0 and $tabCacheL[$i]==false and $tabCacheC[$j]==false) {
@@ -255,9 +258,13 @@ function appliquerMethodeHongroise($matScores, $valMax) {
         else {
             echo "On a sélectionné le nombre max de zéros";
         }
+        echo "<br><br>";
 
         // On sélectionne le nombre max de zéros
         if ($nbMaxPasSelec == true) {
+
+            echo "On sélectionne le nombre max de zéros<br><br>";
+
             $z = [];
             $z[] = [$i, $j];
             $i=1;
@@ -285,7 +292,7 @@ function appliquerMethodeHongroise($matScores, $valMax) {
                             $z[] = [$j, $z[$i-1][1]];
                             break;
                         }
-                        else if ($j>= $taille and $matriceMarquage[$j][$z[$i-1][1]]!=0) {
+                        else if ($j >= $taille-1) {
                             $finSuite = true;
                             break;
                         }
@@ -334,6 +341,8 @@ function appliquerMethodeHongroise($matScores, $valMax) {
 
         // Opérations avec l'élément libre le plus petit
         else {
+
+            echo "On fait les opérations avec l'élément libre le plus petit<br><br>";
 
             // On trouve l'élément libre le plus petit
             $valMin = $valMax;
