@@ -49,6 +49,12 @@ h3 {
     color: var(--title-text-color);
 }
 
+button
+{
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+}
+
 p {
     font-family: sans-serif;
     font-size: 1em;
