@@ -36,9 +36,9 @@ if (!estConnecter()){
 <main>
 <?php
 
-$etatForm = 'reponduOuvert';        //Variable temporaire qui permet de selectionner
+$etatForm = 'ouvert';        //Variable temporaire qui permet de selectionner
 
-switch($etatForm)           //TODO : A changer en fonction de la variable indiquant l'état du questionnaire
+switch($etatForm)               //TODO : A changer en fonction de la variable indiquant l'état du questionnaire
     {
     case 'inexistant':          //TODO : A adapter
         echo"<div id='inexistant'>
@@ -54,15 +54,25 @@ switch($etatForm)           //TODO : A changer en fonction de la variable indiqu
             </div>";
         break;
 
+    case 'fini':           //TODO : A adapter
+        echo"<div id='ferme'>
+                <h2>Merci d'avoir répondu au<br>formulaire !</h2>
+                <button href='#'>Accéder aux résultats</button>
+            </div>";
+        break;
+
     case 'reponduOuvert':   //TODO : A adapter
         echo"<div id='ferme'>
                 <h2>Merci d'avoir répondu au<br>formulaire !</h2>
-                <button>Modifier ma réponse</button>
+                <button href='#'>Modifier ma réponse</button>
             </div>";
         break;
 
     case 'ouvert':          //TODO : A adapter
-        echo'Personne par ici';
+        echo"<div id='ferme'>
+                <h2>Merci d'avoir répondu au<br>formulaire !</h2>
+                <button href='#'>Modifier ma réponse</button>
+            </div>";
         break;
 }
 
