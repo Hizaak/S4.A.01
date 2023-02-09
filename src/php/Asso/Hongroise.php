@@ -1,7 +1,5 @@
 <?php
 
-require_once "Affichage.php";
-
 function initMatriceMarquage($taille) {
     $matriceMarquage = array();
     for ($i = 0; $i < $taille; $i++) {
@@ -29,9 +27,6 @@ function appliquerMethodeHongroise($matScores, $valMax) {
     $tabCacheL = initTabCache($taille);
     $tabCacheC = initTabCache($taille);
 
-    afficherMat($matScores);
-    echo "<br><br>";
-
     //soustraire la valeur minimale de chaque ligne à celle-ci
     for ($i = 0; $i < $taille; $i++) {
         $valMin = $matScores[$i][0];
@@ -44,9 +39,6 @@ function appliquerMethodeHongroise($matScores, $valMax) {
             $matScores[$i][$j] -= $valMin;
         }
     }
-
-    afficherMat($matScores);
-    echo "<br><br>";
 
     //idem à chaque colonne
     for ($i = 0; $i < $taille; $i++) {
@@ -61,13 +53,8 @@ function appliquerMethodeHongroise($matScores, $valMax) {
         }
     }
 
-    afficherMat($matScores);
-    echo "<br><br>";
-
     // Tant que tous les étudiants ne sont pas sélectionnés
     while (true) {
-
-        echo "iteration<br><br>";
 
         // Marquer les zéros
         $newZeroSelec = false;
@@ -150,28 +137,6 @@ function appliquerMethodeHongroise($matScores, $valMax) {
                 }
             }
         }
-
-        //afficher les lignes et colonnes cachées
-        echo "Lignes cachées : ";
-        for ($i = 0; $i < $taille; $i++) {
-            if ($tabCacheL[$i] == true) {
-                echo "1";
-            }
-            else {
-                echo "0";
-            }
-        }
-        echo "<br>";
-        echo "Colonnes cachées : ";
-        for ($i = 0; $i < $taille; $i++) {
-            if ($tabCacheC[$i] == true) {
-                echo "1";
-            }
-            else {
-                echo "0";
-            }
-        }
-        echo "<br><br>";
     
         //marquage des primes
         $nbMaxPasSelec = false;
@@ -226,44 +191,8 @@ function appliquerMethodeHongroise($matScores, $valMax) {
             }
         } while ($rotation == true);
 
-        //afficher les lignes et colonnes cachées
-        echo "Lignes cachées : ";
-        for ($p = 0; $p < $taille; $p++) {
-            if ($tabCacheL[$p] == true) {
-                echo "1";
-            }
-            else {
-                echo "0";
-            }
-        }
-        echo "<br>";
-        echo "Colonnes cachées : ";
-        for ($o = 0; $o < $taille; $o++) {
-            if ($tabCacheC[$o] == true) {
-                echo "1";
-            }
-            else {
-                echo "0";
-            }
-        }
-        echo "<br><br>";
-        
-        afficherMat($matScores);
-        echo "<br><br>";
-        afficherMat($matriceMarquage);
-        echo "<br><br>";
-        if ($nbMaxPasSelec == true) {
-            echo "On a pas sélectionné le nombre max de zéros";
-        }
-        else {
-            echo "On a sélectionné le nombre max de zéros";
-        }
-        echo "<br><br>";
-
         // On sélectionne le nombre max de zéros
         if ($nbMaxPasSelec == true) {
-
-            echo "On sélectionne le nombre max de zéros<br><br>";
 
             $z = [];
             $z[] = [$i, $j];
@@ -273,13 +202,6 @@ function appliquerMethodeHongroise($matScores, $valMax) {
                 
                 $j=0;
                 while ($j<=$taille) {
-
-                    //afficher la suite z
-                    echo "Suite z : ";
-                    for ($o = 0; $o < count($z); $o++) {
-                        echo "(".$z[$o][0].",".$z[$o][1].")";
-                    }
-                    echo "<br><br>";
 
                     if ($i%2==0) {
                         if ($matriceMarquage[$z[$i-1][0]][$j]==1) {
@@ -306,18 +228,8 @@ function appliquerMethodeHongroise($matScores, $valMax) {
                 $i++;
             }
 
-            //afficher la suite z
-            echo "Suite z : ";
-            for ($o = 0; $o < count($z); $o++) {
-                echo "(".$z[$o][0].",".$z[$o][1].")";
-            }
-            echo "<br><br>";
-
             //on démarque les primes et sélectionne les zéros
             for ($i = 0; $i < count($z); $i++) {
-                
-                echo "<br><br>";
-                afficherMat($matriceMarquage);
                 
                 if ($i%2==0) {
                     $matriceMarquage[$z[$i][0]][$z[$i][1]] = 0;
@@ -341,8 +253,6 @@ function appliquerMethodeHongroise($matScores, $valMax) {
 
         // Opérations avec l'élément libre le plus petit
         else {
-
-            echo "On fait les opérations avec l'élément libre le plus petit<br><br>";
 
             // On trouve l'élément libre le plus petit
             $valMin = $valMax;
@@ -369,15 +279,6 @@ function appliquerMethodeHongroise($matScores, $valMax) {
                 }
             }
         }
-    }
-
-    // On affiche la matrice marquage sans utiliser affciehrMat
-    echo "<br><br>";
-    for ($i = 0; $i < $taille; $i++) {
-        for ($j = 0; $j < $taille; $j++) {
-            echo $matriceMarquage[$i][$j]." ";
-        }
-        echo "<br>";
     }
     
     return $matriceMarquage;

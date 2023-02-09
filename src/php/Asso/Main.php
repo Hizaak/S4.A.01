@@ -2,7 +2,6 @@
 <?php
 
 require_once "hongroise.php";
-require_once "Affichage.php";
 require_once "Outils.php";
 
 //Récuperer les étudiants dans la base de données
@@ -55,23 +54,16 @@ $listEtud[5]->ajouterReponse(new ReponseQCM(2, "Nicolas", ["non"])); //rep2 de N
 $listEtud[5]->ajouterReponse(new ReponseQCM(3, "Nicolas", ["non"])); //rep3 de Nicolas
 $listEtud[5]->ajouterReponse(new ReponseQCM(4, "Nicolas", ["oui"])); //rep4 de Nicolas
 
-
-//Afficher les réponses des étudiants
-afficherReponses($listEtud);
-
 //On sépare les étudiants en deux listes : les premières années et les deuxièmes années
 
 $listPremAn=array();
 $listSecAn=array();
 separerEtud($listEtud,$listPremAn,$listSecAn);
-//On affiche les deux listes pour vérifier (seulement leurs login)
-afficherEtudiants($listPremAn, $listSecAn);
 
 //Supprimer les parrains qui ne veulent pas de filleul
 //On part du principe que la dernière question des deuxieme annee est la question sur le fait de vouloir un filleul ou non
 foreach($listSecAn as $etud){
     if($etud->getListeReponses()[count($etud->getListeReponses())-1]->getReponseQCM()==["non"]){
-        afficherNoFilleul($etud);
         //On pop l'etudiant $etud de la liste $listSecAn
         $key = array_search($etud, $listSecAn);
         array_splice($listSecAn, $key, 1);
@@ -83,7 +75,6 @@ foreach($listSecAn as $etud){
 //On initialise la matrice de score
 $nbParrains = count($listSecAn);
 $nbFilleuls = count($listPremAn);
-afficherNbParrains($nbParrains);
 $matriceScore = array();
 $nbQuestionsPrem=count($listPremAn[0]->getListeReponses());
 $scoreMax = $nbQuestionsPrem;
@@ -111,11 +102,6 @@ for ($i = 0; $i < $nbFilleuls; $i++) {
     }
 }
 
-afficherMatScore($matriceScore, $listPremAn, $listSecAn, $nbFilleuls, $nbParrains);
-
-afficherMat($matriceScore);
-echo "<br>";
-
 //On associe les filleuls aux parrains
 //On recupere la valeur maximale de la matrice de score
 $max = 0;
@@ -127,12 +113,8 @@ for ($i = 0; $i < $nbFilleuls; $i++) {
     }
 }
 
-afficherMat($matriceScore);
-echo "<br>";
-
 //on affiche une matrice de résultat de la méthode hongroise en affichant null si c'est null
 $matMarque = appliquerMethodeHongroise($matriceScore, $max);
-afficherMatMarque($matMarque, $listPremAn, $listSecAn, $nbFilleuls, $nbParrains);
 
 //On associe les filleuls aux parrains
 
