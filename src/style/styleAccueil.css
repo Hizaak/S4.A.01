@@ -8,6 +8,7 @@ h1 {
     margin: 10px;
 }
 
+
 .textH3 {
     font-size: 0.8em;
     color: var(--shaded-text-color);
@@ -49,6 +50,11 @@ div {
     height: 120px;
 }
 #ferme
+{
+    height: 150px;
+}
+
+#divTemps
 {
     height: 285px;
 }

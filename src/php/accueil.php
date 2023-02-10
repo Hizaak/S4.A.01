@@ -46,8 +46,8 @@ $secondes = 6;
 
 switch($etatForm)               //TODO : A changer en fonction de la variable indiquant l'état du questionnaire
     {
-    case 'inexistant':          //TODO : A adapter
-        echo"<div id='inexistant'>
+            case 'inexistant':          //TODO : A adapter
+                echo"<div id='inexistant'>
                 <h2>Le questionnaire n'est pas<br>encore disponible... Désolé</h2>
             </div>";
                 break;
@@ -74,8 +74,8 @@ switch($etatForm)               //TODO : A changer en fonction de la variable in
             </div>";
                 break;
 
-    case 'ouvert':          //TODO : A adapter
-        echo"<div id='ferme'>
+            case 'ouvert':          //TODO : A adapter
+                echo"<div id='divTemps'>
                 <h2>Le formulaire est dispo,<br>réponds-y !</h2>
                 <ul>
                     <li>
@@ -110,6 +110,13 @@ switch($etatForm)               //TODO : A changer en fonction de la variable in
                 <button href='#'>Modifier ma réponse</button>
             </div>";
                 break;
+                case 'formulairePasEncoreOuvert':           //TODO : A adapter
+                 echo "<div id='ferme'>
+                    <h2>Le formulaire n'est pas encore ouvert...</h2>
+                    <hr>
+                    <h3 class='textH3'>Prenez votre mal en patience,<br> ça ne fait que tarder</h3>
+                </div>";
+        break;
         }
         ?>
     </main>
