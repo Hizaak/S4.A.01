@@ -1,18 +1,18 @@
 /* Style pop-up */
-*{
+* {
     margin: 0;
     padding: 0;
     font-family: sans-serif;
 }
 
-h1{
+h1 {
     /* police avec empattement */
     font-family: 'Liberation Serif', serif;
     font-size: 2.5em;
     letter-spacing: 1px;
 }
 
-body{
+body {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -20,7 +20,7 @@ body{
     height: 100vh;
 }
 
-main{
+main {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -33,14 +33,14 @@ main{
     text-align: left;
 }
 
-#sous-titre{
+#sous-titre {
     font-size: 1em;
     font-style: italic;
     font-weight: 500;
     margin-bottom: 10px;
 }
 
-#saisieMail{
+#saisieMail {
     padding: 5px;
     font-size: 1.5em;
     border-radius: 5px;
@@ -48,7 +48,7 @@ main{
     width: 70%;
 }
 
-#boutonSAbonner{
+#boutonSAbonner {
     padding: 5px;
     font-size: 1.5em;
     border-radius: 5px;
@@ -57,7 +57,7 @@ main{
     cursor: pointer;
 }
 
-#boutonSAbonner:hover{
+#boutonSAbonner:hover {
     background-color: #ce2f2f;
     color: #FFFFFF;
     /* transition */
@@ -66,7 +66,7 @@ main{
     box-shadow: 0 0 10px #ce2f2f;
 }
 
-#mentions{
+#mentions {
     color: #00000087;
     font-size: 0.8em;
     font-style: italic;
@@ -74,39 +74,39 @@ main{
     margin-top: 5px;
 }
 
-#validationPolitique{
+#validationPolitique {
     display: flex;
     flex-direction: row;
     margin-top: 3px;
     margin-bottom: 10px;
 }
 
-#checkbox{
-    margin-top:-2px;
+#checkbox {
+    margin-top: -2px;
 }
 
-#politique{
+#politique {
     margin-left: 3px;
 }
 
-a{
+a {
     text-decoration: none;
     color: #1b65edc4;
 }
 
-a:hover{
+a:hover {
     text-decoration: underline;
 }
 
-#croix{
+#croix {
     margin-top: -115px;
     margin-left: -20px;
     font-size: 1.5em;
     cursor: pointer;
 }
 
-rouge{
-    color:red;
+rouge {
+    color: red;
     font-family: 'Liberation Serif', serif;
     letter-spacing: 1px;
 }

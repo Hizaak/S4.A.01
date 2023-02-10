@@ -313,6 +313,3 @@ class Question_Libre extends Question{
 
 
 }
-
-?>
-

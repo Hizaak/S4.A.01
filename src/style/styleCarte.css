@@ -1,17 +1,13 @@
-.container{
+.container {
     height: auto;
     margin: auto;
     margin-left: 35%;
     width: 50rem;
     display: flex;
     margin-bottom: 30px;
-
-
-
-
 }
 
-.propriete{
+.propriete {
     padding: 10px;
     display: flex;
     flex-direction: column;
@@ -22,10 +18,7 @@
     box-shadow: 0 0 10px #3232326a;
     border-radius: 10px;
     border-left: none;
-
 }
-
-
 
 .carte {
     /*la carte fait 200px de large et 200px de haut*/
@@ -38,59 +31,54 @@
     text-align: center;
 }
 
-img{
-    
+img {
+
     width: 200px;
     height: 200px;
     margin-bottom: 20px;
     border-radius: 10px;
 
 }
-input[type="button"]{
+
+input[type="button"] {
     height: 50px;
     border-radius: 10px;
     width: 75%;
-    margin : auto;
-    
-    
+    margin: auto;
 }
 
-.QCM{
+.QCM {
     display: grid;
     row-gap: 10px;
-    grid-template-columns: 50% 50%; /*Alexandre doit fix ça*/
+    grid-template-columns: 50% 50%;
+    /*Alexandre doit fix ça*/
     margin-bottom: 30px;
 }
 
-
-.addsuppbtn{
+.addsuppbtn {
     float: left;
     bottom: 0;
 }
-
-
-
 
 form {
     width: 100%;
     height: 100%;
 }
 
-.reponselibre{
+.reponselibre {
     height: 200px;
 }
 
-.inputReponseLibre{
+.inputReponseLibre {
     resize: none;
     width: 80%;
     height: 90%;
     border-radius: 10px;
     border: 1px solid gray;
     padding: -10px;
-
 }
 
-.inputReponseLibre:focus{
+.inputReponseLibre:focus {
     outline: none;
     border: 1px solid #000;
 }

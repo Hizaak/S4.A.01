@@ -88,6 +88,3 @@ if(!empty($_POST)){
     // //On redirige vers la page de création de formulaire
     // header("Location: ../php/creationFormulaire.php");
 }
-
-
-?>

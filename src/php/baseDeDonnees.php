@@ -11,7 +11,7 @@
     // $db_name = "hegolagunak";
     $db_servername="localhost";
     $db_username="hegolagunak";
-    $db_password="SAE4.01hegolagunak";
+    $db_password="S4.01hegolagunak";
     $db_name="hegolagunak";
     try
     {

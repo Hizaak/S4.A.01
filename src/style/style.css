@@ -49,8 +49,7 @@ h3 {
     color: var(--title-text-color);
 }
 
-button
-{
+button {
     font-family: 'Roboto', sans-serif;
     font-weight: bold;
 }
@@ -87,4 +86,3 @@ body {
     color: rgb(255, 65, 65);
     font-style: italic;
 }
-

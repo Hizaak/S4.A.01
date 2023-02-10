@@ -11,13 +11,11 @@
     <!--CSS-->
     <link rel="stylesheet" href="../style/style.css">
     <link rel="stylesheet" href="../style/styleIndex.css">
-    
+
     <!--Polices-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Fira+Mono&family=Rambla:wght@700&family=Roboto:ital,wght@0,300;1,400&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Mono&family=Rambla:wght@700&family=Roboto:ital,wght@0,300;1,400&display=swap" rel="stylesheet">
 
 </head>
 
@@ -29,10 +27,11 @@
 
     <main>
         <form>
-        <p id="mainSubTitle">Bienvenue sur la page Hego Lagunak ! Ici, vous pouvez répondre au questionnaire de parainage.</p>
-        <button href="#" id="boutonCommencer">Commencer le questionnaire</button>
-        <a>Retour sur le site officiel</a>
+            <p id="mainSubTitle">Bienvenue sur la page Hego Lagunak ! Ici, vous pouvez répondre au questionnaire de parainage.</p>
+            <button href="#" id="boutonCommencer">Commencer le questionnaire</button>
+            <a>Retour sur le site officiel</a>
         </form>
     </main>
 </body>
+
 </html>

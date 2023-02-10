@@ -4,17 +4,16 @@ header {
     line-height: 1;
 }
 
-h1{
+h1 {
     margin: 10px;
 }
 
-.textH3
-{
+.textH3 {
     font-size: 0.8em;
-    color : var(--shaded-text-color);
+    color: var(--shaded-text-color);
 }
 
-hr{
+hr {
     margin-block: 15px;
     margin-inline: 100px;
 }
@@ -26,35 +25,32 @@ hr{
     pointer-events: none;
 }
 
-main{
-    display : flex;
+main {
+    display: flex;
     flex-direction: column;
     text-align: center;
     justify-content: center;
 }
 
-div
-{
+div {
     margin-inline: auto;
-    margin-top : 70px;
+    margin-top: 70px;
     background-color: var(--light-background-color);
-    width : 500px;
-    padding-top : 35px;
+    width: 500px;
+    padding-top: 35px;
     border-radius: 25px;
 
 }
 
-#inexistant
-{
-    height : 120px;
+#inexistant {
+    height: 120px;
 }
-#ferme
-{
+
+#ferme {
     height: 150px;
 }
 
-button
-{
+button {
     margin-top: 20px;
     padding: 5px;
     font-size: 20px;
@@ -63,13 +59,12 @@ button
     cursor: pointer;
     border-radius: 5px;
     transition: 0.2s;
-    width : 90%;
+    width: 90%;
     color: var(--icon-color);
     border: 1px solid var(--icon-color);
 }
 
-button:hover
-{
+button:hover {
     background-color: var(--icon-color);
-    color : var(--title-text-color);
+    color: var(--title-text-color);
 }
