@@ -14,9 +14,7 @@
     <!-- Polices -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Fira+Mono&family=Rambla:wght@700&family=Roboto:ital,wght@0,300;1,400&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Mono&family=Rambla:wght@700&family=Roboto:ital,wght@0,300;1,400&display=swap" rel="stylesheet">
 
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="../sources/icons/favicon/apple-touch-icon.png">
@@ -33,22 +31,22 @@
     <main>
         <form method="POST">
             <h2 id="connexionTitle">Connexion</h1>
-            <p>Identifiant</p>
-            <section id="mail">
-                <input name='login' type="text" id="identifiant" required>
-                <label id="domaine">@iutbayonne.univ-pau.fr</label>
-            </section>
-            <section id="sectionMDP">
-                <p>Mot de passe</p>
-                <a id="MDPOublie" href="motDePasseOublie.php">Mot de passe oublié</a>
-            </section>
-            <section>
-                <!-- TODO : mettre une limite de visibilité dans la saisie pour ne pas couvrir l'oeil -->
-                <input id="MDP" type="password" name="password" autocomplete="current-password" required>
-                <img id="oeil-MDP" src="../sources/icons/visibility_on.svg" alt="Icone d'oeil" onclick="showPassword('MDP')">
-                <p id="error"></p>
-            </section>
-            <button id="boutonConnexion" type="submit" name="submit">Se connecter</button>
+                <p>Identifiant</p>
+                <section id="mail">
+                    <input name='login' type="text" id="identifiant" required>
+                    <label id="domaine">@iutbayonne.univ-pau.fr</label>
+                </section>
+                <section id="sectionMDP">
+                    <p>Mot de passe</p>
+                    <a id="MDPOublie" href="motDePasseOublie.php">Mot de passe oublié</a>
+                </section>
+                <section>
+                    <!-- TODO : mettre une limite de visibilité dans la saisie pour ne pas couvrir l'oeil -->
+                    <input id="MDP" type="password" name="password" autocomplete="current-password" required>
+                    <img id="oeil-MDP" src="../sources/icons/visibility_on.svg" alt="Icone d'oeil" onclick="showPassword('MDP')">
+                    <p id="error"></p>
+                </section>
+                <button id="boutonConnexion" type="submit" name="submit">Se connecter</button>
         </form>
         <p id="pasDeCompte">Pas de compte ? <a href="creationCompte.php">Créer un compte</a>.</p>
     </main>
@@ -60,7 +58,7 @@
             <li><a id="nousContacter" href="nousContacter.html">Nous contacter</a></li>
         </ul>
     </footer>
-    
+
     <script type="text/javascript" src="../script/outils.js"></script>
 </body>
 
@@ -69,7 +67,7 @@
 <?php
 include('outils.php');
 if (isset($_SESSION['login'])) {
-    echo ('<script>document.getElementById("identifiant").value ="'.$_SESSION['login'].'"</script>');
+    echo ('<script>document.getElementById("identifiant").value ="' . $_SESSION['login'] . '"</script>');
 }
 if (isset($_POST['login']) && isset($_POST['password'])) {
     //on verifie que le mail est bien dans la base de données
@@ -87,30 +85,24 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
             exit();
         }
 
-        if ($resultat['PASSWORD']!=' ' && password_verify($_POST['password'], $resultat['PASSWORD'])) {
+        if ($resultat['PASSWORD'] != ' ' && password_verify($_POST['password'], $resultat['PASSWORD'])) {
             //on verifie que l'utilisateur a bien validé son compte
             if ($resultat['VALIDE'] == "oui") {
                 //on stocke le mail dans une variable de session
                 $_SESSION['login'] = strtolower(($_POST['login']));
                 $_SESSION['role'] = $resultat['ROLE'];
-                $_SESSION['message'] = ["Bienvenue ".$_SESSION['login'],"#006700"];
+                $_SESSION['message'] = ["Bienvenue " . $_SESSION['login'], "#006700"];
                 //on redirige vers la page de verification
-                if ($resultat['ROLE'] == 'admin'){
+                if ($resultat['ROLE'] == 'admin') {
                     header('Location:admin.php');
-
-                    
-                }
-                else{
+                } else {
                     header('Location:accueil.php');
                 }
-                
-            } 
+            }
         } else {
             error("Identifiant ou mot de passe incorrect");
         }
     }
 }
-
-
 
 ?>

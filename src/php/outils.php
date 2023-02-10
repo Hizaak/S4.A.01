@@ -101,6 +101,3 @@ function interdireVisiteur(){
         header('Location:accueil.php');
     }
 }
-
-
-?>
