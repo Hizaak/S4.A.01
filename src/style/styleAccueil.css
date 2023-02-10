@@ -14,6 +14,11 @@ h1{
     color : var(--shaded-text-color);
 }
 
+.labelHeure
+{
+    font-size : 16px;
+}
+
 hr{
     margin-block: 15px;
     margin-inline: 100px;
@@ -27,8 +32,6 @@ hr{
 }
 
 main{
-    display : flex;
-    flex-direction: column;
     text-align: center;
     justify-content: center;
 }
@@ -50,7 +53,7 @@ div
 }
 #ferme
 {
-    height: 150px;
+    height: 285px;
 }
 
 button
@@ -72,4 +75,27 @@ button:hover
 {
     background-color: var(--icon-color);
     color : var(--title-text-color);
+}
+
+ul {
+    list-style-type: none;
+    margin-block: 20px;
+    margin-inline: 40px;
+    padding: 0;
+    overflow: hidden;
+}
+
+li {
+    background-color: var(--background-color);
+    margin-inline : 5px;
+    padding-block: 10px;
+    float: left;
+    width: 22%;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.Temps
+{
+    font-size : 48px;
 }

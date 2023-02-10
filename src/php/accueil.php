@@ -36,7 +36,13 @@ if (!estConnecter()){
 <main>
 <?php
 
-$etatForm = 'ouvert';        //Variable temporaire qui permet de selectionner
+//VARIABLES
+$etatForm = 'ouvert';           //Variables temporaires qui permetent de tester le site
+
+$jours = 1;
+$heures = 23;
+$minutes = 36;
+$secondes = 6;
 
 switch($etatForm)               //TODO : A changer en fonction de la variable indiquant l'état du questionnaire
     {
@@ -70,7 +76,37 @@ switch($etatForm)               //TODO : A changer en fonction de la variable in
 
     case 'ouvert':          //TODO : A adapter
         echo"<div id='ferme'>
-                <h2>Merci d'avoir répondu au<br>formulaire !</h2>
+                <h2>Le formulaire est dispo,<br>réponds-y !</h2>
+                <ul>
+                    <li>
+                        <h2 class='Temps'>".$jours."</h2>
+                        <h3 class='labelHeure'>";
+                        if($jours <= 1){echo"jour";}
+                        else{echo"jours";}
+                        echo"</h3>
+                    </li>
+                    <li>
+                        <h2 class='Temps'>".$heures."</h2>
+                        <h3 class='labelHeure'>";
+                        if($heures <= 1){echo"heure";}
+                        else{echo"heures";}
+                        echo"</h3>
+                    </li>
+                    <li>
+                        <h2 class='Temps'>".$minutes."</h2>
+                        <h3 class='labelHeure'>";
+                        if($minutes <= 1){echo"minute";}
+                        else{echo"minutes";}
+                        echo"</h3>
+                    </li>
+                    <li>
+                        <H2 class='Temps'>".$secondes."</H2>
+                        <h3 class='labelHeure'>";
+                        if($secondes <= 1){echo"seconde";}
+                        else{echo"secondes";}
+                        echo"</h3>
+                    </li>
+                </ul>
                 <button href='#'>Modifier ma réponse</button>
             </div>";
         break;
