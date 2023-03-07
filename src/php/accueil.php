@@ -1,6 +1,7 @@
 <?php
 include 'outils.php';
-if (!estConnecter()) {
+include 'Formulaire.php';
+if (!estConnecte()) {
     header('Location: connexion.php');
 }
 ?>
@@ -29,20 +30,20 @@ if (!estConnecter()) {
 </head>
 
 <body>
-    <header>
-        <img id="logoHegoBerria" src="../sources/icons/logo_hego_berria.svg" alt="Le logo de Hego Berria">
-        <h1>Hego Berria</h1>
-    </header>
-    <main>
-        <?php
+<header>
+    <img id="logoHegoBerria" src="../sources/icons/logo_hego_berria.svg" alt="Le logo de Hego Berria">
+    <h1>Hego Berria</h1>
+</header>
+<main>
+<?php
 
-//VARIABLES
-$etatForm = 'ouvert';           //Variables temporaires qui permetent de tester le site
+    // On fait une variable qui va prendre pour valeur ce que va retourner SELECT * FROM Etudiant WHERE login = $_SESSION['login']
 
-$jours = 1;
-$heures = 23;
-$minutes = 36;
-$secondes = 6;
+    var_dump($_SESSION);
+    $etudiant = new Etudiant($_SESSION['login']);
+    // $etatForm = formulaire::getInstance()->getEtat();
+    // 23h 59min 59s 31 mars 2023
+    $dateFin = mktime(23, 59, 59, 3, 31, 2023);
 
 
 
@@ -52,32 +53,32 @@ switch($etatForm)               //TODO : A changer en fonction de la variable in
                 echo"<div id='inexistant'>
                 <h2>Le questionnaire n'est pas<br>encore disponible... Désolé</h2>
             </div>";
-                break;
+        break;
 
-            case 'formulaireEnAttente':           //TODO : A adapter
-                echo "<div id='ferme'>
+        case 'formulaireEnAttente':
+            echo "<div id='ferme'>
                 <h2>Merci d'avoir répondu au<br>formulaire !</h2>
                 <hr>
                 <h3 class='textH3'>Vous aller bientôt être parrainé(e) !</h3>
             </div>";
-                break;
+        break;
 
-            case 'accederResultats':           //TODO : A adapter
-                echo "<div id='ferme'>
+        case 'accederResultats':
+            echo "<div id='ferme'>
                 <h2>Merci d'avoir répondu au<br>formulaire !</h2>
                 <button>Accéder aux résultats</button>
             </div>";
-                break;
+        break;
 
-            case 'modificationReponse':   //TODO : A adapter
-                echo "<div id='ferme'>
+        case 'modificationReponse':
+            echo "<div id='ferme'>
                 <h2>Merci d'avoir répondu au<br>formulaire !</h2>
                 <button>Modifier ma réponse</button>
             </div>";
-                break;
+        break;
 
-            case 'ouvert':          //TODO : A adapter
-                echo"<div id='divTemps'>
+        case 'ouvert':
+            echo"<div id='divTemps'>
                 <h2>Le formulaire est dispo,<br>réponds-y !</h2>
                 <ul>
                     <li>
@@ -113,13 +114,6 @@ switch($etatForm)               //TODO : A changer en fonction de la variable in
                 </ul>
                 <button>Modifier ma réponse</button>
             </div>";
-                break;
-                case 'formulairePasEncoreOuvert':           //TODO : A adapter
-                 echo "<div id='ferme'>
-                    <h2>Le formulaire n'est pas encore ouvert...</h2>
-                    <hr>
-                    <h3 class='textH3'>Prenez votre mal en patience,<br> ça ne fait que tarder</h3>
-                </div>";
         break;
         }
         ?>

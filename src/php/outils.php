@@ -60,7 +60,7 @@ function verifUtilisateur($user){
 
 
 
-function estConnecter(){
+function estConnecte(){
     //retourne true si l'utilisateur est connecté
     if (isset($_SESSION['login'])){
         return true;
@@ -73,7 +73,7 @@ function estConnecter(){
 
 function estAdmin(){
     //retourne true si l'utilisateur est admin
-    if (estConnecter() && $_SESSION['role'] == 'admin'){
+    if (estConnecte() && $_SESSION['role'] == 'admin'){
         return true;
     }
     else{
