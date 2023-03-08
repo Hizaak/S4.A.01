@@ -99,7 +99,7 @@ for ($i = 0; $i < $nbFilleuls; $i++) {
 for ($i = 0; $i < $nbFilleuls; $i++) {
     for ($j = 0; $j < $nbParrains; $j++) {
         for ($k = 0; $k < $nbQuestionsPrem; $k++) {
-            $matriceScore[$i][$j] -=calculerDistanceReponses($listPremAn[$i]->getListeReponses()[$k]->getReponseQCM(),$listSecAn[$j]->getListeReponses()[$k]->getReponseQCM());
+            $matriceScore[$i][$j] -= calculerDistanceReponses($listPremAn[$i]->getListeReponses()[$k]->getReponseQCM(),$listSecAn[$j]->getListeReponses()[$k]->getReponseQCM());
         }
     }
 }
@@ -113,6 +113,9 @@ for ($i = 0; $i < $nbFilleuls; $i++) {
 
 afficherMatScore($matriceScore, $listPremAn, $listSecAn, $nbFilleuls, $nbParrains);
 
+afficherMat($matriceScore);
+echo "<br>";
+
 //On associe les filleuls aux parrains
 //On recupere la valeur maximale de la matrice de score
 $max = 0;
@@ -123,6 +126,9 @@ for ($i = 0; $i < $nbFilleuls; $i++) {
         }
     }
 }
+
+afficherMat($matriceScore);
+echo "<br>";
 
 //on affiche une matrice de résultat de la méthode hongroise en affichant null si c'est null
 $matMarque = appliquerMethodeHongroise($matriceScore, $max);

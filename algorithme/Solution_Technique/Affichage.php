@@ -28,6 +28,18 @@ function afficherMatrice($matrice, $listPremAn, $listSecAn, $nbFilleuls, $nbParr
     echo "</table>";
 }
 
+function afficherMat($matrice){
+    echo "<table>";
+    for ($i = 0; $i < count($matrice); $i++) {
+        echo "<tr>";
+        for ($j = 0; $j < count($matrice[$i]); $j++) {
+            echo "<td>".$matrice[$i][$j]."</td>";
+        }
+        echo "</tr>";
+    }
+    echo "</table>";
+}
+
 /**
  * @brief Fonction qui affiche les réponses des étudiants
  * @param type $listEtud
