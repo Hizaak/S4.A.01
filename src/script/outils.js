@@ -11,21 +11,20 @@ function showPassword(id) {
   }
 
 
-  function notification(couleurBG){
-
+  function notification(couleurBG,time){
+    time=parseInt(time);
     
     // On récupère l'élément notification
     var notif = document.getElementById("notif");
-    console.log(notif);
+    notif.style.animation="fadein 0.5s, fadeout 0.5s "+time/1000+"s";
+
     
     // On affiche la notification
     notif.style.backgroundColor="\#"+couleurBG.substring(1);
-    notif.className = "show";
+    notif.className="show"
     
     // On supprime la notification après 3 secondes
     setTimeout(function(){ 
-      notif.className = notif.className.replace("show", ""); 
       document.getElementById("injection").remove();
-  }, 3000);
-  
+  }, time+500);
     } 

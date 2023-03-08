@@ -85,12 +85,12 @@ function estAdmin(){
 
 
 
-function notifier($message,$rgb="#333"){
+function notifier($message,$rgb="#333",$time=3000){
     //affiche un message dans la page
     $injection= '<section id=injection><script type="text/javascript" src="../script/outils.js"></script>
           <link rel="stylesheet" href="../style/notification.css">
           <div id="notif">'."$message".'</div>
-          <script>notification("'.$rgb.'")</script></section>';
+          <script>notification("'.$rgb.'","'.$time.'")</script></section>';
     echo $injection;
 }
 

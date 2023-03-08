@@ -14,6 +14,10 @@
     z-index: 1; /* On l'affiche au dessus de tout */
     left: 50%; /* On la centre horizontalement */
     bottom: 30px;  /* On la positionne en bas de 30px */
+    /* On ajoute une animation : On met 0,5 seconde pour faire apparaître et disparaître la notification.
+    Cependant, on met un ralenti de fondu de 2,5 secondes*/
+
+    
 }
   
 
@@ -22,8 +26,7 @@
     visibility: visible; /* On l'affiche */
     /* Ajouter une animation : On met 0,5 seconde pour faire apparaître et disparaître la notification.
     Cependant, on met un ralenti de fondu de 2,5 secondes*/
-    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-    animation: fadein 0.5s, fadeout 0.5s 2.5s;}
+    /* animation: fadein 0.5s, fadeout 0.5s 1s;} */}
   
     /* On ajoute une animation pour faire apparaître la notification */
   @-webkit-keyframes fadein {
