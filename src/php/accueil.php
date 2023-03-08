@@ -42,7 +42,6 @@ if (!estConnecte()) {
     var_dump($_SESSION);
     $etudiant = new Etudiant($_SESSION['login']);
     // $etatForm = formulaire::getInstance()->getEtat();
-    // 23h 59min 59s 31 mars 2023
     $dateFin = mktime(23, 59, 59, 3, 31, 2023);
 
 
@@ -119,10 +118,8 @@ switch($etatForm)               //TODO : A changer en fonction de la variable in
         ?>
         <script>
             //VARIABLES
-            const dateLimite = new Date(2023,0,0,0,0,0)//year, month, day, hour, minute, second
-            //const dateActuelle = new Date();
-            const dateActuelle = new Date(2022,11,30,23,59,45);
-
+            const dateLimite = new Date(2023,0,0,0,0,0) //year, month, day, hour, minute, second
+            const dateActuelle = new Date();
             const differenceMs = Math.abs(dateLimite - dateActuelle);
 
             days = Math.floor(differenceMs / (1000 * 60 * 60 * 24));
@@ -135,13 +132,9 @@ switch($etatForm)               //TODO : A changer en fonction de la variable in
             document.getElementById("minutes").innerHTML = (minutes);
             document.getElementById("secondes").innerHTML = (seconds);
 
-
-
             const countdown = setInterval(function(){
                 // Décrémenter le temps restant
-
                 seconds--;
-
                 if (seconds === -1) // Vérifier si le timer est terminé -- Si non, actualise les minutes, heures et jours.
                 {
                     seconds = 59;
@@ -161,7 +154,6 @@ switch($etatForm)               //TODO : A changer en fonction de la variable in
                                 minutes = 0;
                                 hours = 0;
                                 days = 0;
-
                                 location.reload()
                             }
                             else
@@ -170,24 +162,11 @@ switch($etatForm)               //TODO : A changer en fonction de la variable in
                             }
                         }
                         document.getElementById("heures").innerHTML = (hours);
-
                     }
                     document.getElementById("minutes").innerHTML = (minutes);
-
                 }
-
                 document.getElementById("secondes").innerHTML = (seconds);
-
             }, 1000); // Exécuter la fonction toutes les secondes (1000 millisecondes).
-
-
-
-
-
-
-
-
-
 
         </script>
     </main>

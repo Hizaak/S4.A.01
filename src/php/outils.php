@@ -1,5 +1,5 @@
 <?php
-include_once('baseDeDonnees.php');
+require_once 'baseDeDonnees.php';
 if(!isset($_SESSION)){
     session_start();
 }
@@ -8,11 +8,7 @@ if (isset($_SESSION['message'])){
     unset($_SESSION['message']);
 }
 
-
 interdireVisiteur();
-
-
-
 
 //Insert un code d'erreur dans la page HTML dans la div d'id "erreur"
 function error($message) {
@@ -87,11 +83,10 @@ function estAdmin(){
 
 function notifier($message,$rgb="#333"){
     //affiche un message dans la page
-    $injection= '<section id=injection><script type="text/javascript" src="../script/outils.js"></script>
+    echo '<section id="injection"><script type="text/javascript" src="../script/outils.js"></script>
           <link rel="stylesheet" href="../style/notification.css">
           <div id="notif">'."$message".'</div>
           <script>notification("'.$rgb.'")</script></section>';
-    echo $injection;
 }
 
 function interdireVisiteur(){
@@ -101,3 +96,4 @@ function interdireVisiteur(){
         header('Location:accueil.php');
     }
 }
+?>

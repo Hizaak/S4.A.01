@@ -1,6 +1,6 @@
 <?php
 // Inclusion du fichier contenant les informations de connexion à la base de données
-include_once 'outils.php';
+require_once 'outils.php';
 include_once 'Etudiant.php';
 
 class Formulaire {
@@ -17,11 +17,10 @@ class Formulaire {
         $this->date_fin = $date_fin;
     }
     
-    public static function getInstance() {
+    public static function getInstance($db) {
         if (is_null(self::$instance)) {
-            global $database;
             // Récupération des données du formulaire
-            $stmt = $database->query('SELECT * FROM formulaire');
+            $stmt = $db->query('SELECT * FROM formulaire');
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
             self::$instance = new Formulaire($row['ID'], $row['TYPEASSOS'], $row['DATE_DEBUT'], $row['DATE_FINAL']);
@@ -46,12 +45,10 @@ class Formulaire {
         return $this->date_fin;
     }
 
-    public function getEtat(Etudiant $etudiant) {
-        // Inclusion du fichier contenant les informations de connexion à la base de données
-        global $database;
+    public function getEtat(Etudiant $etudiant, $db) {
 
         // Récupération des données du formulaire
-        $stmt = $database->query('SELECT * FROM formulaire');
+        $stmt = $db->query('SELECT * FROM formulaire');
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if (!$row) {
@@ -71,12 +68,10 @@ class Formulaire {
             }
         }
     }
-    public function existe() {
-        // Inclusion du fichier contenant les informations de connexion à la base de données
-        global $database;
 
+    public function existe($db) {
         // Récupération des données du formulaire
-        $stmt = $database->query('SELECT * FROM formulaire');
+        $stmt = $db->query('SELECT * FROM formulaire');
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         return $row;
     }

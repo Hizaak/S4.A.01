@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="fr">
-
-<head>
+    
+    <head>
     <!-- Metadonnées -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion</title>
-
+    
     <!-- CSS -->
     <link rel="stylesheet" href="../style/styleConnexion.css">
     <link rel="stylesheet" href="../style/style.css">
@@ -65,7 +65,8 @@
 </html>
 
 <?php
-include('outils.php');
+include 'outils.php';
+
 if (isset($_SESSION['login'])) {
     echo ('<script>document.getElementById("identifiant").value ="' . $_SESSION['login'] . '"</script>');
 }
@@ -89,6 +90,9 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
             //on verifie que l'utilisateur a bien validé son compte
             if ($resultat['VALIDE'] == "oui") {
                 //on stocke le mail dans une variable de session
+                $toto = new stdClass();
+                $toto->nom = 'max';
+                $_SESSION['user'] = $toto;
                 $_SESSION['login'] = strtolower(($_POST['login']));
                 $_SESSION['role'] = $resultat['ROLE'];
                 $_SESSION['message'] = ["Bienvenue " . $_SESSION['login'], "#006700"];

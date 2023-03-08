@@ -1,10 +1,6 @@
 
 <?php
 require_once "Utilisateur.php";
-require_once "outils.php";
-require_once "baseDeDonnees.php";
-
-
 
 /**
  * @brief Classe Etudiant héritant de la classe Utilisateur
@@ -31,9 +27,8 @@ class Etudiant extends Utilisateur
         return $this->niveau;
     }
 
-    public function getListeReponses(){
-        global $database;
-        $stmt = $database->prepare('SELECT ID_QUESTION, REPONSE FROM repondre WHERE LOGIN = :login');
+    public function getListeReponses($db){
+        $stmt = $db->prepare('SELECT ID_QUESTION, REPONSE FROM repondre WHERE LOGIN = :login');
         $stmt->execute(array('login' => $this->getLogin()));
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
@@ -65,11 +60,10 @@ class Etudiant extends Utilisateur
     // Definir la liste de reponses depuis la base de donnes
 
     // Constructeur depuis la base de données (login)
-    public function __construct($login){
+    public function __construct($login, $db){
         parent::__construct($login);
-        global $database;
-        // Récupération des données de l'étudiant
-        $stmt = $database->prepare('SELECT * FROM etudiant WHERE LOGIN = :login');
+
+        $stmt = $db->prepare('SELECT * FROM etudiant WHERE LOGIN = :login');
         $stmt->execute(array('login' => $login));
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 

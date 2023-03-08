@@ -84,7 +84,7 @@ if (isset($_POST['code'])) {
                 $req = $database->prepare('UPDATE utilisateur SET password = ? WHERE login = ?');
                 $req->execute(array($_SESSION['password'], $_SESSION['login']));
                 //on redirige vers la page de connexion
-                $_SESSION['message'] = ["Votre mot de passe à bien était modifié!", "#006700"];
+                $_SESSION['message'] = ["Votre mot de passe à bien été modifié !", "#006700"];
                 header('Location: connexion.php');
                 break;
             default:
