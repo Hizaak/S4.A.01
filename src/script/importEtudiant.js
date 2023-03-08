@@ -370,18 +370,21 @@ document.getElementById("btn-save").addEventListener("click", function() {
         }
         
     }
-    console.log(ins_mod);
-    console.log(loginChange);
-    console.log(del);
+    // console.log(ins_mod);
+    // console.log(loginChange);
+    // console.log(del);
     //On envoie les données au serveur
-    $.ajax({
-        url: window.location.href,
-        type: "POST",
-        data: { ins_mod: (ins_mod), loginChange: (loginChange) , del: (del) },
-        success: function(data) {
-            console.log(data);
-        }
-    });
+    if(ins_mod.length>0 || loginChange.length>0 || del.length>0){
+        $.ajax({
+            url: window.location.href,
+            type: "POST",
+            data: { ins_mod: (ins_mod), loginChange: (loginChange) , del: (del) },
+            success: function(data) {
+                console.log(data);
+            }
+        });
+    }
+        
 });
 
 
