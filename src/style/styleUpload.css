@@ -1,4 +1,4 @@
-input[type=file]::file-selector-button {
+/* input[type=file]::file-selector-button {
     height: 100%;
     width: 100%;
     border: none;
@@ -14,16 +14,16 @@ input[type=file] {
     width: 100%;
     color: transparent;
 
-}
+} */
 
-h2 {
+#achanger{
     font-size: 25px;
     margin-top: 2em;
     margin-bottom: 2em;
     text-align: center;
 }
 
-.btn-file {
+/* .btn-file {
     border: 1px solid #ccc;
     display: inline-block;
     cursor: pointer;
@@ -33,16 +33,15 @@ h2 {
     font-size: 18px;
 
 
-}
+} */
 
-form {
+/* form {
     text-align: center;
-}
+} */
 
-table,
-th,
-td {
+th, td {
     border: 1px solid;
+    border-radius: 5px;
     text-align: center;
     margin: 0 auto;
 }
@@ -50,5 +49,35 @@ td {
 table {
     width: 75%;
     margin: 20px auto;
+    text-align: center;
+}
 
+
+div.scroll{
+    overflow: auto;
+    /* La height c'est la moitié de l'écran vertical*/
+    max-height: 50vh;
+    height: auto;
+    /* background-color: brown; */
+    width: 75%;
+    margin: 20px auto;
+}
+    
+.edit{
+    border: none;
+    text-align: left;
+}
+
+.select{
+    border: none;
+    text-align: right;
+
+}
+.btn-edit{
+    width: 100%;
+    
+}
+
+.feedback{
+    text-align: center;
 }
