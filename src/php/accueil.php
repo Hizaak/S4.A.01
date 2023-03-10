@@ -1,6 +1,6 @@
 <?php
 include 'outils.php';
-if (!estConnecter()) {
+if (0) {
     header('Location: connexion.php');
 }
 ?>
@@ -29,7 +29,17 @@ if (!estConnecter()) {
 </head>
 
 <body>
+<!--Side Navigation-->
+<div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <p id="sideNavText1">Connecté en tant que :</p>
+    <p id="connectedUser">USER</p>
+    <hr>
+
+</div>
+
     <header>
+        <span id='sideNavButton' onclick="openNav()">&#9776</span>
         <img id="logoHegoBerria" src="../sources/icons/logo_hego_berria.svg" alt="Le logo de Hego Berria">
         <h1>Hego Berria</h1>
     </header>
@@ -168,7 +178,7 @@ switch($etatForm)               //TODO : A changer en fonction de la variable in
                                 hours = 0;
                                 days = 0;
 
-                                location.reload()
+                                //location.reload()
                             }
                             else
                             {
@@ -186,15 +196,13 @@ switch($etatForm)               //TODO : A changer en fonction de la variable in
 
             }, 1000); // Exécuter la fonction toutes les secondes (1000 millisecondes).
 
+            function openNav() {
+                document.getElementById("mySidenav").style.width = "400px";
+            }
 
-
-
-
-
-
-
-
-
+            function closeNav() {
+                document.getElementById("mySidenav").style.width = "0";
+            }
         </script>
     </main>
 </body>
