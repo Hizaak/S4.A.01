@@ -1,7 +1,6 @@
 .container {
     height: auto;
     margin: auto;
-    margin-left: 35%;
     width: 50rem;
     display: flex;
     margin-bottom: 30px;
@@ -14,7 +13,7 @@
     flex-wrap: wrap;
     width: 300px;
     height: auto;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     box-shadow: 0 0 10px #3232326a;
     border-radius: 10px;
     border-left: none;
@@ -24,7 +23,7 @@
     /*la carte fait 200px de large et 200px de haut*/
     width: 20rem;
     background-color: #fff;
-    border: 1px solid #000;
+    /* border: 1px solid #000; */
     border-radius: 10px;
     box-shadow: 0 0 10px #3232326a;
     justify-content: space-between;

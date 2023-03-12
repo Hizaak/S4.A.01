@@ -293,8 +293,8 @@ function valid_line_final(tr) {
                 //On recupere le bouton "btn-edit" du tr et on lui met un event listener sur le click
                 var btn = tr.getElementsByClassName("btn-edit")[0];
                 btn.dispatchEvent(new Event("click"));
-                //On met le bordure en rouge
                 error=true;
+                break;
             }
         }
     if (error){
@@ -309,7 +309,6 @@ function valid_line_final(tr) {
 var btns = document.getElementsByClassName("btn-edit");
 for (var i = 0; i < btns.length; i++) {
     btns[i].onclick=function(){
-        console.log("dans les events",this.parentElement.parentElement);
         edit_line(this.parentElement)};
 }
 
@@ -374,16 +373,25 @@ document.getElementById("btn-save").addEventListener("click", function() {
     // console.log(loginChange);
     // console.log(del);
     //On envoie les données au serveur
-    if(ins_mod.length>0 || loginChange.length>0 || del.length>0){
+    if(ins_mod.length>0 || loginChange.length>0 || del.length>0 ){
         $.ajax({
             url: window.location.href,
             type: "POST",
             data: { ins_mod: (ins_mod), loginChange: (loginChange) , del: (del) },
             success: function(data) {
-                console.log(data);
+                //Quand on reussis tous les attribut data-old sont égaux aux textContent des td
+                for (var i = 0; i < tr.length; i++) {
+                    var td = tr[i].getElementsByClassName("info");
+                    for (var j = 0; j < td.length; j++) {
+                        td[j].setAttribute("data-old",td[j].textContent);
+                    }
+                }
+                //On affiche un message de confirmation
+                alert("Les modifications ont bien été enregistrées");
             }
         });
     }
+
         
 });
 

@@ -88,7 +88,7 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
 
         if ($resultat['PASSWORD'] != ' ' && password_verify($_POST['password'], $resultat['PASSWORD'])) {
             //on verifie que l'utilisateur a bien validé son compte
-            if ($resultat['VALIDE'] == "oui") {
+            if ($resultat['VALIDE']==0) {
                 //on stocke le mail dans une variable de session
                 $toto = new stdClass();
                 $toto->nom = 'max';

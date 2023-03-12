@@ -28,9 +28,9 @@ class Etudiant extends Utilisateur
     }
 
     public function getListeReponses($db){
-        $stmt = $db->prepare('SELECT ID_QUESTION, REPONSE FROM repondre WHERE LOGIN = :login');
-        $stmt->execute(array('login' => $this->getLogin()));
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        $req = $db->prepare('SELECT ID_QUESTION, REPONSE FROM repondre WHERE LOGIN = :login');
+        $req->execute(array('login' => $this->getLogin()));
+        return $req->fetch(PDO::FETCH_ASSOC);
     }
 
     // SETTERS
@@ -77,7 +77,6 @@ class Etudiant extends Utilisateur
         // La listeReponse n'est pas récupérée ici, mais dans la méthode getListeReponses()
     }
     
-
 
     public function aRepondu(){
         return count($this->listeReponses) > 0;
