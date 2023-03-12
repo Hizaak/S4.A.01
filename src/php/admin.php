@@ -38,8 +38,8 @@
 
 
 <?php
-    $formulaire = Formulaire::getInstance();
-    if($formulaire->existe()){
+    $formulaire = Formulaire::getInstance($database);
+    if($formulaire->existe($database)){
         echo "<div id='ferme'>
             <h2>Vous êtes connecté en tant qu'administrateur</h2>
             <button href='#'>Modifier le formulaire</button>

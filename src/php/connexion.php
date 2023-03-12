@@ -65,14 +65,15 @@
 </html>
 
 <?php
-include 'outils.php';
+include_once 'Utilisateur.php';
+include_once 'outils.php';
 
-if (isset($_SESSION['login'])) {
-    echo ('<script>document.getElementById("identifiant").value ="' . $_SESSION['login'] . '"</script>');
+if (isset($_SESSION['user'])) {
+    echo ('<script>document.getElementById("identifiant").value ="' . $_SESSION['user']->getLogin() . '"</script>');
 }
 if (isset($_POST['login']) && isset($_POST['password'])) {
     //on verifie que le mail est bien dans la base de données
-    $req = $database->prepare('SELECT * FROM utilisateur WHERE login = ?');
+    $req = $database->prepare('SELECT * FROM utilisateur WHERE login =:login');
     $req->execute(array($_POST['login']));
     $resultat = $req->fetch();
 
@@ -88,19 +89,15 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
 
         if ($resultat['PASSWORD'] != ' ' && password_verify($_POST['password'], $resultat['PASSWORD'])) {
             //on verifie que l'utilisateur a bien validé son compte
-            if ($resultat['VALIDE'] == "oui") {
-                //on stocke le mail dans une variable de session
-                $toto = new stdClass();
-                $toto->nom = 'max';
-                $_SESSION['user'] = $toto;
-                $_SESSION['login'] = strtolower(($_POST['login']));
-                $_SESSION['role'] = $resultat['ROLE'];
-                $_SESSION['message'] = ["Bienvenue " . $_SESSION['login'], "#006700"];
+            if ($resultat['VALIDE'] == 1) {
+                $user = new Utilisateur(strtolower(($_POST['login'])), $database);
+                $_SESSION['user'] = $user;
                 //on redirige vers la page de verification
-                if ($resultat['ROLE'] == 'admin') {
+                if ($resultat['user']['role'] == 'admin') {
                     header('Location:admin.php');
                 } else {
                     header('Location:accueil.php');
+                    echo "OUIIII";
                 }
             }
         } else {

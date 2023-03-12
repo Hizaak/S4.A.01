@@ -1,7 +1,7 @@
 <?php
 // Inclusion du fichier contenant les informations de connexion à la base de données
 require_once 'outils.php';
-include_once 'Etudiant.php';
+include_once 'Utilisateur.php';
 
 class Formulaire {
     private static $instance;
@@ -20,8 +20,8 @@ class Formulaire {
     public static function getInstance($db) {
         if (is_null(self::$instance)) {
             // Récupération des données du formulaire
-            $stmt = $db->query('SELECT * FROM formulaire');
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            $req = $db->query('SELECT * FROM formulaire');
+            $row = $req->fetch(PDO::FETCH_ASSOC);
 
             self::$instance = new Formulaire($row['ID'], $row['TYPEASSOS'], $row['DATE_DEBUT'], $row['DATE_FINAL']);
         }
@@ -48,8 +48,8 @@ class Formulaire {
     public function getEtat(Etudiant $etudiant, $db) {
 
         // Récupération des données du formulaire
-        $stmt = $db->query('SELECT * FROM formulaire');
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        $req = $db->query('SELECT * FROM formulaire');
+        $row = $req->fetch(PDO::FETCH_ASSOC);
 
         if (!$row) {
             return 'formulaireInexistant';
@@ -71,8 +71,8 @@ class Formulaire {
 
     public function existe($db) {
         // Récupération des données du formulaire
-        $stmt = $db->query('SELECT * FROM formulaire');
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        $req = $db->query('SELECT * FROM formulaire');
+        $row = $req->fetch(PDO::FETCH_ASSOC);
         return $row;
     }
 
