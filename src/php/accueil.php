@@ -80,7 +80,7 @@ switch($etatForm)
 
         case 'peutModifier':
             echo"<div id='divTemps'>
-                <h2>Le formulaire est dispo,<br>réponds-y !</h2>
+                <h2>Merci d'avoir d'avoir répondu,<br>Tu peux toujours modifier !</h2>
                 <ul>
                     <li>
                         <h2 class='Temps' id='jours'></h2>
@@ -99,7 +99,7 @@ switch($etatForm)
                         <p class='labelTimer' id='labelSecondes'></p>
                     </li>
                 </ul>
-                <button>Modifier ma réponse</button>
+                <button>Modifier mes réponses</button>
             </div>";
         break;
 
@@ -124,12 +124,39 @@ switch($etatForm)
                         <p class='labelTimer' id='labelSecondes'></p>
                     </li>
                 </ul>
-                <button>Répondre au formulaire</button>
+                <button onclick='window.location.href = \"afficherFormulaire.php\"'>Accèder au formulaire</button>
             </div>";
         break;
+
+        case 'continueDeRepondre':
+            $QuestionsRestantes=$_SESSION['user']->getNBQuestionARepondre($database)-$_SESSION['user']->getNBQuestionRepondu($database);
+            echo"<div id='divTemps'>
+                <h2>Il te reste ".$QuestionsRestantes." Question(s),<br>réponds-y !</h2>
+                <ul>
+                    <li>
+                        <h2 class='Temps' id='jours'></h2>
+                        <p class='labelTimer' id='labelJours'></p>
+                    </li>
+                    <li>
+                        <h2 class='Temps' id='heures'></h2>
+                        <p class='labelTimer' id='labelHeures'></p>
+                    </li>
+                    <li>
+                        <h2 class='Temps' id='minutes'></h2>
+                        <p class='labelTimer' id='labelMinutes'></p>
+                    </li>
+                    <li>
+                        <H2 class='Temps' id='secondes'></H2>
+                        <p class='labelTimer' id='labelSecondes'></p>
+                    </li>
+                </ul>
+                <button onclick='window.location.href = \"afficherFormulaire.php\"'>Continuer le formulaire</button>
+            </div>";
+
         }
         ?>
-        <script type="text/javascript">var dateLimite = Date.parse("<?php echo $dateFin; ?>");
+        <script type="text/javascript">
+            var dateLimite = Date.parse("<?php echo $dateFin; ?>");
             //VARIABLES
             const dateActuelle = new Date();
             const differenceMs = Math.abs(dateLimite - dateActuelle);

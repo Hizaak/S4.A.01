@@ -321,8 +321,8 @@ function buttonToCheckBox(prop, carte) {
     bouton.setAttribute("type", "button");
     bouton.setAttribute("class", "next");
     bouton.setAttribute("value", "Suivant");
-    bouton.setAttribute("onclick", "next(" + carte.id + ")");
     bouton.setAttribute("name", carte.id + "next");
+    bouton.disabled = true;
     carte.appendChild(bouton);
 
 

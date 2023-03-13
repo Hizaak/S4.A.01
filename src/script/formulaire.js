@@ -1,11 +1,14 @@
 let questionActuelle = 0;
 let numQuestion=ListeQuestionHTML.length;
 console.log(numQuestion);
+console.log(questionActuelle);
 function suivant() {
-    //On recupere la variable global ListeQuestionHTML  
     if (questionActuelle == numQuestion) {
-        alert("Fin du questionnaire");
-        return;
+        //On redirige vers la page d'accueil dans 1 seconde
+        setTimeout(function () {
+            window.location.href = "accueil.php";
+        }, 1000);
+        return
     }
     document.getElementById('carteActuelle').innerHTML=ListeQuestionHTML[questionActuelle];
     //On regarde si c'est une question QCM ou un question Libre
@@ -116,8 +119,7 @@ function sendReponse(idQuestion, reponse) {
             // }
             console.log(data);
         }
-    });
-    
+    });    
 }
     
 

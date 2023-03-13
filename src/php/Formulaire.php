@@ -61,11 +61,15 @@ class Formulaire {
                 return 'peutConsulterMaisPasRepondu';
             }
         } else {
-            if ($user->aReponduAuFormulaire($db)) {
+            if ($user->aReponduAtousLeFormulaires($db)){
+                //Si l'utilisateur a répondu à tout le formulaire
                 return 'peutModifier';
-            } else {
-                return 'peutRepondre';
             }
+            else if($user->getNbQuestionRepondu($db)>0){
+                return 'continueDeRepondre';
+            }
+            else{}
+                return 'peutRepondre';
         }
     }
 

@@ -120,7 +120,7 @@ if(!empty($_POST)){
                         'ID_QUESTION'=>$id
                     ));
                     //On insere les reponses
-                    for ($i=0;$i<$nbProp;$i++){
+                    for ($i=0;$i<$nbPropNew;$i++){
                         $req=$database->prepare("INSERT INTO proposition (ID_QUESTION, TEXTE, COULEUR) VALUES (:ID_QUESTION, :REPONSE, :COULEUR)");
                         $req->execute(array(
                             'ID_QUESTION'=>$id,

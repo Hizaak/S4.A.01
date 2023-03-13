@@ -4,15 +4,17 @@ include_once 'question.php';
 include_once 'genereHTMLQuestion.php';
 include_once 'baseDeDonnees.php';
 
+//L'utilisateur doit être connecté et ne doit pas être un admin
+if(!isset($_SESSION['user']) || $_SESSION['user']->estAdmin()){
+    header('Location:../index.php');
+}
+
 
 //On recherche toutes les Question que l'utilisateur n'a pas encore répondu
 //On récupère les questions que l'utilisateur peut voir (donc avec un VISIBILITE de (all ou le niveau de l'utilisateur))
 //faut faire un select imbriqué
 //On récupère les questions
-$_SESSION['user']->setlogin("user");
-$_SESSION['user']->setNiveau("1");
 $req=$database->prepare("SELECT ID FROM question WHERE VISIBILITE='all' OR VISIBILITE IN (SELECT NIVEAU FROM utilisateur WHERE LOGIN=:login)");
-// TODO : Changer
 $req->execute(array("login"=>$_SESSION['user']->getLogin()));
 //On récupère les questions
 $ListeQuestion = $req->fetchAll();
@@ -32,6 +34,11 @@ foreach($ListeQuestionDejaRepondu as $question){
             unset($ListeQuestion[$key]);
         }
     }
+}
+//Si la liste est vide, on redirige vers la page d'accueil et on notifie l'utilisateur
+if(empty($ListeQuestion)){
+    header('Location:../index.php');
+    exit();
 }
 
 //On fait un array qui contient le html de chaque question pour le donner au javascript

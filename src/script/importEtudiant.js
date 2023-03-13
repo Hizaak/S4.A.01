@@ -137,7 +137,7 @@ function select_all(){
 //On fait un event sur le bouton ajouter qui ajoute une tout en bas du tableau et on focus le premier input
 document.getElementById("btn-add").addEventListener("click", function() {
     //On créer une ligne et on le met direct en mode edition
-    console.log(add_line().getElementsByClassName("btn-edit")[0].dispatchEvent(new Event("click")));
+    add_line().getElementsByClassName("btn-edit")[0].dispatchEvent(new Event("click"));
 });
 
 
@@ -209,9 +209,7 @@ function edit_line(tr){
     document.getElementById("btn-save").disabled = true;
     // La touche enter click sur le bouton valider
     let btn=tr.getElementsByClassName("btn-edit")[0];
-    console.log(tr)
     var tr = btn.parentNode.parentNode;
-    console.log(tr)
     //On recupere les td du tr
     var td = tr.getElementsByClassName("info");
     for (var j = 0; j < td.length; j++) {
