@@ -69,8 +69,6 @@ function estConnecte(){
 
 
 
-
-
 function notifier($message,$rgb="#333",$time=3000){
     //affiche un message dans la page
     $injection = '<section id="injection"><script type="text/javascript" src="../script/outils.js"></script>

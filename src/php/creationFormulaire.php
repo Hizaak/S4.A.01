@@ -16,12 +16,13 @@
 </html>
 
 <?php
+include_once "Utilisateur.php";
 include_once "genereHTMLQuestion.php";
 include_once "baseDeDonnees.php";
 include_once "outils.php";
-if (!estAdmin()) {
-    header('Location:connexion.php');
-}
+// if (!estAdmin()) {
+//     header('Location:connexion.php');
+// }
 
 
 if (!empty($_POST) && !isset($_SESSION['Questions'])) {

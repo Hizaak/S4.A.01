@@ -147,7 +147,7 @@ class ReprQuestionQCM extends ReprQuestion
             </section>
             <section>
                 <label for="iconeCarte">Icone de la carte</label>
-                <input  type="file" accept="image/*" name="' . $this->question->get_id_html() . 'editIcon" class="editIcon" id="' . $this->question->get_id_html() . 'editIcon" onchange=loadimg(' . $this->question->get_id_html() . 'editIcon)>
+                <input  type="file" accept="image/png" name="' . $this->question->get_id_html() . 'editIcon" class="editIcon" id="' . $this->question->get_id_html() . 'editIcon" onchange=loadimg(' . $this->question->get_id_html() . 'editIcon)>
             </section>
             <section>
             <label for="visibilite">Visibilité de la carte</label>
@@ -219,7 +219,7 @@ class ReprQuestionLIBRE extends ReprQuestion
             </section>
             <section>
                 <label for="iconeCarte">Icone de la carte</label>
-                <input  type="file" accept="image/*" name="' . $this->question->get_id_html() . 'editIcon" class="editIcon" id="' . $this->question->get_id_html() . 'editIcon" onchange=loadimg(' . $this->question->get_id_html() . 'editIcon,' . $this->question->get_id_html() . ')>
+                <input  type="file" accept="image/png" name="' . $this->question->get_id_html() . 'editIcon" class="editIcon" id="' . $this->question->get_id_html() . 'editIcon" onchange=loadimg(' . $this->question->get_id_html() . 'editIcon,' . $this->question->get_id_html() . ')>
             </section>
             <section>
             <label for="visibilite">Visibilité de la carte</label>

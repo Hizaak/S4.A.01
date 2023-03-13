@@ -107,14 +107,14 @@ CREATE TABLE `question` (
   `INTITULE` varchar(50) NOT NULL,
   `ID_FORMULAIRE` int DEFAULT NULL,
   `IMAGE` varchar(260) DEFAULT '..\\sources\\images\\imgplaceholder.jpg',
-  `VISIBILITE` enum('all','1','2') DEFAULT NULL,
+  `VISIBILITE` varchar(5) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT '''all''',
   `TYPEQUESTION` enum('QCM','LIBRE') DEFAULT NULL,
   `NBREPONSE` int DEFAULT '1',
   `NBCARACTEREMAX` int DEFAULT '255',
   PRIMARY KEY (`ID`),
   KEY `ID_FORMULAIRE` (`ID_FORMULAIRE`),
   CONSTRAINT `question_ibfk_1` FOREIGN KEY (`ID_FORMULAIRE`) REFERENCES `formulaire` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -168,7 +168,7 @@ CREATE TABLE `utilisateur` (
   `PASSWORD` varchar(64) DEFAULT NULL,
   `ROLE` enum('admin','user') DEFAULT 'user',
   `NIVEAU` int DEFAULT NULL,
-  `VALIDE` enum('oui','non') DEFAULT 'non',
+  `VALIDE` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`LOGIN`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -179,7 +179,7 @@ CREATE TABLE `utilisateur` (
 
 LOCK TABLES `utilisateur` WRITE;
 /*!40000 ALTER TABLE `utilisateur` DISABLE KEYS */;
-INSERT INTO `utilisateur` VALUES ('amaurice006','Maurice','Alexandre','$2y$10$VUWZiNXTZSOGS6mtubUff.SGVX20d3cnP3XDa31lGjMyVuHdUKfa.','user',2,'oui'),('espicka','Spicka','Evan','$2y$10$SsWuP7mJLxP4dFOVs2NOF.4wu0JXvUwyhOgspn/nMbNfsQ78AvPwu','user',2,'oui'),('hegoberria',NULL,NULL,'$2y$10$JIPHKlKMA.0V2Bjz11U7m.vT.qzjS33EN0tSdoxCOQbLO.vz4a1D2','admin',NULL,'oui'),('lerrecarret','Errezarret','Leho',NULL,'user',2,'non'),('ndargazan001','Nicolas','Dargazanli','$2y$10$PgAWRG.J47yApnhNgDc9pOmlo8N76F9D8qRUwGxhiteYodlA72cHW','user',2,'oui'),('pdavid003','David','Pierre','$2y$10$pt8AQd4idRavWymkw/ct2usyBACjEozjFnAnLFKiJKw2ln8kiF/o.','user',1,'oui'),('random002','Adom','',NULL,'user',3,'non'),('tbrierre','Brierre','Titouan','$2y$10$tFbdKxeIDVFw6VC1SC8MUO4sKR8F9Pel7fxpgp69x6IeKZZuGSiVS','user',2,'oui'),('user','user','user','$2y$10$aV1mj3NJwwJO.a24Gng04OposIBnKVJdSZts4wuKe4sF.4.RmjW/a','user',NULL,'oui');
+INSERT INTO `utilisateur` VALUES ('amaurice006','Maurice','Alexandre',NULL,'user',2,0),('espicka','Spicka','Evan',NULL,'user',2,0),('hegoberria',NULL,NULL,'$2y$10$Gl93xsaDRMeYum4tMFp1uu31koELgb0i4n0TxErfZuV8.oaZEx6zy','admin',NULL,1),('ndargazan001','Dargazanli','Nicolas',NULL,'user',1,0),('pdavid003','David','Pierre',NULL,'user',1,0),('tbrierre','Brierre','Titouan',NULL,'user',2,0),('user','user','user','$2y$10$nVNxkuP258oiuRhp4nZlVOsYBIihAV7A8NzwWuerPWsveqvMpQmvm','user',2,1);
 /*!40000 ALTER TABLE `utilisateur` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -192,15 +192,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-03-07  0:10:02
-
-CREATE TABLE `repondreQCM`(
-	`ID_QUESTION` int NOT NULL,
-  	`LOGIN` varchar(64) NOT NULL,
-    `ID_PROP` int,
-    PRIMARY KEY (`ID_QUESTION`,`LOGIN`,`ID_PROP`),
-    KEY `LOGIN` (`LOGIN`),
-    CONSTRAINT `repondreQCM_ibfk_1` FOREIGN KEY (`ID_QUESTION`) REFERENCES `question` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
-    CONSTRAINT `repondreQCM_ibfk_2` FOREIGN KEY (`LOGIN`) REFERENCES `utilisateur` (`LOGIN`) ON DELETE CASCADE ON UPDATE CASCADE,
-    CONSTRAINT `repondreQCM_ibfk_3` FOREIGN KEY (`ID_PROP`) REFERENCES `proposition` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+-- Dump completed on 2023-03-13  0:10:03
