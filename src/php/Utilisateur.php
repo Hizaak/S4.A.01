@@ -74,8 +74,8 @@ class Utilisateur {
     }
 
     public function getNbQuestionRepondu($db){
-        $req=$db->prepare("SELECT ID_QUESTION FROM repondreQCM UNION SELECT ID_QUESTION FROM repondreLibre WHERE LOGIN=:login");
-        $req->execute(array("login"=>$this->getLogin()));
+        $req=$db->prepare("SELECT ID_QUESTION FROM repondreQCM WHERE LOGIN=:leftlogin UNION SELECT ID_QUESTION FROM repondreLibre WHERE LOGIN=:rightlogin");
+        $req->execute(array("leftlogin"=>$this->getLogin(),"rightlogin"=>$this->getLogin()));
         return $req->rowCount();
     }
 

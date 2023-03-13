@@ -16,12 +16,11 @@ if(!isset($_SESSION['user']) || $_SESSION['user']->estAdmin()){
 //On récupère les questions
 $req=$database->prepare("SELECT ID FROM question WHERE VISIBILITE='all' OR VISIBILITE IN (SELECT NIVEAU FROM utilisateur WHERE LOGIN=:login)");
 $req->execute(array("login"=>$_SESSION['user']->getLogin()));
-//On récupère les questions
 $ListeQuestion = $req->fetchAll();
 
 //On récupère les questions que l'utilisateur a déjà répondu et on les supprime de la liste dans la table repondreQCM et repondreLibre
-$req=$database->prepare("SELECT ID_QUESTION FROM repondreQCM UNION SELECT ID_QUESTION FROM repondreLibre WHERE LOGIN=:login");
-$req->execute(array("login"=>$_SESSION['user']->getLogin()));
+$req=$database->prepare("SELECT ID_QUESTION FROM repondreQCM WHERE LOGIN=:LEFTlogin UNION SELECT ID_QUESTION FROM repondreLibre WHERE LOGIN=:RIGHTlogin");
+$req->execute(array("LEFTlogin"=>$_SESSION['user']->getLogin(),"RIGHTlogin"=>$_SESSION['user']->getLogin()));
 //On récupère les questions
 $ListeQuestionDejaRepondu = $req->fetchAll();
 //On parcourt les questions déjà répondu
