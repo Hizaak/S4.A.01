@@ -37,10 +37,8 @@ if (!estConnecte()) {
 <main>
 <?php
 
-    // On fait une variable qui va prendre pour valeur ce que va retourner SELECT * FROM Etudiant WHERE login = $_SESSION['login']
 
     var_dump($_SESSION);
-    $etudiant = new Etudiant($_SESSION['login']);
     // $etatForm = formulaire::getInstance()->getEtat();
     $dateFin = mktime(23, 59, 59, 3, 31, 2023);
 

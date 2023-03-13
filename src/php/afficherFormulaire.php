@@ -1,6 +1,5 @@
 <?php
-session_start();
-include_once 'Etudiant.php';
+include_once 'Utilisateur.php';
 include_once 'question.php';
 include_once 'genereHTMLQuestion.php';
 include_once 'baseDeDonnees.php';
@@ -9,14 +8,31 @@ include_once 'baseDeDonnees.php';
 //On recherche toutes les Question que l'utilisateur n'a pas encore répondu
 //On récupère les questions que l'utilisateur peut voir (donc avec un VISIBILITE de (all ou le niveau de l'utilisateur))
 //faut faire un select imbriqué
-$_SESSION['login']="user";
 //On récupère les questions
+$_SESSION['user']->setlogin("user");
+$_SESSION['user']->setNiveau("1");
 $req=$database->prepare("SELECT ID FROM question WHERE VISIBILITE='all' OR VISIBILITE IN (SELECT NIVEAU FROM utilisateur WHERE LOGIN=:login)");
 // TODO : Changer
-$req->execute(array("login"=>$_SESSION['login']));
-
+$req->execute(array("login"=>$_SESSION['user']->getLogin()));
 //On récupère les questions
 $ListeQuestion = $req->fetchAll();
+
+//On récupère les questions que l'utilisateur a déjà répondu et on les supprime de la liste dans la table repondreQCM et repondreLibre
+$req=$database->prepare("SELECT ID_QUESTION FROM repondreQCM UNION SELECT ID_QUESTION FROM repondreLibre WHERE LOGIN=:login");
+$req->execute(array("login"=>$_SESSION['user']->getLogin()));
+//On récupère les questions
+$ListeQuestionDejaRepondu = $req->fetchAll();
+//On parcourt les questions déjà répondu
+foreach($ListeQuestionDejaRepondu as $question){
+    //On parcourt les questions
+    foreach($ListeQuestion as $key=>$question2){
+        //Si la question est la même
+        if($question["ID_QUESTION"]==$question2["ID"]){
+            //On supprime la question de la liste
+            unset($ListeQuestion[$key]);
+        }
+    }
+}
 
 //On fait un array qui contient le html de chaque question pour le donner au javascript
 $ListeQuestionHTML = array();
@@ -38,7 +54,8 @@ echo "<script>var ListeQuestionHTML =".json_encode($ListeQuestionHTML).";</scrip
     <title>Formulaire</title>
 </head>
 <body>
-    <div id='jsp'>
+    <!-- On place la divb -->
+    <div id='carteActuelle'>
     </div>
 </body>
 </html>

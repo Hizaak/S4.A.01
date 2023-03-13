@@ -58,7 +58,7 @@ function verifUtilisateur($user){
 
 function estConnecte(){
     //retourne true si l'utilisateur est connecté
-    if (isset($_SESSION['login'])){
+    if (isset($_SESSION['user'])){
         return true;
     }
     else{
@@ -69,7 +69,7 @@ function estConnecte(){
 
 function estAdmin(){
     //retourne true si l'utilisateur est admin
-    if (estConnecte() && $_SESSION['role'] == 'admin'){
+    if (estConnecte() && $_SESSION['user']['role'] == 'admin'){
         return true;
     }
     else{
@@ -83,7 +83,7 @@ function estAdmin(){
 
 function notifier($message,$rgb="#333",$time=3000){
     //affiche un message dans la page
-    echo '<section id="injection"><script type="text/javascript" src="../script/outils.js"></script>
+    $injection = '<section id="injection"><script type="text/javascript" src="../script/outils.js"></script>
           <link rel="stylesheet" href="../style/notification.css">
           <div id="notif">'."$message".'</div>
           <script>notification("'.$rgb.'","'.$time.'")</script></section>';
