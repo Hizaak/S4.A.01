@@ -108,7 +108,7 @@ class ReprQuestionQCM extends ReprQuestion
 
             for ($i = 0; $i < count($this->question->get_listPropositions()); $i++) {
                 $html .= '<input id="' . $this->question->get_id_html() . 'rep' . $i . '"
-                                class="BoutonReponse' . $typeQuestion . '" 
+                                class="BoutonReponse BoutonReponse' . $typeQuestion . '" 
                                 type="' . $buttontype . '" 
                                 name="' . $this->question->get_id_html() . 'rep' . $i . '" 
                                 value="' . $this->question->get_listPropositions()[$i][0] . '" 
@@ -120,7 +120,7 @@ class ReprQuestionQCM extends ReprQuestion
                 $html .=
                     '<section class=checkboxRep>
                         <input id="' . $this->question->get_id_html() . 'rep' . $i . '" 
-                               class="BoutonReponse' . $typeQuestion . '" 
+                               class="BoutonReponse BoutonReponse' . $typeQuestion . '" 
                                type="' . $buttontype . '" 
                                name="' . $this->question->get_id_html() . 'rep' . $i . '"
                                value="true">
@@ -130,7 +130,7 @@ class ReprQuestionQCM extends ReprQuestion
             }
             $html .= '</section>
             <section class="suivant">
-                <input type="button" name="' . $this->question->get_id_html() . 'next" class="next" id="' . $this->question->get_id_html() . 'next" value="Suivant" onClick=next(' . $this->question->get_id_html() . ')>';
+                <input data-maxReponse="' . $this->question->get_nbReponseMax() . '" type="button" name="' . $this->question->get_id_html() . 'next" class="next" id="' . $this->question->get_id_html() . 'next" value="Suivant" disabled>';
         }
         return $html;
     }
@@ -202,7 +202,7 @@ class ReprQuestionLIBRE extends ReprQuestion
                 <textarea name="' . $this->question->get_id_html() . 'rep" class="inputReponseLibre" id="' . $this->question->get_id_html() . 'rep" placeholder="Vous pouvez écrire jusqu\'à ' . $this->question->get_nbCaractereMax() . ' caractères" maxlength="' . $this->question->get_nbCaractereMax() . '"></textarea>
             </section>
         <section class="suivant">
-            <input type="button" name="' . $this->question->get_id_html() . 'next" class="next" id="' . $this->question->get_id_html() . 'next" value="Suivant" onClick=next(' . $this->question->get_id_html() . ')>';
+            <input data-maxCar ="'.$this->question->get_nbCaractereMax().'" type="button" name="' . $this->question->get_id_html() . 'next" class="next" id="' . $this->question->get_id_html() . 'next" value="Suivant" disabled>';
 
 
         return $html;

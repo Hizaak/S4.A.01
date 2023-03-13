@@ -1,10 +1,10 @@
 <?php
 include 'outils.php';
 #include 'baseDeDonnees.php';
-if (!estAdmin()){
-    echo "Vous n'avez pas les droits pour accéder à cette page";
-    header('Location:connexion.php');
-}
+// if (!estAdmin()){
+//     echo "Vous n'avez pas les droits pour accéder à cette page";
+//     header('Location:connexion.php');
+// }
 
 //Si on on a cliqué sur le bouton enregistrer
 if (isset($_POST['ins_mod'])||isset($_POST['loginChange'])||isset($_POST['del'])){

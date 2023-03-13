@@ -77,7 +77,6 @@ function notifier($message,$rgb="#333",$time=3000){
           <link rel="stylesheet" href="../style/notification.css">
           <div id="notif">'."$message".'</div>
           <script>notification("'.$rgb.'","'.$time.'")</script></section>';
-    echo $injection;
 }
 
 function interdireVisiteur(){

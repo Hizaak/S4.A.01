@@ -43,6 +43,22 @@ abstract class Question{
         return $listQuestions;
     }
 
+    static public function db_get($database,$id){
+        $req=$database->prepare("SELECT ID,TYPEQUESTION FROM question WHERE ID=:id");
+        $req->execute(array("id"=>$id));
+        $resultat=$req->fetch();
+        $id=$resultat['ID'];
+        $type=$resultat['TYPEQUESTION'];
+        if($type=="QCM"){
+            $carte=Question_QCM::db_get($database,$id);
+            return $carte;
+        }
+        if($type=="LIBRE"){
+            $carte=Question_Libre::db_get($database,$id);
+            return $carte;
+        }
+    }
+
 
     //On creer les getters et setters
 
