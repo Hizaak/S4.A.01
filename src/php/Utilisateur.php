@@ -57,9 +57,20 @@ class Utilisateur {
         return $req->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function aRepondu(){
-        return !empty($this->listeReponses);
+
+    public function aReponduAuFormulaire($db){
+        $req1 = $db->prepare('SELECT login FROM repondreQCM WHERE LOGIN = :login');
+        $req1->execute(array('login' => $this->getLogin()));
+        $req2 = $db->prepare('SELECT login FROM repondreLibre WHERE LOGIN = :login');
+        $req2->execute(array('login' => $this->getLogin()));
+        if($req1->fetch(PDO::FETCH_ASSOC || $req2->fetch(PDO::FETCH_ASSOC))){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
+
 
 
 }
