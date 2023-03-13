@@ -45,23 +45,23 @@ class Formulaire {
         return $this->date_fin;
     }
 
-    public function getEtat(Etudiant $etudiant, $db) {
+    public function getEtat(Utilisateur $user, $db) {
 
         // Récupération des données du formulaire
         $req = $db->query('SELECT * FROM formulaire');
         $row = $req->fetch(PDO::FETCH_ASSOC);
 
-        if (!$row) {
-            return 'formulaireInexistant';
-        }
+        // if (!$row) {
+        //     return 'formulaireInexistant';
+        // }
         if ($row['DATE_FINAL'] < date('Y-m-d')) {
-            if ($etudiant->aRepondu()) {
+            if ($user->aReponduAuFormulaire($db)) {
                 return 'peutConsulterEtRepondu';
             } else {
                 return 'peutConsulterMaisPasRepondu';
             }
         } else {
-            if ($etudiant->aRepondu()) {
+            if ($user->aReponduAuFormulaire($db)) {
                 return 'peutModifier';
             } else {
                 return 'peutRepondre';
@@ -73,7 +73,11 @@ class Formulaire {
         // Récupération des données du formulaire
         $req = $db->query('SELECT * FROM formulaire');
         $row = $req->fetch(PDO::FETCH_ASSOC);
-        return $row;
+        if(!$row) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
 }

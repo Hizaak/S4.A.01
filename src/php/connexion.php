@@ -97,7 +97,6 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
                     header('Location:admin.php');
                 } else {
                     header('Location:accueil.php');
-                    echo "OUIIII";
                 }
             }
         } else {

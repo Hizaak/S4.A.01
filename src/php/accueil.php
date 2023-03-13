@@ -1,5 +1,5 @@
 <?php
-include 'outils.php';
+include 'Utilisateur.php';
 include 'Formulaire.php';
 if (!estConnecte()) {
     header('Location: connexion.php');
@@ -36,87 +36,101 @@ if (!estConnecte()) {
 </header>
 <main>
 <?php
+    
+
+    // récupérer l'instance de formulaire
+    $formulaire = Formulaire::getInstance($database);
+    // on met le formulaire dans la session
+    $_SESSION['formulaire'] = $formulaire;
+    $etatForm = $_SESSION['formulaire']->getEtat($_SESSION['user'],$database);
+    $dateFin = $_SESSION['formulaire']->getDateFin();
 
 
-    var_dump($_SESSION);
-    // $etatForm = formulaire::getInstance()->getEtat();
-    $dateFin = mktime(23, 59, 59, 3, 31, 2023);
-
-
-
-switch($etatForm)               //TODO : A changer en fonction de la variable indiquant l'état du questionnaire
+switch($etatForm)
     {
-            case 'inexistant':          //TODO : A adapter
-                echo"<div id='inexistant'>
-                <h2>Le questionnaire n'est pas<br>encore disponible... Désolé</h2>
-            </div>";
-        break;
+        // ON NE FAIT PAS CE CAS CAR IL Y A FORCEMENT UN FORMULAIRE
+        // case 'formulaireInexistant': 
+        //     echo"<div id='inexistant'>
+        //         <h2>Le questionnaire n'est pas<br>encore disponible... Désolé</h2>
+        //     </div>";
+        // break;
 
-        case 'formulaireEnAttente':
-            echo "<div id='ferme'>
-                <h2>Merci d'avoir répondu au<br>formulaire !</h2>
-                <hr>
-                <h3 class='textH3'>Vous aller bientôt être parrainé(e) !</h3>
-            </div>";
-        break;
+        // ON NE FAIT PAS CE CAS CAR ON LE FERA DANS LA V2 DE L'APPLICATION
+        // case 'formulaireEnAttente':
+        //     echo "<div id='ferme'>
+        //         <h2>Merci d'avoir répondu au<br>formulaire !</h2>
+        //         <hr>
+        //         <h2 class='textp'>Vous aller bientôt être parrainé(e) !</h2>
+        //     </div>";
+        // break;
 
-        case 'accederResultats':
+        case 'peutConsulterEtRepondu':
             echo "<div id='ferme'>
                 <h2>Merci d'avoir répondu au<br>formulaire !</h2>
                 <button>Accéder aux résultats</button>
             </div>";
         break;
 
-        case 'modificationReponse':
+        case 'peutConsulterMaisPasRepondu':
             echo "<div id='ferme'>
-                <h2>Merci d'avoir répondu au<br>formulaire !</h2>
-                <button>Modifier ma réponse</button>
+                <h2>Vous avez été parainné !</h2>
+                <button>Accéder aux résultats</button>
             </div>";
         break;
 
-        case 'ouvert':
+        case 'peutModifier':
             echo"<div id='divTemps'>
                 <h2>Le formulaire est dispo,<br>réponds-y !</h2>
                 <ul>
                     <li>
                         <h2 class='Temps' id='jours'></h2>
-                        <h3 class='labelHeure'>";
-                        if($jours <= 1){echo"jour";}
-                        else{echo"jours";}
-                        echo"</h3>
+                        <p class='labelTimer' id='labelJours'></p>
                     </li>
                     <li>
-                        <h2 class='Temps' id='heures'></h2>";
-                        if($heures <= 1)
-                        {
-                            echo"heure";
-                        }
-                        else{echo"heures";}
-                        echo"</h3>
+                        <h2 class='Temps' id='heures'></h2>
+                        <p class='labelTimer' id='labelHeures'></p>
                     </li>
                     <li>
                         <h2 class='Temps' id='minutes'></h2>
-                        <h3 class='labelHeure'>";
-                        if($minutes <= 1){echo"minute";}
-                        else{echo"minutes";}
-                        echo"</h3>
+                        <p class='labelTimer' id='labelMinutes'></p>
                     </li>
                     <li>
                         <H2 class='Temps' id='secondes'></H2>
-                        <h3 class='labelHeure'>";
-                        if($secondes <= 1){echo"seconde";}
-                        else{echo"secondes";}
-                        echo"</h3>
+                        <p class='labelTimer' id='labelSecondes'></p>
                     </li>
                 </ul>
                 <button>Modifier ma réponse</button>
             </div>";
         break;
+
+        case 'peutRepondre':
+            echo"<div id='divTemps'>
+                <h2>Le formulaire est dispo,<br>réponds-y !</h2>
+                <ul>
+                    <li>
+                        <h2 class='Temps' id='jours'></h2>
+                        <p class='labelTimer' id='labelJours'></p>
+                    </li>
+                    <li>
+                        <h2 class='Temps' id='heures'></h2>
+                        <p class='labelTimer' id='labelHeures'></p>
+                    </li>
+                    <li>
+                        <h2 class='Temps' id='minutes'></h2>
+                        <p class='labelTimer' id='labelMinutes'></p>
+                    </li>
+                    <li>
+                        <H2 class='Temps' id='secondes'></H2>
+                        <p class='labelTimer' id='labelSecondes'></p>
+                    </li>
+                </ul>
+                <button>Répondre au formulaire</button>
+            </div>";
+        break;
         }
         ?>
-        <script>
+        <script type="text/javascript">var dateLimite = Date.parse("<?php echo $dateFin; ?>");
             //VARIABLES
-            const dateLimite = new Date(2023,0,0,0,0,0) //year, month, day, hour, minute, second
             const dateActuelle = new Date();
             const differenceMs = Math.abs(dateLimite - dateActuelle);
 
@@ -130,6 +144,29 @@ switch($etatForm)               //TODO : A changer en fonction de la variable in
             document.getElementById("minutes").innerHTML = (minutes);
             document.getElementById("secondes").innerHTML = (seconds);
 
+            if(days === 1 || days === 0)            {
+                document.getElementById("labelJours").innerHTML = "jour";
+            } else {
+                document.getElementById("labelJours").innerHTML = "jours";
+            }
+
+            if(hours === 1 || hours === 0)            {
+                document.getElementById("labelHeures").innerHTML = "heure";
+            } else {
+                document.getElementById("labelHeures").innerHTML = "heures";
+            }
+
+            if(minutes === 1 || minutes === 0)            {
+                document.getElementById("labelMinutes").innerHTML = "minute";
+            } else {
+                document.getElementById("labelMinutes").innerHTML = "minutes";
+            }
+
+            if(seconds === 1 || seconds === 0)            {
+                document.getElementById("labelSecondes").innerHTML = "seconde";
+            } else {
+                document.getElementById("labelSecondes").innerHTML = "secondes";
+            }
             const countdown = setInterval(function(){
                 // Décrémenter le temps restant
                 seconds--;
@@ -156,14 +193,46 @@ switch($etatForm)               //TODO : A changer en fonction de la variable in
                             }
                             else
                             {
-                                document.getElementById("jours").innerHTML = (days);
+                                document.getElementById("jours").innerHTML = days;
+                                if(days === 1 || days === 0)
+                                {
+                                    document.getElementById("labelJours").innerHTML = "jour";
+                                }
+                                else
+                                {
+                                    document.getElementById("labelJours").innerHTML = "jours";
+                                }
                             }
                         }
-                        document.getElementById("heures").innerHTML = (hours);
+                        document.getElementById("heures").innerHTML = hours;
+                        if(hours === 1 || hours === 0)
+                        {
+                            document.getElementById("labelHeures").innerHTML = "heure";
+                        }
+                        else
+                        {
+                            document.getElementById("labelHeures").innerHTML = "heures";
+                        }
                     }
-                    document.getElementById("minutes").innerHTML = (minutes);
+                    document.getElementById("minutes").innerHTML = minutes;
+                    if(minutes === 1 || minutes === 0)
+                    {
+                        document.getElementById("labelMinutes").innerHTML = "minute";
+                    }
+                    else
+                    {
+                        document.getElementById("labelMinutes").innerHTML = "minutes";
+                    }
                 }
-                document.getElementById("secondes").innerHTML = (seconds);
+                document.getElementById("secondes").innerHTML = seconds;
+                if(seconds === 1 || seconds === 0)
+                {
+                    document.getElementById("labelSecondes").innerHTML = "seconde";
+                }
+                else
+                {
+                    document.getElementById("labelSecondes").innerHTML = "secondes";
+                }
             }, 1000); // Exécuter la fonction toutes les secondes (1000 millisecondes).
 
         </script>
