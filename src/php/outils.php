@@ -67,16 +67,6 @@ function estConnecte(){
 }
 
 
-function estAdmin(){
-    //retourne true si l'utilisateur est admin
-    if (estConnecte() && $_SESSION['user']['role'] == 'admin'){
-        return true;
-    }
-    else{
-        return false;
-    }
-}
-
 
 
 

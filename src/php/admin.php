@@ -1,7 +1,8 @@
 <?php
+    include_once 'Utilisateur.php';
     include_once 'outils.php';
     include_once 'Formulaire.php';
-    if (!estAdmin()) {
+    if (!$_SESSION['user']->estAdmin()) {
         header('Location:connexion.php');
     }
 ?>

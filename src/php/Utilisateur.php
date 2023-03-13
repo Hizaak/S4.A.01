@@ -45,10 +45,9 @@ class Utilisateur {
 
         $this->login = $login;
         $this->role = $row['ROLE'];
-        $this->estValide = $row['EST_VALIDE'];
+        $this->estValide = $row['VALIDE'];
         $this->nom = $row['NOM'];
         $this->prenom = $row['PRENOM'];
-
 
     }
 
