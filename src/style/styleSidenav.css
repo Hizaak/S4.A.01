@@ -1,0 +1,138 @@
+/************************************SIDE NAVIGATION*************************************/
+
+.sidenav
+{
+    height: 100%;
+    width: 400px;
+    position: fixed;
+    z-index: 1;
+    top: -75px;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    right: 0;
+}
+
+.sidenav a
+{
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover
+{
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn
+{
+    height : 40px;
+    width : 35px;
+    position: absolute;
+    top: 10px;
+    right: 0px;
+    font-size: 30px;
+    margin-left: 50px;
+}
+
+#sideNavButton
+{
+    font-size:40px;
+    cursor:pointer;
+    position: fixed;
+    top: 30px;
+    right: 0px;
+    transform: translate(-50%, -50%);
+}
+
+.sidenav p
+{
+    font-size: 20px;
+    margin-left : 25px;
+    margin-bottom: 5px;
+
+}
+
+#connectedUser
+{
+    font-size : 30px;
+    font-weight: bolder;
+    margin-left : 25px;
+}
+
+.sidenav hr
+{
+    width : 350px;
+    margin : auto;
+    margin-top : 25px;
+}
+
+.sidenav form
+{
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    padding: 20px 15px;
+    padding-top: 10px;
+    text-align: left;
+    max-width: 350px;
+}
+
+.sidenav form p
+{
+    margin-left : 10px;
+    font-size: 16px;
+    margin-top : 10px;
+}
+
+.sidenav input
+{
+    outline-color: invert;
+    background-color: var(--background-color);
+    border: solid 1px var(--border-color);
+    color: var(--text-color);
+    border-radius: 4px;
+    margin-top: 3px;
+    padding: 5px;
+}
+
+.errorPWD
+{
+    color: rgb(255, 65, 65)
+}
+
+#labelPWD
+{
+    font-size: 12px;
+    margin-left : 2px;
+}
+
+#boutonMAJ
+{
+    align-self: end;
+    width : 150px;
+    border-color : transparent;
+    color : var(--main-text-color);
+    background-color: rgb(70, 70, 70);
+    font-weight: initial;
+}
+
+#disconnect
+{
+    height : 40px;
+    width : auto;
+    position: absolute;
+    bottom: 75px;
+    right: 35px;
+    margin-left: 50px;
+    color: rgb(255, 65, 65);
+    border-color: rgb(255, 65, 65);
+    background-color: transparent;
+}
+
+/************************************END OF SIDE NAVIGATION*************************************/

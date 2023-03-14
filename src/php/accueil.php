@@ -15,6 +15,7 @@ if (0) {
 
     <!-- CSS -->
     <link rel="stylesheet" href="../style/styleAccueil.css">
+    <link rel="stylesheet" href="../style/styleSidenav.css">
     <link rel="stylesheet" href="../style/style.css">
 
     <!-- Polices -->
@@ -35,6 +36,22 @@ if (0) {
     <p id="sideNavText1">Connecté en tant que :</p>
     <p id="connectedUser">USER</p>
     <hr>
+    <form method="POST">
+
+        <p>Ancien mot de passe</p>
+        <input name='login' type="text" id="identifiant" required>
+        <p class="errorPWD">Le mot de passe est erroné</p>
+        <p>Nouveau mot de passe</p>
+        <input id="MDP" type="password" name="password" autocomplete="current-password" required>
+        <p>Confirmer nouveau mot de passe</p>
+        <input id="MDP-verif" type="password" name="password-verif" autocomplete="current-password" required>
+        <p class="errorPWD">Les mots de passe de correspondent pas</p>
+        <p id="labelPWD">Le mot de passe doit faire plus de 8 caractères et contenir un caractère spécial.</p>
+        <button id="boutonMAJ" type="submit" name="submit">Mettre à jour</button>
+
+    </form>
+    <hr>
+    <button id="disconnect">Déconnexion</button>
 
 </div>
 
@@ -98,7 +115,8 @@ switch($etatForm)               //TODO : A changer en fonction de la variable in
                         echo"</h3>
                     </li>
                     <li>
-                        <h2 class='Temps' id='heures'></h2>";
+                        <h2 class='Temps' id='heures'></h2>
+                        <h3 class='labelHeure'>";
                         if($heures <= 1)
                         {
                             echo"heure";
