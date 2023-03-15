@@ -1,8 +1,8 @@
 
 <?php
-
+require_once "Outils.php";
+require_once "Utilisateur.php";
 require_once "hongroise.php";
-require_once "OutilsAsso.php";
 
 //Récuperer les étudiants dans la base de données
 
@@ -15,13 +15,24 @@ $listEtud = array();
 //On sépare les étudiants en deux listes : les premières années et les deuxièmes années
 
 $listPremAn=array();
-$req = $database->prepare('SELECT * FROM utilisateur WHERE niveau = 1');
+$req = $database->prepare('SELECT login FROM utilisateur WHERE niveau = 1');
 $req->execute();
+for ($i = 0; $i < $req->rowCount(); $i++) {
+    $donnees = $req->fetch();
+    $listPremAn[] = new Utilisateur($donnees["login"], $database);
+}
+
 
 
 $listSecAn=array();
-$req = $database->prepare('SELECT * FROM utilisateur WHERE niveau = 2');
+$req = $database->prepare('SELECT login FROM utilisateur WHERE niveau = 2');
 $req->execute();
+for ($i = 0; $i < $req->rowCount(); $i++) {
+    $donnees = $req->fetch();
+    $listSecAn[] = new Utilisateur($donnees["login"], $database);
+}
+
+
 
 
 //Supprimer les parrains qui ne veulent pas de filleul

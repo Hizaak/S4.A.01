@@ -52,10 +52,18 @@ class Utilisateur {
     }
 
     public function getListeReponses($db){
-        //TODO : A REFAIRE NE FONCTIONNE PLUS
-        $req = $db->prepare('SELECT ID_QUESTION, REPONSE FROM repondre WHERE LOGIN = :login');
-        $req->execute(array('login' => $this->getLogin()));
-        return $req->fetch(PDO::FETCH_ASSOC);
+        // TODO : ça c'est complètement pété, attention.
+
+        // Il faut récupérer chaque question
+        // Puis mettre 
+        $req = $db->prepare('SELECT ID FROM question WHERE Visibilite = :visibilite');
+        $leNiveau = $this->getNiveau();
+        $req->execute(array('visibilite' => );
+        var_dump($req->fetch(PDO::FETCH_ASSOC));
+        // $req = $db->prepare('SELECT TEXTE FROM proposition JOIN repondreQCM ON proposition.ID = repondreQCM.ID_PROP WHERE LOGIN = :login');
+        // $req->execute(array('login' => $this->getLogin()));
+        // var_dump($req->fetch(PDO::FETCH_ASSOC));
+        // return $req->fetch(PDO::FETCH_ASSOC);
     }
 
 
@@ -92,4 +100,9 @@ class Utilisateur {
 
 
 }
+
+// fonction test
+$utilisateurDeBase = new Utilisateur('amaurice006', $database);
+// var_dump($utilisateurDeBase->getListeReponses($database));
+$utilisateurDeBase->getListeReponses($database)
 ?>

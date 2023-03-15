@@ -23,6 +23,39 @@ body {
     border-left: none;
 }
 
+header
+{
+    padding-block : 25px;
+    padding-left: 25px;
+    width : 100%;
+    background-color: var(--light-background-color);
+}
+
+header p{
+    display : inline;
+}
+
+header select{
+    margin-right: 15px;
+    background-color: var(--background-color);
+    color : var(--main-text-color);;
+    border-color: var(--icon-color);
+    border-radius: 5px;
+}
+
+header input
+{
+    margin-right: 15px;
+    background-color: var(--background-color);
+    color : var(--main-text-color);
+    border-color: var(--icon-color);
+    border-radius: 5px;
+}
+
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+
 #carteActuelle {
     margin-top: 20px;
     margin: auto;
