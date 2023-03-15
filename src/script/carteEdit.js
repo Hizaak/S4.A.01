@@ -2,71 +2,71 @@
 
 
 
+function syncValid(){
+    var boutons = document.querySelectorAll(".ValideeditSubmit");
+    for (let i = 0; i < boutons.length; i++) {
+        boutons[i].addEventListener("click", function () {
+            //On recupere tout les inputs de la partie propriété
+            idcarte = this.parentNode.parentNode.querySelector(".carte").id;
+            intitule = this.parentNode.querySelector(".editName").value;
+            visibilite= this.parentNode.querySelector(".editVisibilite").value;
+            
 
-var boutons = document.querySelectorAll(".ValideeditSubmit");
-for (let i = 0; i < boutons.length; i++) {
-    boutons[i].addEventListener("click", function () {
-        //On recupere tout les inputs de la partie propriété
-        idcarte = this.parentNode.parentNode.querySelector(".carte").id;
-        intitule = this.parentNode.querySelector(".editName").value;
-        visibilite= this.parentNode.querySelector(".editVisibilite").value;
-        
+            //On recupere le type de la question
+            if (this.parentNode.parentNode.querySelector(".carte").querySelector("section").className.includes("QCM")) { type = "QCM"; }
+            else { type = "LIBRE"; }
 
-        //On recupere le type de la question
-        if (this.parentNode.parentNode.querySelector(".carte").querySelector("section").className.includes("QCM")) { type = "QCM"; }
-        else { type = "LIBRE"; }
-
-        //On note limit la contraite de la question (nombre de reponse pour un QCM ou nombre de caractere pour une question libre)
-        if (type == "QCM") {
-            limit = this.parentNode.querySelector(".editNbRepMax").value;
-        }
-        else {
-            limit = this.parentNode.querySelector(".editNbCaractereMax").value;
-        }
-
-        //on recupère le base64 de l'image
-        image = this.parentNode.parentNode.querySelector(".carte").querySelector("img").src;
-
-        //Si l'input file est vide on met l'image a null
-        if (this.parentNode.querySelector(".editIcon").files.length == 0) {
-            image = null;
-        }
-
-        //On creer un dictionnaire
-
-        proposition = {};
-        //On parcours les reponses d'un QCM
-        if (type == "QCM") {
-            sectionReponse = this.parentNode.querySelectorAll(".btnsettings");
-            sectionReponse.forEach(reponse => {
-                attributs = {};
-                text = reponse.querySelector("input[type=text]");
-                color = reponse.querySelector("input[type=color]"); //null si pas de couleur
-                attributs['text'] = text.value;
-
-                //condition sur une ligne, si color est null alors on met null sinon on met la valeur de color
-                attributs['color'] = color == null ? null : color.value;
-
-                //on ajoute l'array au dictionnaire avec comme clé l'id de la reponse en enlevant l'id de la carte et le mot edit
-                proposition[text.id.replace(idcarte + "edit", "")] = attributs;
-            });
-        }
-
-        //On envois le json au serveur par avec ajax
-        $.ajax({
-            url: "questionUpload.php",
-            type: "POST",
-            data: { id: idcarte, type, intitule: intitule,visibilite:visibilite,image: image, proposition: proposition, limit: limit },
-            success: function (data) {
-                console.log(data); 
+            //On note limit la contraite de la question (nombre de reponse pour un QCM ou nombre de caractere pour une question libre)
+            if (type == "QCM") {
+                limit = this.parentNode.querySelector(".editNbRepMax").value;
             }
+            else {
+                limit = this.parentNode.querySelector(".editNbCaractereMax").value;
+            }
+
+            //on recupère le base64 de l'image
+            image = this.parentNode.parentNode.querySelector(".carte").querySelector("img").src;
+
+            //Si l'input file est vide on met l'image a null
+            if (this.parentNode.querySelector(".editIcon").files.length == 0) {
+                image = null;
+            }
+
+            //On creer un dictionnaire
+
+            proposition = {};
+            //On parcours les reponses d'un QCM
+            if (type == "QCM") {
+                sectionReponse = this.parentNode.querySelectorAll(".btnsettings");
+                sectionReponse.forEach(reponse => {
+                    attributs = {};
+                    text = reponse.querySelector("input[type=text]");
+                    color = reponse.querySelector("input[type=color]"); //null si pas de couleur
+                    attributs['text'] = text.value;
+
+                    //condition sur une ligne, si color est null alors on met null sinon on met la valeur de color
+                    attributs['color'] = color == null ? null : color.value;
+
+                    //on ajoute l'array au dictionnaire avec comme clé l'id de la reponse en enlevant l'id de la carte et le mot edit
+                    proposition[text.id.replace(idcarte + "edit", "")] = attributs;
+                });
+            }
+
+            //On envois le json au serveur par avec ajax
+            $.ajax({
+                url: "questionUpload.php",
+                type: "POST",
+                data: { id: idcarte, type, intitule: intitule,visibilite:visibilite,image: image, proposition: proposition, limit: limit },
+                success: function (data) {
+                    console.log(data); 
+                }
+
+            });
 
         });
 
-    });
-
+    }
 }
-
 
 
 
@@ -363,20 +363,40 @@ document.getElementById("ajoutCarteBouton").addEventListener("click", function (
         url: "creationFormulaire.php",
         type: "POST",
         data: {
-            type: type
+            ajoutCarte: type
         },
         success: function (data) {
-            //On recupère le html de la carte et on l'ajoute à la page au dessus de la section parente du bouton
-            var carte = document.createElement("section");
-            carte.innerHTML = data;
-            document.getElementById("ajoutCarteBouton").parentElement.parentElement.insertBefore(carte, document.getElementById("ajoutCarteBouton").parentElement);
-            //On ajoute un event listener sur le bouton de suppression de la carte
-            carte.querySelector(".suppCarte").addEventListener("click", function () {
-                this.parentElement.remove();
-            }
-            );
+            //DATA est du on le met juste au dessus de la section de class fb-ajout
+            document.querySelector(".fb-ajout").insertAdjacentHTML("beforebegin", data);
+            syncValid();
+            synDelete();
+
         }
     });
 
 });
 
+//On fait un event listener sur le bouton de suppression d'une carte sur les span de class delete
+function synDelete(){
+    var sup = document.querySelectorAll(".delete");
+    for (var i = 0; i < sup.length; i++) {
+        sup[i].addEventListener("click", supQuestion);
+    }
+}
+function supQuestion(){
+    var id = this.id;
+    //On supprime la section d'id id+container
+    $.ajax({
+        url: "creationFormulaire.php",
+        type: "POST",
+        data: {
+            supQuestion: id
+        },
+        success: function (data) {
+            //DATA est du on le met juste au dessus de la section de class fb-ajout
+            document.getElementById(id+"container").remove();
+        }
+    });
+}
+syncValid();
+synDelete()
