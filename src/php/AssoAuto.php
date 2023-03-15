@@ -8,15 +8,21 @@ require_once "OutilsAsso.php";
 
 $listEtud = array();
 
+
 //Récuperer les réponses dans la base de données
 //TO DO
 
 //On sépare les étudiants en deux listes : les premières années et les deuxièmes années
 
 $listPremAn=array();
-$listSecAn=array();
+$req = $database->prepare('SELECT * FROM utilisateur WHERE niveau = 1');
+$req->execute();
 
-separerEtud($listEtud,$listPremAn,$listSecAn);
+
+$listSecAn=array();
+$req = $database->prepare('SELECT * FROM utilisateur WHERE niveau = 2');
+$req->execute();
+
 
 //Supprimer les parrains qui ne veulent pas de filleul
 //On part du principe que la dernière question des deuxieme annee est la question sur le fait de vouloir un filleul ou non
@@ -75,8 +81,25 @@ for ($i = 0; $i < $nbFilleuls; $i++) {
 $matMarque = appliquerMethodeHongroise($matriceScore, $max);
 
 //On associe les filleuls aux parrains
+for ($i = 0; $i < $nbFilleuls; $i++) {
+    for ($j = 0; $j < $nbParrains; $j++) {
+        if ($matMarque[$i][$j] == 0) {
+            $listPremAn[$i]->setParrain($listSecAn[$j]);
+            $listSecAn[$j]->setFilleul($listPremAn[$i]);
+        }
+    }
+}
 
 
 //Enregistrer les associations dans la base de données
+
+$req = $database->prepare('UPDATE utilisateur SET parrain = :parrain WHERE id = :id');
+foreach($listPremAn as $etud){
+    $req->execute(array(
+        'parrain' => $etud->getParrain()->getId(),
+        'id' => $etud->getId()
+    ));
+}
+
 
 ?>
