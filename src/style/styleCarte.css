@@ -1,5 +1,5 @@
 body {
-    background-color: #16161b;
+    background-color: #212027;
     color: #CCCCCC;
 }
 .container {
@@ -18,7 +18,7 @@ body {
     width: 300px;
     height: auto;
     /* border: 1px solid black; */
-    box-shadow: 0 0 10px #666666;
+    box-shadow: 0 0 10px #16161b;
     border-radius: 10px;
     border-left: none;
 }
@@ -32,8 +32,8 @@ body {
     width: 20rem;
     margin: auto;
     border-radius: 10px;
-    box-shadow: 0 0 10px #666666;
-    background-color: #212027;
+    box-shadow: 0 0 10px #16161b;
+    background-color: #22282e;
     justify-content: space-between;
     text-align: center;
     padding-bottom: 20px;
@@ -48,13 +48,16 @@ img {
 
 }
 
-.BoutonReponse[type='button'] {
+input[type='button'] {
     height: 50px;
     border-radius: 10px;
     width: 75%;
     margin: auto;
+    box-shadow: 0 0 10px #16161b;
+}
+
+.BoutonReponse {
     border: none;
-    box-shadow: 0 0 10px #666666;
 }
 
 .QCM {
@@ -86,8 +89,8 @@ form {
     padding: 2%;
     border: none;
     border-radius: 10px;
-    box-shadow: 0 0 10px #666666;
-    background-color: #212027;
+    box-shadow: 0 0 10px #16161b;
+    background-color: #22282e;
     color: #a8a8a8;
     padding: -10px;
 }
@@ -95,8 +98,8 @@ form {
 .inputReponseLibre:focus {
     outline: none;
     border: none;
-    box-shadow: 0 0 10px #666666;
-    background-color: #212027;
+    box-shadow: 0 0 10px #16161b;
+    background-color: #22282e;
     color: #a8a8a8;
 }
 
@@ -105,23 +108,29 @@ form {
     padding: 5px;
     font-size: 20px;
     letter-spacing: 1px;
-    background-color: #212027;
+    background-color: #22282e;
     cursor: pointer;
     border-radius: 5px;
     transition: 0.2s;
     width: 90%;
     color: #ff8c3fcc;
-    border: none;
+    border: 1px 1px solid #ff8c3fcc;
     box-shadow: 0 0 10px #ff8c3fcc;
 }
 
 .next:hover:not(:disabled) {
     background-color: #ff8c3fcc;
-    box-shadow: 0 0 10px #ff8c3fcc;
     color: #EEEEEE;
 }
 
 .next:disabled {
-    color: #666666;
+    color: #CCCCCC;
+    border: none;
     box-shadow: none;
+}
+
+.next:enabled {
+    color: #ff8c3fcc;
+    border: 1px solid #ff8c3fcc;
+    box-shadow: 0 0 10px #ff8c3fcc;
 }
