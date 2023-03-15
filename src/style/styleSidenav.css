@@ -9,10 +9,21 @@
     top: -75px;
     background-color: #111;
     overflow-x: hidden;
-    transition: 0.5s;
+
     padding-top: 60px;
     right: 0;
 }
+
+#dimScreen
+{
+    width:100vw;
+    height:100vh;
+    background-color:rgba(0, 0, 0, 50%);
+    position:fixed;
+    margin-top: 0px;
+    border-radius: 0px
+}
+
 
 .sidenav a
 {
@@ -135,4 +146,8 @@
     background-color: transparent;
 }
 
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
 /************************************END OF SIDE NAVIGATION*************************************/

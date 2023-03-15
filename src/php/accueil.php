@@ -54,7 +54,7 @@ if (0) {
     <button id="disconnect">Déconnexion</button>
 
 </div>
-
+<div id="dimScreen" onclick="closeNav()"></div>
     <header>
         <span id='sideNavButton' onclick="openNav()">&#9776</span>
         <img id="logoHegoBerria" src="../sources/icons/logo_hego_berria.svg" alt="Le logo de Hego Berria">
@@ -216,10 +216,13 @@ switch($etatForm)               //TODO : A changer en fonction de la variable in
 
             function openNav() {
                 document.getElementById("mySidenav").style.width = "400px";
+                document.getElementById("dimScreen").style.display = "fixed";
             }
 
+            /* Set the width of the side navigation to 0 and the left margin of the page content to 0, and the background color of body to white */
             function closeNav() {
                 document.getElementById("mySidenav").style.width = "0";
+                document.getElementById("dimScreen").style.display = "none";
             }
         </script>
     </main>
