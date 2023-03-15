@@ -58,7 +58,7 @@ class Utilisateur {
         // Puis mettre 
         $req = $db->prepare('SELECT ID FROM question WHERE Visibilite = :visibilite');
         $leNiveau = $this->getNiveau();
-        $req->execute(array('visibilite' => );
+        $req->execute(array('visibilite' => $leNiveau));
         var_dump($req->fetch(PDO::FETCH_ASSOC));
         // $req = $db->prepare('SELECT TEXTE FROM proposition JOIN repondreQCM ON proposition.ID = repondreQCM.ID_PROP WHERE LOGIN = :login');
         // $req->execute(array('login' => $this->getLogin()));
@@ -101,8 +101,4 @@ class Utilisateur {
 
 }
 
-// fonction test
-$utilisateurDeBase = new Utilisateur('amaurice006', $database);
-// var_dump($utilisateurDeBase->getListeReponses($database));
-$utilisateurDeBase->getListeReponses($database)
 ?>
