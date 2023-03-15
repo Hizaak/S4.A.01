@@ -80,7 +80,7 @@ switch($etatForm)
 
         case 'peutModifier':
             echo"<div id='divTemps'>
-                <h2>Merci d'avoir d'avoir répondu,<br>Tu peux toujours modifier !</h2>
+                <h2>Merci d'avoir d'avoir répondu,<br>tu peux toujours modifier !</h2>
                 <ul>
                     <li>
                         <h2 class='Temps' id='jours'></h2>
@@ -99,7 +99,7 @@ switch($etatForm)
                         <p class='labelTimer' id='labelSecondes'></p>
                     </li>
                 </ul>
-                <button>Modifier mes réponses</button>
+                <button onclick='window.location.href = \"afficherFormulaire.php?modify=1\"'>Modifier mes réponses</button>
             </div>";
         break;
 
@@ -130,8 +130,12 @@ switch($etatForm)
 
         case 'continueDeRepondre':
             $QuestionsRestantes=$_SESSION['user']->getNBQuestionARepondre($database)-$_SESSION['user']->getNBQuestionRepondu($database);
+            $msg="question";
+            if($QuestionsRestantes>1){
+                $msg.="s";
+            }
             echo"<div id='divTemps'>
-                <h2>Il te reste ".$QuestionsRestantes." Question(s),<br>réponds-y !</h2>
+                <h2>Il te reste ".$QuestionsRestantes." ".$msg.",<br>réponds-y !</h2>
                 <ul>
                     <li>
                         <h2 class='Temps' id='jours'></h2>

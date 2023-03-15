@@ -23,6 +23,16 @@ if (isset($_POST['reponse'])&&isset($_POST['idQuestion'])) {
         //On recupere les réponses de l'utilisateur
         $reponses = $_POST['reponse'];
         //On parcourt les réponses de l'utilisateur
+
+        //On recupere les réponse de l'utilisateur si elles existe déjà
+        $req=$database->prepare("SELECT * FROM repondreQCM WHERE ID_QUESTION=:idQuestion AND LOGIN=:Login");
+        $req->execute(array("idQuestion" => $idQuestion, "Login" => $idUtilisateur));
+        //Si elle existe déjà on la supprime
+        if($req->fetch()){
+            //On supprime la réponse précédente et on ajoute la nouvelle
+            $req = $database->prepare("DELETE FROM repondreQCM WHERE ID_QUESTION=:idQuestion AND LOGIN=:Login");
+            $req->execute(array("idQuestion" => $idQuestion, "Login" => $idUtilisateur));
+        }
         foreach ($reponses as $reponse) {
             //On parcourt les propositions de la question
             foreach ($propositions as $proposition) {
@@ -33,9 +43,8 @@ if (isset($_POST['reponse'])&&isset($_POST['idQuestion'])) {
                     //On recupere l'id de l'utilisateur
                     //On ajoute la réponse dans la base de données
                     try{
-                        $req = $database->prepare("INSERT INTO repondreQCM (ID_QUESTION,LOGIN, ID_PROP) VALUES (:idQuestion,:Login, :idProposition) ON DUPLICATE KEY UPDATE ID_PROP = ".$idProposition."");
+                        $req = $database->prepare("INSERT INTO repondreQCM (ID_QUESTION,LOGIN, ID_PROP) VALUES (:idQuestion,:Login,:idProposition)");
                         $req->execute(array("idQuestion" => $idQuestion, "Login" => $idUtilisateur, "idProposition" => $idProposition));
-
                     }catch(Exception $e){
                         $error[]=$idQuestion;
                     }

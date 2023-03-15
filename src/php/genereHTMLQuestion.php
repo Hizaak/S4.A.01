@@ -140,6 +140,9 @@ class ReprQuestionQCM extends ReprQuestion
         $buttontype = ($this->question->get_nbReponseMax() >= 2) ? "checkbox" : "button";
         $html = '
         <section class="propriete" id="' . $this->question->get_id_html() . 'propriete">
+            <section class="supprimer">
+            <span name="' . $this->question->get_id_html() . 'delete" class="delete" id="' . $this->question->get_id_html() . 'delete" onclick="supprimer(' . $this->question->get_id_html() . ')">X</span>
+            </section>
             <section>
                 <label for="intituleCarte">Intitulé de la carte</label>
                 <input  type="text" name="' . $this->question->get_id_html() . 'editName" class="editName" id="' . $this->question->get_id_html() . 'editName" value="' . $this->question->get_name() . '" oninput="maj(' . $this->question->get_id_html() . 'propriete,' . $this->question->get_id_html() . ')">
@@ -212,6 +215,9 @@ class ReprQuestionLIBRE extends ReprQuestion
     {
         $html = '
         <section class="propriete" id="' . $this->question->get_id_html() . 'propriete">
+            <section class="supprimer">
+                <span name="' . $this->question->get_id_html() . 'delete" class="delete" id="' . $this->question->get_id_html() . 'delete" onclick="supprimer(' . $this->question->get_id_html() . ')">X</span>
+            </section>
             <section>
                 <label for="intituleCarte">Intitulé de la carte</label>
                 <input  type="text" name="' . $this->question->get_id_html() . 'editName" class="editName" id="' . $this->question->get_id_html() . 'editName" value="' . $this->question->get_name() . '" oninput="maj(' . $this->question->get_id_html() . 'propriete,' . $this->question->get_id_html() . ')">

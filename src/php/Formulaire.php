@@ -68,9 +68,10 @@ class Formulaire {
             else if($user->getNbQuestionRepondu($db)>0){
                 return 'continueDeRepondre';
             }
-            else{}
+            else{
                 return 'peutRepondre';
         }
+    }
     }
 
     public function existe($db) {

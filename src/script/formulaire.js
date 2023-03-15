@@ -1,7 +1,12 @@
 let questionActuelle = 0;
 let numQuestion=ListeQuestionHTML.length;
-console.log(numQuestion);
-console.log(questionActuelle);
+const queryString = window.location.search;
+if(new URLSearchParams(queryString).get('modify')==1){
+    modif=true;
+}
+else{
+    modif=false;
+}
 function suivant() {
     if (questionActuelle == numQuestion) {
         //On redirige vers la page d'accueil dans 1 seconde
@@ -38,8 +43,17 @@ function suivant() {
                 }
             }
             );
+            if(modif){
+                let reponse = ListeReponse[questionActuelle];
+                for (let i = 0; i < BoutonReponseQCM.length; i++) {
+                    if (reponse.includes(BoutonReponseQCM[i].nextElementSibling.innerText)) {
+                        BoutonReponseQCM[i].checked=true;
+                    }
+                }
+                check_Nbreponses_Checkbox(BoutonReponseQCM);
+            }
         }
-        //Sinon c'est une question QCM avec des simple
+        //Sinon c'est une question QCM avec des simple boutons
         else {
             //On met un event listener sur les boutons input de class BoutonReponseQCM
             let BoutonReponseQCM = document.getElementsByClassName("BoutonReponseQCM");
@@ -50,11 +64,24 @@ function suivant() {
                     suivant();
                 });
         }
+        if(modif){
+            //On met en bleu la bordure du bouton correspondant à la réponse
+            let reponse = ListeReponse[questionActuelle][0];
+            for (let i = 0; i < BoutonReponseQCM.length; i++) {
+                if (reponse==BoutonReponseQCM[i].value) {
+                    BoutonReponseQCM[i].style.borderColor="blue";
+                }
+            }
+        }
+
     }
     }
     else if (ListeQuestionHTML[questionActuelle].includes("Libre")) {
         //On fait un event listener sur le textarea inputReponseLibre pour qu'il active le bouton suivant si le texte fait moi de 10 caractères
         let inputReponseLibre = document.getElementsByClassName("inputReponseLibre")[0];
+        if(modif){
+            console.log(ListeReponse[questionActuelle]);
+        }
         btnSuivant=document.getElementsByClassName("next")[0];
         let maxCar=parseInt(btnSuivant.getAttribute("data-maxCar"));
         inputReponseLibre.addEventListener("keyup", function () {
@@ -75,6 +102,10 @@ function suivant() {
             }
         }
         );
+        if(modif){
+            inputReponseLibre.value=ListeReponse[questionActuelle];
+            inputReponseLibre.dispatchEvent(new Event('keyup'));
+        }
     }
     questionActuelle++;
 }

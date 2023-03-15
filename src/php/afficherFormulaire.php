@@ -18,27 +18,47 @@ $req=$database->prepare("SELECT ID FROM question WHERE VISIBILITE='all' OR VISIB
 $req->execute(array("login"=>$_SESSION['user']->getLogin()));
 $ListeQuestion = $req->fetchAll();
 
-//On récupère les questions que l'utilisateur a déjà répondu et on les supprime de la liste dans la table repondreQCM et repondreLibre
-$req=$database->prepare("SELECT ID_QUESTION FROM repondreQCM WHERE LOGIN=:LEFTlogin UNION SELECT ID_QUESTION FROM repondreLibre WHERE LOGIN=:RIGHTlogin");
-$req->execute(array("LEFTlogin"=>$_SESSION['user']->getLogin(),"RIGHTlogin"=>$_SESSION['user']->getLogin()));
-//On récupère les questions
-$ListeQuestionDejaRepondu = $req->fetchAll();
-//On parcourt les questions déjà répondu
-foreach($ListeQuestionDejaRepondu as $question){
-    //On parcourt les questions
-    foreach($ListeQuestion as $key=>$question2){
-        //Si la question est la même
-        if($question["ID_QUESTION"]==$question2["ID"]){
-            //On supprime la question de la liste
-            unset($ListeQuestion[$key]);
+//Si on un un get ?modify on fait pas cette partie
+if(!isset($_GET['modify']) || $_GET['modify']!="1"){
+    //On récupère les questions que l'utilisateur a déjà répondu et on les supprime de la liste dans la table repondreQCM et repondreLibre
+    $req=$database->prepare("SELECT ID_QUESTION FROM repondreQCM WHERE LOGIN=:LEFTlogin UNION SELECT ID_QUESTION FROM repondreLibre WHERE LOGIN=:RIGHTlogin");
+    $req->execute(array("LEFTlogin"=>$_SESSION['user']->getLogin(),"RIGHTlogin"=>$_SESSION['user']->getLogin()));
+    //On récupère les questions
+    $ListeQuestionDejaRepondu = $req->fetchAll();
+    //On parcourt les questions déjà répondu
+    foreach($ListeQuestionDejaRepondu as $question){
+        //On parcourt les questions
+        foreach($ListeQuestion as $key=>$question2){
+            //Si la question est la même
+            if($question["ID_QUESTION"]==$question2["ID"]){
+                //On supprime la question de la liste
+                unset($ListeQuestion[$key]);
+            }
         }
     }
+    if(empty($ListeQuestion)){
+        header('Location:../index.php');
+        exit();
+    }
+}
+else{
+    //L'utilisateur veut modifier ses réponses
+    echo "Vous pouvez modifier vos réponses";
+    $req=$database->prepare("SELECT repondreQCM.ID_QUESTION,TEXTE FROM repondreQCM JOIN proposition ON repondreQCM.ID_PROP=proposition.ID WHERE repondreQCM.LOGIN=:LEFTlogin UNION SELECT repondreLibre.ID_QUESTION,repondreLibre.REPONSE FROM repondreLibre WHERE repondreLibre.LOGIN=:RIGHTlogin ORDER BY ID_QUESTION");
+    $req->execute(array("LEFTlogin"=>$_SESSION['user']->getLogin(),"RIGHTlogin"=>$_SESSION['user']->getLogin()));
+    //On fait un array avec comme clé l'id de la question et comme valeur l'array des réponses
+    $ListeReponse = array();
+    while($reponse = $req->fetch()){
+        $ListeReponse[$reponse["ID_QUESTION"]][] = $reponse["TEXTE"];
+    }
+    //On remplace les clés par la position de la question dans la liste
+    $ListeReponse = array_values($ListeReponse);
+    
+    //On injecte ca dans le js
+    echo "<script>var ListeReponse =".json_encode($ListeReponse).";</script>";
 }
 //Si la liste est vide, on redirige vers la page d'accueil et on notifie l'utilisateur
-if(empty($ListeQuestion)){
-    header('Location:../index.php');
-    exit();
-}
+
 
 //On fait un array qui contient le html de chaque question pour le donner au javascript
 $ListeQuestionHTML = array();
