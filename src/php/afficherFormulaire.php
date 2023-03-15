@@ -5,9 +5,9 @@ include_once 'genereHTMLQuestion.php';
 include_once 'baseDeDonnees.php';
 
 //L'utilisateur doit être connecté et ne doit pas être un admin
-if(!isset($_SESSION['user']) || $_SESSION['user']->estAdmin()){
-    header('Location:../index.php');
-}
+// if(!isset($_SESSION['user']) || $_SESSION['user']->estAdmin()){
+//     header('Location:../index.php');
+// }
 
 
 //On recherche toutes les Question que l'utilisateur n'a pas encore répondu
@@ -43,7 +43,7 @@ if(!isset($_GET['modify']) || $_GET['modify']!="1"){
 }
 else{
     //L'utilisateur veut modifier ses réponses
-    echo "Vous pouvez modifier vos réponses";
+    echo "<h1 style='text-align:center'>Vous pouvez modifier vos réponses</h1>";
     $req=$database->prepare("SELECT repondreQCM.ID_QUESTION,TEXTE FROM repondreQCM JOIN proposition ON repondreQCM.ID_PROP=proposition.ID WHERE repondreQCM.LOGIN=:LEFTlogin UNION SELECT repondreLibre.ID_QUESTION,repondreLibre.REPONSE FROM repondreLibre WHERE repondreLibre.LOGIN=:RIGHTlogin ORDER BY ID_QUESTION");
     $req->execute(array("LEFTlogin"=>$_SESSION['user']->getLogin(),"RIGHTlogin"=>$_SESSION['user']->getLogin()));
     //On fait un array avec comme clé l'id de la question et comme valeur l'array des réponses
@@ -69,12 +69,12 @@ echo "<script>var ListeQuestionHTML =".json_encode($ListeQuestionHTML).";</scrip
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../style/styleCarte.css">
+    <link rel="stylesheet" href="../style/styleCarteEtudiant.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     
     <title>Formulaire</title>

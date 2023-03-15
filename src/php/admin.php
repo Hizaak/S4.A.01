@@ -74,13 +74,13 @@
     if($formulaire->existe($database)){
         echo "<div id='ferme'>
                 <h2>Vous êtes connecté en tant qu'administrateur</h2>
-                <button>Modifier le formulaire</button>
+                <button onclick='window.location.href = \"creationFormulaire.php\"'>Modifier le formulaire</button>
             </div>";
     }
     else {
         echo "<div id='ferme'>
             <h2>Vous êtes connecté en tant qu'administrateur</h2>
-            <button >Rédiger le formulaire</button>
+            <button onclick='window.location.href = \"creationFormulaire.php\"'>Rédiger le formulaire</button>
         </div>";
     }
 ?>
@@ -95,6 +95,10 @@
         document.getElementById("mySidenav").style.width = "0";
         document.getElementById("dimScreen").style.display = "none";
     }
+    document.getElementById("disconnect").addEventListener("click", function(){
+                //On va sur la page de déconnexion
+                window.location.href = "deconnexion.php";
+        });
 </script>
 </body>
 </html>

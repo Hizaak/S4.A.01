@@ -1,8 +1,12 @@
 <?php
 include 'Utilisateur.php';
 include 'Formulaire.php';
-if (!estConnecte()) {
+if (!isset($_SESSION['user'])) {
     header('Location: connexion.php');
+}
+//Si le user c'est un admin on le redirige vers la page admin
+if ($_SESSION['user']->estAdmin()) {
+    header('Location: admin.php');
 }
 ?>
 <!DOCTYPE html>
@@ -35,7 +39,7 @@ if (!estConnecte()) {
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <p id="sideNavText1">Connecté en tant que :</p>
-    <p id="connectedUser">USER</p>
+    <p id="connectedUser"><?php echo $_SESSION['user']->getprenom()." ".$_SESSION['user']->getnom()?></p>
     <hr>
     <form method="POST">
 
@@ -150,7 +154,7 @@ switch($etatForm)
                         <p class='labelTimer' id='labelSecondes'></p>
                     </li>
                 </ul>
-                <button onclick='window.location.href = \"afficherFormulaire.php\"'>Accèder au formulaire</button>
+                <button onclick='window.location.href = \"afficherFormulaire.php\"'>Accéder au formulaire</button>
             </div>";
         break;
 
@@ -302,6 +306,12 @@ switch($etatForm)
                 document.getElementById("mySidenav").style.width = "0";
                 document.getElementById("dimScreen").style.display = "none";
             }
+            //On fait un event listner sur le bouton d'id disconnect
+            document.getElementById("disconnect").addEventListener("click", function(){
+                //On va sur la page de déconnexion
+                window.location.href = "deconnexion.php";
+            });
+
         </script>
     </main>
 </body>

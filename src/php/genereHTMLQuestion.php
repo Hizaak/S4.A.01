@@ -141,7 +141,7 @@ class ReprQuestionQCM extends ReprQuestion
         $html = '
         <section class="propriete" id="' . $this->question->get_id_html() . 'propriete">
             <section class="supprimer">
-            <span name="' . $this->question->get_id_html() . 'delete" class="delete" id="' . $this->question->get_id_html() .'">X</span>
+            <span name="' . $this->question->get_id_html() . 'delete" class="delete" id="' . $this->question->get_id_html() .'">❌</span>
             </section>
             <section>
                 <label for="intituleCarte">Intitulé de la carte</label>
@@ -217,7 +217,7 @@ class ReprQuestionLIBRE extends ReprQuestion
         $html = '
         <section class="propriete" id="' . $this->question->get_id_html() . 'propriete">
             <section class="supprimer">
-                <span name="' . $this->question->get_id_html() . 'delete" class="delete" id="' . $this->question->get_id_html() .'">X</span>
+                <span name="' . $this->question->get_id_html() . 'delete" class="delete" id="' . $this->question->get_id_html() .'">❌</span>
             </section>
             <section>
                 <label for="intituleCarte">Intitulé de la carte</label>

@@ -74,7 +74,7 @@ function syncValid(){
 //On fait une fonction qui attend un évènement de changemet de valeur d'un des inputs
 function maj(prop, carte) {
     typereponse = prop.querySelectorAll('label')[1].textContent;
-    carte.querySelector("h2").innerText = prop.querySelector(".editName").value;
+    carte.querySelectorAll("h2")[0].innerText = prop.querySelectorAll(".editName")[0].value;
     if (typereponse == "button") {
         if (prop.querySelector(".editNbRepMax").value > 1) {
             //On transforme les boutons en checkbox si il y a plus d'une réponse possible
@@ -198,7 +198,7 @@ function addRep(prop, carte) {
         bouton = document.createElement("input");
         bouton.setAttribute("type", "button");
         bouton.setAttribute("id", carte.id + "editRep" + (nbBoutons));
-        bouton.setAttribute("class", "buttonRep");
+        bouton.setAttribute("class", "buttonRep BoutonReponse BoutonReponseQCM");
         bouton.setAttribute("value", text.value);
         bouton.setAttribute("style", "background-color:" + document.getElementById(carte.id + "editColor" + (nbBoutons)).value);
         section.appendChild(bouton);
@@ -342,7 +342,7 @@ function checkBoxToButton(prop, carte) {
         //on crée une nouvelle section de réponses avec un checkbox et un label
         var bouton = document.createElement("input");
         bouton.setAttribute("type", "button");
-        bouton.setAttribute("class", "buttonRep");
+        bouton.setAttribute("class", "buttonRep BoutonReponse BoutonReponseQCM");
         bouton.setAttribute("value", cac[i].nextSibling.nextSibling.textContent);
         bouton.setAttribute("style", "background-color:" + document.getElementById(carte.id + "editColor" + i).value);
         section.appendChild(bouton);
@@ -370,6 +370,11 @@ document.getElementById("ajoutCarteBouton").addEventListener("click", function (
             document.querySelector(".fb-ajout").insertAdjacentHTML("beforebegin", data);
             syncValid();
             synDelete();
+            if(type=="libre")
+            {
+                //On reload la page pour le moment
+                location.reload();
+            }
 
         }
     });

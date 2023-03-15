@@ -167,7 +167,7 @@ def associerParrainFilleul(reponses1eAnnees, reponses2eAnnees):
 
 def main():
     # Ouverture du json contenant les réponses
-    with open('ReponsesTestARenommer.json') as reponses:
+    with open('reponses.json') as reponses:
         reponses = json.load(reponses)
 
     reponses1eAnnees = reponses['1annee']
