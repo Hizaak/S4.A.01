@@ -93,11 +93,7 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
                 $user = new Utilisateur(strtolower(($_POST['login'])), $database);
                 $_SESSION['user'] = $user;
                 //on redirige vers la page de verification
-                if ($_SESSION['user']->estAdmin()) {
-                    header('Location:admin.php');
-                } else {
-                    header('Location:accueil.php');
-                }
+                header('Location:accueil.php');
             }
         } else {
             error("Identifiant ou mot de passe incorrect");

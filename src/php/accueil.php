@@ -4,10 +4,7 @@ include 'Formulaire.php';
 if (!isset($_SESSION['user'])) {
     header('Location: connexion.php');
 }
-//Si le user c'est un admin on le redirige vers la page admin
-if ($_SESSION['user']->estAdmin()) {
-    header('Location: admin.php');
-}
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -39,7 +36,15 @@ if ($_SESSION['user']->estAdmin()) {
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <p id="sideNavText1">Connecté en tant que :</p>
-    <p id="connectedUser"><?php echo $_SESSION['user']->getprenom()." ".$_SESSION['user']->getnom()?></p>
+    <p id="connectedUser"><?php 
+    //Si on est admin on affiche le login de l'utilisateur sinon on affiche son nom et prénom
+    if ($_SESSION['user']->estAdmin()){
+        echo $_SESSION['user']->getLogin();
+    }
+    else{
+        echo $_SESSION['user']->getprenom()." ".$_SESSION['user']->getnom();
+    }
+    ?></p>
     <hr>
     <form method="POST">
 
@@ -72,44 +77,66 @@ if ($_SESSION['user']->estAdmin()) {
     $formulaire = Formulaire::getInstance($database);
     // on met le formulaire dans la session
     $_SESSION['formulaire'] = $formulaire;
-    $etatForm = $_SESSION['formulaire']->getEtat($_SESSION['user'],$database);
     $dateFin = $_SESSION['formulaire']->getDateFin();
+    if (!$_SESSION['user']->estAdmin()){
+        $etatForm = $_SESSION['formulaire']->getEtat($_SESSION['user'],$database);
+    }
+    else{
+        //On est admin
+        //Si le formulaire est fermé on lui dit de voir les résultats
+        $etatForm=null;
+        if ($dateFin < date("Y-m-d H:i:s")){
+            echo "<div class='info' id='ferme'>
+                <h2>Le formulaire est fermé !</h2>
+                <button onclick='window.location.href = \"resultats.php\"'>Voir les résultats</button>
+            </div>";
+        }
+        //Sinon on lui dit de patienter le temps que les utilisateurs répondent
+        else{
+            echo "<div class='info' id='divTemps'>
+                <h2>Le formulaire est encore ouvert<br>Patientez encore un peu!</h2>
+                <ul>
+                    <li>
+                        <h2 class='Temps' id='jours'></h2>
+                        <p class='labelTimer' id='labelJours'></p>
+                    </li>
+                    <li>
+                        <h2 class='Temps' id='heures'></h2>
+                        <p class='labelTimer' id='labelHeures'></p>
+                    </li>
+                    <li>
+                        <h2 class='Temps' id='minutes'></h2>
+                        <p class='labelTimer' id='labelMinutes'></p>
+                    </li>
+                    <li>
+                        <H2 class='Temps' id='secondes'></H2>
+                        <p class='labelTimer' id='labelSecondes'></p>
+                    </li>
+                </ul>
+            </div>";
+            $etatForm='en cours';
+        }
+    }
 
-
+//Si l'utiliateur est un utilisateur normal
 switch($etatForm)
     {
-        // ON NE FAIT PAS CE CAS CAR IL Y A FORCEMENT UN FORMULAIRE
-        // case 'formulaireInexistant': 
-        //     echo"<div id='inexistant'>
-        //         <h2>Le questionnaire n'est pas<br>encore disponible... Désolé</h2>
-        //     </div>";
-        // break;
-
-        // ON NE FAIT PAS CE CAS CAR ON LE FERA DANS LA V2 DE L'APPLICATION
-        // case 'formulaireEnAttente':
-        //     echo "<div id='ferme'>
-        //         <h2>Merci d'avoir répondu au<br>formulaire !</h2>
-        //         <hr>
-        //         <h2 class='textp'>Vous aller bientôt être parrainé(e) !</h2>
-        //     </div>";
-        // break;
-
         case 'peutConsulterEtRepondu':
-            echo "<div id='ferme'>
+            echo "<div class='info' id='ferme'>
                 <h2>Merci d'avoir répondu au<br>formulaire !</h2>
-                <button>Accéder aux résultats</button>
+                <button onclick='window.location.href = \"resultats.php\"'>Voir les résultats</button>
             </div>";
         break;
 
         case 'peutConsulterMaisPasRepondu':
-            echo "<div id='ferme'>
+            echo "<div class='info' id='ferme'>
                 <h2>Vous avez été parainné !</h2>
-                <button>Accéder aux résultats</button>
+                <button onclick='window.location.href = \"resultats.php\"'>Voir les résultats</button>
             </div>";
         break;
 
         case 'peutModifier':
-            echo"<div id='divTemps'>
+            echo"<div class='info' id='divTemps'>
                 <h2>Merci d'avoir d'avoir répondu,<br>tu peux toujours modifier !</h2>
                 <ul>
                     <li>
@@ -134,7 +161,7 @@ switch($etatForm)
         break;
 
         case 'peutRepondre':
-            echo"<div id='divTemps'>
+            echo"<div class='info' id='divTemps'>
                 <h2>Le formulaire est dispo,<br>réponds-y !</h2>
                 <ul>
                     <li>
@@ -164,7 +191,7 @@ switch($etatForm)
             if($QuestionsRestantes>1){
                 $msg.="s";
             }
-            echo"<div id='divTemps'>
+            echo"<div class='info' id='divTemps'>
                 <h2>Il te reste ".$QuestionsRestantes." ".$msg.",<br>réponds-y !</h2>
                 <ul>
                     <li>
@@ -190,7 +217,9 @@ switch($etatForm)
         }
         ?>
         <script type="text/javascript">
-            var dateLimite = Date.parse("<?php echo $dateFin; ?>");
+            <?php if($etatForm=="peutRepondre" || $etatForm=="peutModifier" || $etatForm=="continueDeRepondre"||$etatForm=="en cours"){
+                echo '
+            var dateLimite = Date.parse("'.$dateFin.'");
             //VARIABLES
             const dateActuelle = new Date();
             const differenceMs = Math.abs(dateLimite - dateActuelle);
@@ -294,7 +323,8 @@ switch($etatForm)
                 {
                     document.getElementById("labelSecondes").innerHTML = "secondes";
                 }
-            }, 1000); // Exécuter la fonction toutes les secondes (1000 millisecondes).
+            }, 1000); // Exécuter la fonction toutes les secondes (1000 millisecondes).' ;
+            }?>
 
             function openNav() {
                 document.getElementById("mySidenav").style.width = "400px";

@@ -37,7 +37,7 @@ main{
     justify-content: center;
 }
 
-div {
+.info {
     margin-inline: auto;
     margin-top: 70px;
     background-color: var(--light-background-color);
