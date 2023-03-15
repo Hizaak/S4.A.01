@@ -1,5 +1,9 @@
 /************************************SIDE NAVIGATION*************************************/
 
+*{
+    margin : 0;
+    padding : 0;
+}
 .sidenav
 {
     height: 100%;
@@ -7,11 +11,11 @@
     position: fixed;
     z-index: 1;
     top: -75px;
-    background-color: #111;
+    background-color: var(--background-color);
     overflow-x: hidden;
-
     padding-top: 60px;
     right: 0;
+    border-radius: 0px;
 }
 
 #dimScreen
@@ -30,7 +34,7 @@
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: 25px;
-    color: #818181;
+    color: var(--main-text-color);
     display: block;
     transition: 0.3s;
 }
@@ -104,9 +108,9 @@
 .sidenav input
 {
     outline-color: invert;
-    background-color: var(--background-color);
+    background-color: var(--light-background-color);
     border: solid 1px var(--border-color);
-    color: var(--text-color);
+    color: var(--main-text-color);
     border-radius: 4px;
     margin-top: 3px;
     padding: 5px;
@@ -114,7 +118,7 @@
 
 .errorPWD
 {
-    color: rgb(255, 65, 65)
+    color: var(--error);
 }
 
 #labelPWD

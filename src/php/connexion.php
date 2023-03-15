@@ -30,7 +30,7 @@
 
     <main>
         <form method="POST">
-            <h2> id="connexionTitle">Connexion</h2>
+            <h2 id="connexionTitle">Connexion</h2>
                 <p>Identifiant</p>
                 <section id="mail">
                     <input name='login' type="text" id="identifiant" required>

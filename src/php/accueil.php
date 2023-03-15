@@ -41,12 +41,12 @@ if (!estConnecte()) {
 
         <p>Ancien mot de passe</p>
         <input name='login' type="text" id="identifiant" required>
-        <p class="errorPWD">Le mot de passe est erroné</p>
+        <p class="errorPWD"></p> <!--TODO: Coder la partie changement mot de passe-->
         <p>Nouveau mot de passe</p>
         <input id="MDP" type="password" name="password" autocomplete="current-password" required>
         <p>Confirmer nouveau mot de passe</p>
         <input id="MDP-verif" type="password" name="password-verif" autocomplete="current-password" required>
-        <p class="errorPWD">Les mots de passe de correspondent pas</p>
+        <p class="errorPWD"></p> <!--TODO: Coder la partie changement mot de passe-->
         <p id="labelPWD">Le mot de passe doit faire plus de 8 caractères et contenir un caractère spécial.</p>
         <button id="boutonMAJ" type="submit" name="submit">Mettre à jour</button>
 
@@ -293,7 +293,7 @@ switch($etatForm)
 
             function openNav() {
                 document.getElementById("mySidenav").style.width = "400px";
-                document.getElementById("dimScreen").style.display = "fixed";
+                document.getElementById("dimScreen").style.display = "initial";
             }
 
             /* Set the width of the side navigation to 0 and the left margin of the page content to 0, and the background color of body to white */
