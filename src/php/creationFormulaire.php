@@ -66,12 +66,23 @@ if (!empty($_POST) && isset($_POST['supQuestion'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../style/styleCarteAdmin.css">
+    <link rel="stylesheet" href="../style/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>Création de Formulaire</title>
 </head>
 
 <body>
-
+<header>
+    <p>Type d'association : </p>
+    <select name="typeAssos" id="typeAssos">
+        <option value="Manu">Manuelle</option>
+        <option value="Auto">Automatique</option>
+    </select>
+    <p>Date d'ouverture : </p>
+    <input type="datetime-local"></input>
+    <p>Date de fermeture</p>
+    <input type="datetime-local"></input>
+</header>
 <?php
 if (!isset($_SESSION['user']) || !$_SESSION['user']->estAdmin()){
     header('Location:connexion.php');
