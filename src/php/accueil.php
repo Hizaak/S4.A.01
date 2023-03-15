@@ -56,6 +56,7 @@ if (!estConnecte()) {
 
 </div>
 <div id="dimScreen" onclick="closeNav()"></div>
+<!--SIDENAV END-->
     <header>
         <span id='sideNavButton' onclick="openNav()">&#9776</span>
         <img id="logoHegoBerria" src="../sources/icons/logo_hego_berria.svg" alt="Le logo de Hego Berria">

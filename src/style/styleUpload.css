@@ -46,6 +46,17 @@ th, td {
     margin: 0 auto;
 }
 
+div
+{
+    margin-inline: auto;
+    text-align : center;
+    margin-top: 70px;
+    background-color: var(--light-background-color);
+    width: 300px;
+    padding-inline: 0px;
+    border-radius: 25px;
+}
+
 table {
     width: 75%;
     margin: 20px auto;
@@ -80,4 +91,17 @@ div.scroll{
 
 .feedback{
     text-align: center;
+}
+
+button {
+    padding: 5px;
+    font-size: 20px;
+    letter-spacing: 1px;
+    background-color: var(--light-background-color);
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.2s;
+    width: 150px;
+    color: var(--icon-color);
+    border: 1px solid var(--icon-color);
 }

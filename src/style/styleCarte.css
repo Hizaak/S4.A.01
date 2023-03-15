@@ -1,7 +1,12 @@
+body {
+    background-color: #16161b;
+    color: #CCCCCC;
+}
 .container {
     height: auto;
     margin: auto;
     display: flex;
+    margin-top: 20px;
     margin-bottom: 30px;
 }
 
@@ -13,18 +18,25 @@
     width: 300px;
     height: auto;
     /* border: 1px solid black; */
-    box-shadow: 0 0 10px #3232326a;
+    box-shadow: 0 0 10px #666666;
     border-radius: 10px;
     border-left: none;
 }
 
+#carteActuelle {
+    margin-top: 20px;
+    margin: auto;
+}
+
 .carte {
     width: 20rem;
-    background-color: #fff;
+    margin: auto;
     border-radius: 10px;
-    box-shadow: 0 0 10px #3232326a;
+    box-shadow: 0 0 10px #666666;
+    background-color: #212027;
     justify-content: space-between;
     text-align: center;
+    padding-bottom: 20px;
 }
 
 img {
@@ -36,11 +48,13 @@ img {
 
 }
 
-input[type="button"] {
+.BoutonReponse[type='button'] {
     height: 50px;
     border-radius: 10px;
     width: 75%;
     margin: auto;
+    border: none;
+    box-shadow: 0 0 10px #666666;
 }
 
 .QCM {
@@ -69,12 +83,45 @@ form {
     resize: none;
     width: 80%;
     height: 90%;
+    padding: 2%;
+    border: none;
     border-radius: 10px;
-    border: 1px solid gray;
+    box-shadow: 0 0 10px #666666;
+    background-color: #212027;
+    color: #a8a8a8;
     padding: -10px;
 }
 
 .inputReponseLibre:focus {
     outline: none;
-    border: 1px solid #000;
+    border: none;
+    box-shadow: 0 0 10px #666666;
+    background-color: #212027;
+    color: #a8a8a8;
+}
+
+.next {
+    margin-top: 20px;
+    padding: 5px;
+    font-size: 20px;
+    letter-spacing: 1px;
+    background-color: #212027;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.2s;
+    width: 90%;
+    color: #ff8c3fcc;
+    border: none;
+    box-shadow: 0 0 10px #ff8c3fcc;
+}
+
+.next:hover:not(:disabled) {
+    background-color: #ff8c3fcc;
+    box-shadow: 0 0 10px #ff8c3fcc;
+    color: #EEEEEE;
+}
+
+.next:disabled {
+    color: #666666;
+    box-shadow: none;
 }
