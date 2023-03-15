@@ -10,15 +10,6 @@ h1 {
 
 
 
-.textH3 {
-    font-size: 0.8em;
-    color: var(--shaded-text-color);
-}
-
-.labelTimer
-{
-    font-size : 16px;
-}
 
 hr{
     margin-block: 15px;
@@ -39,6 +30,7 @@ main{
 
 .info {
     margin-inline: auto;
+    text-align : center;
     margin-top: 70px;
     background-color: var(--light-background-color);
     width: 500px;
@@ -47,18 +39,11 @@ main{
 
 }
 
-#inexistant {
-    height: 120px;
-}
 #ferme
 {
     height: 150px;
 }
 
-#divTemps
-{
-    height: 285px;
-}
 
 button {
     margin-top: 20px;
@@ -72,6 +57,11 @@ button {
     width: 90%;
     color: var(--icon-color);
     border: 1px solid var(--icon-color);
+}
+
+.scroll button
+{
+    width : 40px;
 }
 
 button:hover {
@@ -95,9 +85,4 @@ li {
     width: 22%;
     text-align: center;
     border-radius: 10px;
-}
-
-.Temps
-{
-    font-size : 48px;
 }

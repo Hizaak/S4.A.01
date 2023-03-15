@@ -13,9 +13,7 @@
     <!-- Polices -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Fira+Mono&family=Rambla:wght@700&family=Roboto:ital,wght@0,300;1,400&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Mono&family=Rambla:wght@700&family=Roboto:ital,wght@0,300;1,400&display=swap" rel="stylesheet">
 
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="../sources/icons/favicon/apple-touch-icon.png">
@@ -33,28 +31,28 @@
     <main>
         <form method="POST">
             <h2 id="creationTitle">Modifier son mot de passe</h1>
-            <p>Identifiant</p>
-            <section id="mail">
-                <input name="login" type="text" id="identifiant"  required>
-                <label id="domaine">@iutbayonne.univ-pau.fr</label>
-                <p id="error"></p>
-            </section>
-            <p id="texteMDP">Nouveau Mot de passe</p>
-            <section>
-                <!-- TODO : mettre une limite de visibilité dans la saisie pour ne pas couvrir l'oeil -->
-                <input id="MDP" type="password" name="password" autocomplete="current-password" required>
-                <img id="oeil-MDP" src="../sources/icons/visibility_on.svg" alt="Icone d'oeil" onclick="showPassword('MDP')">
-            </section>
-            <p id="texteConfirmation">Confirmer le nouveau mot de passe</p>
-            <section>
-                <!-- TODO : mettre une limite de visibilité dans la saisie pour ne pas couvrir l'oeil -->
-                <!-- TODO : mettre un message d'erreur si les deux mots de passe ne correspondent pas + conformité du mdp -->
-                <input id="confirmation" type="password" name="conf-password" autocomplete="current-password" required>
-                <img id="oeil-confirmation" src="../sources/icons/visibility_on.svg" alt="Icone d'oeil" onclick="showPassword('confirmation')">
-            </section>
-            <button id="boutonInscription" type="submit" name="submit">Modifier</button>
-    
-            
+                <p>Identifiant</p>
+                <section id="mail">
+                    <input name="login" type="text" id="identifiant" required>
+                    <label id="domaine">@iutbayonne.univ-pau.fr</label>
+                    <p id="error"></p>
+                </section>
+                <p id="texteMDP">Nouveau Mot de passe</p>
+                <section>
+                    <!-- TODO : mettre une limite de visibilité dans la saisie pour ne pas couvrir l'oeil -->
+                    <input id="MDP" type="password" name="password" autocomplete="current-password" required>
+                    <img id="oeil-MDP" src="../sources/icons/visibility_on.svg" alt="Icone d'oeil" onclick="showPassword('MDP')">
+                </section>
+                <p id="texteConfirmation">Confirmer le nouveau mot de passe</p>
+                <section>
+                    <!-- TODO : mettre une limite de visibilité dans la saisie pour ne pas couvrir l'oeil -->
+                    <!-- TODO : mettre un message d'erreur si les deux mots de passe ne correspondent pas + conformité du mdp -->
+                    <input id="confirmation" type="password" name="conf-password" autocomplete="current-password" required>
+                    <img id="oeil-confirmation" src="../sources/icons/visibility_on.svg" alt="Icone d'oeil" onclick="showPassword('confirmation')">
+                </section>
+                <button id="boutonInscription" type="submit" name="submit">Modifier</button>
+
+
         </form>
     </main>
 
@@ -65,7 +63,7 @@
             <li><a id="nousContacter" href="../html/nousContacter.html">Nous contacter</a></li>
         </ul>
     </footer>
-    
+
     <script type="text/javascript" src="../script/outils.js"></script>
 </body>
 
@@ -76,7 +74,7 @@
 <?php
 include('outils.php');
 if (isset($_SESSION['login'])) {
-    echo ('<script>document.getElementById("identifiant").value ="'.$_SESSION['login'].'"</script>');
+    echo ('<script>document.getElementById("identifiant").value ="' . $_SESSION['login'] . '"</script>');
 }
 
 if (isset($_POST['submit']) && isset($_POST['login']) && isset($_POST['password']) && isset($_POST['conf-password'])) {
@@ -84,8 +82,8 @@ if (isset($_POST['submit']) && isset($_POST['login']) && isset($_POST['password'
     $login = $_POST['login'];
     $password = $_POST['password'];
     $confPassword = $_POST['conf-password'];
-    $resultats=verifUtilisateur($login);
-    if ($resultats){
+    $resultats = verifUtilisateur($login);
+    if ($resultats) {
         if ($resultats['VALIDE'] != "oui") {
             error("Votre compte n\'est pas encore initialisée<br>cliquez <a href='creationCompte.php'>ici</a>");
             exit();
@@ -95,18 +93,14 @@ if (isset($_POST['submit']) && isset($_POST['login']) && isset($_POST['password'
             $password = password_hash($password, PASSWORD_DEFAULT);
             $_SESSION['login'] = $login;
             $_SESSION['password'] = $password;
-            $_SESSION['code']=envoyerCodeMail($login);
-            $_SESSION['contexte']="MDPoublie";
+            $_SESSION['code'] = envoyerCodeMail($login);
+            $_SESSION['contexte'] = "MDPoublie";
             header('Location: verification.php');
-        }
-        else {
+        } else {
             error("Les mots de passe ne correspondent pas");
         }
-        
-    }
-
-
-    else {
+    } else {
         error('Identifiant incorrect');
-    }}
+    }
+}
 ?>

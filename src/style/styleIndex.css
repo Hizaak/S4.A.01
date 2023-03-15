@@ -1,13 +1,12 @@
-
-body{
-    display:flex;
+body {
+    display: flex;
     flex-direction: column;
     line-height: 1.5;
     min-height: 100vh;
 }
 
 /*Header*/
-header{
+header {
     text-align: center;
     line-height: 1;
 }
@@ -39,7 +38,7 @@ form {
     margin-inline: 10px;
 }
 
-#mainSubTitle{
+#mainSubTitle {
     font-size: 20px;
     font-family: 'Courier New', Courier, monospace;
 }
@@ -47,10 +46,10 @@ form {
 #boutonCommencer {
 
     margin-top: 20px;
-    margin-bottom : 20px;
+    margin-bottom: 20px;
     padding: 5px;
     width: 100%;
-    max-width:400px;
+    max-width: 400px;
     height: 50px;
     font-size: 20px;
     letter-spacing: 1px;
@@ -69,6 +68,6 @@ form {
     background-color: var(--icon-color);
 }
 
-a{
+a {
     font-size: 14px;
 }

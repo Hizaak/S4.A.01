@@ -19,6 +19,7 @@ Input: Fira Mono
     /* Couleurs */
     --icon-color: #ff8c3fcc;
     --link-text: #4f94e3;
+    --error: rgb(225, 70, 70);
 }
 
 * {
@@ -49,8 +50,7 @@ h3 {
     color: var(--title-text-color);
 }
 
-button
-{
+button {
     font-family: 'Roboto', sans-serif;
     font-weight: bold;
 }

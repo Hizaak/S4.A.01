@@ -13,9 +13,7 @@
     <!-- Polices -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Fira+Mono&family=Rambla:wght@700&family=Roboto:ital,wght@0,300;1,400&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Mono&family=Rambla:wght@700&family=Roboto:ital,wght@0,300;1,400&display=swap" rel="stylesheet">
 
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="../sources/icons/favicon/apple-touch-icon.png">
@@ -40,7 +38,7 @@
             <input type='submit' value='Valider' id='boutonValidation'>
         </form>
         <p id="success"></p>
-        
+
     </main>
 
 </html>
@@ -62,31 +60,31 @@ include('outils.php');
 
 //on verifie que le code est correct
 
-if(!isset($_SESSION['contexte'])){
+if (!isset($_SESSION['contexte'])) {
     error("Erreur : contexte non défini");
     header("Refresh: 1; url=connexion.php");
 }
 
 
-if (isset($_POST['code'])){
-    if ($_POST['code'] == $_SESSION['code']){
+if (isset($_POST['code'])) {
+    if ($_POST['code'] == $_SESSION['code']) {
         $contexte = $_SESSION['contexte'];
 
-        switch ($_SESSION['contexte']){
+        switch ($_SESSION['contexte']) {
             case 'creationCompte':
-                 //on actualise le mot de passe de l'utilisateur dans la table utilisateur
-                $req = $database->prepare('UPDATE utilisateur SET password = ?, valide = \'oui\' WHERE login = ?' );
+                //on actualise le mot de passe de l'utilisateur dans la table utilisateur
+                $req = $database->prepare('UPDATE utilisateur SET password = ?, valide = 1 WHERE login = ?');
                 $req->execute(array($_SESSION['password'], $_SESSION['login']));
-                $_SESSION['message'] = ["Votre compte a bien été créé !","#006700"];
+                $_SESSION['message'] = ["Votre compte a bien été créé !", "#006700"];
                 //on redirige vers la page de connexion
                 header('Location:connexion.php');
                 break;
             case 'MDPoublie':
                 //on actualise le mot de passe de l'utilisateur dans la table utilisateur
-                $req = $database->prepare('UPDATE utilisateur SET password = ? WHERE login = ?' );
+                $req = $database->prepare('UPDATE utilisateur SET password = ? WHERE login = ?');
                 $req->execute(array($_SESSION['password'], $_SESSION['login']));
                 //on redirige vers la page de connexion
-                $_SESSION['message'] = ["Votre mot de passe à bien était modifié!","#006700"];
+                $_SESSION['message'] = ["Votre mot de passe à bien été modifié !", "#006700"];
                 header('Location: connexion.php');
                 break;
             default:
@@ -97,10 +95,7 @@ if (isset($_POST['code'])){
         unset($_SESSION['contexte']);
         unset($_SESSION['code']);
         unset($_SESSION['password']);
-
-
-    }
-    else{
+    } else {
         error("Le code de vérification est incorrect");
     }
 }
