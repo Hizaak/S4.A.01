@@ -58,6 +58,10 @@ if (!isset($_SESSION['user'])) {
         <p class="errorPWD"></p> <!--TODO: Coder la partie changement mot de passe-->
         <p id="labelPWD">Le mot de passe doit faire plus de 8 caractères et contenir un caractère spécial.</p>
         <button id="boutonMAJ" type="submit" name="submit">Mettre à jour</button>
+        <?php
+        if ($_SESSION['user']->estAdmin())
+            {echo"<button id='boutonList' onclick=window.location.href = 'importEtudiant.php'>Modifier la liste étudiante</button>";}
+        ?>
 
     </form>
     <hr>
