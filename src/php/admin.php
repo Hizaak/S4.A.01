@@ -52,10 +52,14 @@
         <p id="labelPWD">Le mot de passe doit faire plus de 8 caractères et contenir un caractère spécial.</p>
         <button id="boutonMAJ" type="submit" name="submit">Mettre à jour</button>
 
+
     </form>
     <hr>
     <post>
-        <button id="boutonList" onclick='window.location.href = "importEtudiant.php"'>Modifier la liste étudiante</button>
+        <?php
+        if ($_SESSION['user']->estAdmin())
+        {echo"<button id='boutonList' onclick=window.location.href = 'importEtudiant.php'>Modifier la liste étudiante</button>";}
+        ?>
     </post>
     <button id="disconnect">Déconnexion</button>
 

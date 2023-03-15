@@ -10,7 +10,7 @@
     width: 0px;
     position: fixed;
     z-index: 1;
-    top: -75px;
+    top: 0px;
     background-color: var(--background-color);
     overflow-x: hidden;
     padding-top: 60px;
@@ -140,14 +140,15 @@
 
 #boutonList
 {
+    position: absolute;
     align-self: end;
     width : 150px;
     border-color : transparent;
     color : var(--main-text-color);
     background-color: rgb(70, 70, 70);
     font-weight: initial;
-    margin-right: -180px;
-}
+    right:35px;
+    }
 
 #disconnect
 {
