@@ -108,7 +108,7 @@ class ReprQuestionQCM extends ReprQuestion
 
             for ($i = 0; $i < count($this->question->get_listPropositions()); $i++) {
                 $html .= '<input id="' . $this->question->get_id_html() . 'rep' . $i . '"
-                                class="BoutonReponse' . $typeQuestion . '" 
+                                class="BoutonReponse BoutonReponse' . $typeQuestion . '" 
                                 type="' . $buttontype . '" 
                                 name="' . $this->question->get_id_html() . 'rep' . $i . '" 
                                 value="' . $this->question->get_listPropositions()[$i][0] . '" 
@@ -120,7 +120,7 @@ class ReprQuestionQCM extends ReprQuestion
                 $html .=
                     '<section class=checkboxRep>
                         <input id="' . $this->question->get_id_html() . 'rep' . $i . '" 
-                               class="BoutonReponse' . $typeQuestion . '" 
+                               class="BoutonReponse BoutonReponse' . $typeQuestion . '" 
                                type="' . $buttontype . '" 
                                name="' . $this->question->get_id_html() . 'rep' . $i . '"
                                value="true">
@@ -130,7 +130,7 @@ class ReprQuestionQCM extends ReprQuestion
             }
             $html .= '</section>
             <section class="suivant">
-                <input type="button" name="' . $this->question->get_id_html() . 'next" class="next" id="' . $this->question->get_id_html() . 'next" value="Suivant" onClick=next(' . $this->question->get_id_html() . ')>';
+                <input data-maxReponse="' . $this->question->get_nbReponseMax() . '" type="button" name="' . $this->question->get_id_html() . 'next" class="next" id="' . $this->question->get_id_html() . 'next" value="Suivant" disabled>';
         }
         return $html;
     }
@@ -140,6 +140,9 @@ class ReprQuestionQCM extends ReprQuestion
         $buttontype = ($this->question->get_nbReponseMax() >= 2) ? "checkbox" : "button";
         $html = '
         <section class="propriete" id="' . $this->question->get_id_html() . 'propriete">
+            <section class="supprimer">
+            <span name="' . $this->question->get_id_html() . 'delete" class="delete" id="' . $this->question->get_id_html() . 'delete" onclick="supprimer(' . $this->question->get_id_html() . ')">X</span>
+            </section>
             <section>
                 <label for="intituleCarte">Intitulé de la carte</label>
                 <input  type="text" name="' . $this->question->get_id_html() . 'editName" class="editName" id="' . $this->question->get_id_html() . 'editName" value="' . $this->question->get_name() . '" oninput="maj(' . $this->question->get_id_html() . 'propriete,' . $this->question->get_id_html() . ')">
@@ -147,7 +150,7 @@ class ReprQuestionQCM extends ReprQuestion
             </section>
             <section>
                 <label for="iconeCarte">Icone de la carte</label>
-                <input  type="file" accept="image/*" name="' . $this->question->get_id_html() . 'editIcon" class="editIcon" id="' . $this->question->get_id_html() . 'editIcon" onchange=loadimg(' . $this->question->get_id_html() . 'editIcon)>
+                <input  type="file" accept="image/png" name="' . $this->question->get_id_html() . 'editIcon" class="editIcon" id="' . $this->question->get_id_html() . 'editIcon" onchange=loadimg(' . $this->question->get_id_html() . 'editIcon)>
             </section>
             <section>
             <label for="visibilite">Visibilité de la carte</label>
@@ -202,7 +205,7 @@ class ReprQuestionLIBRE extends ReprQuestion
                 <textarea name="' . $this->question->get_id_html() . 'rep" class="inputReponseLibre" id="' . $this->question->get_id_html() . 'rep" placeholder="Vous pouvez écrire jusqu\'à ' . $this->question->get_nbCaractereMax() . ' caractères" maxlength="' . $this->question->get_nbCaractereMax() . '"></textarea>
             </section>
         <section class="suivant">
-            <input type="button" name="' . $this->question->get_id_html() . 'next" class="next" id="' . $this->question->get_id_html() . 'next" value="Suivant" onClick=next(' . $this->question->get_id_html() . ')>';
+            <input data-maxCar ="'.$this->question->get_nbCaractereMax().'" type="button" name="' . $this->question->get_id_html() . 'next" class="next" id="' . $this->question->get_id_html() . 'next" value="Suivant" disabled>';
 
 
         return $html;
@@ -212,6 +215,9 @@ class ReprQuestionLIBRE extends ReprQuestion
     {
         $html = '
         <section class="propriete" id="' . $this->question->get_id_html() . 'propriete">
+            <section class="supprimer">
+                <span name="' . $this->question->get_id_html() . 'delete" class="delete" id="' . $this->question->get_id_html() . 'delete" onclick="supprimer(' . $this->question->get_id_html() . ')">X</span>
+            </section>
             <section>
                 <label for="intituleCarte">Intitulé de la carte</label>
                 <input  type="text" name="' . $this->question->get_id_html() . 'editName" class="editName" id="' . $this->question->get_id_html() . 'editName" value="' . $this->question->get_name() . '" oninput="maj(' . $this->question->get_id_html() . 'propriete,' . $this->question->get_id_html() . ')">
@@ -219,7 +225,7 @@ class ReprQuestionLIBRE extends ReprQuestion
             </section>
             <section>
                 <label for="iconeCarte">Icone de la carte</label>
-                <input  type="file" accept="image/*" name="' . $this->question->get_id_html() . 'editIcon" class="editIcon" id="' . $this->question->get_id_html() . 'editIcon" onchange=loadimg(' . $this->question->get_id_html() . 'editIcon,' . $this->question->get_id_html() . ')>
+                <input  type="file" accept="image/png" name="' . $this->question->get_id_html() . 'editIcon" class="editIcon" id="' . $this->question->get_id_html() . 'editIcon" onchange=loadimg(' . $this->question->get_id_html() . 'editIcon,' . $this->question->get_id_html() . ')>
             </section>
             <section>
             <label for="visibilite">Visibilité de la carte</label>

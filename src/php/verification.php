@@ -73,7 +73,7 @@ if (isset($_POST['code'])) {
         switch ($_SESSION['contexte']) {
             case 'creationCompte':
                 //on actualise le mot de passe de l'utilisateur dans la table utilisateur
-                $req = $database->prepare('UPDATE utilisateur SET password = ?, valide = \'oui\' WHERE login = ?');
+                $req = $database->prepare('UPDATE utilisateur SET password = ?, valide = 1 WHERE login = ?');
                 $req->execute(array($_SESSION['password'], $_SESSION['login']));
                 $_SESSION['message'] = ["Votre compte a bien été créé !", "#006700"];
                 //on redirige vers la page de connexion
@@ -84,7 +84,7 @@ if (isset($_POST['code'])) {
                 $req = $database->prepare('UPDATE utilisateur SET password = ? WHERE login = ?');
                 $req->execute(array($_SESSION['password'], $_SESSION['login']));
                 //on redirige vers la page de connexion
-                $_SESSION['message'] = ["Votre mot de passe à bien était modifié!", "#006700"];
+                $_SESSION['message'] = ["Votre mot de passe à bien été modifié !", "#006700"];
                 header('Location: connexion.php');
                 break;
             default:

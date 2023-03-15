@@ -11,18 +11,29 @@
 </head>
 
 <body>
-</body>
-
-</html>
 
 <?php
+include_once "Utilisateur.php";
 include_once "genereHTMLQuestion.php";
 include_once "baseDeDonnees.php";
 include_once "outils.php";
-if (!estAdmin()) {
+if (!isset($_SESSION['user']) || !$_SESSION['user']->estAdmin()){
     header('Location:connexion.php');
 }
 
+if (isset($_POST['ajoutCarte'])) {
+    $type = $_POST['ajoutCarte'];
+    if ($type == "libre") {
+        $question = new QuestionLibre();
+        $question->db_insert($database);
+    } else if ($type == "QCM") {
+        $question = new QuestionQCM();
+        $question->db_insert($database);
+    }
+    //On retourne le code html de la question
+    echo ReprQuestion::get_instance($question)->get_html(true);
+    exit();
+}
 
 if (!empty($_POST) && !isset($_SESSION['Questions'])) {
     print_r($_POST);
@@ -61,9 +72,17 @@ $ListeQuestion = Question::db_get_all($database);
 foreach ($ListeQuestion as $question) {
     echo ReprQuestion::get_instance($question)->get_html(true);
 }
-
-
-
-
-
+?>
+<section class='fb-ajout'>
+        <label for="ajoutCarte">Ajouter une question de type</label>
+        <select name="ajoutCarte" id="ajoutCarte">
+            <option value="libre">Libre</option>
+            <option value="QCM">QCM</option>
+        </select>
+        <button id="ajoutCarteBouton">Ajouter</button>
+    </section>
+</body>
+</html>
+<?php
 echo '<script type="text/javascript" src="../script/carteEdit.js"></script>';
+?>

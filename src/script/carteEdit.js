@@ -8,7 +8,9 @@ for (let i = 0; i < boutons.length; i++) {
     boutons[i].addEventListener("click", function () {
         //On recupere tout les inputs de la partie propriété
         idcarte = this.parentNode.parentNode.querySelector(".carte").id;
-        ititule = this.parentNode.querySelector(".editName").value;
+        intitule = this.parentNode.querySelector(".editName").value;
+        visibilite= this.parentNode.querySelector(".editVisibilite").value;
+        
 
         //On recupere le type de la question
         if (this.parentNode.parentNode.querySelector(".carte").querySelector("section").className.includes("QCM")) { type = "QCM"; }
@@ -24,7 +26,9 @@ for (let i = 0; i < boutons.length; i++) {
 
         //on recupère le base64 de l'image
         image = this.parentNode.parentNode.querySelector(".carte").querySelector("img").src;
-        if (image.includes("/sources/images/imgplaceholder.jpg")) {
+
+        //Si l'input file est vide on met l'image a null
+        if (this.parentNode.querySelector(".editIcon").files.length == 0) {
             image = null;
         }
 
@@ -52,10 +56,9 @@ for (let i = 0; i < boutons.length; i++) {
         $.ajax({
             url: "questionUpload.php",
             type: "POST",
-            data: { id: idcarte, type, ititule: ititule, image: image, proposition: proposition, limit: limit },
+            data: { id: idcarte, type, intitule: intitule,visibilite:visibilite,image: image, proposition: proposition, limit: limit },
             success: function (data) {
-                console.log(data);
-                //Ne pas oublier l'input de visibilité 
+                console.log(data); 
             }
 
         });
@@ -129,31 +132,30 @@ function maj(prop, carte) {
 
 }
 function loadimg(input) {
-    //On recupère la carte de la propriété
+    // On récupère la carte de la propriété
     var img = input.parentNode.parentNode.parentNode.querySelector(".carte").querySelector("img");
 
     var file = input.files[0];
     var reader = new FileReader();
-    reader.onloadend = function () {
-        //si c'est une image on l'affiche
-        if (file.type.match('image.*')) {
+    reader.onloadend = function() {
+        // Si c'est une image PNG, on l'affiche
+        if (file.type.match('image/png')) {
             img.src = reader.result;
         }
-        //sinon on affiche une alerte
+        // Sinon on affiche une alerte
         else {
             input.value = "";
-            alert("Ce n'est pas une image");
-
+            alert("Ce n'est pas une image PNG");
         }
-
-    }
+    };
     if (file) {
         reader.readAsDataURL(file);
-    }
-    else {
+    } else {
         img.src = "";
-    };
+    }
 }
+
+
 
 
 
@@ -319,8 +321,8 @@ function buttonToCheckBox(prop, carte) {
     bouton.setAttribute("type", "button");
     bouton.setAttribute("class", "next");
     bouton.setAttribute("value", "Suivant");
-    bouton.setAttribute("onclick", "next(" + carte.id + ")");
     bouton.setAttribute("name", carte.id + "next");
+    bouton.disabled = true;
     carte.appendChild(bouton);
 
 
@@ -352,3 +354,29 @@ function checkBoxToButton(prop, carte) {
     //On supprime le bouton suivant
     carte.querySelector(".next").remove();
 }
+
+//On fait un event listener sur le bouton d'ajoout d'une carte 
+document.getElementById("ajoutCarteBouton").addEventListener("click", function () {
+    //On recupère le type de la carte souhaité avec le select qui est frere du bouton
+    var type = this.previousElementSibling.value;
+    $.ajax({
+        url: "creationFormulaire.php",
+        type: "POST",
+        data: {
+            type: type
+        },
+        success: function (data) {
+            //On recupère le html de la carte et on l'ajoute à la page au dessus de la section parente du bouton
+            var carte = document.createElement("section");
+            carte.innerHTML = data;
+            document.getElementById("ajoutCarteBouton").parentElement.parentElement.insertBefore(carte, document.getElementById("ajoutCarteBouton").parentElement);
+            //On ajoute un event listener sur le bouton de suppression de la carte
+            carte.querySelector(".suppCarte").addEventListener("click", function () {
+                this.parentElement.remove();
+            }
+            );
+        }
+    });
+
+});
+

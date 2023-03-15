@@ -1,5 +1,5 @@
 <?php
-include_once('baseDeDonnees.php');
+require_once 'baseDeDonnees.php';
 if(!isset($_SESSION)){
     session_start();
 }
@@ -8,11 +8,7 @@ if (isset($_SESSION['message'])){
     unset($_SESSION['message']);
 }
 
-
 interdireVisiteur();
-
-
-
 
 //Insert un code d'erreur dans la page HTML dans la div d'id "erreur"
 function error($message) {
@@ -60,20 +56,9 @@ function verifUtilisateur($user){
 
 
 
-function estConnecter(){
+function estConnecte(){
     //retourne true si l'utilisateur est connecté
-    if (isset($_SESSION['login'])){
-        return true;
-    }
-    else{
-        return false;
-    }
-}
-
-
-function estAdmin(){
-    //retourne true si l'utilisateur est admin
-    if (estConnecter() && $_SESSION['role'] == 'admin'){
+    if (isset($_SESSION['user'])){
         return true;
     }
     else{
@@ -84,14 +69,12 @@ function estAdmin(){
 
 
 
-
-function notifier($message,$rgb="#333"){
+function notifier($message,$rgb="#333",$time=3000){
     //affiche un message dans la page
-    $injection= '<section id=injection><script type="text/javascript" src="../script/outils.js"></script>
+    $injection = '<section id="injection"><script type="text/javascript" src="../script/outils.js"></script>
           <link rel="stylesheet" href="../style/notification.css">
           <div id="notif">'."$message".'</div>
-          <script>notification("'.$rgb.'")</script></section>';
-    echo $injection;
+          <script>notification("'.$rgb.'","'.$time.'")</script></section>';
 }
 
 function interdireVisiteur(){
@@ -101,3 +84,4 @@ function interdireVisiteur(){
         header('Location:accueil.php');
     }
 }
+?>
