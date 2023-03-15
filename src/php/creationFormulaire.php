@@ -80,7 +80,7 @@ if (!empty($_POST) && isset($_POST['supQuestion'])) {
     </select>
     <p>Date d'ouverture : </p>
     <input type="datetime-local"></input>
-    <p>Date de fermeture</p>
+    <p>Date de fermeture : </p>
     <input type="datetime-local"></input>
 </header>
 <?php
