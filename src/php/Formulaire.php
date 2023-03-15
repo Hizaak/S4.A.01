@@ -54,13 +54,20 @@ class Formulaire {
         // if (!$row) {
         //     return 'formulaireInexistant';
         // }
+
+        if ($row['DATE_DEBUT'] > date('Y-m-d')) {
+            return 'formulairePasCommence';
+        } else
+
         if ($row['DATE_FINAL'] < date('Y-m-d')) {
             if ($user->aReponduAuFormulaire($db)) {
                 return 'peutConsulterEtRepondu';
             } else {
                 return 'peutConsulterMaisPasRepondu';
             }
-        } else {
+        } 
+
+        else {
             if ($user->aReponduAtousLeFormulaires($db)){
                 //Si l'utilisateur a répondu à tout le formulaire
                 return 'peutModifier';

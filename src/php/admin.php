@@ -75,11 +75,32 @@
 
 <?php
     $formulaire = Formulaire::getInstance($database);
+    //On doit récupérer l'etat du formulaire
+    $dateDebut=$formulaire->getDateDebut();
+    $dateFin=$formulaire->getDateFin();
+    
     if($formulaire->existe($database)){
-        echo "<div class='info' id='ferme'>
+        //Si le formulaire n'a pas encore commencé
+        if($dateDebut>date("Y-m-d")){
+            echo "<div class='info' id='ferme'>
                 <h2>Vous êtes connecté en tant qu'administrateur</h2>
                 <button onclick='window.location.href = \"creationFormulaire.php\"'>Modifier le formulaire</button>
             </div>";
+        }
+        //Si le formulaire est en cours
+        else if($dateDebut<=date("Y-m-d") && $dateFin>=date("Y-m-d")){
+            echo "<div class='info' id='ouvert'>
+                <h2>Vous ne pouvez plus modifier le formulaire</h2>
+                <button onclick='window.location.href = \"accueil.php\"'>Accueil</button>
+            </div>";
+        }
+        //Si le formulaire est terminé
+        else if($dateFin<date("Y-m-d")){
+            echo "<div class='info' id='ferme'>
+                <h2>Le formulaire est terminé</h2>
+                <button onclick='window.location.href = \"resultats.php\"'>Afficher les résultats</button>
+            </div>";
+        }
     }
     else {
         echo "<div class='info' id='ferme'>
