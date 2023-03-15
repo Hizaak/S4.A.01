@@ -19,6 +19,7 @@ Input: Fira Mono
     /* Couleurs */
     --icon-color: #ff8c3fcc;
     --link-text: #4f94e3;
+    --error: rgb(225, 70, 70);
 }
 
 * {
@@ -87,76 +88,3 @@ body {
     font-style: italic;
 }
 
-/*SIDE NAVIGATION*/
-
-.sidenav {
-    height: 100%;
-    width: 400px;
-    position: fixed;
-    z-index: 1;
-    top: -75px;
-    background-color: #111;
-    overflow-x: hidden;
-    transition: 0.5s;
-    padding-top: 60px;
-    right: 0;
-}
-
-.sidenav a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #818181;
-    display: block;
-    transition: 0.3s;
-}
-
-.sidenav a:hover {
-    color: #f1f1f1;
-}
-
-.sidenav .closebtn {
-    height : 40px;
-    width : 35px;
-    position: absolute;
-    top: 10px;
-    right: 0px;
-    font-size: 30px;
-    margin-left: 50px;
-}
-
-#sideNavButton
-{
-    font-size:40px;
-    cursor:pointer;
-    position: fixed;
-    top: 30px;
-    right: 0px;
-    transform: translate(-50%, -50%);
-}
-
-.sidenav p
-{
-    font-size: 20px;
-    margin-left : 25px;
-    margin-bottom: 5px;
-
-}
-
-#connectedUser
-{
-    font-size : 30px;
-    font-weight: bolder;
-    margin-left : 25px;
-}
-
-.sidenav hr
-{
-    width : 350px;
-    left : 0;
-}
-
-@media screen and (max-height: 450px) {
-    .sidenav {padding-top: 15px;}
-    .sidenav a {font-size: 18px;}
-}

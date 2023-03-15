@@ -16,6 +16,7 @@ if (!estConnecte()) {
 
     <!-- CSS -->
     <link rel="stylesheet" href="../style/styleAccueil.css">
+    <link rel="stylesheet" href="../style/styleSidenav.css">
     <link rel="stylesheet" href="../style/style.css">
 
     <!-- Polices -->
@@ -30,14 +31,38 @@ if (!estConnecte()) {
 </head>
 
 <body>
-<header>
-    <img id="logoHegoBerria" src="../sources/icons/logo_hego_berria.svg" alt="Le logo de Hego Berria">
-    <h1>Hego Berria</h1>
-</header>
-<main>
-<?php
-    
+<!--Side Navigation-->
+<div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <p id="sideNavText1">Connecté en tant que :</p>
+    <p id="connectedUser">USER</p>
+    <hr>
+    <form method="POST">
 
+        <p>Ancien mot de passe</p>
+        <input name='login' type="text" id="identifiant" required>
+        <p class="errorPWD"></p> <!--TODO: Coder la partie changement mot de passe-->
+        <p>Nouveau mot de passe</p>
+        <input id="MDP" type="password" name="password" autocomplete="current-password" required>
+        <p>Confirmer nouveau mot de passe</p>
+        <input id="MDP-verif" type="password" name="password-verif" autocomplete="current-password" required>
+        <p class="errorPWD"></p> <!--TODO: Coder la partie changement mot de passe-->
+        <p id="labelPWD">Le mot de passe doit faire plus de 8 caractères et contenir un caractère spécial.</p>
+        <button id="boutonMAJ" type="submit" name="submit">Mettre à jour</button>
+
+    </form>
+    <hr>
+    <button id="disconnect">Déconnexion</button>
+
+</div>
+<div id="dimScreen" onclick="closeNav()"></div>
+    <header>
+        <span id='sideNavButton' onclick="openNav()">&#9776</span>
+        <img id="logoHegoBerria" src="../sources/icons/logo_hego_berria.svg" alt="Le logo de Hego Berria">
+        <h1>Hego Berria</h1>
+    </header>
+    <main>
+        <?php
     // récupérer l'instance de formulaire
     $formulaire = Formulaire::getInstance($database);
     // on met le formulaire dans la session
@@ -80,7 +105,7 @@ switch($etatForm)
 
         case 'peutModifier':
             echo"<div id='divTemps'>
-                <h2>Merci d'avoir d'avoir répondu,<br>Tu peux toujours modifier !</h2>
+                <h2>Merci d'avoir d'avoir répondu,<br>tu peux toujours modifier !</h2>
                 <ul>
                     <li>
                         <h2 class='Temps' id='jours'></h2>
@@ -99,7 +124,7 @@ switch($etatForm)
                         <p class='labelTimer' id='labelSecondes'></p>
                     </li>
                 </ul>
-                <button>Modifier mes réponses</button>
+                <button onclick='window.location.href = \"afficherFormulaire.php?modify=1\"'>Modifier mes réponses</button>
             </div>";
         break;
 
@@ -130,8 +155,12 @@ switch($etatForm)
 
         case 'continueDeRepondre':
             $QuestionsRestantes=$_SESSION['user']->getNBQuestionARepondre($database)-$_SESSION['user']->getNBQuestionRepondu($database);
+            $msg="question";
+            if($QuestionsRestantes>1){
+                $msg.="s";
+            }
             echo"<div id='divTemps'>
-                <h2>Il te reste ".$QuestionsRestantes." Question(s),<br>réponds-y !</h2>
+                <h2>Il te reste ".$QuestionsRestantes." ".$msg.",<br>réponds-y !</h2>
                 <ul>
                     <li>
                         <h2 class='Temps' id='jours'></h2>
@@ -262,6 +291,16 @@ switch($etatForm)
                 }
             }, 1000); // Exécuter la fonction toutes les secondes (1000 millisecondes).
 
+            function openNav() {
+                document.getElementById("mySidenav").style.width = "400px";
+                document.getElementById("dimScreen").style.display = "initial";
+            }
+
+            /* Set the width of the side navigation to 0 and the left margin of the page content to 0, and the background color of body to white */
+            function closeNav() {
+                document.getElementById("mySidenav").style.width = "0";
+                document.getElementById("dimScreen").style.display = "none";
+            }
         </script>
     </main>
 </body>

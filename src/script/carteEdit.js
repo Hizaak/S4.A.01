@@ -354,3 +354,29 @@ function checkBoxToButton(prop, carte) {
     //On supprime le bouton suivant
     carte.querySelector(".next").remove();
 }
+
+//On fait un event listener sur le bouton d'ajoout d'une carte 
+document.getElementById("ajoutCarteBouton").addEventListener("click", function () {
+    //On recupère le type de la carte souhaité avec le select qui est frere du bouton
+    var type = this.previousElementSibling.value;
+    $.ajax({
+        url: "creationFormulaire.php",
+        type: "POST",
+        data: {
+            type: type
+        },
+        success: function (data) {
+            //On recupère le html de la carte et on l'ajoute à la page au dessus de la section parente du bouton
+            var carte = document.createElement("section");
+            carte.innerHTML = data;
+            document.getElementById("ajoutCarteBouton").parentElement.parentElement.insertBefore(carte, document.getElementById("ajoutCarteBouton").parentElement);
+            //On ajoute un event listener sur le bouton de suppression de la carte
+            carte.querySelector(".suppCarte").addEventListener("click", function () {
+                this.parentElement.remove();
+            }
+            );
+        }
+    });
+
+});
+
