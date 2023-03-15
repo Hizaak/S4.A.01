@@ -58,7 +58,7 @@
     <post>
         <?php
         if ($_SESSION['user']->estAdmin())
-        {echo"<button id='boutonList' onclick=window.location.href = 'importEtudiant.php'>Modifier la liste étudiante</button>";}
+        {echo"<button id='boutonList' onclick='window.location.href = \"importEtudiant.php\"'>Modifier la liste étudiante</button>";}
         ?>
     </post>
     <button id="disconnect">Déconnexion</button>
