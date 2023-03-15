@@ -217,6 +217,11 @@ switch($etatForm)
                 </ul>
                 <button onclick='window.location.href = \"afficherFormulaire.php\"'>Continuer le formulaire</button>
             </div>";
+            break;
+        case "formulairePasCommence":
+            echo "<div class='info' id='ferme'>
+                <h2>Le formulaire n'est pas encore disponible !</h2>
+            </div>";
 
         }
         ?>
