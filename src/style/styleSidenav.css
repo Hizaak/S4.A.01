@@ -7,7 +7,7 @@
 .sidenav
 {
     height: 100%;
-    width: 400px;
+    width: 0px;
     position: fixed;
     z-index: 1;
     top: -75px;
@@ -25,7 +25,8 @@
     background-color:rgba(0, 0, 0, 50%);
     position:fixed;
     margin-top: 0px;
-    border-radius: 0px
+    border-radius: 0px;
+    display:none;
 }
 
 
@@ -135,6 +136,17 @@
     color : var(--main-text-color);
     background-color: rgb(70, 70, 70);
     font-weight: initial;
+}
+
+#boutonList
+{
+    align-self: end;
+    width : 150px;
+    border-color : transparent;
+    color : var(--main-text-color);
+    background-color: rgb(70, 70, 70);
+    font-weight: initial;
+    margin-right: -180px;
 }
 
 #disconnect

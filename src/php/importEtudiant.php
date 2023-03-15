@@ -1,3 +1,27 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <!-- Metadonnées -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Importer étudiants</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../style/styleUpload.css">
+    <link rel="stylesheet" href="../style/style.css">
+
+    <!-- Polices -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Mono&family=Rambla:wght@700&family=Roboto:ital,wght@0,300;1,400&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../sources/icons/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../sources/icons/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../sources/icons/favicon/favicon-16x16.png">
+</head>
+
 <?php
 include_once 'Utilisateur.php';
 include_once 'outils.php';
@@ -116,16 +140,6 @@ if (isset($_POST['ins_mod'])||isset($_POST['loginChange'])||isset($_POST['del'])
 
 ?>
 
-<html>
-
-<head>
-    <meta charset="utf-8">
-    <title>Importation des étudiants</title>
-    <link rel="stylesheet" href="../style/style.css">
-    <link rel="stylesheet" href="../style/styleUpload.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    
-</head>
 <main>
     <section id="achanger">
         <h2>Importation des étudiants</h2>

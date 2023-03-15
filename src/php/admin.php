@@ -15,8 +15,9 @@
         <title>Hego Lagunak</title>
 
         <!-- CSS -->
-        <link rel="stylesheet" href="../style/styleAccueil.css">
+        <link rel="stylesheet" href="../style/styleSidenav.css">
         <link rel="stylesheet" href="../style/style.css">
+        <link rel="stylesheet" href="../style/styleAdmin.css">
 
         <!-- Polices -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,7 +33,37 @@
     </head>
 
 <body>
+<!--Side Navigation-->
+<div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <p id="sideNavText1">Connecté en tant que :</p>
+    <p id="connectedUser">HEGO BERRIA</p>
+    <hr>
+    <form method="POST">
+
+        <p>Ancien mot de passe</p>
+        <input name='login' type="text" id="identifiant" required>
+        <p class="errorPWD"></p> <!--TODO: Coder la partie changement mot de passe-->
+        <p>Nouveau mot de passe</p>
+        <input id="MDP" type="password" name="password" autocomplete="current-password" required>
+        <p>Confirmer nouveau mot de passe</p>
+        <input id="MDP-verif" type="password" name="password-verif" autocomplete="current-password" required>
+        <p class="errorPWD"></p> <!--TODO: Coder la partie changement mot de passe-->
+        <p id="labelPWD">Le mot de passe doit faire plus de 8 caractères et contenir un caractère spécial.</p>
+        <button id="boutonMAJ" type="submit" name="submit">Mettre à jour</button>
+
+    </form>
+    <hr>
+    <post>
+        <button id="boutonList" onclick='window.location.href = "importEtudiant.php"'>Modifier la liste étudiante</button>
+    </post>
+    <button id="disconnect">Déconnexion</button>
+
+</div>
+<div id="dimScreen" onclick="closeNav()"></div>
+<!--SIDENAV END-->
     <header>
+        <span id='sideNavButton' onclick="openNav()">&#9776</span>
         <img id="logoHegoBerria" src="../sources/icons/logo_hego_berria.svg" alt="Le logo de Hego Berria">
         <h1>Hego Berria</h1>
     </header>
@@ -42,16 +73,28 @@
     $formulaire = Formulaire::getInstance($database);
     if($formulaire->existe($database)){
         echo "<div id='ferme'>
-            <h2>Vous êtes connecté en tant qu'administrateur</h2>
-            <button href='#'>Modifier le formulaire</button>
-        </div>";
+                <h2>Vous êtes connecté en tant qu'administrateur</h2>
+                <button>Modifier le formulaire</button>
+            </div>";
     }
     else {
         echo "<div id='ferme'>
             <h2>Vous êtes connecté en tant qu'administrateur</h2>
-            <button href='#'>Rédiger le formulaire</button>
+            <button >Rédiger le formulaire</button>
         </div>";
     }
 ?>
+<script>
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "400px";
+        document.getElementById("dimScreen").style.display = "initial";
+    }
+
+    /* Set the width of the side navigation to 0 and the left margin of the page content to 0, and the background color of body to white */
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+        document.getElementById("dimScreen").style.display = "none";
+    }
+</script>
 </body>
 </html>
