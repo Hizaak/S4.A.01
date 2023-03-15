@@ -5,9 +5,9 @@ include_once 'genereHTMLQuestion.php';
 include_once 'baseDeDonnees.php';
 
 //L'utilisateur doit être connecté et ne doit pas être un admin
-// if(!isset($_SESSION['user']) || $_SESSION['user']->estAdmin()){
-//     header('Location:../index.php');
-// }
+if(!isset($_SESSION['user']) || $_SESSION['user']->estAdmin()){
+    header('Location:../index.php');
+}
 
 
 //On recherche toutes les Question que l'utilisateur n'a pas encore répondu
