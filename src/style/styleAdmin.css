@@ -28,7 +28,7 @@ main{
     justify-content: center;
 }
 
-div {
+.info {
     margin-inline: auto;
     text-align : center;
     margin-top: 70px;

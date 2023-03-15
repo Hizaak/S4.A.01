@@ -72,13 +72,13 @@
 <?php
     $formulaire = Formulaire::getInstance($database);
     if($formulaire->existe($database)){
-        echo "<div id='ferme'>
+        echo "<div class='info' id='ferme'>
                 <h2>Vous êtes connecté en tant qu'administrateur</h2>
                 <button onclick='window.location.href = \"creationFormulaire.php\"'>Modifier le formulaire</button>
             </div>";
     }
     else {
-        echo "<div id='ferme'>
+        echo "<div class='info' id='ferme'>
             <h2>Vous êtes connecté en tant qu'administrateur</h2>
             <button onclick='window.location.href = \"creationFormulaire.php\"'>Rédiger le formulaire</button>
         </div>";
