@@ -1,0 +1,11 @@
+-- On se connecte avec Hegoberria
+
+#Le formulaire n'est pas encore ouvert
+-- On va sur la page admin
+#On va importer des étudiants
+-- On va dans la slide bar importé etudiant
+
+
+
+
+-- On crée un formulaire
