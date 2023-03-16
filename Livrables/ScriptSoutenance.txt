@@ -2,10 +2,36 @@
 
 #Le formulaire n'est pas encore ouvert
 -- On va sur la page admin
+
+
 #On va importer des étudiants
--- On va dans la slide bar importé etudiant
+-- On va dans la slide bar importé etudiant,On ajoute le fichier CSV, et on modifie deux données [ndargazan001 passe en deuxieme année],[On change le prenom d'un etudiant]
+-- On supprime l'étudiant [dboulanger001] [On enregistre]
+
+
+#On retourne au menu admin et on modifie le formulaire, on ajoute 3 Question [QCM,libre,QCM] ['all','1','2']
+
+
+#On ouvre le formulaire admin ne pourra plus le modifer
+
+#PENDANT CE TEMPS LA UN AUTRE ORDI VALIDE LE COMPTE DE L'ETUDIANT [pdavid003] avec le mot de passe test
+
+#On se deconnecte et on se connecte en temps qu'étudiant [ndargazan001] On valide le compte
+
+# On fait la requete de parainage des étudiants
+
+
+INSERT INTO `parrainer` (`LOGIN_PARRAIN`, `LOGIN_FILLEUL`) VALUES ('ndargazan001', 'pdavid003'), ('ndargazan001', 'gbourgeois001'), ('vbernard001', 'mlegrand001'), ('vbernard001', 'cfournier001'), ('tbrierre', 'jmaurice001'), ('tbrierre', 'lrobert001'), ('lrobert001', 'lthomas002'), ('ahenry001', 'ssimon001'), ('espicka', 'fperrin001');
 
 
 
 
--- On crée un formulaire
+#On répond au formulaire chez pierre
+
+
+#On change la date du formulaire pour le fermé, sur la page d'accueil user on vera le résultats puis sur la page admin on vera tout les resultats
+
+
+
+
+
