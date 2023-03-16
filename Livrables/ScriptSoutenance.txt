@@ -16,7 +16,7 @@
 
 #PENDANT CE TEMPS LA UN AUTRE ORDI VALIDE LE COMPTE DE L'ETUDIANT [pdavid003] avec le mot de passe test
 
-#On se deconnecte et on se connecte en temps qu'étudiant [ndargazan001] On valide le compte
+#On se deconnecte et on se connecte en tant qu'étudiant [ndargazan001] On valide le compte
 
 # On fait la requete de parainage des étudiants
 
