@@ -145,7 +145,7 @@ if (isset($_POST['ins_mod'])||isset($_POST['loginChange'])||isset($_POST['del'])
 <main>
     <section id="achanger">
         <h2>Importation des étudiants</h2>
-        <input id="btn-save" type="button" value="Enregistrer">
+        <button id="btn-save">Enregistrer</button>
 
     </section>
     <div class="scroll">

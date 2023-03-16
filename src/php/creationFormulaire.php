@@ -74,14 +74,17 @@ if (!empty($_POST) && isset($_POST['supQuestion'])) {
 <body>
 <header>
     <p>Type d'association : </p>
+    <!-- le par default c'est auto -->
     <select name="typeAssos" id="typeAssos">
-        <option value="Manu">Manuelle</option>
         <option value="Auto">Automatique</option>
+        <option value="Manuelle">Manuelle</option>
     </select>
     <p>Date d'ouverture : </p>
-    <input type="datetime-local"></input>
+    <!-- Par default le 17mars 2023 a 00h00 -->
+    <input type="datetime-local" value="2023-03-17T00:00"></input>
     <p>Date de fermeture : </p>
-    <input type="datetime-local"></input>
+    <!-- Par default le 18 mars 2023 a 00h00 -->
+    <input type="datetime-local" value="2023-03-18T00:00"></input>
 </header>
 <?php
 if (!isset($_SESSION['user']) || !$_SESSION['user']->estAdmin()){
