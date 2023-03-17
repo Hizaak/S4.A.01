@@ -85,6 +85,7 @@ if (!isset($_SESSION['user'])) {
     // on met le formulaire dans la session
     $_SESSION['formulaire'] = $formulaire;
     $dateFin = $_SESSION['formulaire']->getDateFin();
+    $dateDebut = $_SESSION['formulaire']->getDateDebut();
     if (!$_SESSION['user']->estAdmin()){
         $etatForm = $_SESSION['formulaire']->getEtat($_SESSION['user'],$database);
     }
@@ -92,14 +93,23 @@ if (!isset($_SESSION['user'])) {
         //On est admin
         //Si le formulaire est fermé on lui dit de voir les résultats
         $etatForm=null;
-        if ($dateFin < date("Y-m-d H:i:s")){
+        if($dateDebut>date(date("Y-m-d H:i:s"))){
+            echo "<div class='info' id='ferme'>
+            <h2>Le formulaire n'est encore ouvert !</h2>";
+            if($_SESSION['user']->estAdmin()){
+                echo "<button onclick='window.location.href = \"admin.php\"'>Page Administrateur</button>";
+            }
+            echo "</div>";
+        }
+
+        else if ($dateFin < date("Y-m-d H:i:s")){
             echo "<div class='info' id='ferme'>
                 <h2>Le formulaire est fermé !</h2>
                 <button onclick='window.location.href = \"resultats.php\"'>Voir les résultats</button>
             </div>";
         }
         //Sinon on lui dit de patienter le temps que les utilisateurs répondent
-        else{
+        else if($dateDebut < date("Y-m-d H:i:s")&&$dateFin > date("Y-m-d H:i:s")){
             echo "<div class='info' id='divTemps'>
                 <h2>Le formulaire est encore ouvert<br>Patientez encore un peu!</h2>
                 <ul>
