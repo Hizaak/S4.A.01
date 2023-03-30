@@ -68,6 +68,10 @@ if (!empty($_POST) && isset($_POST['supQuestion'])) {
     <link rel="stylesheet" href="../style/styleCarteAdmin.css">
     <link rel="stylesheet" href="../style/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../sources/icons/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../sources/icons/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../sources/icons/favicon/favicon-16x16.png">
     <title>Création de Formulaire</title>
 </head>
 
@@ -75,13 +79,14 @@ if (!empty($_POST) && isset($_POST['supQuestion'])) {
 <header>
     <p>Type d'association : </p>
     <select name="typeAssos" id="typeAssos">
-        <option value="Manu">Manuelle</option>
         <option value="Auto">Automatique</option>
+        <option value="Manuelle">Manuelle</option>
     </select>
     <p>Date d'ouverture : </p>
-    <input type="datetime-local"></input>
+    <input type="datetime-local" value="2023-03-17T00:00"></input>
     <p>Date de fermeture : </p>
-    <input type="datetime-local"></input>
+    <input type="datetime-local" value="2023-03-19T00:00"></input>
+    <button id="valider" onclick='window.location.href = "admin.php"'>Valider</button>
 </header>
 <?php
 if (!isset($_SESSION['user']) || !$_SESSION['user']->estAdmin()){
@@ -99,6 +104,7 @@ foreach ($ListeQuestion as $question) {
 ?>
 <section class='fb-ajout'>
         <label for="ajoutCarte">Ajouter une question de type</label>
+        <br>
         <select name="ajoutCarte" id="ajoutCarte">
             <option value="libre">Libre</option>
             <option value="QCM">QCM</option>

@@ -39,7 +39,7 @@ function suivant() {
                         }
                     }
                     sendReponse(idQuestion, reponse);
-                    suivant();
+                    // suivant();
                 }
             }
             );
@@ -61,7 +61,7 @@ function suivant() {
                 BoutonReponseQCM[i].addEventListener("click", function () {
                     //On recupere la valeur de l'input et on le met dans un array réponse
                     sendReponse(idQuestion, [this.value])
-                    suivant();
+                    // suivant();
                 });
         }
         if(modif){
@@ -98,7 +98,7 @@ function suivant() {
             inputReponseLibre.dispatchEvent(new Event('keyup'));
             if(btnSuivant.disabled==false){
                 sendReponse(idQuestion, [inputReponseLibre.value]);
-                suivant();
+                // suivant();
             }
         }
         );
@@ -144,11 +144,9 @@ function sendReponse(idQuestion, reponse) {
             reponse: reponse
         },
         success: function (data) {
-            // if (data == "ok") {
-            //     console.log("ok");
-            //     return true;
-            // }
-            console.log(data);
+            if (data == "ok") {
+                suivant();
+            }
         }
     });    
 }

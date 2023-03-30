@@ -161,7 +161,7 @@ class ReprQuestionQCM extends ReprQuestion
                     <option value="tous" ' . (($this->question->get_visibilite() == "all") ? "selected" : "") . '>tous</option>
                 </select>
             </section>
-            <section>
+            <section>   
                 <label for="nbReponseMax">Nombre de réponses max</label>
                 <input  type="number" name="' . $this->question->get_id_html() . 'editNbRepMax" class="editNbRepMax" id="' . $this->question->get_id_html() . 'editNbRepMax" value="' . $this->question->get_nbReponseMax() . '"  min="1" max="' . ($this->question->get_nbReponseMax() + 1) . '" oninput="maj(' . $this->question->get_id_html() . 'propriete,' . $this->question->get_id_html() . ')">
             </section>
@@ -184,7 +184,7 @@ class ReprQuestionQCM extends ReprQuestion
             $html .= '>
             </section>';
         }
-        $html .= '</section>
+        $html .= '<br></section>
             <section class="addsuppbtn">
                 <button type="button" name="' . $this->question->get_id_html() . 'supp" class="suppRep" id="' . $this->question->get_id_html() . 'edit" onClick=suppRep(' . $this->question->get_id_html() . 'propriete' . ',' . $this->question->get_id_html() . ')>Enlever</button>
                 <button type="button" name="' . $this->question->get_id_html() . 'add" class="addRep" id="' . $this->question->get_id_html() . 'edit" onClick=addRep(' . $this->question->get_id_html() . 'propriete' . ',' . $this->question->get_id_html() . ') >Ajouter</button>
@@ -240,6 +240,7 @@ class ReprQuestionLIBRE extends ReprQuestion
                 <label for="nbCaractereMax">Nombre de caractère max</label>
                 <input  type="number" name="' . $this->question->get_id_html() . 'editNbCaractereMax" class="editbtn editNbCaractereMax" id="' . $this->question->get_id_html() . 'editNbCaractereMax" value="' . $this->question->get_nbCaractereMax() . '"  min="1" max="500" oninput="maj(' . $this->question->get_id_html() . 'propriete,' . $this->question->get_id_html() . ')">
             </section>
+            <br> 
             <input type="submit" name="' . $this->question->get_id_html() . 'editSubmit" class="ValideeditSubmit" id="' . $this->question->get_id_html() . 'editSubmit" value="Valider">
         </section>';
         return $html;

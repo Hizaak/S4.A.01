@@ -1,6 +1,7 @@
 body {
     background-color: #16161b;
     color: #CCCCCC;
+    overflow-x: hidden;
 }
 .container {
     height: auto;
@@ -36,6 +37,7 @@ header p{
 }
 
 header select{
+    padding: 10px;
     margin-right: 15px;
     background-color: var(--background-color);
     color : var(--main-text-color);;
@@ -45,11 +47,21 @@ header select{
 
 header input
 {
+    padding: 10px;
     margin-right: 15px;
     background-color: var(--background-color);
     color : var(--main-text-color);
     border-color: var(--icon-color);
     border-radius: 5px;
+}
+
+#valider{
+    padding: 10px;
+    background-color: var(--background-color);
+    color : var(--main-text-color);
+    border-color: var(--icon-color);
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 input[type="datetime-local"]::-webkit-calendar-picker-indicator {
@@ -167,4 +179,60 @@ form {
     margin-left: 295px;
     margin-top: -20px;
     cursor: pointer;
+}
+
+#ajoutCarteBouton {
+    padding: 5px;
+    font-size: 20px;
+    letter-spacing: 1px;
+    background-color: var(--light-background-color);
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.2s;
+    width: 150px;
+    color: var(--icon-color);
+    border: 1px solid var(--icon-color);
+}
+
+
+#ajoutCarte{
+    /* On fait un select de la meme facon qu'un bouton */
+    background-color: var(--background-color);
+    color : var(--main-text-color);
+    border-color: var(--icon-color);
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 20px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: 0.2s;
+    width: 150px;
+
+
+    
+}
+
+.editName, .editVisibilite ,.editbtn,.editNbRepMax {
+    /* On fait en sorte que le background soit un peu plus clair que la couleur de fond */
+    background-color: #424252;
+    border : 1px solid #2f2f3a;
+    /* On met la texte color */
+    color : #FFFFFF;
+    border-radius: 5px;
+    /* On veut que le texte est un padding de 2px */
+    padding: 2px;
+}
+
+.ValideeditSubmit,.addRep,.suppRep{
+    /* C'est le bouton valide */
+    background-color: var(--background-color);
+    color : var(--main-text-color);
+    border-color: var(--icon-color);
+    border-radius: 5px;
+    padding: 5px;
+
+}
+
+.fb-ajout{
+    text-align: center;
 }

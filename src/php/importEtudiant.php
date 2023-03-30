@@ -145,7 +145,7 @@ if (isset($_POST['ins_mod'])||isset($_POST['loginChange'])||isset($_POST['del'])
 <main>
     <section id="achanger">
         <h2>Importation des étudiants</h2>
-        <input id="btn-save" type="button" value="Enregistrer">
+        <button id="btn-save">Enregistrer</button>
 
     </section>
     <div class="scroll">
@@ -179,6 +179,7 @@ if (isset($_POST['ins_mod'])||isset($_POST['loginChange'])||isset($_POST['del'])
     <section class="action">
         <button id="btn-delete" disabled>Supprimer</button>
         <button id="btn-add" >Ajouter</button>
+        <button id="btn-retour" onclick="window.history.back()">Retour</button>
         <div class="upload">
             <input type="file" name="file" multiple="multiple" accept=".csv,.txt" id="btnZone">
         </div>
